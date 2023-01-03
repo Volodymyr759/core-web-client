@@ -1,5 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from '@reduxjs/toolkit';
-import thunk from "redux-thunk";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { userReducer } from './reducers/userReduser';
 
 export const rootReducer = combineReducers({
@@ -7,6 +6,10 @@ export const rootReducer = combineReducers({
     todo: userReducer
 })
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+export const setupStore = () => {
+    return configureStore({
+        reducer: rootReducer
+    })
+}
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>

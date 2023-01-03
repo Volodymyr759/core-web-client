@@ -1,0 +1,32 @@
+.btn {
+    display: inline-block;
+    text-align: center;
+  
+    height: 39px;
+    width: 150px;
+    padding: 12px 0;
+    margin: 0 10px;
+  
+    border: none;
+    border-radius: 70px;
+  
+    color: white;
+  
+    cursor: pointer;
+  }
+  
+  .primary {
+    /* PS primary color */
+    background-color: #f93a73;
+  }
+  
+  .dark {
+    /* PS secondary color */
+    background-color: #343f4d;
+  }
+  
+  @media (max-width: 768px) {
+    .btn {
+      width: 120px;
+    }
+  }

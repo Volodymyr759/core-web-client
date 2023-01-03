@@ -10,7 +10,7 @@ export const getAllUsers = () => {
             const response = await axios.get('https://jsonplaceholder.typicode.com/users');
             dispatch({ type: UserActionTypes.GET_All_USERS, payload: await response.data });
         } catch (error) {
-            dispatch({ type: UserActionTypes.SET_ERROR, payload: error.message })
+            dispatch({ type: UserActionTypes.SET_ERROR, payload: "Error of loading users." })
         } finally {
             dispatch({ type: UserActionTypes.SET_IS_LOADING, payload: false });
         }
