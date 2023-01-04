@@ -1,3 +1,22 @@
+interface IUser{
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+}
+
+export interface UserState {
+    users: IUser[];
+    loading: boolean;
+    error: null | string;
+}
+
+export enum UserActionTypes {
+    GET_All_USERS = "GET_All_USERS",
+    SET_ERROR = "SET_ERROR",
+    SET_IS_LOADING = "SET_IS_LOADING"
+}
+
 interface GetAllUsersAction {
     type: UserActionTypes.GET_All_USERS;
     payload: IUser[];
@@ -14,22 +33,3 @@ interface SetLoadingAction {
 }
 
 export type UserAction = GetAllUsersAction | SetErrorAction | SetLoadingAction
-
-export enum UserActionTypes {
-    GET_All_USERS = "GET_All_USERS",
-    SET_ERROR = "SET_ERROR",
-    SET_IS_LOADING = "SET_IS_LOADING",
-}
-
-export interface UserState {
-    users: IUser[];
-    loading: boolean;
-    error: null | string;
-}
-
-interface IUser{
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-}

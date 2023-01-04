@@ -2,7 +2,6 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { UserAction, UserActionTypes } from "../../types/user"
 
-
 export const getAllUsers = () => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {

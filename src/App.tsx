@@ -1,55 +1,78 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
-import { HOME, ERROR, REGISTER_PAGE, LOGIN_PAGE, USERS_PAGE } from './pathes';
-import { UserList } from './components/UserList';
+import { HOME, ERROR, REGISTER_PAGE, LOGIN_PAGE, USERS_PAGE, ABOUT, SERVICES, TEAM, VACANCIES, CONTACT } from './pathes';
 import PublicLayout from './components/layouts/PublicLayout';
 import AdminLayout from './components/layouts/AdminLayout';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import UsersPage from './pages/UsersPage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import TeamPage from './pages/TeamPage';
+import VacanciesPage from './pages/VacanciesPage';
+import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
     return (
-        // <div className="App">
-        //     {/* <header className="App-header">
-        //     <img src={logo} className="App-logo" alt="logo" />
-        //     <p>
-        //     Edit <code>src/App.tsx</code> and save to reload.
-        //     </p>
-        //     <a
-        //     className="App-link"
-        //     href="https://reactjs.org"
-        //     target="_blank"
-        //     rel="noopener noreferrer"
-        //     >
-        //     Learn React
-        //     </a>
-        // </header> */}
-        //     <UserList />
-        // </div>
         <>
-      <BrowserRouter>
-        <Routes>
-          <Route path={HOME} element={
-            <PublicLayout>
-              <HomePage />
-            </PublicLayout>
-          } />
-          <Route path={ERROR} element={
-            <PublicLayout>
-              <ErrorPage />
-            </PublicLayout>
-          } />
-          <Route path={USERS_PAGE} element={
-            <AdminLayout>
-              <UsersPage />
-            </AdminLayout>
-          } />
-        </Routes>
-      </BrowserRouter>
-    </>
+            <BrowserRouter>
+                <Routes>
+                    {/* Public Pages */}
+                    <Route path={HOME} element={
+                        <PublicLayout>
+                            <HomePage />
+                        </PublicLayout>
+                    } />
+                    <Route path={ABOUT} element={
+                        <PublicLayout>
+                            <AboutPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={SERVICES} element={
+                        <PublicLayout>
+                            <ServicesPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={TEAM} element={
+                        <PublicLayout>
+                            <TeamPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={VACANCIES} element={
+                        <PublicLayout>
+                            <VacanciesPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={CONTACT} element={
+                        <PublicLayout>
+                            <ContactPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={LOGIN_PAGE} element={
+                        <PublicLayout>
+                            <LoginPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={REGISTER_PAGE} element={
+                        <PublicLayout>
+                            <RegisterPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={ERROR} element={
+                        <PublicLayout>
+                            <ErrorPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={USERS_PAGE} element={
+                        <AdminLayout>
+                            <UsersPage />
+                        </AdminLayout>
+                    } />
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 }
 
