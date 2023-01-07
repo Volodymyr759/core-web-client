@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import { HOME } from '../pathes';
+import { HOME } from '../routing/pathes';
 import { Button } from '../components/Button/Button';
 import '../index.css';
 

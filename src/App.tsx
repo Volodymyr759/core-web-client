@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
-import { HOME, ERROR, REGISTER_PAGE, LOGIN_PAGE, USERS_PAGE, ABOUT, SERVICES, TEAM, VACANCIES, CONTACT } from './pathes';
+import { HOME, ERROR, REGISTER_PAGE, LOGIN_PAGE, USERS_PAGE, ABOUT, SERVICES, TEAM, VACANCIES, CONTACT } from './routing/pathes';
 import PublicLayout from './components/layouts/PublicLayout';
 import AdminLayout from './components/layouts/AdminLayout';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import UsersPage from './pages/UsersPage';
-import AboutPage from './pages/AboutPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 import ServicesPage from './pages/ServicesPage';
-import TeamPage from './pages/TeamPage';
+import TeamPage from './pages/TeamPage/TeamPage';
 import VacanciesPage from './pages/VacanciesPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';

@@ -17,11 +17,11 @@ export const login = (loginDto: ILoginDto) => {
     }
 }
 
-export const logout = (email: string) => {
+export const logout = (email: string, token: string) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
             dispatch({ type: AuthActionTypes.SET_IS_LOADING, payload: true });
-            await logoutAxios(email);
+            await logoutAxios(email, token);
         } catch (error) {
             dispatch({ type: AuthActionTypes.SET_ERROR, payload: "Logout failed." })
         } finally {

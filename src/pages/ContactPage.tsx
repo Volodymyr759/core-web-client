@@ -1,10 +1,15 @@
+import { PageHeader } from "../components/PageHeader/PageHeader";
 
 const ContactPage = () => {
 
     return (
-        <div>
-            Contact Us.
-        </div>
+        <>
+            <p></p>
+            <PageHeader
+                title="CONTACT US"
+                text=""
+            />
+        </>
     )
 }
 

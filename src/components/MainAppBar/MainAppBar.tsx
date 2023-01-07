@@ -12,35 +12,27 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';
-import { ABOUT, CONTACT, HOME, SERVICES, TEAM, VACANCIES } from '../../pathes';
+import { Link, useNavigate } from 'react-router-dom';
+import { ABOUT, CONTACT, HOME, SERVICES, TEAM, VACANCIES } from '../../routing/pathes';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
-
-const pages = [
-    { title: "Home", linkTo: HOME },
-    { title: "About", linkTo: ABOUT },
-    { title: "Services", linkTo: SERVICES },
-    { title: "Team", linkTo: TEAM },
-    { title: "Vacancies", linkTo: VACANCIES },
-    { title: "Contact", linkTo: CONTACT },
-]
+import {PublicPages} from '../../routing/PublicPages';
 
 const settings = [
     { title: "Profile", linkTo: HOME },
     { title: "Account", linkTo: ABOUT },
-    { title: "Dashboard", linkTo: SERVICES },
-    { title: "Logout", linkTo: TEAM },
+    { title: "Dashboard", linkTo: SERVICES }
 ]
 
 function MainAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-    const { auth, loading, error } = useTypedSelector(state => state.auth)
+    const { auth } = useTypedSelector(state => state.auth)
     const { logout } = useActions();
+    const navigate = useNavigate();
 
-    console.log("Auth: ", auth);
+    // console.log("Auth: ", auth);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -57,6 +49,11 @@ function MainAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleLogout = () => {
+        logout(auth.email, auth.tokens.accessToken);
+        navigate(HOME);
+    }
 
     return (
         <AppBar position="static">
@@ -107,7 +104,7 @@ function MainAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
+                            {PublicPages.map((page) => (
                                 <MenuItem key={page.title} component={Link} to={page.linkTo} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page.title}</Typography>
                                 </MenuItem>
@@ -137,7 +134,7 @@ function MainAppBar() {
 
                     {/* Public pages */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {PublicPages.map((page) => (
                             <Button
                                 key={page.title}
                                 onClick={handleCloseNavMenu}
@@ -178,7 +175,7 @@ function MainAppBar() {
                                     </MenuItem>
                                 ))}
                                 <hr />
-                                <MenuItem component={Link} to={HOME} onClick={() => logout(auth.email)}>
+                                <MenuItem component={Link} to={HOME} onClick={handleLogout}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>
                             </Menu>
