@@ -11,8 +11,8 @@ import ServicesPage from './pages/ServicesPage';
 import TeamPage from './pages/TeamPage/TeamPage';
 import VacanciesPage from './pages/VacanciesPage';
 import ContactPage from './pages/ContactPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/Login/LoginPage';
+import RegisterPage from './pages/Register/RegisterPage';
 
 function App() {
     return (

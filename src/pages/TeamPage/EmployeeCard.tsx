@@ -1,24 +1,25 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { Props } from "./types";
 
 export const EmployeeCard = ({ employee, ...props }: Props): JSX.Element => {
     return (
         <Grid item xs={12} md={4} textAlign='center'>
-            <Box
-                component="img"
-                sx={{ width: '100%' }}
-                alt="About us 2nd img."
-                src={employee.avatarurl}
-            />
-            <Typography variant="body2" component={'p'}>
-                {employee.fullname}
-            </Typography>
-            <Typography variant="body2" component={'p'}>
-                {employee.position}
-            </Typography>
-            <Typography variant="body2" component={'p'}>
-                {employee.description}
-            </Typography>
+            <Card>
+                <Box
+                    component="img"
+                    sx={{ width: '90%' }}
+                    alt="Employee photo."
+                    src={employee.avatarUrl}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {employee.fullName} - {employee.position}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {employee.description}
+                    </Typography>
+                </CardContent>
+            </Card>
         </Grid>
     )
 };

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { ErrorStatus } from '../types/error';
 
 export class AxiosMiddleware {
@@ -8,17 +8,16 @@ export class AxiosMiddleware {
         axios.interceptors.response.use(function (response: AxiosResponse): AxiosResponse {
             return response;
         },
-            function (error) {
-                switch (error.response.status) {
+            function (error: AxiosError) {
+                switch (error.status) {
+                    case ErrorStatus['Bad Request']:
+                        throw new Error(error.response.data.toString());
                     case ErrorStatus.Forbidden:
-                        console.log('Forbidden error.');
                         return;
                     case ErrorStatus['Not Found']:
-                        console.log('Not found error.');
-                        return;
+                        throw new Error(error.response.data.toString());
                     default:
-                        console.log('Internal server error.');
-                        return;
+                        throw new Error('Internal server error.');
                 }
             });
     }

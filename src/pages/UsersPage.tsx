@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { UserList } from '../components/UserList';
 
 const UsersPage = () => {

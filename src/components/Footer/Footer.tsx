@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { useNavigate } from 'react-router-dom';
 import { PublicPages } from '../../routing/PublicPages';
+import { SubscriptionForm } from './SubscriptionForm';
 
 const Footer = () => {
     const navigate = useNavigate();
@@ -51,9 +52,8 @@ const Footer = () => {
                 <Typography variant="body2" component={'p'}>
                     Tamen quem nulla quae legam multos aute sint culpa legam noster magna
                 </Typography>
-                <div>
+                {/* <div>
                     <TextField
-                        // color='secondary'
                         sx={{ color: '#1976d2' }}
                         label="Email"
                         fullWidth
@@ -65,7 +65,8 @@ const Footer = () => {
                     <Button sx={{ backgroundColor: 'white', color: '#1976d2', marginTop: '20px' }} onClick={() => alert('Subscribe.')}>
                         Subscribe
                     </Button>
-                </div>
+                </div> */}
+                <SubscriptionForm />
             </Grid>
         </Grid>
     )

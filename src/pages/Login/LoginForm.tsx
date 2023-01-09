@@ -1,16 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { HOME, REGISTER_PAGE } from "../routing/pathes";
+import { HOME } from "../../routing/pathes";
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
-import { useActions } from "../hooks/useActions";
-import { ILoginDto } from "../types/auth";
+import { useActions } from "../../hooks/useActions";
+import { ILoginDto } from "../../types/auth";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
-const LoginPage = () => {
+const LoginForm = () => {
     const { login } = useActions();
     const navigate = useNavigate();
-    
+    const { auth, error, loading } = useTypedSelector(state => state.auth);
+
     const validationSchema = Yup.object({
         email: Yup.string()
             .required()
@@ -30,21 +33,22 @@ const LoginPage = () => {
         remember: false
     }
 
-    const { control, handleSubmit, formState: { errors }, setError } = useForm({
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues
     })
 
     const onSubmit = (loginModel: { email: string, password: string, remember: boolean }): void => {
         login(loginModel as ILoginDto);
-        console.log("Login model: ", loginModel);
-        navigate(HOME);
     }
 
+    if (auth) {
+        reset();
+        navigate(HOME);
+    };
+
     return (
-        <div>
-            <p>Log in.</p>
-            <p>Or Sign Up: <Link to={REGISTER_PAGE}>registration</Link></p>
+        <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <Controller
@@ -54,9 +58,9 @@ const LoginPage = () => {
                             <TextField
                                 {...field}
                                 label="Email"
-                                // fullWidth
                                 type="email"
                                 margin="normal"
+                                size="medium"
                                 error={Boolean(errors.email)}
                                 helperText={errors.email?.message}
                             />
@@ -70,10 +74,11 @@ const LoginPage = () => {
                         render={({ field }) =>
                             <TextField
                                 {...field}
-                                label="Rassword"
-                                // fullWidth
+                                label="Password"
                                 type="password"
                                 margin="normal"
+                                // size="medium"
+                                fullWidth
                                 error={Boolean(errors.password)}
                                 helperText={errors.password?.message}
                             />
@@ -97,19 +102,19 @@ const LoginPage = () => {
                         }
                         label={<p>Remember Me?</p>}
                     />
-
                 </div>
-                <div>
-                    <Button onClick={() => alert('Canceled.')}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Button onClick={() => navigate(HOME)}>
                         Cancel
                     </Button>
                     <Button type="submit">
-                        Log In
+                        {loading ? 'Sending...' : 'Log In'}
                     </Button>
                 </div>
             </form>
-        </div>
+            {error && <ErrorMessage message={error} />}
+        </>
     )
 }
 
-export default LoginPage;
+export default LoginForm;

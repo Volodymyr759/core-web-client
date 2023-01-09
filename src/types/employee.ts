@@ -1,10 +1,10 @@
 export interface IEmployee {
     id: number;
-    fullname: string;
+    fullName: string;
     email: string;
     position: string;
     description: string;
-    avatarurl: string;
+    avatarUrl: string;
 }
 
 export interface EmployeeState {

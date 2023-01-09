@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material';
+import { Container } from '@mui/material';
 import React, { FC } from 'react';
 import Footer from '../Footer/Footer';
 import MainAppBar from '../MainAppBar/MainAppBar';

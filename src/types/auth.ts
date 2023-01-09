@@ -4,6 +4,12 @@ export interface ILoginDto {
     remember: boolean;
   }
 
+export interface IRegisterDto{
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
 export interface IAuth{
     email: string;
     roles: string[];

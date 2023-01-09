@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
-import { ABOUT, CONTACT, HOME, SERVICES, TEAM, VACANCIES } from '../../routing/pathes';
+import { ABOUT, HOME, SERVICES } from '../../routing/pathes';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
 import {PublicPages} from '../../routing/PublicPages';

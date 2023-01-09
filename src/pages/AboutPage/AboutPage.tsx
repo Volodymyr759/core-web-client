@@ -1,4 +1,3 @@
-import { Box, Grid, Typography } from "@mui/material";
 import { PageHeader } from "../../components/PageHeader/PageHeader";
 import AboutUsContent from "./AboutUsContent";
 
