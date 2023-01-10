@@ -7,13 +7,17 @@ import { Button, TextField } from "@mui/material";
 import { registerAxios } from "../../api/auth";
 import { useState } from "react";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { RegisterFormState } from "./types";
 
 const RegisterForm = (): JSX.Element => {
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState<boolean>(false);
+    const initState: RegisterFormState = {
+        loading: false,
+        error: null
+    };
 
-    const [axiosError, setAxiosError] = useState<string>('');
+    const [registrationState, setRegistrationState] = useState<RegisterFormState>(initState);
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -43,7 +47,9 @@ const RegisterForm = (): JSX.Element => {
 
     const onSubmit = async (registerDto: { email: string, password: string, confirmPassword: string }) => {
         try {
-            setLoading(true);
+            setRegistrationState(prevRegisterFormState => {
+                return { loading: true, error: null };
+            })
             await registerAxios({
                 email: registerDto.email,
                 password: registerDto.password,
@@ -52,9 +58,13 @@ const RegisterForm = (): JSX.Element => {
             reset();
             navigate(HOME);
         } catch (e) {
-            setAxiosError(e.message || 'Unknown server error.')
+            setRegistrationState(prevRegisterFormState => {
+                return { ...prevRegisterFormState, error: e.message || 'Unknown server error.' }
+            })
         } finally {
-            setLoading(false);
+            setRegistrationState(prevRegisterFormState => {
+                return { ...prevRegisterFormState, loading: false }
+            })
         }
     }
 
@@ -119,11 +129,11 @@ const RegisterForm = (): JSX.Element => {
                         Cancel
                     </Button>
                     <Button type="submit">
-                        {loading ? 'Sending...' : 'Sign Up'}
+                        {registrationState.loading ? 'Sending...' : 'Sign Up'}
                     </Button>
                 </div>
             </form>
-            {axiosError.length > 0 && <ErrorMessage message={axiosError} />}
+            {registrationState.error && <ErrorMessage message={registrationState.error} />}
         </>
     )
 }
