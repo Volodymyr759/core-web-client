@@ -10,9 +10,9 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
     switch(action.type){
         case EmployeeActionTypes.GET_All_EMPLOYEES:
             return { ...state, employees: action.payload};
-        case EmployeeActionTypes.SET_ERROR:
+        case EmployeeActionTypes.SET_EMPLOYEE_ERROR:
             return { ...state, error: action.payload};
-        case EmployeeActionTypes.SET_IS_LOADING:
+        case EmployeeActionTypes.SET_EMPLOYEE_LOADING:
             return { ...state, loading: action.payload};
 
         default: return state;

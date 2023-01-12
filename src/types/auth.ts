@@ -28,8 +28,8 @@ export interface AuthState {
 export enum AuthActionTypes {
     LOGIN = "LOGIN",
     LOGOUT = "LOGOUT",
-    SET_ERROR = "SET_ERROR",
-    SET_IS_LOADING = "SET_IS_LOADING"
+    SET_AUTH_ERROR = "SET_AUTH_ERROR",
+    SET_AUTH_LOADING = "SET_AUTH_LOADING"
 }
 
 interface Login {
@@ -43,12 +43,12 @@ interface Logout {
 }
 
 interface SetErrorAction {
-    type: AuthActionTypes.SET_ERROR;
-    payload: string;
+    type: AuthActionTypes.SET_AUTH_ERROR;
+    payload: null | string;
 }
 
 interface SetLoadingAction {
-    type: AuthActionTypes.SET_IS_LOADING;
+    type: AuthActionTypes.SET_AUTH_LOADING;
     payload: boolean;
 }
 

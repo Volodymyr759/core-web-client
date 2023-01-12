@@ -6,7 +6,6 @@ import LoginForm from "./LoginForm";
 const LoginPage = () => {
     return (
         <>
-            <p></p>
             <PageHeader
                 title="Sign in."
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
@@ -15,7 +14,6 @@ const LoginPage = () => {
                 <LoginForm />
                 <p>Or <Link to={REGISTER_PAGE}>Sign Up</Link> if you already have account.</p>
             </div>
-            <br />
         </>
     )
 }

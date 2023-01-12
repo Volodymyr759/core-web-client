@@ -1,19 +1,15 @@
 .public-layout-container {
   background-color: white;
-  min-height: 300px;/* 100vh;*/
-  /* background-image: url(https://s3propertyspace-dev.s3.eu-central-1.amazonaws.com/builds/ps_lease/1650555570/static/media/error-bg.99c52ecf.svg);
-    background-repeat: no-repeat;
-  
-    min-height: 100vh;
-    /* min-width: 991px; */
-  /*margin: 0 40px; */
+  min-height: 300px;
+  margin-top: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .admin-layout-container {
   background-color: transparent;
   padding: 0 !important;
   min-height: 100%;
-  /*100vh;*/
 }
 
 .logo {
@@ -22,6 +18,5 @@
 
 .footer {
   padding: 60px 0 30px 0;
-  /* background-color: #1976d2;/* #3D4F4C;*/
   color: #1976d2;
 }

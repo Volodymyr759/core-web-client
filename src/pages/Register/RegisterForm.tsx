@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { HOME } from "../../routing/pathes";
+import { HOME, REGISTER_COMPLETE } from "../../routing/pathes";
 import { Button, TextField } from "@mui/material";
 import { registerAxios } from "../../api/auth";
 import { useState } from "react";
@@ -56,7 +56,7 @@ const RegisterForm = (): JSX.Element => {
                 confirmPassword: registerDto.confirmPassword
             });
             reset();
-            navigate(HOME);
+            navigate(REGISTER_COMPLETE);
         } catch (e) {
             setRegistrationState(prevRegisterFormState => {
                 return { ...prevRegisterFormState, error: e.message || 'Unknown server error.' }

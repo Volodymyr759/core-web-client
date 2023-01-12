@@ -15,8 +15,8 @@ export interface EmployeeState {
 
 export enum EmployeeActionTypes {
     GET_All_EMPLOYEES = "GET_All_EMPLOYEES",
-    SET_ERROR = "SET_ERROR",
-    SET_IS_LOADING = "SET_IS_LOADING"
+    SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
+    SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING"
 }
 
 interface GetAllEmployeesAction {
@@ -25,12 +25,12 @@ interface GetAllEmployeesAction {
 }
 
 interface SetErrorAction {
-    type: EmployeeActionTypes.SET_ERROR;
-    payload: string;
+    type: EmployeeActionTypes.SET_EMPLOYEE_ERROR;
+    payload: null | string;
 }
 
 interface SetLoadingAction {
-    type: EmployeeActionTypes.SET_IS_LOADING;
+    type: EmployeeActionTypes.SET_EMPLOYEE_LOADING;
     payload: boolean;
 }
 

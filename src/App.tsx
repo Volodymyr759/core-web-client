@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
-import { HOME, ERROR, REGISTER_PAGE, LOGIN_PAGE, USERS_PAGE, ABOUT, SERVICES, TEAM, VACANCIES, CONTACT } from './routing/pathes';
+import { HOME, ERROR, REGISTER_PAGE, LOGIN_PAGE, USERS_PAGE, ABOUT, SERVICES, TEAM, VACANCIES, CONTACT, REGISTER_COMPLETE } from './routing/pathes';
 import PublicLayout from './components/layouts/PublicLayout';
 import AdminLayout from './components/layouts/AdminLayout';
 import HomePage from './pages/HomePage';
@@ -13,6 +13,7 @@ import VacanciesPage from './pages/VacanciesPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
+import { RegisterCompletePage } from './pages/Register/RegisterCompletePage';
 
 function App() {
     return (
@@ -20,14 +21,39 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     {/* Public Pages */}
+                    <Route path={ABOUT} element={
+                        <PublicLayout>
+                            <AboutPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={CONTACT} element={
+                        <PublicLayout>
+                            <ContactPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={ERROR} element={
+                        <PublicLayout>
+                            <ErrorPage />
+                        </PublicLayout>
+                    } />
                     <Route path={HOME} element={
                         <PublicLayout>
                             <HomePage />
                         </PublicLayout>
                     } />
-                    <Route path={ABOUT} element={
+                    <Route path={LOGIN_PAGE} element={
                         <PublicLayout>
-                            <AboutPage />
+                            <LoginPage />
+                        </PublicLayout>
+                    } />
+                    <Route path={REGISTER_COMPLETE} element={
+                        <PublicLayout>
+                            <RegisterCompletePage />
+                        </PublicLayout>
+                    } />
+                    <Route path={REGISTER_PAGE} element={
+                        <PublicLayout>
+                            <RegisterPage />
                         </PublicLayout>
                     } />
                     <Route path={SERVICES} element={
@@ -43,26 +69,6 @@ function App() {
                     <Route path={VACANCIES} element={
                         <PublicLayout>
                             <VacanciesPage />
-                        </PublicLayout>
-                    } />
-                    <Route path={CONTACT} element={
-                        <PublicLayout>
-                            <ContactPage />
-                        </PublicLayout>
-                    } />
-                    <Route path={LOGIN_PAGE} element={
-                        <PublicLayout>
-                            <LoginPage />
-                        </PublicLayout>
-                    } />
-                    <Route path={REGISTER_PAGE} element={
-                        <PublicLayout>
-                            <RegisterPage />
-                        </PublicLayout>
-                    } />
-                    <Route path={ERROR} element={
-                        <PublicLayout>
-                            <ErrorPage />
                         </PublicLayout>
                     } />
                     <Route path={USERS_PAGE} element={

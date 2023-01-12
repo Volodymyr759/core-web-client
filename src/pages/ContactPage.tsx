@@ -4,7 +4,6 @@ const ContactPage = () => {
 
     return (
         <>
-            <p></p>
             <PageHeader
                 title="CONTACT US"
                 text=""

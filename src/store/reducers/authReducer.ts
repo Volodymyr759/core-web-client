@@ -12,9 +12,9 @@ export const authReducer = (state: AuthState = initialState, action: AuthAction)
             return { ...state, auth: action.payload };
         case AuthActionTypes.LOGOUT:
             return { ...state, auth: null };
-        case AuthActionTypes.SET_ERROR:
+        case AuthActionTypes.SET_AUTH_ERROR:
             return { ...state, error: action.payload };
-        case AuthActionTypes.SET_IS_LOADING:
+        case AuthActionTypes.SET_AUTH_LOADING:
             return { ...state, loading: action.payload };
         default: return state;
     }
