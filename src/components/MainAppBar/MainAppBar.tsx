@@ -16,13 +16,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ABOUT, HOME, SERVICES } from '../../routing/pathes';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
-import { MainMenuPathes } from '../../routing/MainMenuPathes';
+import { MainMenuPathes } from '../../routing/pathes';
 
-const settings = [
-    { title: "Profile", linkTo: HOME },
-    { title: "Account", linkTo: ABOUT },
-    { title: "Dashboard", linkTo: SERVICES }
-]
+// const settings = [
+//     { title: "Profile", linkTo: HOME },
+//     { title: "Account", linkTo: ABOUT },
+//     { title: "Dashboard", linkTo: SERVICES }
+// ]
+
+const settings = [HOME, ABOUT, SERVICES];
 
 function MainAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -52,7 +54,7 @@ function MainAppBar() {
 
     const handleLogout = () => {
         logout(auth.email, auth.tokens.accessToken);
-        navigate(HOME);
+        navigate(HOME.path);
     }
 
     return (
@@ -105,8 +107,8 @@ function MainAppBar() {
                             }}
                         >
                             {MainMenuPathes.map((page) => (
-                                <MenuItem key={page.title} component={Link} to={page.linkTo} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page.title}</Typography>
+                                <MenuItem key={page.name} component={Link} to={page.path} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -132,7 +134,7 @@ function MainAppBar() {
                         LOGO
                     </Typography>
 
-                    {/* Public pages */}
+                    {/* Main Menu pages */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {MainMenuPathes.map((page) => (
                             <Button
@@ -140,7 +142,7 @@ function MainAppBar() {
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <Link to={page.linkTo} className="main-menu-link">{page.title}</Link>
+                                <Link to={page.path} className="main-menu-link">{page.name}</Link>
                             </Button>
                         ))}
                     </Box>
@@ -170,12 +172,12 @@ function MainAppBar() {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting.title} component={Link} to={setting.linkTo} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting.name} component={Link} to={setting.path} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">{setting.title}</Typography>
                                     </MenuItem>
                                 ))}
                                 <hr />
-                                <MenuItem component={Link} to={HOME} onClick={handleLogout}>
+                                <MenuItem component={Link} to={HOME.path} onClick={handleLogout}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>
                             </Menu>

@@ -44,7 +44,7 @@ const LoginForm = () => {
 
     if (auth) {
         reset();
-        navigate(HOME);
+        navigate(HOME.path);
     };
 
     return (
@@ -104,7 +104,7 @@ const LoginForm = () => {
                     />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => navigate(HOME)}>
+                    <Button onClick={() => navigate(HOME.path)}>
                         Cancel
                     </Button>
                     <Button type="submit">

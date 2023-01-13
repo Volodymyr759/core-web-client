@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { REGISTER_PAGE } from "../../routing/pathes";
+import { REGISTER } from "../../routing/pathes";
 import { PageHeader } from "../../components/PageHeader/PageHeader";
 import LoginForm from "./LoginForm";
 
@@ -12,7 +12,7 @@ const LoginPage = () => {
             />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '30px 0' }}>
                 <LoginForm />
-                <p>Or <Link to={REGISTER_PAGE}>Sign Up</Link> if you already have account.</p>
+                <p>Or <Link to={REGISTER.path}>Sign Up</Link> if you already have account.</p>
             </div>
         </>
     )

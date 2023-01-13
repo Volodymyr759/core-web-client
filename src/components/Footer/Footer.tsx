@@ -3,10 +3,10 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import StarBorder from '@mui/icons-material/StarBorder';
 import { useNavigate } from 'react-router-dom';
-import { MainMenuPathes } from '../../routing/MainMenuPathes';
+import { MainMenuPathes } from '../../routing/pathes';
 import { SubscriptionForm } from './SubscriptionForm';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Footer = () => {
     const navigate = useNavigate();
@@ -31,22 +31,23 @@ const Footer = () => {
                 </Typography>
             </Grid>
             <Grid item xs={12} md={4} textAlign='center'>
-                <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 16, fontWeight: 600 }}>
+                <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 18, fontWeight: 600 }}>
                     Useful Links
                 </Typography>
                 <List sx={{ marginLeft: '90px' }}>
                     {MainMenuPathes.map((page) => (
-                        <ListItemButton key={page.title} sx={{ padding: '0' }} onClick={() => { navigate(page.linkTo); window.scroll(0, 0) }}>
-                            <ListItemIcon>
-                                <StarBorder htmlColor='#1976d2' />
+                        <ListItemButton key={page.title} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
+                            <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
+                                <ArrowForwardIosIcon fontSize='small' htmlColor='#1976d2' />
                             </ListItemIcon>
-                            <ListItemText primary={page.title} />
+                            &nbsp;&nbsp;
+                            <ListItemText primary={page.name} />
                         </ListItemButton>
                     ))}
                 </List>
             </Grid>
             <Grid item xs={12} md={4} textAlign='center' padding={'16px 40px !important'}>
-                <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 16, fontWeight: 600 }}>
+                <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 18, fontWeight: 600 }}>
                     Our Newsletter
                 </Typography>
                 <Typography variant="body2" component={'p'}>

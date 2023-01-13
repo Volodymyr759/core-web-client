@@ -56,7 +56,7 @@ const RegisterForm = (): JSX.Element => {
                 confirmPassword: registerDto.confirmPassword
             });
             reset();
-            navigate(REGISTER_COMPLETE);
+            navigate(REGISTER_COMPLETE.path);
         } catch (e) {
             setRegistrationState(prevRegisterFormState => {
                 return { ...prevRegisterFormState, error: e.message || 'Unknown server error.' }
@@ -125,7 +125,7 @@ const RegisterForm = (): JSX.Element => {
                     />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => navigate(HOME)}>
+                    <Button onClick={() => navigate(HOME.path)}>
                         Cancel
                     </Button>
                     <Button type="submit">

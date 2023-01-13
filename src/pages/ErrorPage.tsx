@@ -29,7 +29,7 @@ export const ErrorPage = ({ status = '500', message = 'Internal Server Error' }:
                     <p className='text-centered'>
                         <Button
                             appearance='primary'
-                            onClick={() => navigate(HOME)}
+                            onClick={() => navigate(HOME.path)}
                         >
                             Home
                         </Button>

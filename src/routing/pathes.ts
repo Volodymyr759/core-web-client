@@ -1,18 +1,28 @@
-export const ABOUT: string = '/about';
-export const CONTACT: string = '/contact';
-export const HOME: string = '/';
-export const SERVICES: string = '/services';
-export const TEAM: string = '/team';
-export const VACANCIES: string = '/vacancies';
-export const ERROR: string = '/error';
+interface PageRouteItem {
+    path: string;
+    name: string;
+    title: string;
+}
+
+export const ABOUT: PageRouteItem = { path: '/about', name: 'About', title: 'About Us' };
+export const CONTACT: PageRouteItem = { path: '/contact', name: 'Contact', title: 'Contact' };
+export const HOME: PageRouteItem = { path: '/', name: 'Home', title: 'Home page' };
+export const SERVICES: PageRouteItem = { path: '/services', name: 'Services', title: 'Services page' };
+export const TEAM: PageRouteItem = { path: '/team', name: 'Team', title: 'Team page' };
+export const VACANCIES: PageRouteItem = { path: '/vacancies', name: 'Vacancies', title: 'Vacancies page' };
+export const ERROR: PageRouteItem = { path: '/error', name: 'Error', title: 'Error page' };
 
 // Sign Up & Sign In
-export const LOGIN_PAGE: string = '/login';
-export const REGISTER_PAGE: string = '/register';
-export const REGISTER_COMPLETE: string = '/register-complete';
+export const LOGIN: PageRouteItem = { path: '/login', name: 'Login', title: 'Sign In' };
+export const REGISTER: PageRouteItem = { path: '/register', name: 'Register', title: 'Sign Up' };
+export const REGISTER_COMPLETE: PageRouteItem = { path: '/register-complete', name: 'RegisterComplete', title: 'Registration Complete' };
 
 // Profile
 
 
 // Admin pages
-export const USERS_PAGE = '/users'
+export const USERS: PageRouteItem = { path: '/users', name: 'Users', title: 'Dashboard - Users page' };
+
+// Main Menu
+export const MainMenuPathes: PageRouteItem[] = [HOME, ABOUT, SERVICES, TEAM, VACANCIES, CONTACT]
+
