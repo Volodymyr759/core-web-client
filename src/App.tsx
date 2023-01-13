@@ -22,7 +22,7 @@ function App() {
                 <Routes>
                     {/* Public Pages */}
                     <Route path={ABOUT} element={
-                        <PublicLayout>
+                        <PublicLayout title='About Us'>
                             <AboutPage />
                         </PublicLayout>
                     } />

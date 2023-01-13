@@ -1,6 +1,6 @@
 import { ABOUT, CONTACT, HOME, SERVICES, TEAM, VACANCIES } from './pathes';
 
-export const PublicPages = [
+export const MainMenuPathes = [
     { title: "Home", linkTo: HOME },
     { title: "About", linkTo: ABOUT },
     { title: "Services", linkTo: SERVICES },

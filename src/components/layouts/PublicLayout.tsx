@@ -5,10 +5,12 @@ import MainAppBar from '../MainAppBar/MainAppBar';
 import './styles.css'
 
 type Props = {
+    title?: string;
     children: React.ReactNode;
 };
 
-const PublicLayout: FC<Props> = ({ children }) => {
+const PublicLayout: FC<Props> = ({ children, title }) => {
+    document.title = title || 'App'
     return (
         <>
             <MainAppBar />

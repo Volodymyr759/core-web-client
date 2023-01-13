@@ -16,7 +16,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ABOUT, HOME, SERVICES } from '../../routing/pathes';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
-import {PublicPages} from '../../routing/PublicPages';
+import { MainMenuPathes } from '../../routing/MainMenuPathes';
 
 const settings = [
     { title: "Profile", linkTo: HOME },
@@ -104,7 +104,7 @@ function MainAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {PublicPages.map((page) => (
+                            {MainMenuPathes.map((page) => (
                                 <MenuItem key={page.title} component={Link} to={page.linkTo} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page.title}</Typography>
                                 </MenuItem>
@@ -134,7 +134,7 @@ function MainAppBar() {
 
                     {/* Public pages */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {PublicPages.map((page) => (
+                        {MainMenuPathes.map((page) => (
                             <Button
                                 key={page.title}
                                 onClick={handleCloseNavMenu}
