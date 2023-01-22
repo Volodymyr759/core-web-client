@@ -11,11 +11,12 @@ export class AxiosMiddleware {
             function (error: AxiosError) {
                 switch (error.status) {
                     case ErrorStatus['Bad Request']:
-                        throw new Error(error.response.data.toString());
+                        throw new Error(error.response.data['title'] || 'Bad Request Error');
                     case ErrorStatus.Forbidden:
                         return;
                     case ErrorStatus['Not Found']:
-                        throw new Error(error.response.data.toString());
+                        // throw new Error(error.response.data.toString());
+                        throw new Error(error.response.data['title'] || 'Not Found Error');
                     default:
                         throw new Error('Internal server error.');
                 }

@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import UsersPage from './pages/UsersPage';
 import AboutPage from './pages/AboutPage/AboutPage';
-import ServicesPage from './pages/ServicesPage';
+import ServicesPage from './pages/CompanyServices/ServicesPage';
 import TeamPage from './pages/TeamPage/TeamPage';
 import VacanciesPage from './pages/VacanciesPage';
 import ContactPage from './pages/ContactPage';

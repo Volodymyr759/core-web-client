@@ -15,12 +15,19 @@ export interface EmployeeState {
 
 export enum EmployeeActionTypes {
     GET_All_EMPLOYEES = "GET_All_EMPLOYEES",
+    GET_PUBLIC_EMPLOYEES = "GET_PUBLIC_EMPLOYEES",
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
     SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING"
 }
 
 interface GetAllEmployeesAction {
     type: EmployeeActionTypes.GET_All_EMPLOYEES;
+    payload: IEmployee[];
+}
+
+
+interface GetPublicEmployeesAction {
+    type: EmployeeActionTypes.GET_PUBLIC_EMPLOYEES;
     payload: IEmployee[];
 }
 
@@ -34,4 +41,4 @@ interface SetLoadingAction {
     payload: boolean;
 }
 
-export type EmployeeAction = GetAllEmployeesAction | SetErrorAction | SetLoadingAction
+export type EmployeeAction = GetAllEmployeesAction | GetPublicEmployeesAction | SetErrorAction | SetLoadingAction
