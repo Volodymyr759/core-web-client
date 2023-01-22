@@ -15,7 +15,7 @@ const initState: EmployeeListState = {
 }
 
 const EmployeesList = () => {
-    const { error, employees, loading } = useTypedSelector(state => state.employee);
+    const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
     const { getPublicEmployees } = useActions();
     const [employeeListState, setEmployeeListState] = useState<EmployeeListState>(initState);
 
@@ -24,11 +24,7 @@ const EmployeesList = () => {
         setEmployeeListState({ currentPage: employeeListState.currentPage + 1 });
     }, [])
 
-    const loadMoreHandler = () => {
-        // setEmployeeListState(prevEmployeeListState => {
-        //     return { ...prevEmployeeListState, currentPage: prevEmployeeListState.currentPage + 1 }
-        // });
-
+    const changePage = () => {
         console.log('employeeListState: ', employeeListState);
         getPublicEmployees(employeeListState.currentPage);
         setEmployeeListState({ currentPage: employeeListState.currentPage + 1 });
@@ -37,24 +33,29 @@ const EmployeesList = () => {
     return (
         <>
             {
-                loading ?
-                    <Spinner />
+                error ?
+                    <ErrorMessage message={error} />
                     :
-                    employees.length > 0 ?
-                        <>
-                            <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
-                                {
-                                    employees.map(emp => (
-                                        <EmployeeCard key={emp.id} employee={emp} />
-                                    ))
-                                }
-                            </Grid>
-                            <Button onClick={loadMoreHandler}>
+                    <>
+                        <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
+                            {
+                                employeeSearchResult.itemList.length > 0 &&
+                                employeeSearchResult.itemList.map(emp => (
+                                    <EmployeeCard key={emp.id} employee={emp} />
+                                ))
+                            }
+                        </Grid>
+                        {
+                            loading && <Spinner />
+                        }
+
+                        <p style={{ textAlign: 'center' }}>
+                            <Button onClick={changePage}>
                                 {loading ? 'Loading...' : 'Load more'}
                             </Button>
-                        </>
-                        :
-                        error && <ErrorMessage message={error} />
+                        </p>
+
+                    </>
             }
         </>
     )

@@ -1,3 +1,5 @@
+import { ISearchResult } from "./searchResult";
+
 export interface IEmployee {
     id: number;
     fullName: string;
@@ -8,27 +10,26 @@ export interface IEmployee {
 }
 
 export interface EmployeeState {
-    employees: IEmployee[];
+    employeeSearchResult: ISearchResult<IEmployee>;
     loading: boolean;
     error: null | string;
 }
 
 export enum EmployeeActionTypes {
-    GET_All_EMPLOYEES = "GET_All_EMPLOYEES",
+    GET_EMPLOYEES = "GET_EMPLOYEES",
     GET_PUBLIC_EMPLOYEES = "GET_PUBLIC_EMPLOYEES",
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
     SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING"
 }
 
-interface GetAllEmployeesAction {
-    type: EmployeeActionTypes.GET_All_EMPLOYEES;
-    payload: IEmployee[];
+interface GetEmployeesAction {
+    type: EmployeeActionTypes.GET_EMPLOYEES;
+    payload: ISearchResult<IEmployee>;
 }
-
 
 interface GetPublicEmployeesAction {
     type: EmployeeActionTypes.GET_PUBLIC_EMPLOYEES;
-    payload: IEmployee[];
+    payload: ISearchResult<IEmployee>;
 }
 
 interface SetErrorAction {
@@ -41,4 +42,4 @@ interface SetLoadingAction {
     payload: boolean;
 }
 
-export type EmployeeAction = GetAllEmployeesAction | GetPublicEmployeesAction | SetErrorAction | SetLoadingAction
+export type EmployeeAction = GetEmployeesAction | GetPublicEmployeesAction | SetErrorAction | SetLoadingAction
