@@ -10,7 +10,7 @@ const initialState: EmployeeState = {
         pageCount: 0,
         pageSize: 3,
         searchCriteria: "",
-        toalItemCount: 0
+        totalItemCount: 0
     },
     loading: false,
     error: null
@@ -21,11 +21,10 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
         case EmployeeActionTypes.GET_EMPLOYEES:
             return { ...state, employeeSearchResult: action.payload };
         case EmployeeActionTypes.GET_PUBLIC_EMPLOYEES:
-            // return { ...state, employeeSearchResult: state.employeeSearchResult.itemList.concat(action.payload.itemList)  };
-            return { 
-                ...state, 
+            return {
+                ...state,
                 employeeSearchResult: {
-                    ...state.employeeSearchResult, 
+                    ...action.payload,
                     itemList: state.employeeSearchResult.itemList.concat(action.payload.itemList)
                 },
             };
@@ -33,6 +32,11 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
             return { ...state, error: action.payload };
         case EmployeeActionTypes.SET_EMPLOYEE_LOADING:
             return { ...state, loading: action.payload };
+        case EmployeeActionTypes.SET_EMPLOYEE_PAGE:
+            return {
+                ...state,
+                employeeSearchResult: { ...state.employeeSearchResult, currentPageNumber: action.payload }
+            };
 
         default: return state;
     }

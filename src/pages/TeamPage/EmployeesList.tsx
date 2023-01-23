@@ -1,33 +1,22 @@
 import { Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { EmployeeCard } from "./EmployeeCard";
 
-interface EmployeeListState {
-    currentPage: number;
-}
-
-const initState: EmployeeListState = {
-    currentPage: 1
-}
-
 const EmployeesList = () => {
     const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
-    const { getPublicEmployees } = useActions();
-    const [employeeListState, setEmployeeListState] = useState<EmployeeListState>(initState);
+    const { getPublicEmployees, setEmployeePage } = useActions();
 
     useEffect(() => {
-        getPublicEmployees(employeeListState.currentPage);
-        setEmployeeListState({ currentPage: employeeListState.currentPage + 1 });
+        getPublicEmployees(employeeSearchResult.currentPageNumber);
     }, [])
 
     const changePage = () => {
-        console.log('employeeListState: ', employeeListState);
-        getPublicEmployees(employeeListState.currentPage);
-        setEmployeeListState({ currentPage: employeeListState.currentPage + 1 });
+        getPublicEmployees(employeeSearchResult.currentPageNumber + 1);
+        setEmployeePage(employeeSearchResult.currentPageNumber + 1);
     }
 
     return (
@@ -50,7 +39,9 @@ const EmployeesList = () => {
                         }
 
                         <p style={{ textAlign: 'center' }}>
-                            <Button onClick={changePage}>
+                            <Button
+                                onClick={changePage}
+                                disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
                                 {loading ? 'Loading...' : 'Load more'}
                             </Button>
                         </p>

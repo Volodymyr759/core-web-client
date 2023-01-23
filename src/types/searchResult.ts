@@ -5,7 +5,7 @@ export interface ISearchResult<T> {
     pageCount: number;
     pageSize: number;
     searchCriteria: string;
-    toalItemCount: number;
+    totalItemCount: number;
 }
 
 export enum OrderType {

@@ -19,7 +19,8 @@ export enum EmployeeActionTypes {
     GET_EMPLOYEES = "GET_EMPLOYEES",
     GET_PUBLIC_EMPLOYEES = "GET_PUBLIC_EMPLOYEES",
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
-    SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING"
+    SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING",
+    SET_EMPLOYEE_PAGE = "SET_EMPLOYEE_PAGE"
 }
 
 interface GetEmployeesAction {
@@ -32,14 +33,19 @@ interface GetPublicEmployeesAction {
     payload: ISearchResult<IEmployee>;
 }
 
-interface SetErrorAction {
+interface SetErrorEmployeeAction {
     type: EmployeeActionTypes.SET_EMPLOYEE_ERROR;
     payload: null | string;
 }
 
-interface SetLoadingAction {
+interface SetLoadingEmployeeAction {
     type: EmployeeActionTypes.SET_EMPLOYEE_LOADING;
     payload: boolean;
 }
 
-export type EmployeeAction = GetEmployeesAction | GetPublicEmployeesAction | SetErrorAction | SetLoadingAction
+interface SetPageEmployeeAction {
+    type: EmployeeActionTypes.SET_EMPLOYEE_PAGE;
+    payload: number;
+}
+
+export type EmployeeAction = GetEmployeesAction | GetPublicEmployeesAction | SetErrorEmployeeAction | SetLoadingEmployeeAction | SetPageEmployeeAction

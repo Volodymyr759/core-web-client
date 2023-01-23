@@ -15,3 +15,9 @@ export const getPublicEmployees = (page: number) => {
         }
     }
 }
+
+export const setEmployeePage = (page: number) => {
+    return async (dispatch: Dispatch<EmployeeAction>) => {
+        dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_PAGE, payload: page });
+    }
+}
