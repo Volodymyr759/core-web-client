@@ -41,6 +41,7 @@ const EmployeesList = () => {
                         <p style={{ textAlign: 'center' }}>
                             <Button
                                 onClick={changePage}
+                                variant="outlined"
                                 disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
                                 {loading ? 'Loading...' : 'Load more'}
                             </Button>

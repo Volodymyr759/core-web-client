@@ -1,7 +1,8 @@
+import React from "react";
 import { PageHeader } from "../../components/PageHeader/PageHeader";
 import AboutUsContent from "./AboutUsContent";
 
-const AboutPage = () => {
+export default function AboutPage() {
 
     return (
         <>
@@ -14,4 +15,4 @@ const AboutPage = () => {
     )
 }
 
-export default AboutPage;
+// export default AboutPage;

@@ -13,13 +13,12 @@ import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
 import { RegisterCompletePage } from './pages/Register/RegisterCompletePage';
+import { AppRouter } from './components/AppRouter';
 
 function App() {
     return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    {/* Public Pages */}
+        <BrowserRouter>
+            {/* <Routes>
                     <Route path={ABOUT.path} element={
                         <PublicLayout title={ABOUT.title}>
                             <AboutPage />
@@ -55,7 +54,6 @@ function App() {
                             <VacanciesPage />
                         </PublicLayout>
                     } />
-                    {/* Auth Pages */}
                     <Route path={LOGIN.path} element={
                         <PublicLayout title={LOGIN.title}>
                             <LoginPage />
@@ -71,15 +69,14 @@ function App() {
                             <RegisterPage />
                         </PublicLayout>
                     } />
-                    {/* Protected Pages */}
                     <Route path={USERS.path} element={
                         <AdminLayout>
                             <UsersPage />
                         </AdminLayout>
                     } />
-                </Routes>
-            </BrowserRouter>
-        </>
+                </Routes> */}
+            <AppRouter />
+        </BrowserRouter>
     );
 }
 

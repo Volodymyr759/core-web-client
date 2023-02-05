@@ -19,6 +19,11 @@ export interface IAuth{
     }
 }
 
+export enum Roles {
+    ADMIN = "Admin",
+    REGISTERED = "Registered"
+}
+
 export interface AuthState {
     auth: null | IAuth;
     loading: boolean;
