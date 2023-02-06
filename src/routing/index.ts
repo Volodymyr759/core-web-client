@@ -9,7 +9,7 @@ import { RegisterCompletePage } from "../pages/Register/RegisterCompletePage";
 import RegisterPage from "../pages/Register/RegisterPage";
 import TeamPage from "../pages/TeamPage/TeamPage";
 import UsersPage from "../pages/UsersPage";
-import VacanciesPage from "../pages/VacanciesPage";
+import VacanciesPage from "../pages/Vacancies/VacanciesPage";
 
 export interface IRoute {
     path: string;

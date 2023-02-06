@@ -4,19 +4,19 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { EmployeeCard } from "./EmployeeCard";
+import { VacancyCard } from "./VacancyCard";
 
-const EmployeesList = () => {
-    const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
-    const { getPublicEmployees, setEmployeePage } = useActions();
+const VacanciesList = () => {
+    const { error, vacancySearchResult, loading } = useTypedSelector(state => state.vacancy)
+    const { getPublicVacancies, setVacancyPage } = useActions();
 
     useEffect(() => {
-        getPublicEmployees(employeeSearchResult.currentPageNumber);
+        getPublicVacancies(vacancySearchResult.currentPageNumber);
     }, [])
 
     const changePage = () => {
-        getPublicEmployees(employeeSearchResult.currentPageNumber + 1);
-        setEmployeePage(employeeSearchResult.currentPageNumber + 1);
+        getPublicVacancies(vacancySearchResult.currentPageNumber + 1);
+        setVacancyPage(vacancySearchResult.currentPageNumber + 1);
     }
 
     return (
@@ -28,9 +28,9 @@ const EmployeesList = () => {
                     <>
                         <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
                             {
-                                employeeSearchResult.itemList.length > 0 &&
-                                employeeSearchResult.itemList.map(emp => (
-                                    <EmployeeCard key={emp.id} employee={emp} />
+                                vacancySearchResult.itemList.length > 0 &&
+                                vacancySearchResult.itemList.map(vacancy => (
+                                    <VacancyCard key={vacancy.id} vacancy={vacancy} />
                                 ))
                             }
                         </Grid>
@@ -41,7 +41,7 @@ const EmployeesList = () => {
                             <Button
                                 onClick={changePage}
                                 variant="outlined"
-                                disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
+                                disabled={vacancySearchResult.currentPageNumber * vacancySearchResult.pageSize >= vacancySearchResult.totalItemCount}>
                                 {loading ? 'Loading...' : 'Load more'}
                             </Button>
                         </Box>
@@ -51,4 +51,4 @@ const EmployeesList = () => {
     )
 }
 
-export default EmployeesList;
+export default VacanciesList;
