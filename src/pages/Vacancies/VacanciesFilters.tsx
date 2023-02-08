@@ -1,27 +1,29 @@
 import { Autocomplete, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getPublicOfficeNameIdsAxios } from "../../api/office";
-import { OfficeNameIdDto, VacanciesFiltersState } from "./types";
+import { useActions } from "../../hooks/useActions";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { OfficeNameIdDto } from "./types";
 
 const VacanciesFilters = () => {
-    const initState: VacanciesFiltersState = {
-        currentOffice: '',
-        searchText: ''
-    }
-
-    const [filters, setFilters] = useState<VacanciesFiltersState>(initState);
     const [offices, setOffices] = useState<OfficeNameIdDto[]>([]);
 
+    const { setVacancyPage, setVacancyOfficeFilter, clearVacancies } = useActions();
+    const { filters } = useTypedSelector(state => state.vacancy);
+
     useEffect(() => {
-        const fetchOffices = async () => {
+        const getOffices = async () => {
             const officesFromApi = await getPublicOfficeNameIdsAxios();
+            officesFromApi.unshift({ id: 0, name: "All offices" });
             setOffices(officesFromApi);
         }
-        fetchOffices();
+        getOffices();
     }, [])
 
     const officeChanged = (event: SelectChangeEvent) => {
-        setFilters({ ...filters, currentOffice: event.target.value })
+        clearVacancies();
+        setVacancyPage(1);
+        setVacancyOfficeFilter(event.target.value);
         console.log("event.target.value: ", event.target.value);
     }
 
@@ -31,11 +33,11 @@ const VacanciesFilters = () => {
                 <FormControl sx={{ width: 300 }}>
                     <InputLabel id="demo-simple-select-label">Office</InputLabel>
                     <Select
-                        value={filters.currentOffice}
+                        value={filters.officeId}
                         label="Office"
                         onChange={officeChanged}
                     >
-                        {offices.map((office) => <MenuItem value={office.id}>{office.name}</MenuItem>)}
+                        {offices.map((office) => <MenuItem key={office.id} value={office.id}>{office.name}</MenuItem>)}
                     </Select>
                 </FormControl>
             </Grid>
@@ -43,14 +45,13 @@ const VacanciesFilters = () => {
                 <Autocomplete
                     sx={{ textAlign: 'center!important' }}
                     freeSolo
-                    // id="free-solo-2-demo"
                     disableClearable
                     options={top100Films.map((option) => option.title)}
                     renderInput={(params) => (
                         <TextField
                             sx={{ width: 300 }}
                             {...params}
-                            label="Search input"
+                            label="Search by title"
                             InputProps={{
                                 ...params.InputProps,
                                 type: 'search',

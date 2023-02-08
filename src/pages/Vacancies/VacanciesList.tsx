@@ -7,15 +7,19 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { VacancyCard } from "./VacancyCard";
 
 const VacanciesList = () => {
-    const { error, vacancySearchResult, loading } = useTypedSelector(state => state.vacancy)
-    const { getPublicVacancies, setVacancyPage } = useActions();
+    const { error, vacancySearchResult, loading, filters } = useTypedSelector(state => state.vacancy)
+    const { getVacancies, setVacancyPage } = useActions(); //getPublicVacancies, 
 
     useEffect(() => {
-        getPublicVacancies(vacancySearchResult.currentPageNumber);
-    }, [])
+        // getPublicVacancies(vacancySearchResult.currentPageNumber);
+        getVacancies(vacancySearchResult.pageSize, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
+            filters.active, filters.officeId, "id", vacancySearchResult.order)
+    }, [filters])
 
     const changePage = () => {
-        getPublicVacancies(vacancySearchResult.currentPageNumber + 1);
+        // getPublicVacancies(vacancySearchResult.currentPageNumber + 1);
+        getVacancies(vacancySearchResult.pageSize, vacancySearchResult.currentPageNumber + 1, vacancySearchResult.searchCriteria,
+            filters.active, filters.officeId, "id", vacancySearchResult.order)
         setVacancyPage(vacancySearchResult.currentPageNumber + 1);
     }
 

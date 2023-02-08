@@ -1,15 +1,19 @@
+import { SortOrder } from "../../types/sortOrder";
 import { VacancyAction, VacancyActionTypes, VacancyState, IVacancy } from "../../types/vacancy";
-import { OrderType } from "../../types/searchResult";
 
 const initialState: VacancyState = {
     vacancySearchResult: {
         itemList: [] as IVacancy[],
         currentPageNumber: 1,
-        order: OrderType.Ascending,
+        order: SortOrder.Descending,
         pageCount: 0,
         pageSize: 9,
         searchCriteria: "",
         totalItemCount: 0
+    },
+    filters: {
+        active: true,
+        officeId: "0"
     },
     loading: false,
     error: null
@@ -35,6 +39,21 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             return {
                 ...state,
                 vacancySearchResult: { ...state.vacancySearchResult, currentPageNumber: action.payload }
+            };
+        case VacancyActionTypes.SET_VACANCY_ACTIVE_FILTER:
+            return {
+                ...state,
+                filters: { ...state.filters, active: action.payload }
+            };
+        case VacancyActionTypes.SET_VACANCY_OFFICE_FILTER:
+            return {
+                ...state,
+                filters: { ...state.filters, officeId: action.payload }
+            };
+        case VacancyActionTypes.CLEAR_VACANCIES:
+            return {
+                ...state,
+                vacancySearchResult: { ...state.vacancySearchResult, itemList: [] }
             };
 
         default: return state;

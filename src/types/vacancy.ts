@@ -11,8 +11,14 @@ export interface IVacancy {
     }
 }
 
+export interface VacancyFilters {
+    active: boolean;
+    officeId: string;
+}
+
 export interface VacancyState {
     vacancySearchResult: ISearchResult<IVacancy>;
+    filters: VacancyFilters;
     loading: boolean;
     error: null | string;
 }
@@ -22,7 +28,10 @@ export enum VacancyActionTypes {
     GET_PUBLIC_VACANCIES = "GET_PUBLIC_VACANCIES",
     SET_VACANCY_ERROR = "SET_VACANCY_ERROR",
     SET_VACANCY_LOADING = "SET_VACANCY_LOADING",
-    SET_VACANCY_PAGE = "SET_VACANCY_PAGE"
+    SET_VACANCY_PAGE = "SET_VACANCY_PAGE",
+    SET_VACANCY_ACTIVE_FILTER = "SET_VACANCY_ACTIVE_FILTER",
+    SET_VACANCY_OFFICE_FILTER = "SET_VACANCY_OFFICE_FILTER",
+    CLEAR_VACANCIES = "CLEAR_VACANCIES"
 }
 
 interface GetVacanciesAction {
@@ -50,4 +59,26 @@ interface SetPageVacancyAction {
     payload: number;
 }
 
-export type VacancyAction = GetVacanciesAction | GetPublicVacanciesAction | SetErrorVacancyAction | SetLoadingVacancyAction | SetPageVacancyAction
+interface SetVacancyActiveFilterAction {
+    type: VacancyActionTypes.SET_VACANCY_ACTIVE_FILTER;
+    payload: boolean;
+}
+
+interface SetVacancyOfficeFilterAction {
+    type: VacancyActionTypes.SET_VACANCY_OFFICE_FILTER;
+    payload: string;
+}
+
+interface ClearVacanciesAction {
+    type: VacancyActionTypes.CLEAR_VACANCIES;
+    payload: [];
+}
+
+export type VacancyAction = GetVacanciesAction | 
+GetPublicVacanciesAction | 
+SetErrorVacancyAction | 
+SetLoadingVacancyAction | 
+SetPageVacancyAction |
+SetVacancyActiveFilterAction |
+SetVacancyOfficeFilterAction |
+ClearVacanciesAction
