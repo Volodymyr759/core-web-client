@@ -9,7 +9,7 @@ export const getPublicVacancies = (page: number) => {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
             dispatch({ type: VacancyActionTypes.GET_PUBLIC_VACANCIES, payload: await getPublicVacanciesAxios(page) });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading employees." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
