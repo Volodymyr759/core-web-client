@@ -8,8 +8,8 @@ import { OfficeNameIdDto } from "./types";
 const VacanciesFilters = () => {
     const [offices, setOffices] = useState<OfficeNameIdDto[]>([]);
 
-    const { setVacancyPage, setVacancyOfficeFilter, clearVacancies } = useActions();
-    const { filters } = useTypedSelector(state => state.vacancy);
+    const { setVacancyPage, setVacancyOfficeFilter, clearVacancies, getVacancies } = useActions();
+    const { vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
 
     useEffect(() => {
         const getOffices = async () => {
@@ -24,8 +24,15 @@ const VacanciesFilters = () => {
         clearVacancies();
         setVacancyPage(1);
         setVacancyOfficeFilter(event.target.value);
+        getVacancies(vacancySearchResult.pageSize, 1, vacancySearchResult.searchCriteria,
+                filters.active, event.target.value, "id", vacancySearchResult.order)
         console.log("event.target.value: ", event.target.value);
     }
+
+    const onTagsChange = (event, values) => {
+
+        console.log('values: ', values);
+      }
 
     return (
         <Grid container spacing={2} sx={{ margin: '20px 0' }}>
@@ -47,6 +54,7 @@ const VacanciesFilters = () => {
                     freeSolo
                     disableClearable
                     options={top100Films.map((option) => option.title)}
+                    onChange={onTagsChange}
                     renderInput={(params) => (
                         <TextField
                             sx={{ width: 300 }}

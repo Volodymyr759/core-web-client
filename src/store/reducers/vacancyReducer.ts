@@ -23,7 +23,7 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
     switch (action.type) {
         case VacancyActionTypes.GET_VACANCIES:
             return { ...state, vacancySearchResult: action.payload };
-        case VacancyActionTypes.GET_PUBLIC_VACANCIES:
+        case VacancyActionTypes.LOAD_MORE_VACANCIES:
             return {
                 ...state,
                 vacancySearchResult: {

@@ -9,7 +9,7 @@ export const CONTACT: PageRouteItem = { path: '/contact', name: 'Contact', title
 export const HOME: PageRouteItem = { path: '/', name: 'Home', title: 'Home page' };
 export const SERVICES: PageRouteItem = { path: '/services', name: 'Services', title: 'Services page' };
 export const TEAM: PageRouteItem = { path: '/team', name: 'Team', title: 'Team page' };
-export const VACANCIES: PageRouteItem = { path: '/vacancies', name: 'Vacancies', title: 'Vacancies page' };
+export const VACANCIES: PageRouteItem = { path: '/vacancy', name: 'Vacancies', title: 'Vacancies page' };
 export const ERROR: PageRouteItem = { path: '/error', name: 'Error', title: 'Error page' };
 
 // Sign Up & Sign In

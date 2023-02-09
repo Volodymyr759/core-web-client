@@ -1,4 +1,5 @@
-import { Box, Button, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { Props } from "./types";
 
 export const VacancyCard = ({ vacancy, ...props }: Props): JSX.Element => {
@@ -10,7 +11,9 @@ export const VacancyCard = ({ vacancy, ...props }: Props): JSX.Element => {
                         {vacancy.officeDto.name}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="div">
-                        {vacancy.title.substring(0, 15) + ' ...'}
+                        <Link to={`/vacancy/detailes/${vacancy.id}`}>
+                            {vacancy.title.substring(0, 15) + ' ...'}
+                        </Link>
                     </Typography>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {'Previews: ' + vacancy.previews}

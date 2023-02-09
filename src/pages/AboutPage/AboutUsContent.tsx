@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 
-const AboutUsContent = () => {
+export default function AboutUsContent() {
     return (
         <Grid container spacing={2} sx={{ padding: '60px 0 30px 0;' }}>
             <Grid item xs={12} md={6} textAlign='center'>
@@ -33,5 +33,3 @@ const AboutUsContent = () => {
         </Grid>
     )
 }
-
-export default AboutUsContent;

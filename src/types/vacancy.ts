@@ -25,7 +25,7 @@ export interface VacancyState {
 
 export enum VacancyActionTypes {
     GET_VACANCIES = "GET_VACANCIES",
-    GET_PUBLIC_VACANCIES = "GET_PUBLIC_VACANCIES",
+    LOAD_MORE_VACANCIES = "LOAD_MORE_VACANCIES",
     SET_VACANCY_ERROR = "SET_VACANCY_ERROR",
     SET_VACANCY_LOADING = "SET_VACANCY_LOADING",
     SET_VACANCY_PAGE = "SET_VACANCY_PAGE",
@@ -39,8 +39,8 @@ interface GetVacanciesAction {
     payload: ISearchResult<IVacancy>;
 }
 
-interface GetPublicVacanciesAction {
-    type: VacancyActionTypes.GET_PUBLIC_VACANCIES;
+interface LoadMoreVacanciesAction {
+    type: VacancyActionTypes.LOAD_MORE_VACANCIES;
     payload: ISearchResult<IVacancy>;
 }
 
@@ -75,7 +75,7 @@ interface ClearVacanciesAction {
 }
 
 export type VacancyAction = GetVacanciesAction | 
-GetPublicVacanciesAction | 
+LoadMoreVacanciesAction | 
 SetErrorVacancyAction | 
 SetLoadingVacancyAction | 
 SetPageVacancyAction |

@@ -8,45 +8,40 @@ import { EmployeeCard } from "./EmployeeCard";
 
 const EmployeesList = () => {
     const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
-    const { getPublicEmployees, setEmployeePage } = useActions();
+    const { getEmployees, loadMoreEmployees, setEmployeePage } = useActions();
 
     useEffect(() => {
-        getPublicEmployees(employeeSearchResult.currentPageNumber);
+        if (employeeSearchResult.itemList.length === 0) getEmployees(1);
     }, [])
 
-    const changePage = () => {
-        getPublicEmployees(employeeSearchResult.currentPageNumber + 1);
+    const loadMoreHandler = () => {
+        loadMoreEmployees(employeeSearchResult.currentPageNumber + 1);
         setEmployeePage(employeeSearchResult.currentPageNumber + 1);
     }
 
+    if (error) return <ErrorMessage message={error} />;
+
     return (
         <>
+            <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
+                {
+                    employeeSearchResult.itemList.length > 0 &&
+                    employeeSearchResult.itemList.map(emp => (
+                        <EmployeeCard key={emp.id} employee={emp} />
+                    ))
+                }
+            </Grid>
             {
-                error ?
-                    <ErrorMessage message={error} />
-                    :
-                    <>
-                        <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
-                            {
-                                employeeSearchResult.itemList.length > 0 &&
-                                employeeSearchResult.itemList.map(emp => (
-                                    <EmployeeCard key={emp.id} employee={emp} />
-                                ))
-                            }
-                        </Grid>
-                        {
-                            loading && <Spinner />
-                        }
-                        <Box mt={5} sx={{ textAlign: 'center' }}>
-                            <Button
-                                onClick={changePage}
-                                variant="outlined"
-                                disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
-                                {loading ? 'Loading...' : 'Load more'}
-                            </Button>
-                        </Box>
-                    </>
+                loading && <Spinner />
             }
+            <Box mt={5} sx={{ textAlign: 'center' }}>
+                <Button
+                    onClick={loadMoreHandler}
+                    variant="outlined"
+                    disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
+                    {loading ? 'Loading...' : 'Load more'}
+                </Button>
+            </Box>
         </>
     )
 }

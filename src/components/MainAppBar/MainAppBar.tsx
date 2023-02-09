@@ -18,12 +18,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
 import { MainMenuPathes } from '../../routing/pathes';
 
-// const settings = [
-//     { title: "Profile", linkTo: HOME },
-//     { title: "Account", linkTo: ABOUT },
-//     { title: "Dashboard", linkTo: SERVICES }
-// ]
-
 const settings = [HOME, ABOUT, SERVICES];
 
 function MainAppBar() {
@@ -33,8 +27,6 @@ function MainAppBar() {
     const { auth } = useTypedSelector(state => state.auth)
     const { logout } = useActions();
     const navigate = useNavigate();
-
-    // console.log("Auth: ", auth);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);

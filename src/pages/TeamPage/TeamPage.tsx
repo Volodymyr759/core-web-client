@@ -1,8 +1,7 @@
 import { PageHeader } from "../../components/PageHeader/PageHeader";
 import EmployeesList from "./EmployeesList";
 
-const TeamPage = () => {
-
+export default function TeamPage() {
     return (
         <>
             <PageHeader
@@ -13,5 +12,3 @@ const TeamPage = () => {
         </>
     )
 }
-
-export default TeamPage;

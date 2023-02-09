@@ -19,7 +19,7 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
     switch (action.type) {
         case EmployeeActionTypes.GET_EMPLOYEES:
             return { ...state, employeeSearchResult: action.payload };
-        case EmployeeActionTypes.GET_PUBLIC_EMPLOYEES:
+        case EmployeeActionTypes.LOAD_MORE_EMPLOYEES:
             return {
                 ...state,
                 employeeSearchResult: {

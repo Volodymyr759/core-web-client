@@ -11,7 +11,7 @@ export const AppRouter = () => {
     var setPublicRoutes = publicRoutes.map(route =>
         <Route key={route.path} path={route.path} element={
             <PublicLayout title={route.title}>
-                {route.component}
+                {route.component()}
             </PublicLayout>
         } />)
 
@@ -30,7 +30,7 @@ export const AppRouter = () => {
                         roleRegisteredRoutes.map(route =>
                             <Route key={route.path} path={route.path} element={
                                 <AdminLayout>
-                                    {route.component}
+                                    {route.component()}
                                 </AdminLayout>
                             } />
                         ))
