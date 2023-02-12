@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
-export const UserList = () => {
+export default function UserList(): JSX.Element {
     const { users, loading, error } = useTypedSelector(state => state.user);
     const { getAllUsers } = useActions();
 

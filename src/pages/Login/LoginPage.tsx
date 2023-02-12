@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { REGISTER } from "../../routing/pathes";
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import { RouteNames } from "../../routing";
 import LoginForm from "./LoginForm";
 
-const LoginPage = () => {
+export default function LoginPage(): JSX.Element {
     return (
         <>
             <PageHeader
@@ -12,10 +12,8 @@ const LoginPage = () => {
             />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '30px 0' }}>
                 <LoginForm />
-                <p>Or <Link to={REGISTER.path}>Sign Up</Link> if you already have account.</p>
+                <p>Or <Link to={RouteNames.REGISTER}>Sign Up</Link> if you already have account.</p>
             </div>
         </>
     )
 }
-
-export default LoginPage;

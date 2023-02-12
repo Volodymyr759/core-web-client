@@ -1,41 +1,68 @@
 import { Routes, Route } from 'react-router-dom';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { publicRoutes, roleRegisteredRoutes } from '../routing';
+import AboutPage from '../pages/AboutPage/AboutPage';
+import ServicesPage from '../pages/CompanyServices/ServicesPage';
+import ContactPage from '../pages/ContactPage';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/Login/LoginPage';
+import RegisterCompletePage from '../pages/Register/RegisterCompletePage';
+import RegisterPage from '../pages/Register/RegisterPage';
+import TeamPage from '../pages/TeamPage/TeamPage';
+import UsersPage from '../pages/UsersPage';
+import VacanciesPage from '../pages/Vacancies/VacanciesPage';
+import VacancyDetailes from '../pages/Vacancies/VacancyDetails';
+import { IRoute, RouteNames } from '../routing';
 import { Roles } from '../types/auth';
 import AdminLayout from './layouts/AdminLayout';
 import PublicLayout from './layouts/PublicLayout';
 
-export const AppRouter = () => {
+export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
 
-    var setPublicRoutes = publicRoutes.map(route =>
-        <Route key={route.path} path={route.path} element={
-            <PublicLayout title={route.title}>
-                {route.component()}
-            </PublicLayout>
-        } />)
+    const anonimousRoleRoutes: IRoute[] = [
+        { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
+        { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> },
+        { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
+        { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
+        { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
+        { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
+        { path: RouteNames.VACANCY_DETAILES, title: "Vacancy Detailes", component: <VacancyDetailes /> },
+        { path: RouteNames.LOGIN, title: "Sign In", component: <LoginPage /> },
+        { path: RouteNames.REGISTER, title: "Sign Up", component: <RegisterPage /> },
+        { path: RouteNames.REGISTER_COMPLETE, title: "Registration Complete", component: <RegisterCompletePage /> },
+        { path: "*", title: "Error: wrong route!", component: <ErrorPage /> }
+    ];
+
+    const registeredRoleRoutes: IRoute[] = [
+        { path: RouteNames.USERS, title: "Users page", component: <UsersPage /> }
+    ]
 
     return (
         auth === null ?
             <Routes>
                 {
-                    setPublicRoutes
+                    anonimousRoleRoutes.map((route) => {
+                        return (
+                            <Route key={route.path} path={route.path} element={
+                                <PublicLayout title={route.title}>{route.component}</PublicLayout>
+                            } />
+                        )
+                    })
                 }
             </Routes >
             :
             auth.roles.includes(Roles.REGISTERED) &&
             <Routes>
                 {
-                    setPublicRoutes.concat(
-                        roleRegisteredRoutes.map(route =>
+                    anonimousRoleRoutes.concat(registeredRoleRoutes).map((route) => {
+                        return (
                             <Route key={route.path} path={route.path} element={
-                                <AdminLayout>
-                                    {route.component()}
-                                </AdminLayout>
+                                <PublicLayout>{route.component}</PublicLayout>
                             } />
-                        ))
+                        )
+                    })
                 }
             </Routes>
-
     )
 }

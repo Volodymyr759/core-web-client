@@ -1,11 +1,9 @@
-import { UserList } from '../components/UserList';
+import UserList from '../components/UserList';
 
-const UsersPage = () => {
+export default function UsersPage(): JSX.Element {
     return (
         <div>
             <UserList />
         </div>
     );
 };
-
-export default UsersPage;

@@ -1,7 +1,7 @@
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import RegisterForm from "./RegisterForm";
 
-const RegisterPage = () => {
+export default function RegisterPage(): JSX.Element {
     return (
         <>
             <PageHeader
@@ -14,5 +14,3 @@ const RegisterPage = () => {
         </>
     )
 }
-
-export default RegisterPage;

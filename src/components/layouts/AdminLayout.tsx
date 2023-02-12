@@ -6,15 +6,10 @@ type Props = {
     children: React.ReactNode;
 };
 
-const AdminLayout: FC<Props> = ({ children }) => {
+export default function AdminLayout({ children }): JSX.Element {
     return (
-        <Container 
-        // maxWidth="xl" 
-        className="admin-layout-container"
-        >
+        <Container className="admin-layout-container" >
             {children}
         </Container>
     );
 };
-
-export default AdminLayout;

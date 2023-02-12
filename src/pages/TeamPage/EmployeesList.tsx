@@ -1,12 +1,12 @@
 import { Box, Button, Grid } from "@mui/material";
 import { useEffect } from "react";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { EmployeeCard } from "./EmployeeCard";
+import EmployeeCard from "./EmployeeCard";
 
-const EmployeesList = () => {
+export default function EmployeesList(): JSX.Element {
     const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
     const { getEmployees, loadMoreEmployees, setEmployeePage } = useActions();
 
@@ -45,5 +45,3 @@ const EmployeesList = () => {
         </>
     )
 }
-
-export default EmployeesList;

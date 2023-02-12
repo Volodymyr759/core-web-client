@@ -1,12 +1,12 @@
 import { Box, Button, Grid } from "@mui/material";
 import { useEffect } from "react";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { VacancyCard } from "./VacancyCard";
+import VacancyCard from "./VacancyCard";
 
-const VacanciesList = () => {
+export default function VacanciesList(): JSX.Element {
     const { error, vacancySearchResult, loading, filters } = useTypedSelector(state => state.vacancy)
     const { getVacancies, setVacancyPage, loadMoreVacancies } = useActions();
 
@@ -48,5 +48,3 @@ const VacanciesList = () => {
         </>
     )
 }
-
-export default VacanciesList;

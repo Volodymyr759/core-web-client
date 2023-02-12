@@ -1,8 +1,8 @@
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import VacanciesFilters from "./VacanciesFilters";
 import VacanciesList from "./VacanciesList";
 
-const VacanciesPage = () => {
+export default function VacanciesPage(): JSX.Element {
 
     return (
         <>
@@ -15,5 +15,3 @@ const VacanciesPage = () => {
         </>
     )
 }
-
-export default VacanciesPage;

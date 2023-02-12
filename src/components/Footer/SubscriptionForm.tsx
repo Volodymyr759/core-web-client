@@ -6,7 +6,7 @@ import { subscribeAxios } from "../../api/mailSubscriber";
 import { IMailSubscriber } from "../../types/mailSubscriber";
 import { useState } from "react";
 
-export const SubscriptionForm = (): JSX.Element => {
+export default function SubscriptionForm(): JSX.Element {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);

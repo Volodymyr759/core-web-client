@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { HOME } from "../../routing/pathes";
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useActions } from "../../hooks/useActions";
 import { ILoginDto } from "../../types/auth";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { RouteNames } from "../../routing";
 
-const LoginForm = () => {
+export default function LoginForm(): JSX.Element {
     const { login } = useActions();
     const navigate = useNavigate();
     const { auth, error, loading } = useTypedSelector(state => state.auth);
@@ -44,7 +44,7 @@ const LoginForm = () => {
 
     if (auth) {
         reset();
-        navigate(HOME.path);
+        navigate(RouteNames.HOME);
     };
 
     return (
@@ -104,7 +104,7 @@ const LoginForm = () => {
                     />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => navigate(HOME.path)}>
+                    <Button onClick={() => navigate(RouteNames.HOME)}>
                         Cancel
                     </Button>
                     <Button type="submit">
@@ -116,5 +116,3 @@ const LoginForm = () => {
         </>
     )
 }
-
-export default LoginForm;

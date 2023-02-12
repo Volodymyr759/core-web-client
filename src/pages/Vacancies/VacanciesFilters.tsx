@@ -6,7 +6,7 @@ import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { OfficeNameIdDto, VacancyTitleDto } from "./types";
 
-const VacanciesFilters = () => {
+export default function VacanciesFilters(): JSX.Element {
     const [offices, setOffices] = useState<OfficeNameIdDto[]>([]);
     const [titles, setTitles] = useState<VacancyTitleDto[]>([]);
 
@@ -82,4 +82,3 @@ const VacanciesFilters = () => {
     )
 }
 
-export default VacanciesFilters;

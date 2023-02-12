@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 
-export default function AboutUsContent() {
+export default function AboutUsContent(): JSX.Element {
     return (
         <Grid container spacing={2} sx={{ padding: '60px 0 30px 0;' }}>
             <Grid item xs={12} md={6} textAlign='center'>

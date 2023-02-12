@@ -1,5 +1,11 @@
 
 
-export const ServicesList = () => {
+export default function ServicesList (): JSX.Element {
+
+    return (
+        <>
+        
+        </>
+    )
     
 }

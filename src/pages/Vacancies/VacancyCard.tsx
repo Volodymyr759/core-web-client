@@ -1,8 +1,9 @@
 import { Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { RouteNames } from "../../routing";
 import { Props } from "./types";
 
-export const VacancyCard = ({ vacancy, ...props }: Props): JSX.Element => {
+export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
 
     return (
         <Grid item xs={12} md={4} textAlign='left'>
@@ -12,10 +13,9 @@ export const VacancyCard = ({ vacancy, ...props }: Props): JSX.Element => {
                         {vacancy.officeDto.name}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="div">
-                        <Link to={`/vacancy/detailes/${vacancy.id}`}>
+                        <Link to={`${RouteNames.VACANCY}/${vacancy.id}`}>
                             {vacancy.title.substring(0, 15) + ' ...'}
                         </Link>
-                        {/* <span id={vacancy.id.toString()} style={{cursor: 'pointer'}} onClick={chooseVacancyHandler}>{vacancy.title.substring(0, 15) + ' ...'}</span> */}
                     </Typography>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {'Previews: ' + vacancy.previews}

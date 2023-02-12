@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { HOME, REGISTER_COMPLETE } from "../../routing/pathes";
 import { Button, TextField } from "@mui/material";
 import { registerAxios } from "../../api/auth";
 import { useState } from "react";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { RegisterFormState } from "./types";
+import { RouteNames } from "../../routing";
 
-const RegisterForm = (): JSX.Element => {
+export default function RegisterForm(): JSX.Element {
     const navigate = useNavigate();
 
     const initState: RegisterFormState = {
@@ -56,7 +56,7 @@ const RegisterForm = (): JSX.Element => {
                 confirmPassword: registerDto.confirmPassword
             });
             reset();
-            navigate(REGISTER_COMPLETE.path);
+            navigate(RouteNames.REGISTER_COMPLETE);
         } catch (e) {
             setRegistrationState(prevRegisterFormState => {
                 return { ...prevRegisterFormState, error: e.message || 'Unknown server error.' }
@@ -125,7 +125,7 @@ const RegisterForm = (): JSX.Element => {
                     />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => navigate(HOME.path)}>
+                    <Button onClick={() => navigate(RouteNames.HOME)}>
                         Cancel
                     </Button>
                     <Button type="submit">
@@ -137,5 +137,3 @@ const RegisterForm = (): JSX.Element => {
         </>
     )
 }
-
-export default RegisterForm;

@@ -1,7 +1,7 @@
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import EmployeesList from "./EmployeesList";
 
-export default function TeamPage() {
+export default function TeamPage(): JSX.Element {
     return (
         <>
             <PageHeader

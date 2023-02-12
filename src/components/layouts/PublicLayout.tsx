@@ -9,7 +9,7 @@ type Props = {
     children: React.ReactNode;
 };
 
-const PublicLayout: FC<Props> = ({ children, title }) => {
+export default function PublicLayout({ children, title }: Props): JSX.Element {
     document.title = title || 'App'
     return (
         <>
@@ -17,10 +17,8 @@ const PublicLayout: FC<Props> = ({ children, title }) => {
             <Container maxWidth="lg" className='public-layout-container' >
                 {children}
             </Container>
-            <Footer/>
+            <Footer />
         </>
 
     );
 };
-
-export default PublicLayout;

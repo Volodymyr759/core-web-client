@@ -1,8 +1,7 @@
-import React from "react";
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import AboutUsContent from "./AboutUsContent";
 
-export default function AboutPage() {
+export default function AboutPage(): JSX.Element {
 
     return (
         <>
@@ -14,5 +13,3 @@ export default function AboutPage() {
         </>
     )
 }
-
-// export default AboutPage;

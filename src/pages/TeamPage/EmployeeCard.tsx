@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { Props } from "./types";
 
-export const EmployeeCard = ({ employee, ...props }: Props): JSX.Element => {
+export default function EmployeeCard({ employee, ...props }: Props): JSX.Element {
     return (
         <Grid item xs={12} md={4} textAlign='center'>
             <Card>

@@ -1,15 +1,13 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const VacancyDetailes = () => {
-    let {id} = useParams();
-    console.log('id: ', id);
+export default function VacancyDetailes (): JSX.Element {
+    const { vacancyId } = useParams();
+    console.log('vacancyId: ', vacancyId);
 
     return (
         <div>
             VacancyDetailes
-            <p>ID: {id}</p>
+            <p>ID: {vacancyId}</p>
         </div>
     )
 }
-
-export default VacancyDetailes;

@@ -1,6 +1,6 @@
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
 
-const ServicesPage = () => {
+export default function ServicesPage(): JSX.Element {
 
     return (
         <>
@@ -11,5 +11,3 @@ const ServicesPage = () => {
         </>
     )
 }
-
-export default ServicesPage;

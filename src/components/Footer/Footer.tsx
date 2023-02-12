@@ -4,12 +4,28 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
-import { MainMenuPathes } from '../../routing/pathes';
-import { SubscriptionForm } from './SubscriptionForm';
+import SubscriptionForm from './SubscriptionForm';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { IRoute, RouteNames } from '../../routing';
+import HomePage from '../../pages/HomePage';
+import AboutPage from '../../pages/AboutPage/AboutPage';
+import ServicesPage from '../../pages/CompanyServices/ServicesPage';
+import TeamPage from '../../pages/TeamPage/TeamPage';
+import VacanciesPage from '../../pages/Vacancies/VacanciesPage';
+import ContactPage from '../../pages/ContactPage';
 
-const Footer = () => {
+const mainMenuRoutes: IRoute[] = [
+    { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
+    { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
+    { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
+    { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
+    { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
+    { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> }
+]
+
+export default function Footer(): JSX.Element {
     const navigate = useNavigate();
+
     return (
         <Grid container spacing={2} className='footer'>
             <Grid item xs={12} md={4} textAlign='center'>
@@ -35,13 +51,13 @@ const Footer = () => {
                     Useful Links
                 </Typography>
                 <List sx={{ marginLeft: '90px' }}>
-                    {MainMenuPathes.map((page) => (
-                        <ListItemButton key={page.title} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
+                    {mainMenuRoutes.map((page) => (
+                        <ListItemButton key={page.path} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
                             <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
                                 <ArrowForwardIosIcon fontSize='small' htmlColor='#1976d2' />
                             </ListItemIcon>
                             &nbsp;&nbsp;
-                            <ListItemText primary={page.name} />
+                            <ListItemText primary={page.title} />
                         </ListItemButton>
                     ))}
                 </List>
@@ -58,5 +74,3 @@ const Footer = () => {
         </Grid>
     )
 };
-
-export default Footer;

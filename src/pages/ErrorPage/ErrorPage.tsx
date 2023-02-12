@@ -1,16 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import { HOME } from '../routing/pathes';
-import { Button } from '../components/Button/Button';
-import '../index.css';
+import Button from '../../components/Button/Button';
+import '../../index.css';
+import { RouteNames } from '../../routing';
+import { Props } from './types';
 
-interface Props {
-    status?: string;
-    message?: string;
-}
-
-export const ErrorPage = ({ status = '500', message = 'Internal Server Error' }: Props) => {
+export default function ErrorPage({ status = '500', message = 'Internal Server Error' }: Props): JSX.Element {
     const navigate = useNavigate();
 
     return (
@@ -29,7 +25,7 @@ export const ErrorPage = ({ status = '500', message = 'Internal Server Error' }:
                     <p className='text-centered'>
                         <Button
                             appearance='primary'
-                            onClick={() => navigate(HOME.path)}
+                            onClick={() => navigate(RouteNames.HOME)}
                         >
                             Home
                         </Button>
@@ -40,5 +36,3 @@ export const ErrorPage = ({ status = '500', message = 'Internal Server Error' }:
     )
 
 };
-
-export default ErrorPage;

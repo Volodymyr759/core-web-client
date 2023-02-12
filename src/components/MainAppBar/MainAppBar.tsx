@@ -1,26 +1,34 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { AppBar, Avatar, Box, Button, Container, Toolbar, Tooltip, IconButton, Menu, MenuItem, Typography, } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
-import { ABOUT, HOME, SERVICES } from '../../routing/pathes';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
-import { MainMenuPathes } from '../../routing/pathes';
+import { IRoute, RouteNames } from '../../routing';
+import AboutPage from '../../pages/AboutPage/AboutPage';
+import VacanciesPage from '../../pages/Vacancies/VacanciesPage';
+import ContactPage from '../../pages/ContactPage';
+import HomePage from '../../pages/HomePage';
+import ServicesPage from '../../pages/CompanyServices/ServicesPage';
+import TeamPage from '../../pages/TeamPage/TeamPage';
 
-const settings = [HOME, ABOUT, SERVICES];
+const settings: IRoute[] = [
+    { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
+    { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
+    { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> }
+];
 
-function MainAppBar() {
+const mainMenuRoutes: IRoute[] = [
+    { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
+    { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
+    { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
+    { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
+    { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
+    { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> }
+]
+
+export default function MainAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -46,7 +54,7 @@ function MainAppBar() {
 
     const handleLogout = () => {
         logout(auth.email, auth.tokens.accessToken);
-        navigate(HOME.path);
+        navigate(RouteNames.HOME);
     }
 
     return (
@@ -98,9 +106,9 @@ function MainAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {MainMenuPathes.map((page) => (
-                                <MenuItem key={page.name} component={Link} to={page.path} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page.name}</Typography>
+                            {mainMenuRoutes.map((page) => (
+                                <MenuItem key={page.path} component={Link} to={page.path} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page.title}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -128,13 +136,13 @@ function MainAppBar() {
 
                     {/* Main Menu pages */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {MainMenuPathes.map((page) => (
+                        {mainMenuRoutes.map((page) => (
                             <Button
-                                key={page.title}
+                                key={page.path}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <Link to={page.path} className="main-menu-link">{page.name}</Link>
+                                <Link to={page.path} className="main-menu-link">{page.title}</Link>
                             </Button>
                         ))}
                     </Box>
@@ -164,12 +172,12 @@ function MainAppBar() {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting.name} component={Link} to={setting.path} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting.path} component={Link} to={setting.path} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">{setting.title}</Typography>
                                     </MenuItem>
                                 ))}
                                 <hr />
-                                <MenuItem component={Link} to={HOME.path} onClick={handleLogout}>
+                                <MenuItem component={Link} to={RouteNames.HOME} onClick={handleLogout}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>
                             </Menu>
@@ -187,5 +195,3 @@ function MainAppBar() {
         </AppBar>
     );
 }
-
-export default MainAppBar;
