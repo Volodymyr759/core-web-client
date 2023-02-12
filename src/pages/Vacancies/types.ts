@@ -9,3 +9,7 @@ export interface OfficeNameIdDto {
 	id: number;
 	name: string;
 }
+
+export interface VacancyTitleDto {
+	value: string;
+}

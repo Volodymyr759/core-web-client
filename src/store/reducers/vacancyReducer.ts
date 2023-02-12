@@ -50,6 +50,11 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
                 ...state,
                 filters: { ...state.filters, officeId: action.payload }
             };
+        case VacancyActionTypes.SET_VACANCY_SEARCH_CRITERIA:
+            return {
+                ...state,
+                vacancySearchResult: { ...state.vacancySearchResult, searchCriteria: action.payload }
+            };
         case VacancyActionTypes.CLEAR_VACANCIES:
             return {
                 ...state,

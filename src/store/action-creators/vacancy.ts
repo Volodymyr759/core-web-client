@@ -59,6 +59,12 @@ export const setVacancyOfficeFilter = (officeId: string) => {
     }
 }
 
+export const setVacancySearchCriteria = (search: string) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        dispatch({ type: VacancyActionTypes.SET_VACANCY_SEARCH_CRITERIA, payload: search });
+    }
+}
+
 export const clearVacancies = () => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.CLEAR_VACANCIES, payload: [] });

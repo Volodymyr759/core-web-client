@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IVacancy } from '../types/vacancy';
 import { ISearchResult } from '../types/searchResult';
 import { SortOrder } from '../types/sortOrder';
+import { VacancyTitleDto } from '../pages/Vacancies/types';
 
 /**
  * Get list of vacancies for current office
@@ -24,4 +25,12 @@ export async function getVacanciesAxios(
     return (
         await axios.get(`/vacancy/get?limit=${limit}&page=${page}&search=${search}&
             vacancyStatus=${vacancyStatus ? 0 : 1}&officeId=${officeId}&sortField=${sortField}&order=${order}`)).data;
+}
+
+/**
+ * Get sorted list of all vacancies titles
+ * @param searchValue<string> search paremeter
+ */
+export async function searchVacanciesTitlesAxios(searchValue: string): Promise<VacancyTitleDto[]> {
+    return (await axios.get(`/vacancy/searchvacanciestitles?searchValue=${searchValue}`)).data;
 }

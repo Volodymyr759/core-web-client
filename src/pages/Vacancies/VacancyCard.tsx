@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Props } from "./types";
 
 export const VacancyCard = ({ vacancy, ...props }: Props): JSX.Element => {
+
     return (
         <Grid item xs={12} md={4} textAlign='left'>
             <Card>
@@ -14,6 +15,7 @@ export const VacancyCard = ({ vacancy, ...props }: Props): JSX.Element => {
                         <Link to={`/vacancy/detailes/${vacancy.id}`}>
                             {vacancy.title.substring(0, 15) + ' ...'}
                         </Link>
+                        {/* <span id={vacancy.id.toString()} style={{cursor: 'pointer'}} onClick={chooseVacancyHandler}>{vacancy.title.substring(0, 15) + ' ...'}</span> */}
                     </Typography>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {'Previews: ' + vacancy.previews}

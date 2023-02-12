@@ -31,6 +31,7 @@ export enum VacancyActionTypes {
     SET_VACANCY_PAGE = "SET_VACANCY_PAGE",
     SET_VACANCY_ACTIVE_FILTER = "SET_VACANCY_ACTIVE_FILTER",
     SET_VACANCY_OFFICE_FILTER = "SET_VACANCY_OFFICE_FILTER",
+    SET_VACANCY_SEARCH_CRITERIA = "SET_VACANCY_SEARCH_CRITERIA",
     CLEAR_VACANCIES = "CLEAR_VACANCIES"
 }
 
@@ -69,6 +70,11 @@ interface SetVacancyOfficeFilterAction {
     payload: string;
 }
 
+interface SetVacancySearchCriteriaAction {
+    type: VacancyActionTypes.SET_VACANCY_SEARCH_CRITERIA;
+    payload: string;
+}
+
 interface ClearVacanciesAction {
     type: VacancyActionTypes.CLEAR_VACANCIES;
     payload: [];
@@ -81,4 +87,5 @@ SetLoadingVacancyAction |
 SetPageVacancyAction |
 SetVacancyActiveFilterAction |
 SetVacancyOfficeFilterAction |
+SetVacancySearchCriteriaAction |
 ClearVacanciesAction
