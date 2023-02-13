@@ -1,9 +1,17 @@
 import { Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useActions } from "../../hooks/useActions";
 import { RouteNames } from "../../routing";
 import { Props } from "./types";
 
 export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
+    const navigate = useNavigate();
+    const { setCurrentVacancy } = useActions();
+
+    const showDetailesHandler = () => {
+        setCurrentVacancy(vacancy);
+        navigate(RouteNames.VACANCY_DETAILES);
+    }
 
     return (
         <Grid item xs={12} md={4} textAlign='left'>
@@ -24,7 +32,7 @@ export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
                         {vacancy.description.substring(0, 20) + ' ...'}
                     </Typography>
                     <Box sx={{ textAlign: 'right' }}>
-                        <Button variant="outlined" size="small">Apply</Button>
+                        <Button variant="outlined" size="small" onClick={showDetailesHandler}>More...</Button>
                     </Box>
                 </CardContent>
             </Card>

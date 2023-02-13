@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { OfficeNameIdDto } from '../pages/Vacancies/types';
+import { OfficeNameIdDto } from '../types/vacancy';
 
 export async function getPublicOfficeNameIdsAxios(): Promise<OfficeNameIdDto[]> {
-    return (await axios.get(`/office/getpublicofficenameids`)).data;
+    return (await axios.get("/office/getpublicofficenameids")).data;
 }

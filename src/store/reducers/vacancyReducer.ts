@@ -11,12 +11,17 @@ const initialState: VacancyState = {
         searchCriteria: "",
         totalItemCount: 0
     },
+    currentVacancy: null,
+    offices: [],
+    titles: [],
     filters: {
         active: true,
         officeId: "0"
     },
-    loading: false,
-    error: null
+    loadingFilters: true,
+    errorFilters: null,
+    loadingVacancies: true,
+    errorVacancies: null
 }
 
 export const vacancyReducer = (state: VacancyState = initialState, action: VacancyAction): VacancyState => {
@@ -32,9 +37,13 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
                 },
             };
         case VacancyActionTypes.SET_VACANCY_ERROR:
-            return { ...state, error: action.payload };
+            return { ...state, errorVacancies: action.payload };
         case VacancyActionTypes.SET_VACANCY_LOADING:
-            return { ...state, loading: action.payload };
+            return { ...state, loadingVacancies: action.payload };
+            case VacancyActionTypes.SET_FILTERS_ERROR:
+            return { ...state, errorFilters: action.payload };
+        case VacancyActionTypes.SET_FILTERS_LOADING:
+            return { ...state, loadingFilters: action.payload };
         case VacancyActionTypes.SET_VACANCY_PAGE:
             return {
                 ...state,
@@ -55,6 +64,12 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
                 ...state,
                 vacancySearchResult: { ...state.vacancySearchResult, searchCriteria: action.payload }
             };
+        case VacancyActionTypes.SET_VACANCY_OFFICES:
+            let vacancyOffices = action.payload;
+            vacancyOffices.unshift({ id: 0, name: "All" });
+            return { ...state, offices: vacancyOffices };
+        case VacancyActionTypes.SET_CURRENT_VACANCY:
+            return { ...state, currentVacancy: action.payload };
         case VacancyActionTypes.CLEAR_VACANCIES:
             return {
                 ...state,

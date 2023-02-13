@@ -1,5 +1,5 @@
+import React from 'react';
 import { Container } from '@mui/material';
-import React, { FC } from 'react';
 import Footer from '../Footer/Footer';
 import MainAppBar from '../MainAppBar/MainAppBar';
 import './styles.css'

@@ -1,31 +1,10 @@
 import { Autocomplete, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
-import { getPublicOfficeNameIdsAxios } from "../../api/office";
-import { searchVacanciesTitlesAxios } from "../../api/vacancy";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { OfficeNameIdDto, VacancyTitleDto } from "./types";
 
 export default function VacanciesFilters(): JSX.Element {
-    const [offices, setOffices] = useState<OfficeNameIdDto[]>([]);
-    const [titles, setTitles] = useState<VacancyTitleDto[]>([]);
-
     const { setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria, clearVacancies, getVacancies } = useActions();
-    const { vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
-
-    useEffect(() => {
-        const getOffices = async () => {
-            const officesFromApi = await getPublicOfficeNameIdsAxios();
-            officesFromApi.unshift({ id: 0, name: "All offices" });
-            setOffices(officesFromApi);
-        };
-        const getVacancyTitles = async () => {
-            const vacancyTitlesFromApi = await searchVacanciesTitlesAxios("");
-            setTitles(vacancyTitlesFromApi);
-        }
-        getOffices();
-        getVacancyTitles();
-    }, [])
+    const { vacancySearchResult, filters, offices, titles } = useTypedSelector(state => state.vacancy);
 
     const officeChanged = (event: SelectChangeEvent) => {
         clearVacancies();

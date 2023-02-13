@@ -1,7 +1,8 @@
 import { Dispatch } from "redux";
-import { getVacanciesAxios } from "../../api/vacancy";
+import { getPublicOfficeNameIdsAxios } from "../../api/office";
+import { getVacanciesAxios, getVacancyByIdAxios, searchVacanciesTitlesAxios } from "../../api/vacancy";
 import { SortOrder } from "../../types/sortOrder";
-import { VacancyAction, VacancyActionTypes } from "../../types/vacancy";
+import { IVacancy, VacancyAction, VacancyActionTypes } from "../../types/vacancy";
 
 export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: SortOrder) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
@@ -14,6 +15,55 @@ export const getVacancies = (limit: number, page: number, search: string, vacanc
             });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
+    }
+}
+
+export const getVacancyById = (id: number) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            dispatch({ type: VacancyActionTypes.GET_VACANCY_BY_ID, payload: await getVacancyByIdAxios(id) });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading choosed vacancy." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
+    }
+}
+
+export const getOfficeNameIdDtos = () => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: null });
+            
+            dispatch({
+                type: VacancyActionTypes.SET_VACANCY_OFFICES, payload:
+                    await getPublicOfficeNameIdsAxios()
+            });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: "Error of loading offices." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: false });
+        }
+    }
+}
+
+export const getVacanciesTitles = (search: string) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            dispatch({
+                type: VacancyActionTypes.SET_VACANCIES_TITLES, payload:
+                    await searchVacanciesTitlesAxios(search)
+            });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies titles." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
@@ -53,6 +103,12 @@ export const setVacancyActiveFilter = (active: boolean) => {
     }
 }
 
+export const setVacancyLoading = (isLoading: boolean) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: isLoading });
+    }
+}
+
 export const setVacancyOfficeFilter = (officeId: string) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICE_FILTER, payload: officeId });
@@ -62,6 +118,12 @@ export const setVacancyOfficeFilter = (officeId: string) => {
 export const setVacancySearchCriteria = (search: string) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.SET_VACANCY_SEARCH_CRITERIA, payload: search });
+    }
+}
+
+export const setCurrentVacancy = (vacancy: IVacancy) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        dispatch({ type: VacancyActionTypes.SET_CURRENT_VACANCY, payload: vacancy });
     }
 }
 
