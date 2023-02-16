@@ -40,7 +40,7 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             return { ...state, errorVacancies: action.payload };
         case VacancyActionTypes.SET_VACANCY_LOADING:
             return { ...state, loadingVacancies: action.payload };
-            case VacancyActionTypes.SET_FILTERS_ERROR:
+        case VacancyActionTypes.SET_FILTERS_ERROR:
             return { ...state, errorFilters: action.payload };
         case VacancyActionTypes.SET_FILTERS_LOADING:
             return { ...state, loadingFilters: action.payload };
@@ -70,6 +70,9 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             return { ...state, offices: vacancyOffices };
         case VacancyActionTypes.SET_CURRENT_VACANCY:
             return { ...state, currentVacancy: action.payload };
+        case VacancyActionTypes.INCREMENT_PREVIEWS:
+            // if (state.currentVacancy) state.currentVacancy.previews = action.payload;
+            return { ...state };
         case VacancyActionTypes.CLEAR_VACANCIES:
             return {
                 ...state,

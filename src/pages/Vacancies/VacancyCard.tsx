@@ -6,11 +6,12 @@ import { Props } from "./types";
 
 export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
     const navigate = useNavigate();
-    const { setCurrentVacancy } = useActions();
+    const { setCurrentVacancy, incrementPreviews } = useActions();
 
     const showDetailesHandler = () => {
+        incrementPreviews(vacancy.id, vacancy.previews + 1);
         setCurrentVacancy(vacancy);
-        navigate(RouteNames.VACANCY_DETAILES);
+        navigate(RouteNames.VACANCY + "/" + vacancy.id);
     }
 
     return (
@@ -20,10 +21,8 @@ export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {vacancy.officeDto.name}
                     </Typography>
-                    <Typography gutterBottom variant="h5" component="div">
-                        <Link to={`${RouteNames.VACANCY}/${vacancy.id}`}>
-                            {vacancy.title.substring(0, 15) + ' ...'}
-                        </Link>
+                    <Typography gutterBottom variant="h5" component="div" sx={{ cursor: 'pointer' }} onClick={showDetailesHandler}>
+                        {vacancy.title.substring(0, 15) + ' ...'}
                     </Typography>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {'Previews: ' + vacancy.previews}

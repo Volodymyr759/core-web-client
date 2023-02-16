@@ -52,6 +52,7 @@ export enum VacancyActionTypes {
     SET_VACANCY_OFFICES = "SET_VACANCY_OFFICES",
     SET_VACANCIES_TITLES = "SET_VACANCIES_TITLES",
     SET_CURRENT_VACANCY = "SET_CURRENT_VACANCY",
+    INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS",
     CLEAR_VACANCIES = "CLEAR_VACANCIES"
 }
 
@@ -125,6 +126,11 @@ interface SetCurrentVacancyAction {
     payload: IVacancy;
 }
 
+interface IncrementPreviewsAction {
+    type: VacancyActionTypes.INCREMENT_PREVIEWS;
+    payload: number;
+}
+
 interface ClearVacanciesAction {
     type: VacancyActionTypes.CLEAR_VACANCIES;
     payload: [];
@@ -144,4 +150,5 @@ SetVacancySearchCriteriaAction |
 SetVacancyOfficesAction |
 SetVacanciesTitlesAction |
 SetCurrentVacancyAction |
+IncrementPreviewsAction |
 ClearVacanciesAction

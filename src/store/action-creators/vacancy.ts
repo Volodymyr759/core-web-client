@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getPublicOfficeNameIdsAxios } from "../../api/office";
-import { getVacanciesAxios, getVacancyByIdAxios, searchVacanciesTitlesAxios } from "../../api/vacancy";
+import { getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios } from "../../api/vacancy";
 import { SortOrder } from "../../types/sortOrder";
 import { IVacancy, VacancyAction, VacancyActionTypes } from "../../types/vacancy";
 
@@ -40,7 +40,7 @@ export const getOfficeNameIdDtos = () => {
         try {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: true });
             dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: null });
-            
+
             dispatch({
                 type: VacancyActionTypes.SET_VACANCY_OFFICES, payload:
                     await getPublicOfficeNameIdsAxios()
@@ -124,6 +124,21 @@ export const setVacancySearchCriteria = (search: string) => {
 export const setCurrentVacancy = (vacancy: IVacancy) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.SET_CURRENT_VACANCY, payload: vacancy });
+    }
+}
+
+export const incrementPreviews = (id: number, number: number) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            await incrementPreviewsAxios(id, number);
+            dispatch({ type: VacancyActionTypes.INCREMENT_PREVIEWS, payload: number });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies titles." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
     }
 }
 

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import SubscriptionForm from './SubscriptionForm';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IRoute, RouteNames } from '../../routing';
-import HomePage from '../../pages/HomePage';
+import HomePage from '../../pages/HomePage/HomePage';
 import AboutPage from '../../pages/AboutPage/AboutPage';
 import ServicesPage from '../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../pages/TeamPage/TeamPage';

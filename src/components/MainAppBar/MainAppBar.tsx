@@ -9,7 +9,7 @@ import { IRoute, RouteNames } from '../../routing';
 import AboutPage from '../../pages/AboutPage/AboutPage';
 import VacanciesPage from '../../pages/Vacancies/VacanciesPage';
 import ContactPage from '../../pages/ContactPage';
-import HomePage from '../../pages/HomePage';
+import HomePage from '../../pages/HomePage/HomePage';
 import ServicesPage from '../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../pages/TeamPage/TeamPage';
 

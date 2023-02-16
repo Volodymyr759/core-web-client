@@ -4,7 +4,7 @@ import AboutPage from '../pages/AboutPage/AboutPage';
 import ServicesPage from '../pages/CompanyServices/ServicesPage';
 import ContactPage from '../pages/ContactPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
-import HomePage from '../pages/HomePage';
+import HomePage from '../pages/HomePage/HomePage';
 import LoginPage from '../pages/Login/LoginPage';
 import RegisterCompletePage from '../pages/Register/RegisterCompletePage';
 import RegisterPage from '../pages/Register/RegisterPage';

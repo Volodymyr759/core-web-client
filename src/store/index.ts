@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './reducers/authReducer';
+import { serviceReducer } from './reducers/serviceReducer';
 import { employeeReducer } from './reducers/employeeReducer';
 import { userReducer } from './reducers/userReduser';
 import { vacancyReducer } from './reducers/vacancyReducer';
@@ -7,6 +8,7 @@ import { vacancyReducer } from './reducers/vacancyReducer';
 export const rootReducer = combineReducers({
     auth: authReducer,
     employee: employeeReducer,
+    service: serviceReducer,
     user: userReducer,
     vacancy: vacancyReducer
 })

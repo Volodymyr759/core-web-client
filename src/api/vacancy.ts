@@ -31,7 +31,7 @@ export async function getVacanciesAxios(
  * @param id<string> identifier
  */
 export async function getVacancyByIdAxios(id: number): Promise<IVacancy> {
-    return (await axios.get(`/vacancy/getbyid/${id}`)).data;
+    return (await axios.get(`/vacancy/getbyid/${id.toString()}`)).data;
 }
 
 /**
@@ -40,4 +40,11 @@ export async function getVacancyByIdAxios(id: number): Promise<IVacancy> {
  */
 export async function searchVacanciesTitlesAxios(searchValue: string): Promise<VacancyTitleDto[]> {
     return (await axios.get(`/vacancy/searchvacanciestitles?searchValue=${searchValue}`)).data;
+}
+
+/**
+ */
+export async function incrementPreviewsAxios(id: number, number: number): Promise<void> {
+    // const pachDoc = JSON.stringify({ op: "replace", path: "/previews", value: number.toString() })
+    await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/previews", value: number }]);
 }
