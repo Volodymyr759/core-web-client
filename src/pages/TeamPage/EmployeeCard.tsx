@@ -1,10 +1,10 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import { Props } from "./types";
+import { EmployeeCardProps } from "./types";
 
-export default function EmployeeCard({ employee, ...props }: Props): JSX.Element {
+export default function EmployeeCard({ employee, ...props }: EmployeeCardProps): JSX.Element {
     return (
         <Grid item xs={12} md={4} textAlign='center'>
-            <Card>
+            <Card elevation={16}>
                 <Box
                     component="img"
                     sx={{ width: '90%' }}

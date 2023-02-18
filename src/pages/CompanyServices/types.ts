@@ -1,5 +1,9 @@
 import { ICompanyService } from "../../types/companyService";
 
-export interface Props {
+export interface ServiceListProps {
+    allowLoadMore: boolean;
+}
+
+export interface ServiceCardProps {
     companyService: ICompanyService;
 }

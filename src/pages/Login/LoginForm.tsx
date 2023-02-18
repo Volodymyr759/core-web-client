@@ -18,11 +18,11 @@ export default function LoginForm(): JSX.Element {
         email: Yup.string()
             .required()
             .min(2, 'Email must be at least 2 characters.')
-            .max(255, 'The field Title may not be greater than 255 characters.'),
+            .max(255, 'The field Email may not be greater than 255 characters.'),
         password: Yup.string()
             .required()
             .min(2, 'Password must be at least 2 characters.')
-            .max(255, 'The field Description may not be greater than 255 characters.'),
+            .max(255, 'The field Paeeword may not be greater than 255 characters.'),
         remember: Yup.boolean()
             .required()
     })

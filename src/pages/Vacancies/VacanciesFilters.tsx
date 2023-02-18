@@ -16,6 +16,7 @@ export default function VacanciesFilters(): JSX.Element {
     }
 
     const searchTitleChanged = (event, values) => {
+        console.log('searchTitleChanged ', values)
         clearVacancies();
         setVacancyPage(1);
         setVacancyOfficeFilter("0");

@@ -5,8 +5,9 @@ import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import EmployeeCard from "./EmployeeCard";
+import { EmployeeListProps } from "./types";
 
-export default function EmployeesList(): JSX.Element {
+export default function EmployeesList({ allowLoadMore, ...props }: EmployeeListProps): JSX.Element {
     const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
     const { getEmployees, loadMoreEmployees, setEmployeePage } = useActions();
 
@@ -22,7 +23,7 @@ export default function EmployeesList(): JSX.Element {
     if (error) return <ErrorMessage message={error} />;
 
     return (
-        <>
+        <div>
             <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
                 {
                     employeeSearchResult.itemList.length > 0 &&
@@ -34,7 +35,9 @@ export default function EmployeesList(): JSX.Element {
             {
                 loading && <Spinner />
             }
-            <Box mt={5} sx={{ textAlign: 'center' }}>
+            {
+                allowLoadMore &&
+                <Box mt={5} sx={{ textAlign: 'center' }}>
                 <Button
                     onClick={loadMoreHandler}
                     variant="outlined"
@@ -42,6 +45,7 @@ export default function EmployeesList(): JSX.Element {
                     {loading ? 'Loading...' : 'Load more'}
                 </Button>
             </Box>
-        </>
+            }
+        </div>
     )
 }

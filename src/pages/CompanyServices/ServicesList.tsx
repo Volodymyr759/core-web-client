@@ -6,8 +6,9 @@ import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { SortOrder } from "../../types/sortOrder";
 import ServiceCard from "./ServiceCard";
+import { ServiceListProps } from "./types";
 
-export default function ServicesList(): JSX.Element {
+export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.Element {
     const { error, serviceSearchResult, loading } = useTypedSelector(state => state.service);
     const { getServices, loadMoreServices, setServicePage } = useActions();
 
@@ -35,7 +36,9 @@ export default function ServicesList(): JSX.Element {
             {
                 loading && <Spinner />
             }
-            <Box mt={5} sx={{ textAlign: 'center' }}>
+            {
+                allowLoadMore &&
+                <Box mt={5} sx={{ textAlign: 'center' }}>
                 <Button
                     onClick={loadMoreHandler}
                     variant="outlined"
@@ -43,6 +46,7 @@ export default function ServicesList(): JSX.Element {
                     {loading ? 'Loading...' : 'Load more'}
                 </Button>
             </Box>
+            }
         </>
     )
 

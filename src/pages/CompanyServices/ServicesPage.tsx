@@ -9,7 +9,7 @@ export default function ServicesPage(): JSX.Element {
                 title="OUR SERVICES"
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
             />
-            <ServicesList />
+            <ServicesList allowLoadMore={true} />
         </>
     )
 }

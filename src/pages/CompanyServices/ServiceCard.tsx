@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { Props } from "./types";
+import { ServiceCardProps } from "./types";
 
-export default function ServiceCard({ companyService }: Props): JSX.Element {
+export default function ServiceCard({ companyService }: ServiceCardProps): JSX.Element {
 
     return (
         <Grid container spacing={2} sx={{ padding: '60px 0 30px 0;' }}>

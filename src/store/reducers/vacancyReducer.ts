@@ -68,6 +68,8 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             let vacancyOffices = action.payload;
             vacancyOffices.unshift({ id: 0, name: "All" });
             return { ...state, offices: vacancyOffices };
+        case VacancyActionTypes.SET_VACANCIES_TITLES:
+            return { ...state, titles: action.payload };
         case VacancyActionTypes.SET_CURRENT_VACANCY:
             return { ...state, currentVacancy: action.payload };
         case VacancyActionTypes.INCREMENT_PREVIEWS:
