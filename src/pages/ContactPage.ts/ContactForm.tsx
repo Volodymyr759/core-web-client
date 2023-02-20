@@ -1,11 +1,10 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { IMailMessage } from "../../types/mailMessage";
 import { sendEmailAxios } from "../../api/email";
-import { useState } from "react";
 import { Button, Grid, TextField } from "@mui/material";
 
 export default function ContactForm(): JSX.Element {

@@ -77,7 +77,6 @@ export default function LoginForm(): JSX.Element {
                                 label="Password"
                                 type="password"
                                 margin="normal"
-                                // size="medium"
                                 fullWidth
                                 error={Boolean(errors.password)}
                                 helperText={errors.password?.message}

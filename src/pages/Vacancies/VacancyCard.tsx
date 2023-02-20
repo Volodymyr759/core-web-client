@@ -1,10 +1,10 @@
-import { Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Badge, Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import { RouteNames } from "../../routing";
-import { Props } from "./types";
+import { VacancyCardProps } from "./types";
 
-export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
+export default function VacancyCard({ vacancy, ...props }: VacancyCardProps): JSX.Element {
     const navigate = useNavigate();
     const { setCurrentVacancy, incrementPreviews } = useActions();
 
@@ -22,7 +22,9 @@ export default function VacancyCard({ vacancy, ...props }: Props): JSX.Element {
                         {vacancy.officeDto.name}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="div" sx={{ cursor: 'pointer' }} onClick={showDetailesHandler}>
-                        {vacancy.title.substring(0, 15) + ' ...'}
+                        <Badge badgeContent={vacancy.previews} color="primary">
+                            {vacancy.title.substring(0, 15) + ' ...'}
+                        </Badge>
                     </Typography>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {'Previews: ' + vacancy.previews}
