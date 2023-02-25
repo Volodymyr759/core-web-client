@@ -9,7 +9,7 @@ import VacancyApplyForm from "./VacancyApplyForm";
 
 export default function VacancyDetailes(): JSX.Element {
     const { vacancyId } = useParams();
-    const { errorVacancies, loadingVacancies, currentVacancy } = useTypedSelector(state => state.vacancy)
+    const { errorVacancies, currentVacancy } = useTypedSelector(state => state.vacancy)
     const { getVacancyById } = useActions();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -25,9 +25,10 @@ export default function VacancyDetailes(): JSX.Element {
             } finally {
                 setLoading(false);
             }
-
         }
     }, [])
+
+
 
     const toggleDrawer =
         (anchor: string, open: boolean) =>
@@ -40,7 +41,6 @@ export default function VacancyDetailes(): JSX.Element {
                 ) {
                     return;
                 }
-
                 setCandidateFormVisible(open);
             };
 

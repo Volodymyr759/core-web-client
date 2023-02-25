@@ -156,9 +156,6 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
 
                 <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px' }} >
                     <Grid item sm={6} sx={{ textAlign: 'center' }}>
-                        {/* <Button variant="outlined" onClick={() => reset()}>
-                            Cancel
-                        </Button> */}
                         <Button variant="outlined" onClick={onCancelHandler}>
                             Cancel
                         </Button>

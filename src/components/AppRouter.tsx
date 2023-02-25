@@ -27,14 +27,17 @@ export default function AppRouter() {
         { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
         { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
         { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
-        { path: RouteNames.VACANCY_DETAILES, title: "Vacancy Detailes", component: <VacancyDetailes /> },
         { path: RouteNames.LOGIN, title: "Sign In", component: <LoginPage /> },
         { path: RouteNames.REGISTER, title: "Sign Up", component: <RegisterPage /> },
         { path: RouteNames.REGISTER_COMPLETE, title: "Registration Complete", component: <RegisterCompletePage /> },
-        { path: "*", title: "Error: wrong route!", component: <ErrorPage /> }
+        { path: "*", title: "Error: wrong route!", component: <ErrorPage status='403' message='Access denied, try to login for continue.' /> }
     ];
 
     const registeredRoleRoutes: IRoute[] = [
+        { path: RouteNames.VACANCY_DETAILES, title: "Vacancy Detailes", component: <VacancyDetailes /> }
+    ]
+
+    const adminRoleRoutes: IRoute[] = [
         { path: RouteNames.USERS, title: "Users page", component: <UsersPage /> }
     ]
 
