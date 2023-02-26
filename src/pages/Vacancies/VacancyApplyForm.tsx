@@ -58,7 +58,7 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
             await createCandidateAxios(candidate);
         } catch (e) {
             console.log('error from axios: ', e.message);
-            setError("Oops! Something while joining the vacancy. Please try again later.");
+            setError(e.message || "Oops! Something while joining the vacancy.");
         } finally {
             setLoading(false);
         }
@@ -66,10 +66,11 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
 
     const onSubmit = (candidate: ICandidate): void => {
         createCandidate(candidate);
-        closeDrawer();
+        // closeDrawer();
     }
 
     const onCancelHandler = () => {
+        setError(null);
         reset();
         closeDrawer();
     }

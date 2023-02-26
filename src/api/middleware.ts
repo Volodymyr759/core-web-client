@@ -29,8 +29,14 @@ export class AxiosMiddleware {
         },
             async function (error: AxiosError) {
                 if (!error.status) {
+                    let errorMessage = "";
                     try {
+                        if (error.response.status === ErrorStatus.Forbidden) {
+                            errorMessage = "You are not allowed to this action.";
+                            throw new Error();
+                        }
                         if (error.response.status === ErrorStatus.Unauthorized) {
+                            errorMessage = "Unable to refresh token, please Sign In.";
                             // Get existing tokens from localStorage and try to refresh
                             const authFromLocalStorage = JSON.parse(localStorage.getItem("auth"));
                             const authModel = await refreshTokenAxios(authFromLocalStorage.tokens.accessToken, authFromLocalStorage.tokens.refreshToken)
@@ -40,8 +46,10 @@ export class AxiosMiddleware {
                             axios.defaults.headers.common['Authorization'] = 'Bearer ' + authModel.tokens.accessToken;
                             return axios(error.config);
                         }
-                    } catch {
-                        throw new Error("Unable to refresh token, please Sign In.")
+                    } catch (error) {
+                        throw new Error(errorMessage);
+                    } finally {
+                        errorMessage = "";
                     }
                 }
                 switch (error.status) {
