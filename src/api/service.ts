@@ -10,8 +10,7 @@ import { SortOrder } from '../types/sortOrder';
  * @param order<SortOrder> Sort direction (ascending / descending)
  */
 export async function getServicesAxios(limit: number, page: number, order: SortOrder): Promise<ISearchResult<ICompanyService>> {
-    return (
-        await axios.get(`/companyservice/get?limit=${limit}&page=${page}&order=${order}`)).data;
+    return (await axios.get(`/companyservice/get?limit=${limit}&page=${page}&order=${order}`)).data;
 }
 
 /**

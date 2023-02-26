@@ -12,3 +12,7 @@ export async function logoutAxios(email: string, token: string) {
 export async function registerAxios(registerDto: IRegisterDto): Promise<IRegisterDto> {
     return (await axios.post<IRegisterDto>("/account/register", registerDto)).data;
 }
+
+export async function refreshTokenAxios(accessToken: string, refreshToken: string): Promise<IAuth> {
+    return (await axios.post<IAuth>("/account/refreshtoken", { accessToken, refreshToken })).data;
+}
