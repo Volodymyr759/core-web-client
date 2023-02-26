@@ -10,7 +10,7 @@ export const getEmployees = (page: number) => {
             dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: null });
             dispatch({ type: EmployeeActionTypes.GET_EMPLOYEES, payload: await getPublicEmployeesAxios(page) });
         } catch (error) {
-            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: "Error of loading employees." })
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: error.message || "Error of loading employees." })
         } finally {
             dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: false });
         }
@@ -24,7 +24,7 @@ export const loadMoreEmployees = (page: number) => {
             dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: null });
             dispatch({ type: EmployeeActionTypes.LOAD_MORE_EMPLOYEES, payload: await getPublicEmployeesAxios(page) });
         } catch (error) {
-            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: "Error of loading employees." })
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: error.message || "Error of loading employees." })
         } finally {
             dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: false });
         }

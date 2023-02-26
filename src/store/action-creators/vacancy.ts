@@ -14,7 +14,7 @@ export const getVacancies = (limit: number, page: number, search: string, vacanc
                     await getVacanciesAxios(limit, page, search, vacancyStatus, officeId, sortField, order)
             });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
@@ -28,7 +28,7 @@ export const getVacancyById = (id: number) => {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
             dispatch({ type: VacancyActionTypes.GET_VACANCY_BY_ID, payload: await getVacancyByIdAxios(id) });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading choosed vacancy." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading choosed vacancy." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
@@ -40,13 +40,9 @@ export const getOfficeNameIdDtos = () => {
         try {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: true });
             dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: null });
-
-            dispatch({
-                type: VacancyActionTypes.SET_VACANCY_OFFICES, payload:
-                    await getPublicOfficeNameIdsAxios()
-            });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICES, payload: await getPublicOfficeNameIdsAxios()  });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: "Error of loading offices." })
+            dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: error.message || "Error of loading vacancies." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: false });
         }
@@ -63,7 +59,7 @@ export const getVacanciesTitles = (search: string) => {
                     await searchVacanciesTitlesAxios(search)
             });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies titles." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies titles." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
@@ -80,7 +76,7 @@ export const loadMoreVacancies = (limit: number, page: number, search: string, v
                     await getVacanciesAxios(limit, page, search, vacancyStatus, officeId, sortField, order)
             });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
@@ -135,7 +131,7 @@ export const incrementPreviews = (id: number, number: number) => {
             await incrementPreviewsAxios(id, number);
             dispatch({ type: VacancyActionTypes.INCREMENT_PREVIEWS, payload: number });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: "Error of loading vacancies titles." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies titles." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }

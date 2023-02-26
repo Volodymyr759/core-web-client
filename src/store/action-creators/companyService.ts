@@ -27,7 +27,7 @@ export const getServiceById = (id: number) => {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
             dispatch({ type: CompanyServiceActionTypes.GET_COMPANY_SERVICE_BY_ID, payload: await getServiceByIdAxios(id) });
         } catch (error) {
-            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: "Error of loading choosed service." })
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error of loading choosed service." })
         } finally {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: false });
         }
