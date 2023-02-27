@@ -8,6 +8,12 @@ export interface ICompanyService {
     isActive: boolean;
 }
 
+export enum CompanyServiceStatus {
+    Active,
+    Disabled,
+    All
+}
+
 export interface CompanyServiceState {
     serviceSearchResult: ISearchResult<ICompanyService>;
     currentCompanyService: null | ICompanyService;

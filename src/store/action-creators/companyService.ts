@@ -1,16 +1,16 @@
 import { Dispatch } from "redux";
 import { getServicesAxios, getServiceByIdAxios } from "../../api/service";
 import { SortOrder } from "../../types/sortOrder";
-import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes } from "../../types/companyService";
+import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceStatus } from "../../types/companyService";
 
-export const getServices = (limit: number, page: number, order: SortOrder) => {
+export const getServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: SortOrder) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
             dispatch({
                 type: CompanyServiceActionTypes.GET_COMPANY_SERVICES, payload:
-                    await getServicesAxios(limit, page, order)
+                    await getServicesAxios(limit, page, companyServiceStatus, order)
             });
         } catch (error) {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error of loading services." })
@@ -34,14 +34,14 @@ export const getServiceById = (id: number) => {
     }
 }
 
-export const loadMoreServices = (limit: number, page: number, order: SortOrder) => {
+export const loadMoreServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: SortOrder) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
             dispatch({
                 type: CompanyServiceActionTypes.LOAD_MORE_COMPANY_SERVICES, payload:
-                    await getServicesAxios(limit, page, order)
+                    await getServicesAxios(limit, page, companyServiceStatus, order)
             });
         } catch (error) {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: "Error of loading services." })

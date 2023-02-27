@@ -58,7 +58,7 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
             await createCandidateAxios(candidate);
         } catch (e) {
             console.log('error from axios: ', e.message);
-            setError(e.message || "Oops! Something while joining the vacancy.");
+            setError(e.message || "Oops! Something went wrong while joining the vacancy.");
         } finally {
             setLoading(false);
         }
@@ -144,9 +144,12 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
                                 <TextField
                                     {...field}
                                     label="Notes"
-                                    type="text"
-                                    margin="normal"
                                     fullWidth
+                                    margin="normal"
+                                    multiline
+                                    rows={4}
+                                    variant='outlined'
+                                    style={{ height: 'none' }}
                                     error={Boolean(errors.notes)}
                                     helperText={errors.notes?.message}
                                 />

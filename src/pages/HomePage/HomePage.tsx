@@ -33,8 +33,6 @@ export default function HomePage(): JSX.Element {
 
             {/* Contact Us chapter */}
             <ContactPage />
-
-            <p>User's list: </p><Link to={RouteNames.USERS}>/users</Link>
         </>
     );
 };

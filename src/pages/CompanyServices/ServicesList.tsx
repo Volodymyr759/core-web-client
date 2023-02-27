@@ -4,6 +4,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { CompanyServiceStatus } from "../../types/companyService";
 import { SortOrder } from "../../types/sortOrder";
 import ServiceCard from "./ServiceCard";
 import { ServiceListProps } from "./types";
@@ -13,11 +14,11 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
     const { getServices, loadMoreServices, setServicePage } = useActions();
 
     useEffect(() => {
-        if (serviceSearchResult.itemList.length === 0) getServices(serviceSearchResult.pageSize, 1, SortOrder.Ascending);
+        if (serviceSearchResult.itemList.length === 0) getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.All, SortOrder.Ascending);
     }, [])
 
     const loadMoreHandler = () => {
-        loadMoreServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber + 1, SortOrder.Ascending);
+        loadMoreServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber + 1, CompanyServiceStatus.All, SortOrder.Ascending);
         setServicePage(serviceSearchResult.currentPageNumber + 1);
     }
 
@@ -39,13 +40,13 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
             {
                 allowLoadMore &&
                 <Box mt={5} sx={{ textAlign: 'center' }}>
-                <Button
-                    onClick={loadMoreHandler}
-                    variant="outlined"
-                    disabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}>
-                    {loading ? 'Loading...' : 'Load more'}
-                </Button>
-            </Box>
+                    <Button
+                        onClick={loadMoreHandler}
+                        variant="outlined"
+                        disabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}>
+                        {loading ? 'Loading...' : 'Load more'}
+                    </Button>
+                </Box>
             }
         </>
     )

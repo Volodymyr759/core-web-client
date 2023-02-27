@@ -28,8 +28,6 @@ export default function VacancyDetailes(): JSX.Element {
         }
     }, [])
 
-
-
     const toggleDrawer =
         (anchor: string, open: boolean) =>
             (event: React.KeyboardEvent | React.MouseEvent) => {
