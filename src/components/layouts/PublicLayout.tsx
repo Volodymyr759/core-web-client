@@ -1,20 +1,16 @@
-import React from 'react';
 import { Container } from '@mui/material';
 import Footer from '../Footer/Footer';
 import MainAppBar from '../MainAppBar/MainAppBar';
+import { LayoutProps } from './types';
 import './styles.css'
 
-type Props = {
-    title?: string;
-    children: React.ReactNode;
-};
 
-export default function PublicLayout({ children, title }: Props): JSX.Element {
-    document.title = title || 'App'
+export default function PublicLayout({ children, title }: LayoutProps): JSX.Element {
+    document.title = title || 'App';
     return (
         <>
             <MainAppBar />
-            <Container maxWidth="lg" className='public-layout-container' >
+            <Container maxWidth="lg" className='layout-container' >
                 {children}
             </Container>
             <Footer />

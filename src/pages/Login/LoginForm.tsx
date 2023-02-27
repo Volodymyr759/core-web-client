@@ -40,12 +40,10 @@ export default function LoginForm(): JSX.Element {
 
     const onSubmit = (loginModel: { email: string, password: string, remember: boolean }): void => {
         login(loginModel as ILoginDto);
+        setTimeout(() => {
+            navigate(RouteNames.HOME);
+        }, 1000);
     }
-
-    if (auth) {
-        reset();
-        navigate(RouteNames.HOME);
-    };
 
     return (
         <>

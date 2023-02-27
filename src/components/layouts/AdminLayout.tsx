@@ -1,28 +1,20 @@
-import React from 'react';
 import { Container } from '@mui/material';
 import MainAppBar from '../MainAppBar/MainAppBar';
 import AdminAppBar from '../AdminAppBar/AdminAppBar';
+import Footer from '../Footer/Footer';
+import { LayoutProps } from './types';
 import './styles.css';
 
-type Props = {
-    children: React.ReactNode;
-};
-
-export default function AdminLayout({ children }: Props): JSX.Element {
+export default function AdminLayout({ children, title }: LayoutProps): JSX.Element {
+    document.title = title || 'Admin';
     return (
         <>
             <MainAppBar />
-            <div style={{margin: '10px', padding: '10px'}}>
-                <AdminAppBar />
-            </div>
-
-            {/* <Container className="admin-layout-container" >
-                {children}
-            </Container> */}
-            <Container className="public-layout-container" >
+            <AdminAppBar />
+            <Container className="layout-container" >
                 {children}
             </Container>
+            <Footer />
         </>
-
     );
 };

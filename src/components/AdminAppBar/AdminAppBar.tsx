@@ -15,12 +15,11 @@ const adminMenuRoutes: IRoute[] = [
 
 export default function AdminAppBar(): JSX.Element {
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ margin: '16px 0 5px' }}>
             {adminMenuRoutes.map((page) => (
-                <Button key={page.path} >
+                <Button key={page.path} sx={{ textTransform: 'none', padding: '0', marginLeft: '10px', minWidth: '0' }} >
                     <Link to={page.path}>{page.title}</Link>
                 </Button>
-
             ))}
         </Grid>
     )
