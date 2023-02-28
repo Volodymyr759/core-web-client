@@ -2,17 +2,34 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-
-import { Button, Checkbox, FormControlLabel, Grid, Switch, TextField, Typography } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import { AdminServiceFormProps } from "./types";
-import { ICompanyService } from "../../../types/companyService";
-import { createServiceAxios } from "../../../api/service";
+import { CompanyServiceStatus, ICompanyService } from "../../../types/companyService";
+import { createServiceAxios, updateServiceAxios } from "../../../api/service";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useActions } from "../../../hooks/useActions";
+import { SortOrder } from "../../../types/sortOrder";
 
 
-export default function AdminServiceForm({ currentService, closeDrawer }: AdminServiceFormProps): JSX.Element {
+export default function AdminServiceForm({ closeDrawer, openServiceForm }: AdminServiceFormProps): JSX.Element {
+    const { currentCompanyService } = useTypedSelector(state => state.service);
+    const { getServices, setCurrentService } = useActions();
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const toggleDrawer = (anchor: string, open: boolean) =>
+        (event: React.KeyboardEvent | React.MouseEvent) => {
+            if (
+                event &&
+                event.type === 'keydown' &&
+                ((event as React.KeyboardEvent).key === 'Tab' ||
+                    (event as React.KeyboardEvent).key === 'Shift')
+            ) {
+                return;
+            }
+            if (!open) closeDrawer();
+        };
 
     const validationSchema = Yup.object({
         title: Yup.string()
@@ -34,11 +51,11 @@ export default function AdminServiceForm({ currentService, closeDrawer }: AdminS
     })
 
     const defaultValues: { title: string, description: string, imageUrl: string, isActive: boolean, id: number } = {
-        title: currentService.title,
-        description: currentService.description,
-        imageUrl: currentService.imageUrl,
-        isActive: true,
-        id: currentService.id
+        title: currentCompanyService.title,
+        description: currentCompanyService.description,
+        imageUrl: currentCompanyService.imageUrl,
+        isActive: currentCompanyService.isActive,
+        id: currentCompanyService.id
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
@@ -46,19 +63,18 @@ export default function AdminServiceForm({ currentService, closeDrawer }: AdminS
         defaultValues
     })
 
-    const createService = async (service: ICompanyService) => {
+    const onSubmit = async (service: ICompanyService): Promise<void> => {
         try {
             setLoading(true);
-            await createServiceAxios(service);
+            service.id === 0 ? await createServiceAxios(service) : await updateServiceAxios(service);
+            // Update list of services for AdminServiceTable-component
+            getServices(100, 1, CompanyServiceStatus.All, SortOrder.Ascending);
         } catch (error) {
-            setError(error.message || "Oops! Something went wrong while creating the service.");
+            setError(error.message || "Oops! Something went wrong while handling the service.");
         } finally {
             setLoading(false);
+            onCancelHandler();
         }
-    }
-
-    const onSubmit = (service: ICompanyService): void => {
-        createService(service);
     }
 
     const onCancelHandler = () => {
@@ -68,9 +84,13 @@ export default function AdminServiceForm({ currentService, closeDrawer }: AdminS
     }
 
     return (
-        <>
+        <SwipeableDrawer
+            open={openServiceForm}
+            anchor='left'
+            onClose={toggleDrawer('left', false)}
+            onOpen={toggleDrawer('left', true)}
+        >
             <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
-                {/* <input {...register("isActive")} type="hidden" /> */}
                 <input {...register("id")} type="hidden" />
                 <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                     <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400 }}>
@@ -164,6 +184,6 @@ export default function AdminServiceForm({ currentService, closeDrawer }: AdminS
                 </Grid>
             </form>
             {error && <ErrorMessage message={error} />}
-        </>
+        </SwipeableDrawer>
     )
 }

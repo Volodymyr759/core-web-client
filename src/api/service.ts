@@ -30,3 +30,12 @@ export async function getServiceByIdAxios(id: number): Promise<ICompanyService> 
 export async function createServiceAxios(service: ICompanyService): Promise<void> {
     return (await axios.post("/companyservice/create", service)).data;
 }
+
+/**
+ * Updates company's service
+ * @param service<ICompanyService> object of type ICompanyService
+ * @returns<void> void
+ */
+export async function updateServiceAxios(service: ICompanyService): Promise<void> {
+    return (await axios.put("/companyservice/update", service)).data;
+}

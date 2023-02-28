@@ -72,3 +72,4 @@ export const setCurrentService = (service: ICompanyService) => {
         dispatch({ type: CompanyServiceActionTypes.SET_CURRENT_COMPANY_SERVICE, payload: service });
     }
 }
+

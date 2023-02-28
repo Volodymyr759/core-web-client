@@ -9,21 +9,32 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
 import React, { useEffect } from 'react';
 import { SortOrder } from '../../../types/sortOrder';
-import { CompanyServiceStatus } from '../../../types/companyService';
-import { Switch } from '@mui/material';
+import { CompanyServiceStatus, ICompanyService } from '../../../types/companyService';
+import { Divider, Switch, Tooltip } from '@mui/material';
 import Spinner from '../../../components/Spinner/Spinner';
+import { AdminServiceTableProps } from './types';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function AdminServiceTable(): JSX.Element {
+export default function AdminServiceTable({ openEditForm }: AdminServiceTableProps): JSX.Element {
     const { errorServices, serviceSearchResult, loadingServices } = useTypedSelector(state => state.service);
-    const { getServices } = useActions();
+    const { getServices, setCurrentService } = useActions();
 
     useEffect(() => {
         getServices(100, 1, CompanyServiceStatus.All, SortOrder.Ascending);
     }, [])
 
-    const changeIsActiveHandler = (event: React.ChangeEvent<HTMLInputElement>, id: number) => {
-        alert('Change isActive is not implemented yet, id: ' + id);
-        console.log('event.target.value: ', event.target.value);
+    const onEditHandler = (id: number) => {
+        const choosedService = serviceSearchResult.itemList.find(s => s.id === id);
+        const serviceToUpdate: ICompanyService = {
+            id: choosedService.id,
+            title: choosedService.title,
+            description: choosedService.description,
+            imageUrl: choosedService.imageUrl,
+            isActive: choosedService.isActive
+        }
+        setCurrentService(serviceToUpdate);
+        openEditForm();
     }
 
     return (
@@ -55,9 +66,19 @@ export default function AdminServiceTable(): JSX.Element {
                                         <TableCell align="left">{service.description.slice(0, 50)}</TableCell>
                                         <TableCell align="left">{service.imageUrl.slice(0, 15)}</TableCell>
                                         <TableCell align="left">
-                                            <Switch checked={service.isActive} onChange={(e) => changeIsActiveHandler(e, service.id)} />
+                                            <Switch checked={service.isActive} disabled={true} />
                                         </TableCell>
-                                        <TableCell align="left"><span onClick={(e) => alert('Service id: ' + service.id)}>Click to Edit!</span></TableCell>
+                                        <TableCell align="left">
+                                            <div style={{ display: 'flex' }}>
+                                                <Tooltip title="Edit Company Service" placement="top">
+                                                    <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(service.id)} />
+                                                </Tooltip>
+                                                <Divider orientation="vertical" flexItem />
+                                                <Tooltip title="Remove Company Service" placement="top">
+                                                    <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => alert('Delete is not implemented yet.')} />
+                                                </Tooltip>
+                                            </div>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

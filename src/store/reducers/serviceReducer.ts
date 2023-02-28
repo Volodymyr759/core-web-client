@@ -11,7 +11,7 @@ const initialState: CompanyServiceState = {
         searchCriteria: "",
         totalItemCount: 0
     },
-    currentCompanyService: null,
+    currentCompanyService: { id: 0, title: '', description: '', imageUrl: '', isActive: true } as ICompanyService,
     loadingServices: true,
     errorServices: null
 }

@@ -16,7 +16,7 @@ export enum CompanyServiceStatus {
 
 export interface CompanyServiceState {
     serviceSearchResult: ISearchResult<ICompanyService>;
-    currentCompanyService: null | ICompanyService;
+    currentCompanyService: ICompanyService;
     loadingServices: boolean;
     errorServices: null | string;
 }
@@ -28,7 +28,7 @@ export enum CompanyServiceActionTypes {
     SET_COMPANY_SERVICE_ERROR = "SET_COMPANY_SERVICE_ERROR",
     SET_COMPANY_SERVICE_LOADING = "SET_COMPANY_SERVICE_LOADING",
     SET_COMPANY_SERVICE_PAGE = "SET_COMPANY_SERVICE_PAGE",
-    SET_CURRENT_COMPANY_SERVICE = "SET_CURRENT_COMPANY_SERVICE"
+    SET_CURRENT_COMPANY_SERVICE = "SET_CURRENT_COMPANY_SERVICE",
 }
 
 interface GetServicesAction {
@@ -63,7 +63,7 @@ interface SetServicePageAction {
 
 interface SetCurrentServiceAction {
     type: CompanyServiceActionTypes.SET_CURRENT_COMPANY_SERVICE;
-    payload: ICompanyService;
+    payload: null | ICompanyService;
 }
 
 export type CompanyServiceAction = GetServicesAction |
