@@ -12,8 +12,8 @@ const initialState: CompanyServiceState = {
         totalItemCount: 0
     },
     currentCompanyService: null,
-    loading: true,
-    error: null
+    loadingServices: true,
+    errorServices: null
 }
 
 export const serviceReducer = (state: CompanyServiceState = initialState, action: CompanyServiceAction): CompanyServiceState => {
@@ -29,9 +29,9 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
                 },
             };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR:
-            return { ...state, error: action.payload };
+            return { ...state, errorServices: action.payload };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING:
-            return { ...state, loading: action.payload };
+            return { ...state, loadingServices: action.payload };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_PAGE:
             return {
                 ...state,

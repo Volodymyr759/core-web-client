@@ -10,7 +10,7 @@ import ServiceCard from "./ServiceCard";
 import { ServiceListProps } from "./types";
 
 export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.Element {
-    const { error, serviceSearchResult, loading } = useTypedSelector(state => state.service);
+    const { errorServices, serviceSearchResult, loadingServices } = useTypedSelector(state => state.service);
     const { getServices, loadMoreServices, setServicePage } = useActions();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
         setServicePage(serviceSearchResult.currentPageNumber + 1);
     }
 
-    if (error) return <ErrorMessage message={error} />;
+    if (errorServices) return <ErrorMessage message={errorServices} />;
 
     return (
         <>
@@ -35,7 +35,7 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
                 }
             </Grid>
             {
-                loading && <Spinner />
+                loadingServices && <Spinner />
             }
             {
                 allowLoadMore &&
@@ -44,7 +44,7 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
                         onClick={loadMoreHandler}
                         variant="outlined"
                         disabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}>
-                        {loading ? 'Loading...' : 'Load more'}
+                        {loadingServices ? 'Loading...' : 'Load more'}
                     </Button>
                 </Box>
             }

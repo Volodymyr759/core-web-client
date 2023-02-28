@@ -17,8 +17,8 @@ export enum CompanyServiceStatus {
 export interface CompanyServiceState {
     serviceSearchResult: ISearchResult<ICompanyService>;
     currentCompanyService: null | ICompanyService;
-    loading: boolean;
-    error: null | string;
+    loadingServices: boolean;
+    errorServices: null | string;
 }
 
 export enum CompanyServiceActionTypes {
