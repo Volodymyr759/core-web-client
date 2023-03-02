@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { getPublicOfficeNameIdsAxios } from "../../api/office";
 import { getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios } from "../../api/vacancy";
-import { OrderType } from "../../types/orderType";
+import { OrderType } from "../../types/common/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes } from "../../types/vacancy";
 
 export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: OrderType) => {

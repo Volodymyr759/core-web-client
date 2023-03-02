@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { IMailMessage } from "../../types/mailMessage";
+import { IMailMessage } from "../../types/common/mailMessage";
 import { sendEmailAxios } from "../../api/email";
 import { Button, Grid, TextField } from "@mui/material";
 

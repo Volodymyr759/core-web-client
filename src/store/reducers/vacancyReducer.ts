@@ -1,4 +1,4 @@
-import { OrderType } from "../../types/orderType";
+import { OrderType } from "../../types/common/orderType";
 import { VacancyAction, VacancyActionTypes, VacancyState, IVacancy } from "../../types/vacancy";
 
 const initialState: VacancyState = {

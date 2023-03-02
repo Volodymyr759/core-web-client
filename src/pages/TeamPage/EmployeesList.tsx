@@ -4,6 +4,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { OrderType } from "../../types/common/orderType";
 import EmployeeCard from "./EmployeeCard";
 import { EmployeeListProps } from "./types";
 
@@ -12,11 +13,11 @@ export default function EmployeesList({ allowLoadMore, ...props }: EmployeeListP
     const { getEmployees, loadMoreEmployees, setEmployeePage } = useActions();
 
     useEffect(() => {
-        if (employeeSearchResult.itemList.length === 0) getEmployees(1);
+        if (employeeSearchResult.itemList.length === 0) getEmployees(3, 1, '', 'FullName', OrderType.Ascending);
     }, [])
 
     const loadMoreHandler = () => {
-        loadMoreEmployees(employeeSearchResult.currentPageNumber + 1);
+        loadMoreEmployees(3, employeeSearchResult.currentPageNumber + 1, '', 'FullName', OrderType.Ascending);
         setEmployeePage(employeeSearchResult.currentPageNumber + 1);
     }
 
@@ -38,13 +39,13 @@ export default function EmployeesList({ allowLoadMore, ...props }: EmployeeListP
             {
                 allowLoadMore &&
                 <Box mt={5} sx={{ textAlign: 'center' }}>
-                <Button
-                    onClick={loadMoreHandler}
-                    variant="outlined"
-                    disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
-                    {loading ? 'Loading...' : 'Load more'}
-                </Button>
-            </Box>
+                    <Button
+                        onClick={loadMoreHandler}
+                        variant="outlined"
+                        disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
+                        {loading ? 'Loading...' : 'Load more'}
+                    </Button>
+                </Box>
             }
         </div>
     )

@@ -1,4 +1,4 @@
-import { OrderType } from "../../types/orderType";
+import { OrderType } from "../../types/common/orderType";
 import { CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceState, ICompanyService } from "../../types/companyService";
 
 const initialState: CompanyServiceState = {

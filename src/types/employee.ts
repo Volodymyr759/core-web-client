@@ -1,4 +1,4 @@
-import { ISearchResult } from "./searchResult";
+import { ISearchResult } from "./common/searchResult";
 
 export interface IEmployee {
     id: number;

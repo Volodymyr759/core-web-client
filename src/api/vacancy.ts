@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IVacancy, VacancyTitleDto } from '../types/vacancy';
-import { ISearchResult } from '../types/searchResult';
-import { OrderType } from '../types/orderType';
+import { ISearchResult } from '../types/common/searchResult';
+import { OrderType } from '../types/common/orderType';
 
 /**
  * Get list of vacancies for current office

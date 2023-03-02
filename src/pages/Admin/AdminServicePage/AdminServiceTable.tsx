@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
 import { useEffect } from 'react';
-import { OrderType } from '../../../types/orderType';
+import { OrderType } from '../../../types/common/orderType';
 import { CompanyServiceStatus, ICompanyService } from '../../../types/companyService';
 import { Divider, Switch, Tooltip } from '@mui/material';
 import Spinner from '../../../components/Spinner/Spinner';

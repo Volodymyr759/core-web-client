@@ -5,7 +5,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { CompanyServiceStatus } from "../../types/companyService";
-import { OrderType } from "../../types/orderType";
+import { OrderType } from "../../types/common/orderType";
 import ServiceCard from "./ServiceCard";
 import { ServiceListProps } from "./types";
 

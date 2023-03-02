@@ -1,5 +1,5 @@
 import { EmployeeAction, EmployeeActionTypes, EmployeeState, IEmployee } from "../../types/employee";
-import { OrderType } from "../../types/orderType";
+import { OrderType } from "../../types/common/orderType";
 
 const initialState: EmployeeState = {
     employeeSearchResult: {

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getServicesAxios, getServiceByIdAxios, removeServiceAxios, createServiceAxios, updateServiceAxios } from "../../api/service";
-import { OrderType } from "../../types/orderType";
+import { OrderType } from "../../types/common/orderType";
 import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceStatus } from "../../types/companyService";
 
 export const getServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: OrderType) => {

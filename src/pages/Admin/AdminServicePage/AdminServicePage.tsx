@@ -5,7 +5,7 @@ import AdminServiceForm from "./AdminServiceForm";
 import { CompanyServiceStatus } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
 import { useActions } from "../../../hooks/useActions";
-import { OrderType } from "../../../types/orderType";
+import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminServicePage(): JSX.Element {
     const { getServices, setCurrentService } = useActions();

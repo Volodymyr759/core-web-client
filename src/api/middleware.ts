@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { ErrorStatus } from '../types/error';
+import { ErrorStatus } from '../types/common/error';
 import { refreshTokenAxios } from './auth';
 
 export class AxiosMiddleware {
