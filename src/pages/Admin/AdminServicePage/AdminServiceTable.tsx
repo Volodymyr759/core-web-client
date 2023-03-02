@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
 import { useEffect } from 'react';
-import { SortOrder } from '../../../types/sortOrder';
+import { OrderType } from '../../../types/orderType';
 import { CompanyServiceStatus, ICompanyService } from '../../../types/companyService';
 import { Divider, Switch, Tooltip } from '@mui/material';
 import Spinner from '../../../components/Spinner/Spinner';
@@ -22,7 +22,7 @@ export default function AdminServiceTable({ openEditForm }: AdminServiceTablePro
     const { getServices, setCurrentService, removeService } = useActions();
 
     useEffect(() => {
-        getServices(100, 1, CompanyServiceStatus.All, SortOrder.Ascending);
+        getServices(100, 1, CompanyServiceStatus.All, OrderType.Ascending);
     }, [])
 
     const onEditHandler = (id: number) => {

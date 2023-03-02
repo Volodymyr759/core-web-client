@@ -1,11 +1,11 @@
 import { EmployeeAction, EmployeeActionTypes, EmployeeState, IEmployee } from "../../types/employee";
-import { SortOrder } from "../../types/sortOrder";
+import { OrderType } from "../../types/orderType";
 
 const initialState: EmployeeState = {
     employeeSearchResult: {
         itemList: [] as IEmployee[],
         currentPageNumber: 1,
-        order: SortOrder.Ascending,
+        order: OrderType.Ascending,
         pageCount: 0,
         pageSize: 3,
         searchCriteria: "",

@@ -1,9 +1,9 @@
 import { Dispatch } from "redux";
 import { getServicesAxios, getServiceByIdAxios, removeServiceAxios, createServiceAxios, updateServiceAxios } from "../../api/service";
-import { SortOrder } from "../../types/sortOrder";
+import { OrderType } from "../../types/orderType";
 import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceStatus } from "../../types/companyService";
 
-export const getServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: SortOrder) => {
+export const getServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: OrderType) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
@@ -34,7 +34,7 @@ export const getServiceById = (id: number) => {
     }
 }
 
-export const loadMoreServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: SortOrder) => {
+export const loadMoreServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: OrderType) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });

@@ -5,7 +5,7 @@ import AdminServiceForm from "./AdminServiceForm";
 import { CompanyServiceStatus } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
 import { useActions } from "../../../hooks/useActions";
-import { SortOrder } from "../../../types/sortOrder";
+import { OrderType } from "../../../types/orderType";
 
 export default function AdminServicePage(): JSX.Element {
     const { getServices, setCurrentService } = useActions();
@@ -14,7 +14,7 @@ export default function AdminServicePage(): JSX.Element {
 
     const activeServicesFiilterHandler = () => {
         const changedShowOmlyActiveServices = !showOnLyActiveServices;
-        getServices(100, 1, changedShowOmlyActiveServices ? CompanyServiceStatus.Active : CompanyServiceStatus.All, SortOrder.Ascending);
+        getServices(100, 1, changedShowOmlyActiveServices ? CompanyServiceStatus.Active : CompanyServiceStatus.All, OrderType.Ascending);
         setShowOnlyActiveServices(changedShowOmlyActiveServices);
     }
 

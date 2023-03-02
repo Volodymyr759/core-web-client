@@ -1,9 +1,9 @@
-import { SortOrder } from "./sortOrder";
+import { OrderType } from "./orderType";
 
 export interface ISearchResult<T> {
     itemList: T[];
     currentPageNumber: number;
-    order: SortOrder;
+    order: OrderType;
     pageCount: number;
     pageSize: number;
     searchCriteria: string;

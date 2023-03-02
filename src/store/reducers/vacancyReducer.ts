@@ -1,11 +1,11 @@
-import { SortOrder } from "../../types/sortOrder";
+import { OrderType } from "../../types/orderType";
 import { VacancyAction, VacancyActionTypes, VacancyState, IVacancy } from "../../types/vacancy";
 
 const initialState: VacancyState = {
     vacancySearchResult: {
         itemList: [] as IVacancy[],
         currentPageNumber: 1,
-        order: SortOrder.Descending,
+        order: OrderType.Descending,
         pageCount: 0,
         pageSize: 9,
         searchCriteria: "",

@@ -5,7 +5,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { CompanyServiceStatus } from "../../types/companyService";
-import { SortOrder } from "../../types/sortOrder";
+import { OrderType } from "../../types/orderType";
 import ServiceCard from "./ServiceCard";
 import { ServiceListProps } from "./types";
 
@@ -14,11 +14,11 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
     const { getServices, loadMoreServices, setServicePage } = useActions();
 
     useEffect(() => {
-        if (serviceSearchResult.itemList.length === 0) getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.All, SortOrder.Ascending);
+        if (serviceSearchResult.itemList.length === 0) getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
     }, [])
 
     const loadMoreHandler = () => {
-        loadMoreServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber + 1, CompanyServiceStatus.All, SortOrder.Ascending);
+        loadMoreServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber + 1, CompanyServiceStatus.Active, OrderType.Ascending);
         setServicePage(serviceSearchResult.currentPageNumber + 1);
     }
 

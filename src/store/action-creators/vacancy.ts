@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
 import { getPublicOfficeNameIdsAxios } from "../../api/office";
 import { getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios } from "../../api/vacancy";
-import { SortOrder } from "../../types/sortOrder";
+import { OrderType } from "../../types/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes } from "../../types/vacancy";
 
-export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: SortOrder) => {
+export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
@@ -66,7 +66,7 @@ export const getVacanciesTitles = (search: string) => {
     }
 }
 
-export const loadMoreVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: SortOrder) => {
+export const loadMoreVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });

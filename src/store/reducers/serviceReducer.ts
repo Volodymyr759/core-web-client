@@ -1,11 +1,11 @@
-import { SortOrder } from "../../types/sortOrder";
+import { OrderType } from "../../types/orderType";
 import { CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceState, ICompanyService } from "../../types/companyService";
 
 const initialState: CompanyServiceState = {
     serviceSearchResult: {
         itemList: [] as ICompanyService[],
         currentPageNumber: 1,
-        order: SortOrder.Descending,
+        order: OrderType.Descending,
         pageCount: 0,
         pageSize: 3,
         searchCriteria: "",

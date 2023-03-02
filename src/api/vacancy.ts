@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IVacancy, VacancyTitleDto } from '../types/vacancy';
 import { ISearchResult } from '../types/searchResult';
-import { SortOrder } from '../types/sortOrder';
+import { OrderType } from '../types/orderType';
 
 /**
  * Get list of vacancies for current office
@@ -11,7 +11,7 @@ import { SortOrder } from '../types/sortOrder';
  * @param vacancyStatus<boolean> Means Active or Disabled vacancy
  * @param officeId<string> Choosed office
  * @param sortField<number> Field for sorting
- * @param order<SortOrder> Sort direction (ascending / descending)
+ * @param order<OrderType> Sort direction (ascending / descending)
  */
 export async function getVacanciesAxios(
     limit: number,
@@ -20,7 +20,7 @@ export async function getVacanciesAxios(
     vacancyStatus: boolean,
     officeId: string,
     sortField: string,
-    order: SortOrder): Promise<ISearchResult<IVacancy>> {
+    order: OrderType): Promise<ISearchResult<IVacancy>> {
     return (
         await axios.get(`/vacancy/get?limit=${limit}&page=${page}&search=${search}&
             vacancyStatus=${vacancyStatus ? 0 : 1}&officeId=${officeId}&sortField=${sortField}&order=${order}`)).data;
