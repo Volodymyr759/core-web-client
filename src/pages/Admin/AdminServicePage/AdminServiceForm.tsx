@@ -4,19 +4,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import { AdminServiceFormProps } from "./types";
-import { CompanyServiceStatus, ICompanyService } from "../../../types/companyService";
-import { createServiceAxios, updateServiceAxios } from "../../../api/service";
+import {  ICompanyService } from "../../../types/companyService";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
-import { SortOrder } from "../../../types/sortOrder";
-
 
 export default function AdminServiceForm({ closeDrawer, openServiceForm }: AdminServiceFormProps): JSX.Element {
     const { currentCompanyService } = useTypedSelector(state => state.service);
-    const { getServices, setCurrentService } = useActions();
+    const { createService, updateService } = useActions();
     const [error, setError] = useState<null | string>(null);
-    const [loading, setLoading] = useState<boolean>(false);
 
     const toggleDrawer = (anchor: string, open: boolean) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -51,11 +47,11 @@ export default function AdminServiceForm({ closeDrawer, openServiceForm }: Admin
     })
 
     const defaultValues: { title: string, description: string, imageUrl: string, isActive: boolean, id: number } = {
-        title: currentCompanyService.title,
-        description: currentCompanyService.description,
-        imageUrl: currentCompanyService.imageUrl,
-        isActive: currentCompanyService.isActive,
-        id: currentCompanyService.id
+        title: currentCompanyService ? currentCompanyService.title : '',
+        description: currentCompanyService ? currentCompanyService.description : '',
+        imageUrl: currentCompanyService ? currentCompanyService.imageUrl : '',
+        isActive: currentCompanyService ? currentCompanyService.isActive : true,
+        id: currentCompanyService ? currentCompanyService.id : 0
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
@@ -64,17 +60,8 @@ export default function AdminServiceForm({ closeDrawer, openServiceForm }: Admin
     })
 
     const onSubmit = async (service: ICompanyService): Promise<void> => {
-        try {
-            setLoading(true);
-            service.id === 0 ? await createServiceAxios(service) : await updateServiceAxios(service);
-            // Update list of services for AdminServiceTable-component
-            getServices(100, 1, CompanyServiceStatus.All, SortOrder.Ascending);
-        } catch (error) {
-            setError(error.message || "Oops! Something went wrong while handling the service.");
-        } finally {
-            setLoading(false);
-            onCancelHandler();
-        }
+        service.id === 0 ? createService(service) : updateService(service);
+        onCancelHandler();
     }
 
     const onCancelHandler = () => {
@@ -178,7 +165,7 @@ export default function AdminServiceForm({ closeDrawer, openServiceForm }: Admin
                     </Grid>
                     <Grid item sm={6} sx={{ textAlign: 'center' }}>
                         <Button variant="outlined" type="submit">
-                            {loading ? 'Sending...' : 'Send'}
+                            Send
                         </Button>
                     </Grid>
                 </Grid>

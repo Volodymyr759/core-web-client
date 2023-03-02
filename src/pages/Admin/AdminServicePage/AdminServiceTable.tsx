@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { SortOrder } from '../../../types/sortOrder';
 import { CompanyServiceStatus, ICompanyService } from '../../../types/companyService';
 import { Divider, Switch, Tooltip } from '@mui/material';
@@ -15,10 +15,11 @@ import Spinner from '../../../components/Spinner/Spinner';
 import { AdminServiceTableProps } from './types';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 export default function AdminServiceTable({ openEditForm }: AdminServiceTableProps): JSX.Element {
-    const { errorServices, serviceSearchResult, loadingServices } = useTypedSelector(state => state.service);
-    const { getServices, setCurrentService } = useActions();
+    const { serviceSearchResult, loadingServices, errorServices } = useTypedSelector(state => state.service);
+    const { getServices, setCurrentService, removeService } = useActions();
 
     useEffect(() => {
         getServices(100, 1, CompanyServiceStatus.All, SortOrder.Ascending);
@@ -36,6 +37,8 @@ export default function AdminServiceTable({ openEditForm }: AdminServiceTablePro
         setCurrentService(serviceToUpdate);
         openEditForm();
     }
+
+    if (errorServices) return <ErrorMessage message={errorServices} />;
 
     return (
         <>
@@ -63,8 +66,8 @@ export default function AdminServiceTable({ openEditForm }: AdminServiceTablePro
                                         <TableCell component="th" scope="row">
                                             {service.title}
                                         </TableCell>
-                                        <TableCell align="left">{service.description.slice(0, 50)}</TableCell>
-                                        <TableCell align="left">{service.imageUrl.slice(0, 15)}</TableCell>
+                                        <TableCell align="left">{service.description.slice(0, 50).concat('...')}</TableCell>
+                                        <TableCell align="left">{service.imageUrl.slice(0, 15).concat('...')}</TableCell>
                                         <TableCell align="left">
                                             <Switch checked={service.isActive} disabled={true} />
                                         </TableCell>
@@ -75,7 +78,7 @@ export default function AdminServiceTable({ openEditForm }: AdminServiceTablePro
                                                 </Tooltip>
                                                 <Divider orientation="vertical" flexItem />
                                                 <Tooltip title="Remove Company Service" placement="top">
-                                                    <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => alert('Delete is not implemented yet.')} />
+                                                    <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => removeService(service.id)} />
                                                 </Tooltip>
                                             </div>
                                         </TableCell>

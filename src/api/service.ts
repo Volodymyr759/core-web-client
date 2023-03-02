@@ -27,15 +27,23 @@ export async function getServiceByIdAxios(id: number): Promise<ICompanyService> 
  * @param service<ICompanyService> object of type ICompanyService
  * @returns<void> void
  */
-export async function createServiceAxios(service: ICompanyService): Promise<void> {
+export async function createServiceAxios(service: ICompanyService): Promise<ICompanyService> {
     return (await axios.post("/companyservice/create", service)).data;
 }
 
 /**
  * Updates company's service
  * @param service<ICompanyService> object of type ICompanyService
- * @returns<void> void
+ * @returns<ICompanyService> updated service object
  */
-export async function updateServiceAxios(service: ICompanyService): Promise<void> {
+export async function updateServiceAxios(service: ICompanyService): Promise<ICompanyService> {
     return (await axios.put("/companyservice/update", service)).data;
+}
+
+/**
+ * Delete's the object of service specified by identifier
+ * @param id<string> identifier
+ */
+export async function removeServiceAxios(id: number): Promise<void> {
+    return await axios.delete(`/companyservice/delete/${id.toString()}`);
 }

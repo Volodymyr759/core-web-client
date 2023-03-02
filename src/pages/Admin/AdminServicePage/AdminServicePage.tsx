@@ -2,7 +2,7 @@ import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminServiceTable from "./AdminServiceTable";
 import { useState } from "react";
 import AdminServiceForm from "./AdminServiceForm";
-import { CompanyServiceStatus, ICompanyService } from "../../../types/companyService";
+import { CompanyServiceStatus } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
 import { useActions } from "../../../hooks/useActions";
 import { SortOrder } from "../../../types/sortOrder";
@@ -19,12 +19,12 @@ export default function AdminServicePage(): JSX.Element {
     }
 
     const onCreateNewHandler = () => {
-        setCurrentService({ id: 0, title: '', description: '', imageUrl: '', isActive: true } as ICompanyService);
+        setCurrentService(null);
         setServiceFormVisible(true);
     }
 
     const onCloseFormHandler = () => {
-        setCurrentService({ id: 0, title: '', description: '', imageUrl: '', isActive: true } as ICompanyService);
+        setCurrentService(null);
         setServiceFormVisible(false);
     }
 

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { getServicesAxios, getServiceByIdAxios } from "../../api/service";
+import { getServicesAxios, getServiceByIdAxios, removeServiceAxios, createServiceAxios, updateServiceAxios } from "../../api/service";
 import { SortOrder } from "../../types/sortOrder";
 import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceStatus } from "../../types/companyService";
 
@@ -61,6 +61,12 @@ export const setServicePage = (page: number) => {
     }
 }
 
+export const setServiceError = (message: string) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: message });
+    }
+}
+
 export const setServiceLoading = (isLoading: boolean) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: isLoading });
@@ -70,6 +76,48 @@ export const setServiceLoading = (isLoading: boolean) => {
 export const setCurrentService = (service: ICompanyService) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         dispatch({ type: CompanyServiceActionTypes.SET_CURRENT_COMPANY_SERVICE, payload: service });
+    }
+}
+
+export const createService = (service: ICompanyService) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        try {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
+            dispatch({ type: CompanyServiceActionTypes.CREATE_COMPANY_SERVICE, payload: await createServiceAxios(service) });
+        } catch (error) {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error while creating the service." })
+        } finally {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: false });
+        }
+    }
+}
+
+export const updateService = (service: ICompanyService) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        try {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
+            dispatch({ type: CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE, payload: await updateServiceAxios(service) });
+        } catch (error) {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error while updating the service." })
+        } finally {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: false });
+        }
+    }
+}
+
+export const removeService = (id: number) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        try {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
+            await removeServiceAxios(id);
+            dispatch({ type: CompanyServiceActionTypes.REMOVE_COMPANY_SERVICE, payload: id });
+        } catch (error) {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error while removing the service." })
+        } finally {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: false });
+        }
     }
 }
 
