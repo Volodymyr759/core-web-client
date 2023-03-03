@@ -11,9 +11,8 @@ const initialState: CompanyServiceState = {
         searchCriteria: "",
         totalItemCount: 0
     },
-    currentCompanyService: null,
-    loadingServices: true,
-    errorServices: null
+    loading: true,
+    error: null
 }
 
 export const serviceReducer = (state: CompanyServiceState = initialState, action: CompanyServiceAction): CompanyServiceState => {
@@ -29,16 +28,14 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
                 },
             };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR:
-            return { ...state, errorServices: action.payload };
+            return { ...state, error: action.payload };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING:
-            return { ...state, loadingServices: action.payload };
+            return { ...state, loading: action.payload };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_PAGE:
             return {
                 ...state,
                 serviceSearchResult: { ...state.serviceSearchResult, currentPageNumber: action.payload }
             };
-        case CompanyServiceActionTypes.SET_CURRENT_COMPANY_SERVICE:
-            return { ...state, currentCompanyService: action.payload };
         case CompanyServiceActionTypes.CREATE_COMPANY_SERVICE:
             return {
                 ...state, serviceSearchResult: {

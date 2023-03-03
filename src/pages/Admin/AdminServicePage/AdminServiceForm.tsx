@@ -4,13 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import { AdminServiceFormProps } from "./types";
-import {  ICompanyService } from "../../../types/companyService";
+import { ICompanyService } from "../../../types/companyService";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 
-export default function AdminServiceForm({ closeDrawer, openServiceForm }: AdminServiceFormProps): JSX.Element {
-    const { currentCompanyService } = useTypedSelector(state => state.service);
+export default function AdminServiceForm({ service, closeForm, openServiceForm }: AdminServiceFormProps): JSX.Element {
     const { createService, updateService } = useActions();
     const [error, setError] = useState<null | string>(null);
 
@@ -24,7 +22,7 @@ export default function AdminServiceForm({ closeDrawer, openServiceForm }: Admin
             ) {
                 return;
             }
-            if (!open) closeDrawer();
+            if (!open) closeForm(null);
         };
 
     const validationSchema = Yup.object({
@@ -47,11 +45,11 @@ export default function AdminServiceForm({ closeDrawer, openServiceForm }: Admin
     })
 
     const defaultValues: { title: string, description: string, imageUrl: string, isActive: boolean, id: number } = {
-        title: currentCompanyService ? currentCompanyService.title : '',
-        description: currentCompanyService ? currentCompanyService.description : '',
-        imageUrl: currentCompanyService ? currentCompanyService.imageUrl : '',
-        isActive: currentCompanyService ? currentCompanyService.isActive : true,
-        id: currentCompanyService ? currentCompanyService.id : 0
+        title: service.title,
+        description: service.description,
+        imageUrl: service.imageUrl,
+        isActive: service.isActive,
+        id: service.id
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
@@ -67,7 +65,7 @@ export default function AdminServiceForm({ closeDrawer, openServiceForm }: Admin
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeDrawer();
+        closeForm(null);
     }
 
     return (

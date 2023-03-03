@@ -1,25 +1,18 @@
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { useEffect } from 'react';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
-import { useEffect } from 'react';
 import { OrderType } from '../../../types/common/orderType';
 import { CompanyServiceStatus, ICompanyService } from '../../../types/companyService';
-import { Divider, Switch, Tooltip } from '@mui/material';
-import Spinner from '../../../components/Spinner/Spinner';
 import { AdminServiceTableProps } from './types';
+import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Spinner from '../../../components/Spinner/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
-export default function AdminServiceTable({ openEditForm }: AdminServiceTableProps): JSX.Element {
-    const { serviceSearchResult, loadingServices, errorServices } = useTypedSelector(state => state.service);
-    const { getServices, setCurrentService, removeService } = useActions();
+export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
+    const { serviceSearchResult, loading, error } = useTypedSelector(state => state.service);
+    const { getServices, removeService } = useActions();
 
     useEffect(() => {
         getServices(100, 1, CompanyServiceStatus.All, OrderType.Ascending);
@@ -34,16 +27,15 @@ export default function AdminServiceTable({ openEditForm }: AdminServiceTablePro
             imageUrl: choosedService.imageUrl,
             isActive: choosedService.isActive
         }
-        setCurrentService(serviceToUpdate);
-        openEditForm();
+        onEdit(serviceToUpdate);
     }
 
-    if (errorServices) return <ErrorMessage message={errorServices} />;
+    if (error) return <ErrorMessage message={error} />;
 
     return (
         <>
             {
-                loadingServices ?
+                loading ?
                     <Spinner />
                     :
                     <TableContainer component={Paper} sx={{ margin: '20px 0' }}>

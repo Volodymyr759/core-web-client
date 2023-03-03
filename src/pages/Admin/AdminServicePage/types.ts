@@ -1,10 +1,11 @@
 import { ICompanyService } from "../../../types/companyService";
 
 export interface AdminServiceFormProps {
-    closeDrawer: () => void;
+    service: ICompanyService;
+    closeForm: (service: ICompanyService) => void;
     openServiceForm: boolean;
 }
 
 export interface AdminServiceTableProps {
-    openEditForm: () => void;
+    onEdit: (service: ICompanyService) => void;
 }

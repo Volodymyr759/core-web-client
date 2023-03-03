@@ -73,12 +73,6 @@ export const setServiceLoading = (isLoading: boolean) => {
     }
 }
 
-export const setCurrentService = (service: ICompanyService) => {
-    return async (dispatch: Dispatch<CompanyServiceAction>) => {
-        dispatch({ type: CompanyServiceActionTypes.SET_CURRENT_COMPANY_SERVICE, payload: service });
-    }
-}
-
 export const createService = (service: ICompanyService) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
