@@ -1,10 +1,11 @@
 import PageHeader from '../../components/PageHeader/PageHeader';
 import AboutPage from '../AboutPage/AboutPage';
 import ServicesList from '../CompanyServices/ServicesList';
-import ContactPage from '../ContactPage.ts/ContactPage';
+import ContactPage from '../ContactPage/ContactPage';
 import EmployeesList from '../TeamPage/EmployeesList';
 
 export default function HomePage(): JSX.Element {
+
     return (
         <>
             {/* Home page chapter */}

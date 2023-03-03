@@ -26,9 +26,8 @@ export default function EmployeesList({ allowLoadMore, ...props }: EmployeeListP
 
     return (
         <div>
-            <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
+            <Grid container spacing={2} className="page-chapter-container">
                 {
-                    employeeSearchResult.itemList.length > 0 &&
                     employeeSearchResult.itemList.map(emp => (
                         <EmployeeCard key={emp.id} employee={emp} />
                     ))

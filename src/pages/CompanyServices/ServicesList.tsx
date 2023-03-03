@@ -15,7 +15,6 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
     const { getServices, loadMoreServices, setServicePage } = useActions();
 
     useEffect(() => {
-        // if (serviceSearchResult.itemList.length === 0) getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
         getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
     }, [])
 
@@ -28,9 +27,8 @@ export default function ServicesList({ allowLoadMore }: ServiceListProps): JSX.E
 
     return (
         <>
-            <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
+            <Grid container spacing={2} className="page-chapter-container">
                 {
-                    serviceSearchResult.itemList.length > 0 &&
                     serviceSearchResult.itemList.map(service => (
                         <ServiceCard key={service.id} companyService={service} />
                     ))

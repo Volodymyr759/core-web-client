@@ -5,7 +5,7 @@ import AdminServicePage from '../pages/Admin/AdminServicePage/AdminServicePage';
 import AdminTeamPage from '../pages/Admin/AdminTeamPage/AdminTeamPage';
 import AdminVacancyPage from '../pages/Admin/AdminVacancyPage/AdminVacancyPage';
 import ServicesPage from '../pages/CompanyServices/ServicesPage';
-import ContactPage from '../pages/ContactPage.ts/ContactPage';
+import ContactPage from '../pages/ContactPage/ContactPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginPage from '../pages/Login/LoginPage';

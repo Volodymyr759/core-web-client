@@ -4,7 +4,7 @@ import ContactInfoCardsList from "./ContactInfoCardsList";
 
 export default function ContactContent(): JSX.Element {
     return (
-        <Grid container spacing={2} sx={{ padding: '60px 0 30px 0;' }}>
+        <Grid container spacing={2} className="page-chapter-container">
             <Grid item xs={12} md={6}>
                 <ContactInfoCardsList />
             </Grid>
