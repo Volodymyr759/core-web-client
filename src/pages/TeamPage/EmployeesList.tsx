@@ -1,5 +1,6 @@
 import { Box, Button, Grid } from "@mui/material";
 import { useEffect } from "react";
+import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
@@ -38,14 +39,12 @@ export default function EmployeesList({ allowLoadMore, ...props }: EmployeeListP
             }
             {
                 allowLoadMore &&
-                <Box mt={5} sx={{ textAlign: 'center' }}>
-                    <Button
-                        onClick={loadMoreHandler}
-                        variant="outlined"
-                        disabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}>
-                        {loading ? 'Loading...' : 'Load more'}
-                    </Button>
-                </Box>
+                <LoadMoreButton
+                    onClickHandler={loadMoreHandler}
+                    isDisabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}
+                >
+                    {loading ? 'Loading...' : 'Load more'}
+                </LoadMoreButton>
             }
         </div>
     )

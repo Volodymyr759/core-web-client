@@ -5,3 +5,9 @@ export interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLButtonElemen
 	children: ReactNode;
 	onClick: () => void;
 }
+
+export interface LoadMoreButtonProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	isDisabled: boolean;
+	onClickHandler: () => void;
+	children: ReactNode;
+}

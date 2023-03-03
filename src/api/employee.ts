@@ -16,3 +16,12 @@ export async function getEmployeesAxios(limit: number, page: number, search: str
     return (await axios.get(`/employee/get?limit=${limit}&page=${page}&search=${search}&sortfield=${sortField}&order=${order}`)).data;
 }
 
+
+/**
+ * Delete's the employee object specified by identifier
+ * @param id<string> identifier
+ */
+export async function removeEmployeeAxios(id: number): Promise<void> {
+    return await axios.delete(`/employee/delete/${id.toString()}`);
+}
+

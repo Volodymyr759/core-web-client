@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader/PageHeader';
-import { RouteNames } from '../../routing';
 import AboutPage from '../AboutPage/AboutPage';
 import ServicesList from '../CompanyServices/ServicesList';
 import ContactPage from '../ContactPage.ts/ContactPage';

@@ -20,7 +20,8 @@ export enum EmployeeActionTypes {
     LOAD_MORE_EMPLOYEES = "LOAD_MORE_EMPLOYEES",
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
     SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING",
-    SET_EMPLOYEE_PAGE = "SET_EMPLOYEE_PAGE"
+    SET_EMPLOYEE_PAGE = "SET_EMPLOYEE_PAGE",
+    REMOVE_EMPLOYEE = "REMOVE_EMPLOYEE"
 }
 
 interface GetEmployeesAction {
@@ -48,4 +49,15 @@ interface SetPageEmployeeAction {
     payload: number;
 }
 
-export type EmployeeAction = GetEmployeesAction | LoadMoreEmployeesAction | SetErrorEmployeeAction | SetLoadingEmployeeAction | SetPageEmployeeAction
+interface RemoveEmployee {
+    type: EmployeeActionTypes.REMOVE_EMPLOYEE;
+    payload: number;
+}
+
+export type EmployeeAction = 
+GetEmployeesAction | 
+LoadMoreEmployeesAction | 
+SetErrorEmployeeAction | 
+SetLoadingEmployeeAction | 
+SetPageEmployeeAction |
+RemoveEmployee

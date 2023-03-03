@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { getEmployeesAxios } from "../../api/employee";
+import { getEmployeesAxios, removeEmployeeAxios } from "../../api/employee";
 import { EmployeeAction, EmployeeActionTypes } from "../../types/employee";
 import { OrderType } from "../../types/common/orderType";
 
@@ -35,5 +35,19 @@ export const loadMoreEmployees = (limit: number, page: number, search: string, s
 export const setEmployeePage = (page: number) => {
     return async (dispatch: Dispatch<EmployeeAction>) => {
         dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_PAGE, payload: page });
+    }
+}
+
+export const removeEmployee = (id: number) => {
+    return async (dispatch: Dispatch<EmployeeAction>) => {
+        try {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: true });
+            await removeEmployeeAxios(id);
+            dispatch({ type: EmployeeActionTypes.REMOVE_EMPLOYEE, payload: id });
+        } catch (error) {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: error.message || "Error while removing the service." })
+        } finally {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: false });
+        }
     }
 }

@@ -9,13 +9,13 @@ import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminServicePage(): JSX.Element {
     const { getServices } = useActions();
-    const [showOnLyActiveServices, setShowOnlyActiveServices] = useState<boolean>(false);
+    const [showOnlyActiveServices, setShowOnlyActiveServices] = useState<boolean>(false);
     const [service, setService] = useState<null | ICompanyService>(null);
 
     const activeServicesFiilterHandler = () => {
-        const changedShowOmlyActiveServices = !showOnLyActiveServices;
-        getServices(100, 1, changedShowOmlyActiveServices ? CompanyServiceStatus.Active : CompanyServiceStatus.All, OrderType.Ascending);
-        setShowOnlyActiveServices(changedShowOmlyActiveServices);
+        const changedShowOnlyActiveServices = !showOnlyActiveServices;
+        getServices(100, 1, changedShowOnlyActiveServices ? CompanyServiceStatus.Active : CompanyServiceStatus.All, OrderType.Ascending);
+        setShowOnlyActiveServices(changedShowOnlyActiveServices);
     }
 
     const onEdit = (service: null | ICompanyService) => {
@@ -34,7 +34,7 @@ export default function AdminServicePage(): JSX.Element {
                         control={
                             <Checkbox
                                 onChange={activeServicesFiilterHandler}
-                                checked={showOnLyActiveServices} />
+                                checked={showOnlyActiveServices} />
                         }
                         label="Show only active" />
                 </Grid>
