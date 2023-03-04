@@ -5,13 +5,7 @@ import { contactInfoItems } from "./types";
 export default function ContactInfoCardsList(): JSX.Element {
     return (
         <Grid container>
-            {
-                contactInfoItems.map((item) => {
-                    return (
-                        <ContactInfoCard key={item.title} contactInfoItem={item} />
-                    )
-                })
-            }
+            {contactInfoItems.map((item) => <ContactInfoCard key={item.title} contactInfoItem={item} />)}
         </Grid>
     )
 }

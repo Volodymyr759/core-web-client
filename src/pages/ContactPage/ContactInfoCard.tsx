@@ -5,22 +5,14 @@ import AutoFixHigh from "@mui/icons-material/AutoFixHigh";
 
 export default function ContactInfoCard({ contactInfoItem }: IContactInfoCardProps): JSX.Element {
     return (
-        <Grid item xs={12} md={6} textAlign='center' sx={{marginTop: '20px'}}>
+        <Grid item xs={12} md={6} textAlign='center' sx={{ marginTop: '20px' }}>
             <AutoFixHigh />
             <br />
             <Typography variant="h6">
                 <strong>{contactInfoItem.title}</strong>
             </Typography>
             <br />
-            {
-                contactInfoItem.lines.map((line) => {
-                    return (
-                        <Typography key={line} variant="body2">
-                            {line}
-                        </Typography>
-                    )
-                })
-            }
+            {contactInfoItem.lines.map((line) => <Typography key={line} variant="body2">{line}</Typography>)}
         </Grid>
     )
 }
