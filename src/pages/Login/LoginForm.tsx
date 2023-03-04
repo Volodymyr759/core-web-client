@@ -12,7 +12,7 @@ import { RouteNames } from "../../routing";
 export default function LoginForm(): JSX.Element {
     const { login } = useActions();
     const navigate = useNavigate();
-    const { auth, error, loading } = useTypedSelector(state => state.auth);
+    const { error, loading } = useTypedSelector(state => state.auth);
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -33,7 +33,7 @@ export default function LoginForm(): JSX.Element {
         remember: false
     }
 
-    const { control, handleSubmit, formState: { errors }, reset } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues
     })

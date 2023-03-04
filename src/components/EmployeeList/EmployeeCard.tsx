@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { EmployeeCardProps } from "./types";
 
-export default function EmployeeCard({ employee, ...props }: EmployeeCardProps): JSX.Element {
+export default function EmployeeCard({ employee }: EmployeeCardProps): JSX.Element {
     return (
         <Grid item xs={12} md={4} textAlign='center'>
             <Card elevation={16}>

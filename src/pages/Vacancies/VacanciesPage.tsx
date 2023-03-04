@@ -17,6 +17,7 @@ export default function VacanciesPage(): JSX.Element {
         if (titles.length === 0) getVacanciesTitles("");// load titles
         if (vacancySearchResult.itemList.length === 0) getVacancies(vacancySearchResult.pageSize, 1, "",
             filters.active, filters.officeId, "id", vacancySearchResult.order);// load vacancies
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

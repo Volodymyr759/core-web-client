@@ -3,21 +3,20 @@ import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";
 import { OrderType } from "../../types/common/orderType";
-import { CompanyServiceStatus } from "../../types/companyService";
 import ButtonCentered from "../../components/Button/ButtonCentered";
 import { useNavigate } from "react-router-dom";
 import { RouteNames } from "../../routing";
+import EmployeesList from "../../components/EmployeeList/EmployeesList";
 
-export default function ServiceChapter(): JSX.Element {
-    const { error, serviceSearchResult, loading } = useTypedSelector(state => state.service);
-    const { getServices } = useActions();
+export default function TeamChapter(): JSX.Element {
+    const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
+    const { getEmployees } = useActions();
     const navigate = useNavigate();
 
     useEffect(() => {
-        getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
+        getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -26,14 +25,14 @@ export default function ServiceChapter(): JSX.Element {
     return (
         <>
             <PageHeader
-                title="Services"
-                text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
+                title="OUR TEAM"
+                text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas."
             />
-            <ServicesList services={serviceSearchResult.itemList} />
+            <EmployeesList employees={employeeSearchResult.itemList} />
             {
                 loading && <Spinner />
             }
-            <ButtonCentered isDisabled={false} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
+            <ButtonCentered isDisabled={false} onClickHandler={() => { navigate(RouteNames.TEAM); window.scroll(0, 0) }} >
                 See All
             </ButtonCentered>
         </>

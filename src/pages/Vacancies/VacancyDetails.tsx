@@ -26,6 +26,7 @@ export default function VacancyDetailes(): JSX.Element {
                 setLoading(false);
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const toggleDrawer =

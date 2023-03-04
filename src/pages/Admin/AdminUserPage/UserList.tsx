@@ -7,7 +7,8 @@ export default function UserList(): JSX.Element {
     const { getAllUsers } = useActions();
 
     useEffect(() => {
-        getAllUsers()
+        getAllUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (loading) {

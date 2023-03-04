@@ -15,6 +15,7 @@ export default function ServicesPage(): JSX.Element {
 
     useEffect(() => {
         getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const loadMoreHandler = () => {

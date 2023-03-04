@@ -16,6 +16,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
 
     useEffect(() => {
         getServices(100, 1, CompanyServiceStatus.All, OrderType.Ascending);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const onEditHandler = (id: number) => {
