@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import ContactForm from "./ContactForm";
 import ContactInfoCardsList from "./ContactInfoCardsList";
 

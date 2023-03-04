@@ -3,7 +3,7 @@ import { LoadMoreButtonProps } from "./types";
 
 export default function LoadMoreButton({ isDisabled, onClickHandler, children }: LoadMoreButtonProps): JSX.Element {
     return (
-        <Box mt={5} sx={{ textAlign: 'center' }}>
+        <Box mt={3} mb={3} textAlign="center">
             <Button
                 onClick={onClickHandler}
                 variant="outlined"

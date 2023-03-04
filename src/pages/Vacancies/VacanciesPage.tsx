@@ -13,13 +13,10 @@ export default function VacanciesPage(): JSX.Element {
     const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies } = useActions();
 
     useEffect(() => {
-        // load offices
-        if (offices.length === 0) getOfficeNameIdDtos();
-        // load titles
-        if (titles.length === 0) getVacanciesTitles("");
-        // load vacancies
+        if (offices.length === 0) getOfficeNameIdDtos();// load offices
+        if (titles.length === 0) getVacanciesTitles("");// load titles
         if (vacancySearchResult.itemList.length === 0) getVacancies(vacancySearchResult.pageSize, 1, "",
-        filters.active, filters.officeId, "id", vacancySearchResult.order);
+            filters.active, filters.officeId, "id", vacancySearchResult.order);// load vacancies
     }, [])
 
     return (

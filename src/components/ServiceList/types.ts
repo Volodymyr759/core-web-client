@@ -1,9 +1,9 @@
 import { ICompanyService } from "../../types/companyService";
 
 export interface ServiceListProps {
-    allowLoadMore: boolean;
+    services: ICompanyService[];
 }
 
 export interface ServiceCardProps {
-    companyService: ICompanyService;
+    service: ICompanyService;
 }

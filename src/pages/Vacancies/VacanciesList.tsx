@@ -1,4 +1,5 @@
-import { Box, Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
+import ButtonCentered from "../../components/Button/ButtonCentered";
 import Spinner from "../../components/Spinner/Spinner";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -17,24 +18,15 @@ export default function VacanciesList(): JSX.Element {
     return (
         <>
             <Grid container spacing={2} sx={{ margin: '30px 0', padding: '0', width: '100%' }}>
-                {
-                    vacancySearchResult.itemList.length > 0 &&
-                    vacancySearchResult.itemList.map(vacancy => (
-                        <VacancyCard key={vacancy.id} vacancy={vacancy} />
-                    ))
-                }
+                {vacancySearchResult.itemList.map(vacancy => (<VacancyCard key={vacancy.id} vacancy={vacancy} />))}
             </Grid>
-            {
-                loadingVacancies && <Spinner />
-            }
-            <Box mt={5} sx={{ textAlign: 'center' }}>
-                <Button
-                    onClick={loadMoreHandler}
-                    variant="outlined"
-                    disabled={vacancySearchResult.currentPageNumber * vacancySearchResult.pageSize >= vacancySearchResult.totalItemCount}>
-                    {loadingVacancies ? 'Loading...' : 'Load more'}
-                </Button>
-            </Box>
+            {loadingVacancies && <Spinner />}
+            <ButtonCentered
+                onClickHandler={loadMoreHandler}
+                isDisabled={vacancySearchResult.currentPageNumber * vacancySearchResult.pageSize >= vacancySearchResult.totalItemCount}
+            >
+                {loadingVacancies ? 'Loading...' : 'Load more'}
+            </ButtonCentered>
         </>
     )
 }
