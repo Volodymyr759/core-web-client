@@ -5,7 +5,7 @@ const initialState: VacancyState = {
     vacancySearchResult: {
         itemList: [] as IVacancy[],
         currentPageNumber: 1,
-        order: OrderType.Descending,
+        order: OrderType.Ascending,
         pageCount: 0,
         pageSize: 9,
         searchCriteria: "",
@@ -16,7 +16,8 @@ const initialState: VacancyState = {
     titles: [],
     filters: {
         active: true,
-        officeId: "0"
+        officeId: "",
+        searchInTitle: ""
     },
     loadingFilters: true,
     errorFilters: null,
@@ -73,14 +74,7 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
         case VacancyActionTypes.SET_CURRENT_VACANCY:
             return { ...state, currentVacancy: action.payload };
         case VacancyActionTypes.INCREMENT_PREVIEWS:
-            // if (state.currentVacancy) state.currentVacancy.previews = action.payload;
             return { ...state };
-        case VacancyActionTypes.CLEAR_VACANCIES:
-            return {
-                ...state,
-                vacancySearchResult: { ...state.vacancySearchResult, itemList: [] }
-            };
-
         default: return state;
     }
 }

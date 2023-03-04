@@ -1,24 +1,34 @@
 import { useEffect } from "react";
+import { useActions } from "../../hooks/useActions";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import ButtonCentered from "../../components/Button/ButtonCentered";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Spinner from "../../components/Spinner/Spinner";
-import { useActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import VacanciesFilters from "./VacanciesFilters";
 import VacanciesList from "./VacanciesList";
 
 export default function VacanciesPage(): JSX.Element {
     const { errorFilters, errorVacancies, loadingFilters, loadingVacancies,
-        offices, titles, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
-    const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies } = useActions();
+        offices, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
+    const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies, setVacancyPage, loadMoreVacancies } = useActions();
 
     useEffect(() => {
-        if (offices.length === 0) getOfficeNameIdDtos();// load offices
-        if (titles.length === 0) getVacanciesTitles("");// load titles
-        if (vacancySearchResult.itemList.length === 0) getVacancies(vacancySearchResult.pageSize, 1, "",
-            filters.active, filters.officeId, "id", vacancySearchResult.order);// load vacancies
+        getOfficeNameIdDtos();
+        getVacanciesTitles(vacancySearchResult.searchCriteria, filters.officeId);
+        getVacancies(vacancySearchResult.pageSize, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
+            filters.active, filters.officeId, "Title", vacancySearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [vacancySearchResult.searchCriteria, filters.officeId])
+
+    const loadMoreHandler = () => {
+        loadMoreVacancies(vacancySearchResult.pageSize, vacancySearchResult.currentPageNumber + 1, vacancySearchResult.searchCriteria,
+            filters.active, filters.officeId, "Title", vacancySearchResult.order)
+        setVacancyPage(vacancySearchResult.currentPageNumber + 1);
+    }
+
+    if (errorFilters) return <ErrorMessage message={errorFilters} />;
+    if (errorVacancies) return <ErrorMessage message={errorVacancies} />;
 
     return (
         <>
@@ -26,18 +36,16 @@ export default function VacanciesPage(): JSX.Element {
                 title="OUR VACANCIES"
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate."
             />
-            {
-                loadingFilters ?
-                    <Spinner /> :
-                    errorFilters ? <ErrorMessage message={errorFilters} /> :
-                        <VacanciesFilters />
-            }
-            {
-                loadingVacancies ?
-                    <Spinner /> :
-                    errorVacancies ? <ErrorMessage message={errorVacancies} /> :
-                        <VacanciesList />
-            }
+            <VacanciesFilters offices={offices} />
+            {loadingFilters && <Spinner />}
+            <VacanciesList />
+            {loadingVacancies && <Spinner />}
+            <ButtonCentered
+                onClickHandler={loadMoreHandler}
+                isDisabled={vacancySearchResult.currentPageNumber * vacancySearchResult.pageSize >= vacancySearchResult.totalItemCount}
+            >
+                {loadingVacancies ? 'Loading...' : 'Load more'}
+            </ButtonCentered>
         </>
     )
 }

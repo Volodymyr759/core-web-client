@@ -40,7 +40,7 @@ export const getOfficeNameIdDtos = () => {
         try {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: true });
             dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: null });
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICES, payload: await getPublicOfficeNameIdsAxios()  });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICES, payload: await getPublicOfficeNameIdsAxios() });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: error.message || "Error of loading vacancies." })
         } finally {
@@ -49,15 +49,12 @@ export const getOfficeNameIdDtos = () => {
     }
 }
 
-export const getVacanciesTitles = (search: string) => {
+export const getVacanciesTitles = (search: string, officeId: string) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
-            dispatch({
-                type: VacancyActionTypes.SET_VACANCIES_TITLES, payload:
-                    await searchVacanciesTitlesAxios(search)
-            });
+            dispatch({ type: VacancyActionTypes.SET_VACANCIES_TITLES, payload: await searchVacanciesTitlesAxios(search, officeId) });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies titles." })
         } finally {
@@ -135,11 +132,5 @@ export const incrementPreviews = (id: number, number: number) => {
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
-    }
-}
-
-export const clearVacancies = () => {
-    return async (dispatch: Dispatch<VacancyAction>) => {
-        dispatch({ type: VacancyActionTypes.CLEAR_VACANCIES, payload: [] });
     }
 }

@@ -5,13 +5,13 @@ import { OrderType } from '../types/common/orderType';
 
 /**
  * Get list of vacancies for current office
- * @param limit<number> page size
- * @param page<number> current page
- * @param search<string> autocompleted search
+ * @param limit<number> Page size
+ * @param page<number> Current page
+ * @param search<string> Autocompleted search
  * @param vacancyStatus<boolean> Means Active or Disabled vacancy
  * @param officeId<string> Choosed office
  * @param sortField<number> Field for sorting
- * @param order<OrderType> Sort direction (ascending / descending)
+ * @param order<OrderType> Sort direction (Ascending / Descending / None)
  */
 export async function getVacanciesAxios(
     limit: number,
@@ -28,7 +28,7 @@ export async function getVacanciesAxios(
 
 /**
  * Get vacancy specified by identifier
- * @param id<string> identifier
+ * @param id<string> Vacancy identifier
  */
 export async function getVacancyByIdAxios(id: number): Promise<IVacancy> {
     return (await axios.get(`/vacancy/getbyid/${id.toString()}`)).data;
@@ -36,15 +36,17 @@ export async function getVacancyByIdAxios(id: number): Promise<IVacancy> {
 
 /**
  * Get sorted list of all vacancies titles
- * @param searchValue<string> search paremeter
+ * @param searchValue<string> Search paremeter
+ * @param officeId<string> Identifier of the office which vacancy belongs. If it's '' in request query - means all offices.
  */
-export async function searchVacanciesTitlesAxios(searchValue: string): Promise<VacancyTitleDto[]> {
-    return (await axios.get(`/vacancy/searchvacanciestitles?searchValue=${searchValue}`)).data;
+export async function searchVacanciesTitlesAxios(searchValue: string, officeId: string): Promise<VacancyTitleDto[]> {
+    return (await axios.get(`/vacancy/searchvacanciestitles?searchValue=${searchValue}&officeId=${officeId}`)).data;
 }
 
 /**
+ * @param id<string> Vacancy identifier
+ * @param number<string> Previews amount
  */
 export async function incrementPreviewsAxios(id: number, number: number): Promise<void> {
-    // const pachDoc = JSON.stringify({ op: "replace", path: "/previews", value: number.toString() })
     await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/previews", value: number }]);
 }

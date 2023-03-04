@@ -14,15 +14,16 @@ export interface IVacancy {
 export interface VacancyFilters {
     active: boolean;
     officeId: string;
+    searchInTitle: string;
 }
 
 export interface OfficeNameIdDto {
-	id: number;
-	name: string;
+    id: number;
+    name: string;
 }
 
 export interface VacancyTitleDto {
-	value: string;
+    value: string;
 }
 
 export interface VacancyState {
@@ -52,8 +53,7 @@ export enum VacancyActionTypes {
     SET_VACANCY_OFFICES = "SET_VACANCY_OFFICES",
     SET_VACANCIES_TITLES = "SET_VACANCIES_TITLES",
     SET_CURRENT_VACANCY = "SET_CURRENT_VACANCY",
-    INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS",
-    CLEAR_VACANCIES = "CLEAR_VACANCIES"
+    INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS"
 }
 
 interface GetVacanciesAction {
@@ -131,24 +131,18 @@ interface IncrementPreviewsAction {
     payload: number;
 }
 
-interface ClearVacanciesAction {
-    type: VacancyActionTypes.CLEAR_VACANCIES;
-    payload: [];
-}
-
-export type VacancyAction = GetVacanciesAction | 
-GetVacancyByIdAction |
-LoadMoreVacanciesAction | 
-SetErrorVacancyAction | 
-SetLoadingVacancyAction | 
-SetFiltersErrorAction |
-SetFiltersLoadingAction |
-SetPageVacancyAction |
-SetVacancyActiveFilterAction |
-SetVacancyOfficeFilterAction |
-SetVacancySearchCriteriaAction |
-SetVacancyOfficesAction |
-SetVacanciesTitlesAction |
-SetCurrentVacancyAction |
-IncrementPreviewsAction |
-ClearVacanciesAction
+export type VacancyAction = GetVacanciesAction |
+    GetVacancyByIdAction |
+    LoadMoreVacanciesAction |
+    SetErrorVacancyAction |
+    SetLoadingVacancyAction |
+    SetFiltersErrorAction |
+    SetFiltersLoadingAction |
+    SetPageVacancyAction |
+    SetVacancyActiveFilterAction |
+    SetVacancyOfficeFilterAction |
+    SetVacancySearchCriteriaAction |
+    SetVacancyOfficesAction |
+    SetVacanciesTitlesAction |
+    SetCurrentVacancyAction |
+    IncrementPreviewsAction 
