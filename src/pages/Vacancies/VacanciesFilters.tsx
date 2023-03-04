@@ -46,10 +46,7 @@ export default function VacanciesFilters({ offices }: VacanciesFiltersProps): JS
                             sx={{ width: 300 }}
                             {...params}
                             label="Search by title"
-                            InputProps={{
-                                ...params.InputProps,
-                                type: 'search',
-                            }}
+                            InputProps={{ ...params.InputProps, type: 'search' }}
                         />
                     )}
                 />

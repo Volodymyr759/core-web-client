@@ -32,9 +32,7 @@ export default function ServicesPage(): JSX.Element {
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
             />
             <ServicesList services={serviceSearchResult.itemList} />
-            {
-                loading && <Spinner />
-            }
+            {loading && <Spinner />}
             <ButtonCentered
                 onClickHandler={loadMoreHandler}
                 isDisabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}

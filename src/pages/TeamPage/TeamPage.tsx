@@ -31,9 +31,7 @@ export default function TeamPage(): JSX.Element {
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas."
             />
             <EmployeesList employees={employeeSearchResult.itemList} />
-            {
-                loading && <Spinner />
-            }
+            {loading && <Spinner />}
             <ButtonCentered
                 onClickHandler={loadMoreHandler}
                 isDisabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}

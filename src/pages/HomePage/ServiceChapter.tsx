@@ -30,9 +30,7 @@ export default function ServiceChapter(): JSX.Element {
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
             />
             <ServicesList services={serviceSearchResult.itemList} />
-            {
-                loading && <Spinner />
-            }
+            {loading && <Spinner />}
             <ButtonCentered isDisabled={false} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
                 See All
             </ButtonCentered>

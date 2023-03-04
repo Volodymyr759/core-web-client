@@ -31,16 +31,10 @@ export default function ContactForm(): JSX.Element {
     })
 
     const defaultValues: { senderName: string, senderEmail: string, subject: string, message: string } = {
-        senderName: '',
-        senderEmail: '',
-        subject: '',
-        message: ''
+        senderName: '', senderEmail: '', subject: '', message: ''
     }
 
-    const { control, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver(validationSchema),
-        defaultValues
-    })
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(validationSchema), defaultValues })
 
     const sendEmail = async (message: IMailMessage) => {
         try {
