@@ -1,5 +1,5 @@
 import { OrderType } from "../../types/common/orderType";
-import { VacancyAction, VacancyActionTypes, VacancyState, IVacancy } from "../../types/vacancy";
+import { VacancyAction, VacancyActionTypes, VacancyState, IVacancy, VacancyStatus } from "../../types/vacancy";
 
 const initialState: VacancyState = {
     vacancySearchResult: {
@@ -15,7 +15,7 @@ const initialState: VacancyState = {
     offices: [],
     titles: [],
     filters: {
-        active: true,
+        active: VacancyStatus.Active,
         officeId: "",
         searchInTitle: ""
     },
@@ -75,6 +75,22 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             return { ...state, currentVacancy: action.payload };
         case VacancyActionTypes.INCREMENT_PREVIEWS:
             return { ...state };
+        case VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS:
+            // return { ...state };
+            return {
+                ...state, vacancySearchResult: {
+                    ...state.vacancySearchResult, itemList: updateVacancyIsActiveStatus(state, action.payload)
+                }
+            }
         default: return state;
     }
+}
+
+function updateVacancyIsActiveStatus(state: VacancyState, vacancyToUpdate: IVacancy): Array<IVacancy> {
+    return state.vacancySearchResult.itemList.map((vacancy: IVacancy) => {
+        if (vacancy.id === vacancyToUpdate.id){
+            return vacancyToUpdate;
+        } 
+        return vacancy;
+    })
 }

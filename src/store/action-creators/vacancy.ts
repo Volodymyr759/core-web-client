@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
 import { getPublicOfficeNameIdsAxios } from "../../api/office";
-import { getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios } from "../../api/vacancy";
+import { getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
 import { OrderType } from "../../types/common/orderType";
-import { IVacancy, VacancyAction, VacancyActionTypes } from "../../types/vacancy";
+import { IVacancy, VacancyAction, VacancyActionTypes, VacancyStatus } from "../../types/vacancy";
 
-export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: OrderType) => {
+export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: VacancyStatus, officeId: string, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
@@ -63,7 +63,7 @@ export const getVacanciesTitles = (search: string, officeId: string) => {
     }
 }
 
-export const loadMoreVacancies = (limit: number, page: number, search: string, vacancyStatus: boolean, officeId: string, sortField: string, order: OrderType) => {
+export const loadMoreVacancies = (limit: number, page: number, search: string, vacancyStatus: VacancyStatus, officeId: string, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
@@ -90,7 +90,7 @@ export const setVacancyPage = (page: number) => {
     }
 }
 
-export const setVacancyActiveFilter = (active: boolean) => {
+export const setVacancyActiveFilter = (active: VacancyStatus) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.SET_VACANCY_ACTIVE_FILTER, payload: active });
     }
@@ -128,7 +128,22 @@ export const incrementPreviews = (id: number, number: number) => {
             await incrementPreviewsAxios(id, number);
             dispatch({ type: VacancyActionTypes.INCREMENT_PREVIEWS, payload: number });
         } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies titles." })
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of incrementing previews for the vacancy." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
+    }
+}
+
+export const updateVacancyIsActiveStatus = (id: number, vacancyToUpdate: IVacancy) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            await updateVacancyIsActiveStatusAxios(id, vacancyToUpdate.isActive);
+            dispatch({ type: VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS, payload: vacancyToUpdate });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of updating vacancy isActive status." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }

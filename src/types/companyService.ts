@@ -27,8 +27,8 @@ export enum CompanyServiceActionTypes {
     SET_COMPANY_SERVICE_ERROR = "SET_COMPANY_SERVICE_ERROR",
     SET_COMPANY_SERVICE_LOADING = "SET_COMPANY_SERVICE_LOADING",
     SET_COMPANY_SERVICE_PAGE = "SET_COMPANY_SERVICE_PAGE",
-    CREATE_COMPANY_SERVICE ="CREATE_COMPANY_SERVICE",
-    UPDATE_COMPANY_SERVICE ="UPDATE_COMPANY_SERVICE",
+    CREATE_COMPANY_SERVICE = "CREATE_COMPANY_SERVICE",
+    UPDATE_COMPANY_SERVICE = "UPDATE_COMPANY_SERVICE",
     REMOVE_COMPANY_SERVICE = "REMOVE_COMPANY_SERVICE"
 }
 
@@ -78,11 +78,11 @@ interface RemoveCompanyService {
 }
 
 export type CompanyServiceAction = GetServicesAction |
-GetServiceByIdAction |
-LoadMoreServicesAction | 
-SetServiceErrorAction |
-SetServiceLoadingAction | 
-SetServicePageAction | 
-CreateCompanyService |
-UpdateCompanyService |
-RemoveCompanyService
+    GetServiceByIdAction |
+    LoadMoreServicesAction |
+    SetServiceErrorAction |
+    SetServiceLoadingAction |
+    SetServicePageAction |
+    CreateCompanyService |
+    UpdateCompanyService |
+    RemoveCompanyService

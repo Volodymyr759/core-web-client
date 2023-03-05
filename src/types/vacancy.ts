@@ -1,3 +1,4 @@
+import { ICandidate } from "./candidate";
 import { ISearchResult } from "./common/searchResult";
 
 export interface IVacancy {
@@ -6,13 +7,21 @@ export interface IVacancy {
     description: string;
     previews: number;
     isActive: boolean;
-    officeDto: {
+    officeId: number;
+    candidates?: ICandidate[];
+    officeDto?: {
         name: string;
     }
 }
 
+export enum VacancyStatus {
+    Active,
+    Disabled,
+    All
+}
+
 export interface VacancyFilters {
-    active: boolean;
+    active: VacancyStatus;
     officeId: string;
     searchInTitle: string;
 }
@@ -53,7 +62,8 @@ export enum VacancyActionTypes {
     SET_VACANCY_OFFICES = "SET_VACANCY_OFFICES",
     SET_VACANCIES_TITLES = "SET_VACANCIES_TITLES",
     SET_CURRENT_VACANCY = "SET_CURRENT_VACANCY",
-    INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS"
+    INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS",
+    UPDATE_VACANCY_ISACTIVE_STATUS = "UPDATE_VACANCY_ISACTIVE_STATUS"
 }
 
 interface GetVacanciesAction {
@@ -98,7 +108,7 @@ interface SetPageVacancyAction {
 
 interface SetVacancyActiveFilterAction {
     type: VacancyActionTypes.SET_VACANCY_ACTIVE_FILTER;
-    payload: boolean;
+    payload: VacancyStatus;
 }
 
 interface SetVacancyOfficeFilterAction {
@@ -131,6 +141,11 @@ interface IncrementPreviewsAction {
     payload: number;
 }
 
+interface UpdateVacancyIsActiveStatus {
+    type: VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS;
+    payload: IVacancy;
+}
+
 export type VacancyAction = GetVacanciesAction |
     GetVacancyByIdAction |
     LoadMoreVacanciesAction |
@@ -145,4 +160,5 @@ export type VacancyAction = GetVacanciesAction |
     SetVacancyOfficesAction |
     SetVacanciesTitlesAction |
     SetCurrentVacancyAction |
-    IncrementPreviewsAction 
+    IncrementPreviewsAction |
+    UpdateVacancyIsActiveStatus

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IVacancy, VacancyTitleDto } from '../types/vacancy';
+import { IVacancy, VacancyStatus, VacancyTitleDto } from '../types/vacancy';
 import { ISearchResult } from '../types/common/searchResult';
 import { OrderType } from '../types/common/orderType';
 
@@ -8,7 +8,7 @@ import { OrderType } from '../types/common/orderType';
  * @param limit<number> Page size
  * @param page<number> Current page
  * @param search<string> Autocompleted search
- * @param vacancyStatus<boolean> Means Active or Disabled vacancy
+ * @param vacancyStatus<VacancyStatus> Means Active / Disabled / All vacancy 'isActive' status
  * @param officeId<string> Choosed office
  * @param sortField<number> Field for sorting
  * @param order<OrderType> Sort direction (Ascending / Descending / None)
@@ -17,13 +17,12 @@ export async function getVacanciesAxios(
     limit: number,
     page: number,
     search: string,
-    vacancyStatus: boolean,
+    vacancyStatus: VacancyStatus,
     officeId: string,
     sortField: string,
     order: OrderType): Promise<ISearchResult<IVacancy>> {
     return (
-        await axios.get(`/vacancy/get?limit=${limit}&page=${page}&search=${search}&
-            vacancyStatus=${vacancyStatus ? 0 : 1}&officeId=${officeId}&sortField=${sortField}&order=${order}`)).data;
+        await axios.get(`/vacancy/get?limit=${limit}&page=${page}&search=${search}&vacancyStatus=${vacancyStatus.toString()}&officeId=${officeId}&sortField=${sortField}&order=${order}`)).data;
 }
 
 /**
@@ -49,4 +48,12 @@ export async function searchVacanciesTitlesAxios(searchValue: string, officeId: 
  */
 export async function incrementPreviewsAxios(id: number, number: number): Promise<void> {
     await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/previews", value: number }]);
+}
+
+/**
+ * @param id<string> Vacancy identifier
+ * @param isActive<boolean> Previews amount
+ */
+export async function updateVacancyIsActiveStatusAxios(id: number, isActive: boolean): Promise<void> {
+    await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/isActive", value: isActive }]);
 }

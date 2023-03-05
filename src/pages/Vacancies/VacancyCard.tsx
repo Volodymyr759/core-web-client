@@ -4,7 +4,7 @@ import { useActions } from "../../hooks/useActions";
 import { RouteNames } from "../../routing";
 import { VacancyCardProps } from "./types";
 
-export default function VacancyCard({ vacancy, ...props }: VacancyCardProps): JSX.Element {
+export default function VacancyCard({ vacancy }: VacancyCardProps): JSX.Element {
     const navigate = useNavigate();
     const { setCurrentVacancy, incrementPreviews } = useActions();
 

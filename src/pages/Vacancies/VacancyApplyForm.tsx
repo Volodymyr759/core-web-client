@@ -5,12 +5,26 @@ import * as Yup from "yup";
 import { VacancyApplyFormProps } from "./types";
 import { ICandidate } from "../../types/candidate";
 import { createCandidateAxios } from "../../api/candidate";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
-export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyApplyFormProps): JSX.Element {
+export default function VacancyApplyForm({ candidate, closeForm, openServiceForm }: VacancyApplyFormProps): JSX.Element {
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const toggleDrawer =
+        (anchor: string, open: boolean) =>
+            (event: React.KeyboardEvent | React.MouseEvent) => {
+                if (
+                    event &&
+                    event.type === 'keydown' &&
+                    ((event as React.KeyboardEvent).key === 'Tab' ||
+                        (event as React.KeyboardEvent).key === 'Shift')
+                ) {
+                    return;
+                }
+                if (!open) closeForm(null);
+            };
 
     const validationSchema = Yup.object({
         fullName: Yup.string()
@@ -38,19 +52,16 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
     })
 
     const defaultValues: { fullName: string, email: string, phone: string, notes: string, isDismissed: boolean, joinedAt: Date, vacancyId: number } = {
-        fullName: '',
-        email: '',
-        phone: '',
-        notes: '',
-        isDismissed: false,
-        joinedAt: new Date(),
-        vacancyId: vacancyId
+        fullName: candidate.fullName,
+        email: candidate.email,
+        phone: candidate.phone,
+        notes: candidate.notes,
+        isDismissed: candidate.isDismissed,
+        joinedAt: candidate.joinedAt,
+        vacancyId: candidate.vacancyId
     }
 
-    const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
-        resolver: yupResolver(validationSchema),
-        defaultValues
-    })
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(validationSchema), defaultValues })
 
     const createCandidate = async (candidate: ICandidate) => {
         try {
@@ -65,102 +76,55 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
 
     const onSubmit = (candidate: ICandidate): void => {
         createCandidate(candidate);
+        onCancelHandler();
     }
 
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeDrawer();
+        closeForm(null);
     }
 
     return (
-        <>
+        <SwipeableDrawer open={openServiceForm} anchor='left'
+            onClose={toggleDrawer('left', false)} onOpen={toggleDrawer('left', true)}
+        >
             <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
-                <input {...register("isDismissed")} type="hidden" />
-                <input {...register("joinedAt")} type="hidden" />
-                <input {...register("vacancyId")} type="hidden" />
                 <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                     <Typography variant="h4" component={'p'} sx={{ padding: '20px', fontWeight: 600 }}>
                         Join Us!
                     </Typography>
                     <Grid item>
-                        <Controller
-                            name="fullName"
-                            control={control}
+                        <Controller name="fullName" control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Full Name"
-                                    type="text"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.fullName)}
-                                    helperText={errors.fullName?.message}
-                                />
-                            }
-                        />
+                                <TextField  {...field} label="Full Name" type="text" margin="normal" fullWidth
+                                    error={Boolean(errors.fullName)} helperText={errors.fullName?.message} />} />
                     </Grid>
                     <Grid item>
                         <Controller
                             name="email"
                             control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Email"
-                                    type="email"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.email)}
-                                    helperText={errors.email?.message}
-                                />
-                            }
-                        />
+                                <TextField  {...field} label="Email" type="email" margin="normal" fullWidth
+                                    error={Boolean(errors.email)} helperText={errors.email?.message} />} />
                     </Grid>
                     <Grid item>
-                        <Controller
-                            name="phone"
-                            control={control}
+                        <Controller name="phone" control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Phone"
-                                    type="text"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.phone)}
-                                    helperText={errors.phone?.message}
-                                />
-                            }
-                        />
+                                <TextField {...field} label="Phone" type="text" margin="normal" fullWidth
+                                    error={Boolean(errors.phone)} helperText={errors.phone?.message} />} />
                     </Grid>
                     <Grid item>
-                        <Controller
-                            name="notes"
-                            control={control}
+                        <Controller name="notes" control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Notes"
-                                    fullWidth
-                                    margin="normal"
-                                    multiline
-                                    rows={4}
-                                    variant='outlined'
-                                    style={{ height: 'none' }}
-                                    error={Boolean(errors.notes)}
-                                    helperText={errors.notes?.message}
-                                />
-                            }
-                        />
+                                <TextField {...field} label="Notes" fullWidth
+                                    margin="normal" multiline rows={4} variant='outlined' style={{ height: 'none' }}
+                                    error={Boolean(errors.notes)} helperText={errors.notes?.message} />} />
                     </Grid>
                 </Grid>
-
                 <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px' }} >
                     <Grid item sm={6} sx={{ textAlign: 'center' }}>
-                        <Button variant="outlined" onClick={onCancelHandler}>
-                            Cancel
-                        </Button>
+                        <Button variant="outlined" onClick={onCancelHandler}>Cancel</Button>
                     </Grid>
                     <Grid item sm={6} sx={{ textAlign: 'center' }}>
                         <Button variant="outlined" type="submit">
@@ -170,6 +134,6 @@ export default function VacancyApplyForm({ vacancyId, closeDrawer }: VacancyAppl
                 </Grid>
             </form>
             {error && <ErrorMessage message={error} />}
-        </>
+        </SwipeableDrawer>
     )
 }

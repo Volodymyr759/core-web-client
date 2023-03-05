@@ -25,7 +25,7 @@ export default function AdminServicePage(): JSX.Element {
     return (
         <>
             <PageHeader
-                title="Company Services"
+                title="Services Management"
                 text="Voluptatum deleniti atque."
             />
             <Grid container spacing={2} sx={{ margin: '20px 0' }}>

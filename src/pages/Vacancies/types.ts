@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-import { IVacancy, OfficeNameIdDto, VacancyTitleDto } from "../../types/vacancy";
+import { ICandidate } from "../../types/candidate";
+import { IVacancy, OfficeNameIdDto } from "../../types/vacancy";
 
 export interface VacanciesFiltersProps {
 	offices: OfficeNameIdDto[];
@@ -10,6 +11,7 @@ export interface VacancyCardProps extends DetailedHTMLProps<HTMLAttributes<HTMLD
 }
 
 export interface VacancyApplyFormProps {
-	vacancyId: number;
-	closeDrawer: () => void;
+	candidate: ICandidate;
+	closeForm: (candidate: ICandidate) => void;
+	openServiceForm: boolean;
 }
