@@ -62,7 +62,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                     <TableCell align="center" >
                                         <Switch checked={vacancy.isActive} onClick={() => onChangeIsActive(vacancy.id)} />
                                     </TableCell>
-                                    <TableCell align="left">{vacancy.officeDto.name}</TableCell>
+                                    <TableCell align="left">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
                                     {/* <TableCell align="left">{vacancy.candidates.map(c => c.fullName + " | " + c.email).join('; ')}</TableCell> */}
                                     <TableCell align="left">
                                         <div style={{ display: 'flex' }}>

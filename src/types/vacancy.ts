@@ -63,7 +63,9 @@ export enum VacancyActionTypes {
     SET_VACANCIES_TITLES = "SET_VACANCIES_TITLES",
     SET_CURRENT_VACANCY = "SET_CURRENT_VACANCY",
     INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS",
-    UPDATE_VACANCY_ISACTIVE_STATUS = "UPDATE_VACANCY_ISACTIVE_STATUS"
+    UPDATE_VACANCY_ISACTIVE_STATUS = "UPDATE_VACANCY_ISACTIVE_STATUS",
+    CREATE_VACANCY = "CREATE_VACANCY",
+    UPDATE_VACANCY = "UPDATE_VACANCY"
 }
 
 interface GetVacanciesAction {
@@ -146,6 +148,16 @@ interface UpdateVacancyIsActiveStatus {
     payload: IVacancy;
 }
 
+interface CreateVacancy {
+    type: VacancyActionTypes.CREATE_VACANCY;
+    payload: IVacancy;
+}
+
+interface UpdateVacancy {
+    type: VacancyActionTypes.UPDATE_VACANCY;
+    payload: IVacancy;
+}
+
 export type VacancyAction = GetVacanciesAction |
     GetVacancyByIdAction |
     LoadMoreVacanciesAction |
@@ -161,4 +173,6 @@ export type VacancyAction = GetVacanciesAction |
     SetVacanciesTitlesAction |
     SetCurrentVacancyAction |
     IncrementPreviewsAction |
-    UpdateVacancyIsActiveStatus
+    UpdateVacancyIsActiveStatus |
+    CreateVacancy |
+    UpdateVacancy

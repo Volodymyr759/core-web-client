@@ -57,3 +57,21 @@ export async function incrementPreviewsAxios(id: number, number: number): Promis
 export async function updateVacancyIsActiveStatusAxios(id: number, isActive: boolean): Promise<void> {
     await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/isActive", value: isActive }]);
 }
+
+/**
+ * Creates a new vacancy
+ * @param vacancy<IVacancy> object of type IVacancy
+ * @returns<IVacancy> created vacancy
+ */
+export async function createVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
+    return (await axios.post("/vacancy/create", vacancy)).data;
+}
+
+/**
+ * Updates the existing vacancy
+ * @param vacancy<IVacancy> object of type IVacancy
+ * @returns<IVacancy> updated vacancy object
+ */
+export async function updateVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
+    return (await axios.put("/vacancy/update", vacancy)).data;
+}

@@ -39,18 +39,13 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
         case CompanyServiceActionTypes.CREATE_COMPANY_SERVICE:
             return {
                 ...state, serviceSearchResult: {
-                    ...state.serviceSearchResult, itemList:
-                        [action.payload, ...state.serviceSearchResult.itemList]
+                    ...state.serviceSearchResult, itemList: [action.payload, ...state.serviceSearchResult.itemList]
                 }
-            }
+            };
         case CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE:
-            return {
-                ...state, serviceSearchResult: {
-                    ...state.serviceSearchResult, itemList: updateService(state, action.payload)
-                }
-            }
+            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: updateService(state, action.payload) } };
         case CompanyServiceActionTypes.REMOVE_COMPANY_SERVICE:
-            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: deleteService(state, action) } }
+            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: deleteService(state, action) } };
         default: return state;
     }
 }
@@ -61,7 +56,7 @@ function deleteService(state: CompanyServiceState, action: CompanyServiceAction)
 
 function updateService(state: CompanyServiceState, serviceToUpdate: ICompanyService): Array<ICompanyService> {
     return state.serviceSearchResult.itemList.map((service: ICompanyService) => {
-        if (service.id === serviceToUpdate.id) return serviceToUpdate
-        return service
+        if (service.id === serviceToUpdate.id) return serviceToUpdate;
+        return service;
     })
 }

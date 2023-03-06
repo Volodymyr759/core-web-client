@@ -1,3 +1,4 @@
+import { Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../../components/PageHeader/PageHeader";
@@ -22,7 +23,7 @@ export default function AdminVacancyPage(): JSX.Element {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vacancySearchResult.searchCriteria, filters.officeId, vacancySearchResult.currentPageNumber])
 
-    const onEdit = (vacancy: null | IVacancy) => {
+    const onCreateEdit = (vacancy: null | IVacancy) => {
         setVacancy(vacancy);
     }
 
@@ -35,11 +36,22 @@ export default function AdminVacancyPage(): JSX.Element {
                 title="Vacancies Management"
                 text="Voluptatum deleniti atque."
             />
-            <VacanciesFilters offices={offices} />
-            <AdminVacancyTable onEdit={onEdit} />
-            {
-                vacancy && <AdminVacancyForm />
-            }
+            <Grid container spacing={2}>
+                <Grid item xs={8}>
+                    <VacanciesFilters offices={offices} />
+                </Grid>
+                <Grid item display={"flex"} alignItems={"center"} justifyContent="center" xs={4}>
+                    <Button
+                        variant="contained"
+                        style={{ marginTop: '15px' }}
+                        onClick={() => onCreateEdit({ id: 0, title: '', description: '', previews: 0, isActive: true, officeId: offices[1].id })}>
+                        + Create New
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <AdminVacancyTable onEdit={onCreateEdit} />
+            {vacancy && <AdminVacancyForm vacancy={vacancy} openForm={true} closeForm={onCreateEdit} />}
         </>
     )
 }

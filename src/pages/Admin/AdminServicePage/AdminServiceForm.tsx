@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
+import { useActions } from "../../../hooks/useActions";
 import { AdminServiceFormProps } from "./types";
 import { ICompanyService } from "../../../types/companyService";
+import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
-import { useActions } from "../../../hooks/useActions";
 
 export default function AdminServiceForm({ service, closeForm, openServiceForm }: AdminServiceFormProps): JSX.Element {
     const { createService, updateService } = useActions();

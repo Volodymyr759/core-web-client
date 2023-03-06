@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getPublicOfficeNameIdsAxios } from "../../api/office";
-import { getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
+import { createVacancyAxios, getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
 import { OrderType } from "../../types/common/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes, VacancyStatus } from "../../types/vacancy";
 
@@ -144,6 +144,34 @@ export const updateVacancyIsActiveStatus = (id: number, vacancyToUpdate: IVacanc
             dispatch({ type: VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS, payload: vacancyToUpdate });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of updating vacancy isActive status." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
+    }
+}
+
+export const createVacancy = (vacancy: IVacancy) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            dispatch({ type: VacancyActionTypes.CREATE_VACANCY, payload: await createVacancyAxios(vacancy) });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error while creating the vacancy." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
+    }
+}
+
+export const updateVacancy = (vacancy: IVacancy) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            dispatch({ type: VacancyActionTypes.UPDATE_VACANCY, payload: await updateVacancyAxios(vacancy) });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error while updating the vacancy." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }

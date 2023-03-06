@@ -76,10 +76,22 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
         case VacancyActionTypes.INCREMENT_PREVIEWS:
             return { ...state };
         case VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS:
-            // return { ...state };
             return {
                 ...state, vacancySearchResult: {
                     ...state.vacancySearchResult, itemList: updateVacancyIsActiveStatus(state, action.payload)
+                }
+            }
+        case VacancyActionTypes.CREATE_VACANCY:
+            return {
+                ...state, vacancySearchResult: {
+                    ...state.vacancySearchResult, itemList:
+                        [action.payload, ...state.vacancySearchResult.itemList]
+                }
+            }
+        case VacancyActionTypes.UPDATE_VACANCY:
+            return {
+                ...state, vacancySearchResult: {
+                    ...state.vacancySearchResult, itemList: updateVacancy(state, action.payload)
                 }
             }
         default: return state;
@@ -88,9 +100,14 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
 
 function updateVacancyIsActiveStatus(state: VacancyState, vacancyToUpdate: IVacancy): Array<IVacancy> {
     return state.vacancySearchResult.itemList.map((vacancy: IVacancy) => {
-        if (vacancy.id === vacancyToUpdate.id){
-            return vacancyToUpdate;
-        } 
+        if (vacancy.id === vacancyToUpdate.id) return vacancyToUpdate;
+        return vacancy;
+    })
+}
+
+function updateVacancy(state: VacancyState, vacancyToUpdate: IVacancy): Array<IVacancy> {
+    return state.vacancySearchResult.itemList.map((vacancy: IVacancy) => {
+        if (vacancy.id === vacancyToUpdate.id) return vacancyToUpdate;
         return vacancy;
     })
 }
