@@ -50,7 +50,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                 >
                                     <TableCell component="th" scope="row">
                                         <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
-                                            <Badge badgeContent={vacancy.previews} color="primary">
+                                            <Badge badgeContent={vacancy.candidates?.length} color="primary">
                                                 {vacancy.title.length > 15 ? vacancy.title.substring(0, 15) + ' ...' : vacancy.title}
                                             </Badge>
                                         </Typography>
@@ -63,7 +63,6 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                         <Switch checked={vacancy.isActive} onClick={() => onChangeIsActive(vacancy.id)} />
                                     </TableCell>
                                     <TableCell align="left">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
-                                    {/* <TableCell align="left">{vacancy.candidates.map(c => c.fullName + " | " + c.email).join('; ')}</TableCell> */}
                                     <TableCell align="left">
                                         <div style={{ display: 'flex' }}>
                                             <Tooltip title="Edit Company Service" placement="top">

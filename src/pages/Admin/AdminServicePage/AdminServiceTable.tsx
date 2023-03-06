@@ -43,11 +43,8 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Title</TableCell>
-                                    <TableCell align="left">Description</TableCell>
-                                    <TableCell align="left">Image Url</TableCell>
-                                    <TableCell align="left">Is Active?</TableCell>
-                                    <TableCell align="left">Actions</TableCell>
+                                    {['Title', 'Description', 'Image Url', 'Is Active?', 'Office', 'Actions'].map((header, index) =>
+                                        <TableCell key={index} align="center">{header}</TableCell>)}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
