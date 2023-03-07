@@ -63,22 +63,22 @@ interface SetServicePageAction {
     payload: number;
 }
 
-interface UpdateServiceIsActiveStatus {
+interface UpdateServiceIsActiveStatusAction {
     type: CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS;
     payload: ICompanyService;
 }
 
-interface CreateCompanyService {
+interface CreateCompanyServiceAction {
     type: CompanyServiceActionTypes.CREATE_COMPANY_SERVICE;
     payload: ICompanyService;
 }
 
-interface UpdateCompanyService {
+interface UpdateCompanyServiceAction {
     type: CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE;
     payload: ICompanyService;
 }
 
-interface RemoveCompanyService {
+interface RemoveCompanyServiceAction {
     type: CompanyServiceActionTypes.REMOVE_COMPANY_SERVICE;
     payload: number;
 }
@@ -89,7 +89,7 @@ export type CompanyServiceAction = GetServicesAction |
     SetServiceErrorAction |
     SetServiceLoadingAction |
     SetServicePageAction |
-    UpdateServiceIsActiveStatus |
-    CreateCompanyService |
-    UpdateCompanyService |
-    RemoveCompanyService
+    UpdateServiceIsActiveStatusAction |
+    CreateCompanyServiceAction |
+    UpdateCompanyServiceAction |
+    RemoveCompanyServiceAction

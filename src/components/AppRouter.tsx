@@ -19,6 +19,7 @@ import { IRoute, RouteNames } from '../routing';
 import { Roles } from '../types/auth';
 import AdminLayout from './Layouts/AdminLayout';
 import PublicLayout from './Layouts/PublicLayout';
+import AdminCountryPage from '../pages/Admin/AdminCountryPage/AdminCountryPage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -42,6 +43,7 @@ export default function AppRouter() {
 
     const adminRoleRoutes: IRoute[] = [
         { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
+        { path: RouteNames.ADMIN_COUNTRIES, title: "Contries", component: <AdminCountryPage /> },
         { path: RouteNames.ADMIN_SERVICES, title: "Services", component: <AdminServicePage /> },
         { path: RouteNames.ADMIN_VACANCIES, title: "Vacancies", component: <AdminVacancyPage /> },
         { path: RouteNames.USERS, title: "Users page", component: <UsersPage /> }
@@ -61,18 +63,6 @@ export default function AppRouter() {
                 }
             </Routes >
             :
-            // auth.roles.includes(Roles.REGISTERED) && 
-            // <Routes>
-            //     {
-            //         anonimousRoleRoutes.concat(registeredRoleRoutes).map((route) => {
-            //             return (
-            //                 <Route key={route.path} path={route.path} element={
-            //                     <PublicLayout>{route.component}</PublicLayout>
-            //                 } />
-            //             )
-            //         })
-            //     }
-            // </Routes>
             auth.roles.includes(Roles.ADMIN) ?
                 <Routes>
                     {
