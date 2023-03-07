@@ -56,13 +56,13 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
     }
 }
 
-function deleteService(state: CompanyServiceState, action: CompanyServiceAction): Array<ICompanyService> {
-    return state.serviceSearchResult.itemList.filter(service => service.id !== action.payload)
-}
-
 function updateService(state: CompanyServiceState, serviceToUpdate: ICompanyService): Array<ICompanyService> {
     return state.serviceSearchResult.itemList.map((service: ICompanyService) => {
         if (service.id === serviceToUpdate.id) return serviceToUpdate;
         return service;
     })
+}
+
+function deleteService(state: CompanyServiceState, action: CompanyServiceAction): Array<ICompanyService> {
+    return state.serviceSearchResult.itemList.filter(service => service.id !== action.payload)
 }

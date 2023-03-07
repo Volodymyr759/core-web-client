@@ -11,6 +11,7 @@ const initialState: EmployeeState = {
         searchCriteria: "",
         totalItemCount: 0
     },
+    offices: [],
     loading: false,
     error: null
 }
@@ -36,7 +37,28 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
                 ...state,
                 employeeSearchResult: { ...state.employeeSearchResult, currentPageNumber: action.payload }
             };
+        case EmployeeActionTypes.CREATE_EMPLOYEE:
+            return {
+                ...state, employeeSearchResult: {
+                    ...state.employeeSearchResult, itemList: [action.payload, ...state.employeeSearchResult.itemList]
+                }
+            };
+        case EmployeeActionTypes.UPDATE_EMPLOYEE:
+            return { ...state, employeeSearchResult: { ...state.employeeSearchResult, itemList: updateEmployee(state, action.payload) } };
+        case EmployeeActionTypes.REMOVE_EMPLOYEE:
+            return { ...state, employeeSearchResult: { ...state.employeeSearchResult, itemList: deleteEmployee(state, action) } };
 
         default: return state;
     }
+}
+
+function updateEmployee(state: EmployeeState, employeeToUpdate: IEmployee): Array<IEmployee> {
+    return state.employeeSearchResult.itemList.map((employee: IEmployee) => {
+        if (employee.id === employeeToUpdate.id) return employeeToUpdate;
+        return employee;
+    })
+}
+
+function deleteEmployee(state: EmployeeState, action: EmployeeAction): Array<IEmployee> {
+    return state.employeeSearchResult.itemList.filter(employee => employee.id !== action.payload)
 }

@@ -1,4 +1,5 @@
 import { ICandidate } from "./candidate";
+import { OfficeNameIdDto } from "./common/officeNameIdDto";
 import { ISearchResult } from "./common/searchResult";
 
 export interface IVacancy {
@@ -24,11 +25,6 @@ export interface VacancyFilters {
     active: VacancyStatus;
     officeId: string;
     searchInTitle: string;
-}
-
-export interface OfficeNameIdDto {
-    id: number;
-    name: string;
 }
 
 export interface VacancyTitleDto {

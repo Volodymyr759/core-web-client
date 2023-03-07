@@ -1,3 +1,4 @@
+import { OfficeNameIdDto } from "./common/officeNameIdDto";
 import { ISearchResult } from "./common/searchResult";
 
 export interface IEmployee {
@@ -7,10 +8,15 @@ export interface IEmployee {
     position: string;
     description: string;
     avatarUrl: string;
+    officeId: number;
+    officeDto?: {
+        name: string;
+    }
 }
 
 export interface EmployeeState {
     employeeSearchResult: ISearchResult<IEmployee>;
+    offices: OfficeNameIdDto[];
     loading: boolean;
     error: null | string;
 }
@@ -21,6 +27,8 @@ export enum EmployeeActionTypes {
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
     SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING",
     SET_EMPLOYEE_PAGE = "SET_EMPLOYEE_PAGE",
+    CREATE_EMPLOYEE = "CREATE_EMPLOYEE",
+    UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE",
     REMOVE_EMPLOYEE = "REMOVE_EMPLOYEE"
 }
 
@@ -49,6 +57,16 @@ interface SetPageEmployeeAction {
     payload: number;
 }
 
+interface CreateCompanyService {
+    type: EmployeeActionTypes.CREATE_EMPLOYEE;
+    payload: IEmployee;
+}
+
+interface UpdateCompanyService {
+    type: EmployeeActionTypes.UPDATE_EMPLOYEE;
+    payload: IEmployee;
+}
+
 interface RemoveEmployee {
     type: EmployeeActionTypes.REMOVE_EMPLOYEE;
     payload: number;
@@ -60,4 +78,6 @@ LoadMoreEmployeesAction |
 SetErrorEmployeeAction | 
 SetLoadingEmployeeAction | 
 SetPageEmployeeAction |
+CreateCompanyService |
+UpdateCompanyService |
 RemoveEmployee

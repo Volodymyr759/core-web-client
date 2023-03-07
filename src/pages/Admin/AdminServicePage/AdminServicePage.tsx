@@ -18,9 +18,7 @@ export default function AdminServicePage(): JSX.Element {
         setShowOnlyActiveServices(changedShowOnlyActiveServices);
     }
 
-    const onEdit = (service: null | ICompanyService) => {
-        setService(service);
-    }
+    const onCreateEdit = (service: null | ICompanyService) => setService(service);
 
     return (
         <>
@@ -34,22 +32,22 @@ export default function AdminServicePage(): JSX.Element {
                         control={
                             <Checkbox
                                 onChange={activeServicesFiilterHandler}
-                                checked={showOnlyActiveServices} />
-                        }
+                                checked={showOnlyActiveServices}
+                            />}
                         label="Show only active" />
                 </Grid>
                 <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                    <Button variant="contained" onClick={() => onEdit({ id: 0, title: '', description: '', imageUrl: '', isActive: true })}>
+                    <Button variant="contained" onClick={() => onCreateEdit({ id: 0, title: '', description: '', imageUrl: '', isActive: true })}>
                         + Create New
                     </Button>
                 </Grid>
             </Grid>
-            <AdminServiceTable onEdit={onEdit} />
+            <AdminServiceTable onEdit={onCreateEdit} />
             {
                 service &&
                 <AdminServiceForm
                     service={service}
-                    closeForm={onEdit}
+                    closeForm={onCreateEdit}
                     openServiceForm={true}
                 />
             }

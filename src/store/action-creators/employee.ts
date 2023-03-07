@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
-import { getEmployeesAxios, removeEmployeeAxios } from "../../api/employee";
-import { EmployeeAction, EmployeeActionTypes } from "../../types/employee";
+import { createEmployeeAxios, getEmployeesAxios, removeEmployeeAxios, updateEmployeeAxios } from "../../api/employee";
+import { EmployeeAction, EmployeeActionTypes, IEmployee } from "../../types/employee";
 import { OrderType } from "../../types/common/orderType";
 
 
@@ -38,6 +38,33 @@ export const setEmployeePage = (page: number) => {
     }
 }
 
+export const createEmployee = (employee: IEmployee) => {
+    return async (dispatch: Dispatch<EmployeeAction>) => {
+        try {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: true });
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: null });
+            dispatch({ type: EmployeeActionTypes.CREATE_EMPLOYEE, payload: await createEmployeeAxios(employee) });
+        } catch (error) {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: error.message || "Error while creating the Employee." })
+        } finally {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: false });
+        }
+    }
+}
+
+export const updateEmployee = (employee: IEmployee) => {
+    return async (dispatch: Dispatch<EmployeeAction>) => {
+        try {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: true });
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: null });
+            dispatch({ type: EmployeeActionTypes.UPDATE_EMPLOYEE, payload: await updateEmployeeAxios(employee) });
+        } catch (error) {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_ERROR, payload: error.message || "Error while updating the Employee." })
+        } finally {
+            dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_LOADING, payload: false });
+        }
+    }
+}
 export const removeEmployee = (id: number) => {
     return async (dispatch: Dispatch<EmployeeAction>) => {
         try {

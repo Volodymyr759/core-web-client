@@ -1,6 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 import { ICandidate } from "../../types/candidate";
-import { IVacancy, OfficeNameIdDto } from "../../types/vacancy";
+import { OfficeNameIdDto } from "../../types/common/officeNameIdDto";
+import { IVacancy } from "../../types/vacancy";
 
 export interface VacanciesFiltersProps {
 	offices: OfficeNameIdDto[];
