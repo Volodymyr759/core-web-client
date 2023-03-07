@@ -76,11 +76,11 @@ export default function AdminVacancyForm({ vacancy, openForm, closeForm }: Admin
             onClose={handleClose}
         >
             <Box sx={style}>
-                <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <input {...register("id")} type="hidden" />
                     <input {...register("previews")} type="hidden" />
-                    <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
-                        <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400 }}>
+                    <Grid container direction="column" justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
+                        <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400, textAlign: 'center' }}>
                             Vacancy Form
                         </Typography>
                         <Grid item>

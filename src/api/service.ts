@@ -24,6 +24,14 @@ export async function getServiceByIdAxios(id: number): Promise<ICompanyService> 
 }
 
 /**
+ * @param id<string> Service identifier
+ * @param isActive<boolean> Service status
+ */
+export async function updateServiceIsActiveStatusAxios(id: number, isActive: boolean): Promise<void> {
+    await axios.patch(`/companyservice/partialserviceupdate/${id}`, [{ op: "replace", path: "/isactive", value: isActive }]);
+}
+
+/**
  * Creates a new company's service
  * @param service<ICompanyService> object of type ICompanyService
  * @returns<ICompanyService> created service object

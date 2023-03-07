@@ -36,6 +36,12 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
                 ...state,
                 serviceSearchResult: { ...state.serviceSearchResult, currentPageNumber: action.payload }
             };
+        case CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS:
+            return {
+                ...state, serviceSearchResult: {
+                    ...state.serviceSearchResult, itemList: updateService(state, action.payload)
+                }
+            }
         case CompanyServiceActionTypes.CREATE_COMPANY_SERVICE:
             return {
                 ...state, serviceSearchResult: {

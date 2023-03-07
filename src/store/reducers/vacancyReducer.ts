@@ -78,7 +78,7 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
         case VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS:
             return {
                 ...state, vacancySearchResult: {
-                    ...state.vacancySearchResult, itemList: updateVacancyIsActiveStatus(state, action.payload)
+                    ...state.vacancySearchResult, itemList: updateVacancy(state, action.payload)
                 }
             }
         case VacancyActionTypes.CREATE_VACANCY:
@@ -96,13 +96,6 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             }
         default: return state;
     }
-}
-
-function updateVacancyIsActiveStatus(state: VacancyState, vacancyToUpdate: IVacancy): Array<IVacancy> {
-    return state.vacancySearchResult.itemList.map((vacancy: IVacancy) => {
-        if (vacancy.id === vacancyToUpdate.id) return vacancyToUpdate;
-        return vacancy;
-    })
 }
 
 function updateVacancy(state: VacancyState, vacancyToUpdate: IVacancy): Array<IVacancy> {

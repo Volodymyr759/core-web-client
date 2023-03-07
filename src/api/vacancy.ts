@@ -52,10 +52,10 @@ export async function incrementPreviewsAxios(id: number, number: number): Promis
 
 /**
  * @param id<string> Vacancy identifier
- * @param isActive<boolean> Previews amount
+ * @param isActive<boolean> Vacancy status
  */
 export async function updateVacancyIsActiveStatusAxios(id: number, isActive: boolean): Promise<void> {
-    await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/isActive", value: isActive }]);
+    await axios.patch(`/vacancy/partialvacancyupdate/${id}`, [{ op: "replace", path: "/isactive", value: isActive }]);
 }
 
 /**

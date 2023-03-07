@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { getServicesAxios, getServiceByIdAxios, removeServiceAxios, createServiceAxios, updateServiceAxios } from "../../api/service";
+import { getServicesAxios, getServiceByIdAxios, removeServiceAxios, createServiceAxios, updateServiceAxios, updateServiceIsActiveStatusAxios } from "../../api/service";
 import { OrderType } from "../../types/common/orderType";
 import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceStatus } from "../../types/companyService";
 
@@ -73,6 +73,21 @@ export const setServiceLoading = (isLoading: boolean) => {
     }
 }
 
+export const updateServiceIsActiveStatus = (id: number, serviceToUpdate: ICompanyService) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        try {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
+            await updateServiceIsActiveStatusAxios(id, serviceToUpdate.isActive);
+            dispatch({ type: CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS, payload: serviceToUpdate });
+        } catch (error) {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error of updating service isActive status." })
+        } finally {
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: false });
+        }
+    }
+}
+
 export const createService = (service: ICompanyService) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
@@ -105,6 +120,7 @@ export const removeService = (id: number) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
+            dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
             await removeServiceAxios(id);
             dispatch({ type: CompanyServiceActionTypes.REMOVE_COMPANY_SERVICE, payload: id });
         } catch (error) {

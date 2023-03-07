@@ -27,6 +27,7 @@ export enum CompanyServiceActionTypes {
     SET_COMPANY_SERVICE_ERROR = "SET_COMPANY_SERVICE_ERROR",
     SET_COMPANY_SERVICE_LOADING = "SET_COMPANY_SERVICE_LOADING",
     SET_COMPANY_SERVICE_PAGE = "SET_COMPANY_SERVICE_PAGE",
+    UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS = "UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS",
     CREATE_COMPANY_SERVICE = "CREATE_COMPANY_SERVICE",
     UPDATE_COMPANY_SERVICE = "UPDATE_COMPANY_SERVICE",
     REMOVE_COMPANY_SERVICE = "REMOVE_COMPANY_SERVICE"
@@ -62,6 +63,11 @@ interface SetServicePageAction {
     payload: number;
 }
 
+interface UpdateServiceIsActiveStatus {
+    type: CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS;
+    payload: ICompanyService;
+}
+
 interface CreateCompanyService {
     type: CompanyServiceActionTypes.CREATE_COMPANY_SERVICE;
     payload: ICompanyService;
@@ -83,6 +89,7 @@ export type CompanyServiceAction = GetServicesAction |
     SetServiceErrorAction |
     SetServiceLoadingAction |
     SetServicePageAction |
+    UpdateServiceIsActiveStatus |
     CreateCompanyService |
     UpdateCompanyService |
     RemoveCompanyService

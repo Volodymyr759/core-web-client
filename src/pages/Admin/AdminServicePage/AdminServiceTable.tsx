@@ -12,7 +12,7 @@ import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
     const { serviceSearchResult, loading, error } = useTypedSelector(state => state.service);
-    const { getServices, removeService } = useActions();
+    const { getServices, removeService, updateServiceIsActiveStatus } = useActions();
 
     useEffect(() => {
         getServices(100, 1, CompanyServiceStatus.All, OrderType.Ascending);
@@ -31,6 +31,13 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
         onEdit(serviceToUpdate);
     }
 
+    const onChangeIsActive = (id: number) => {
+        const choosedService = serviceSearchResult.itemList.find(s => s.id === id);
+        const serviceToUpdate: ICompanyService = { ...choosedService };
+        serviceToUpdate.isActive = !choosedService.isActive;
+        updateServiceIsActiveStatus(id, serviceToUpdate);
+    }
+
     if (error) return <ErrorMessage message={error} />;
 
     return (
@@ -43,7 +50,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    {['Title', 'Description', 'Image Url', 'Is Active?', 'Office', 'Actions'].map((header, index) =>
+                                    {['Title', 'Description', 'Image Url', 'Is Active?', 'Actions'].map((header, index) =>
                                         <TableCell key={index} align="center">{header}</TableCell>)}
                                 </TableRow>
                             </TableHead>
@@ -59,7 +66,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                                         <TableCell align="left">{service.description.slice(0, 50).concat('...')}</TableCell>
                                         <TableCell align="left">{service.imageUrl.slice(0, 15).concat('...')}</TableCell>
                                         <TableCell align="left">
-                                            <Switch checked={service.isActive} disabled={true} />
+                                            <Switch checked={service.isActive} onClick={() => onChangeIsActive(service.id)} />
                                         </TableCell>
                                         <TableCell align="left">
                                             <div style={{ display: 'flex' }}>
