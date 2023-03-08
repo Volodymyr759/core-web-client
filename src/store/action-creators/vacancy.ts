@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { getPublicOfficeNameIdsAxios } from "../../api/office";
+import { getOfficeNameIdsAxios } from "../../api/office";
 import { createVacancyAxios, getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
 import { OrderType } from "../../types/common/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes, VacancyStatus } from "../../types/vacancy";
@@ -40,7 +40,7 @@ export const getOfficeNameIdDtos = () => {
         try {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: true });
             dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: null });
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICES, payload: await getPublicOfficeNameIdsAxios() });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICES, payload: await getOfficeNameIdsAxios() });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_ERROR, payload: error.message || "Error of loading vacancies." })
         } finally {

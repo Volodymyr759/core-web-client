@@ -1,15 +1,17 @@
 import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { IRoute, RouteNames } from "../../routing";
 import AdminCountryPage from "../../pages/Admin/AdminCountryPage/AdminCountryPage";
 import AdminServicePage from "../../pages/Admin/AdminServicePage/AdminServicePage";
+import AdminOfficePage from "../../pages/Admin/AdminOfficePage/AdminOfficePage";
 import AdminTeamPage from "../../pages/Admin/AdminTeamPage/AdminTeamPage";
 import AdminVacancyPage from "../../pages/Admin/AdminVacancyPage/AdminVacancyPage";
 import UsersPage from "../../pages/Admin/AdminUserPage/UsersPage";
-import { IRoute, RouteNames } from "../../routing";
 
 const adminMenuRoutes: IRoute[] = [
     { path: RouteNames.ADMIN_COUNTRIES, title: "Countries", component: <AdminCountryPage /> },
     { path: RouteNames.ADMIN_SERVICES, title: "Services", component: <AdminServicePage /> },
+    { path: RouteNames.ADMIN_OFFICES, title: "Offices", component: <AdminOfficePage /> },
     { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
     { path: RouteNames.ADMIN_VACANCIES, title: "Vacancies", component: <AdminVacancyPage /> },
     { path: RouteNames.USERS, title: "Users", component: <UsersPage /> }

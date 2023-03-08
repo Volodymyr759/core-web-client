@@ -19,6 +19,7 @@ export enum RouteNames {
     USERS = '/users',
     ADMIN_TEAM = '/admin/team',
     ADMIN_COUNTRIES = '/admin/countries',
+    ADMIN_OFFICES = '/admin/offices',
     ADMIN_SERVICES = '/admin/services',
     ADMIN_VACANCIES = '/admin/vacancies'
 }

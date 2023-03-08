@@ -4,7 +4,7 @@ import { OrderType } from '../types/common/orderType';
 import { ICountry } from '../types/country';
 
 /**
- * Get list of countries
+ * Gets list of countries
  * @param limit<number> Page size
  * @param page<number> Current page
  * @param sortField<string> Field for sorting, for now only by Name
@@ -15,9 +15,9 @@ export async function getCountriesAxios(limit: number, page: number, sortField: 
 }
 
 /**
- * Get's the object of country specified by identifier
- * @param id<string> identifier
- * @returns<ICountry> object of service
+ * Gets the object of country specified by identifier
+ * @param id<string> Identifier
+ * @returns<ICountry> Object of service
  */
 export async function getCountryByIdAxios(id: number): Promise<ICountry> {
     return (await axios.get(`/country/getbyid/${id.toString()}`)).data;

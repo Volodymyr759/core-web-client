@@ -1,7 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import AboutPage from '../pages/AboutPage/AboutPage';
+import { Roles } from '../types/auth';
+import { IRoute, RouteNames } from '../routing';
+import AdminCountryPage from '../pages/Admin/AdminCountryPage/AdminCountryPage';
 import AdminServicePage from '../pages/Admin/AdminServicePage/AdminServicePage';
+import AdminOfficePage from '../pages/Admin/AdminOfficePage/AdminOfficePage';
 import AdminTeamPage from '../pages/Admin/AdminTeamPage/AdminTeamPage';
 import AdminVacancyPage from '../pages/Admin/AdminVacancyPage/AdminVacancyPage';
 import ServicesPage from '../pages/CompanyServices/ServicesPage';
@@ -15,11 +19,8 @@ import TeamPage from '../pages/TeamPage/TeamPage';
 import UsersPage from '../pages/Admin/AdminUserPage/UsersPage';
 import VacanciesPage from '../pages/Vacancies/VacanciesPage';
 import VacancyDetailes from '../pages/Vacancies/VacancyDetails';
-import { IRoute, RouteNames } from '../routing';
-import { Roles } from '../types/auth';
 import AdminLayout from './Layouts/AdminLayout';
 import PublicLayout from './Layouts/PublicLayout';
-import AdminCountryPage from '../pages/Admin/AdminCountryPage/AdminCountryPage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -44,6 +45,7 @@ export default function AppRouter() {
     const adminRoleRoutes: IRoute[] = [
         { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
         { path: RouteNames.ADMIN_COUNTRIES, title: "Contries", component: <AdminCountryPage /> },
+        { path: RouteNames.ADMIN_OFFICES, title: "Offices", component: <AdminOfficePage /> },
         { path: RouteNames.ADMIN_SERVICES, title: "Services", component: <AdminServicePage /> },
         { path: RouteNames.ADMIN_VACANCIES, title: "Vacancies", component: <AdminVacancyPage /> },
         { path: RouteNames.USERS, title: "Users page", component: <UsersPage /> }

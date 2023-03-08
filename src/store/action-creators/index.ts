@@ -2,6 +2,7 @@ import * as AuthActionCreators from "./auth";
 import * as CompanyServiceActionCreators from "./companyService";
 import * as CountryActionCreators from "./country";
 import * as EmployeeActionCreators from "./employee";
+import * as OfficeActionCreators from "./office";
 import * as UserActionCreators from "./user";
 import * as VacancyActionCreators from "./vacancy";
 
@@ -10,6 +11,7 @@ export const ActionCreators = {
     ...CompanyServiceActionCreators,
     ...CountryActionCreators,
     ...EmployeeActionCreators,
+    ...OfficeActionCreators,
     ...UserActionCreators,
     ...VacancyActionCreators
 }
