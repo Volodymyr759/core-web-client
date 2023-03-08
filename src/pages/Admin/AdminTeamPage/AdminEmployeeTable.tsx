@@ -61,8 +61,8 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                                         <TableCell align="left">{employee.description.slice(0, 15).concat('...')}</TableCell>
                                         <TableCell align="left">{employee.avatarUrl.slice(0, 15).concat('...')}</TableCell>
                                         <TableCell align="left">{employee.officeDto ? employee.officeDto.name : '...Please refresh the page...'}</TableCell>
-                                        <TableCell align="left">
-                                            <div style={{ display: 'flex' }}>
+                                        <TableCell align="center">
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                 <Tooltip title="Edit Employee" placement="top">
                                                     <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(employee.id)} />
                                                 </Tooltip>

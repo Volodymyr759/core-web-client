@@ -63,8 +63,8 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                         <Switch checked={vacancy.isActive} onClick={() => onChangeIsActive(vacancy.id)} />
                                     </TableCell>
                                     <TableCell align="left">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
-                                    <TableCell align="left">
-                                        <div style={{ display: 'flex' }}>
+                                    <TableCell align="center">
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
                                             <Tooltip title="Edit Company Service" placement="top">
                                                 <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(vacancy.id)} />
                                             </Tooltip>

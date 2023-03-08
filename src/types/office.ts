@@ -10,7 +10,7 @@ export interface IOffice {
     latitude: number;
     longitude: number;
     countryId: number;
-    countryDto?: ICountry; //{ name: string, code: string };
+    countryDto?: ICountry;
     vacancyDtos?: IVacancy[];
 }
 

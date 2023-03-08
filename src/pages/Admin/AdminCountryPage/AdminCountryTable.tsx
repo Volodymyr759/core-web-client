@@ -59,8 +59,8 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                                                 return <p key={office.name}><span>{office.name + ', ' + office.address}</span></p>
                                             })
                                         }</TableCell>
-                                        <TableCell align="left">
-                                            <div style={{ display: 'flex' }}>
+                                        <TableCell align="center">
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                 <Tooltip title="Edit Country" placement="top">
                                                     <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(country.id)} />
                                                 </Tooltip>
