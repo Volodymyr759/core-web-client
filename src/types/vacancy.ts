@@ -1,4 +1,3 @@
-import { ICandidate } from "./candidate";
 import { OfficeNameIdDto } from "./common/officeNameIdDto";
 import { ISearchResult } from "./common/searchResult";
 

@@ -1,5 +1,5 @@
 import { OrderType } from "../../types/common/orderType";
-import { CandidateAction, CandidateActionTypes, CandidateState, ICandidate, CandidateStatus, CandidateFilters } from "../../types/candidate";
+import { CandidateAction, CandidateActionTypes, CandidateState, ICandidate, CandidateStatus } from "../../types/candidate";
 
 const initialState: CandidateState = {
     candidateSearchResult: {

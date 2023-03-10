@@ -16,6 +16,7 @@ export default function AdminCandidatePage(): JSX.Element {
 
     useEffect(() => {
         getCandidates(candidateSearchResult.pageSize, candidateSearchResult.currentPageNumber, filters, "FullName", OrderType.Ascending)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters, candidateSearchResult.currentPageNumber]);
 
     const onCreateEdit = (candidate: null | ICandidate) => setCandidate(candidate);

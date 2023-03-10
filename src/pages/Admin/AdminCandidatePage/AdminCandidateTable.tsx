@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { ICandidate } from "../../../types/candidate";
@@ -53,7 +54,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                 <TableCell align="left">
                                     <Switch checked={candidate.isDismissed} onClick={() => onChangeIsDismissed(candidate.id)} />
                                 </TableCell>
-                                <TableCell align="left">{candidate.joinedAt.toString()}</TableCell>
+                                <TableCell align="left">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
                                 <TableCell align="left">{candidate.vacancyDto?.title.slice(0, 50).concat('...')}</TableCell>
                                 <TableCell align="center">
                                     <div style={{ display: 'flex', justifyContent: 'center' }}>
