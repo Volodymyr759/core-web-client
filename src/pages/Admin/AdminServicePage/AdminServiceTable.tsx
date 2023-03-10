@@ -1,22 +1,16 @@
-import { useEffect } from 'react';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
-import { OrderType } from '../../../types/common/orderType';
-import { CompanyServiceStatus, ICompanyService } from '../../../types/companyService';
+import { ICompanyService } from '../../../types/companyService';
 import { AdminServiceTableProps } from './types';
 import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
+import TablePagination from '../../../components/TablePagination/TablePagination';
 
 export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
     const { serviceSearchResult, error } = useTypedSelector(state => state.service);
-    const { getServices, removeService, updateServiceIsActiveStatus } = useActions();
-
-    useEffect(() => {
-        getServices(100, 1, CompanyServiceStatus.All, OrderType.Ascending);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    const { removeService, updateServiceIsActiveStatus, setServicePage } = useActions();
 
     const onEditHandler = (id: number) => {
         const choosedService = serviceSearchResult.itemList.find(s => s.id === id);
@@ -79,6 +73,10 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                count={Math.ceil(serviceSearchResult.totalItemCount / serviceSearchResult.pageSize)}
+                onChangePage={(value: number) => setServicePage(value)}
+            />
         </>
     )
 }

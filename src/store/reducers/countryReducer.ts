@@ -23,6 +23,8 @@ export const countryReducer = (state: CountryState = initialState, action: Count
             return { ...state, error: action.payload };
         case CountryActionTypes.SET_COUNTRY_LOADING:
             return { ...state, loading: action.payload };
+        case CountryActionTypes.SET_COUNTRY_PAGE:
+            return { ...state, countrySearchResult: { ...state.countrySearchResult, currentPageNumber: action.payload } };
         case CountryActionTypes.CREATE_COUNTRY:
             return { ...state, countrySearchResult: { ...state.countrySearchResult, itemList: [action.payload, ...state.countrySearchResult.itemList] } };
         case CountryActionTypes.UPDATE_COUNTRY:

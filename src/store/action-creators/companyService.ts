@@ -51,13 +51,15 @@ export const loadMoreServices = (limit: number, page: number, companyServiceStat
     }
 }
 
-/**
- * Sets current page for Services store
- * @param page<number> current page
- */
 export const setServicePage = (page: number) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_PAGE, payload: page });
+    }
+}
+
+export const setServiceActiveFilter = (status: CompanyServiceStatus) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ACTIVE_FILTER, payload: status });
     }
 }
 

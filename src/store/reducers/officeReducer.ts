@@ -23,6 +23,8 @@ export const officeReducer = (state: OfficeState = initialState, action: OfficeA
             return { ...state, error: action.payload };
         case OfficeActionTypes.SET_OFFICE_LOADING:
             return { ...state, loading: action.payload };
+        case OfficeActionTypes.SET_OFFICE_PAGE:
+            return { ...state, officeSearchResult: { ...state.officeSearchResult, currentPageNumber: action.payload } };
         case OfficeActionTypes.CREATE_OFFICE:
             return { ...state, officeSearchResult: { ...state.officeSearchResult, itemList: [action.payload, ...state.officeSearchResult.itemList] } };
         case OfficeActionTypes.UPDATE_OFFICE:

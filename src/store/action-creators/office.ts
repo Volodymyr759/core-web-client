@@ -46,6 +46,12 @@ export const setOfficeLoading = (isLoading: boolean) => {
     }
 }
 
+export const setOfficePage = (page: number) => {
+    return async (dispatch: Dispatch<OfficeAction>) => {
+        dispatch({ type: OfficeActionTypes.SET_OFFICE_PAGE, payload: page });
+    }
+}
+
 export const createOffice = (office: IOffice) => {
     return async (dispatch: Dispatch<OfficeAction>) => {
         try {

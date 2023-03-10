@@ -1,5 +1,5 @@
 import { OrderType } from "../../types/common/orderType";
-import { CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceState, ICompanyService } from "../../types/companyService";
+import { CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceState, CompanyServiceStatus, ICompanyService } from "../../types/companyService";
 
 const initialState: CompanyServiceState = {
     serviceSearchResult: {
@@ -11,6 +11,9 @@ const initialState: CompanyServiceState = {
         searchCriteria: "",
         totalItemCount: 0
     },
+    filters: {
+        active: CompanyServiceStatus.All,
+    },
     loading: true,
     error: null
 }
@@ -20,34 +23,19 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
         case CompanyServiceActionTypes.GET_COMPANY_SERVICES:
             return { ...state, serviceSearchResult: action.payload };
         case CompanyServiceActionTypes.LOAD_MORE_COMPANY_SERVICES:
-            return {
-                ...state,
-                serviceSearchResult: {
-                    ...action.payload,
-                    itemList: state.serviceSearchResult.itemList.concat(action.payload.itemList)
-                },
-            };
+            return { ...state, serviceSearchResult: { ...action.payload, itemList: state.serviceSearchResult.itemList.concat(action.payload.itemList) }, };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR:
             return { ...state, error: action.payload };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING:
             return { ...state, loading: action.payload };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_PAGE:
-            return {
-                ...state,
-                serviceSearchResult: { ...state.serviceSearchResult, currentPageNumber: action.payload }
-            };
+            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, currentPageNumber: action.payload } };
+        case CompanyServiceActionTypes.SET_COMPANY_SERVICE_ACTIVE_FILTER:
+            return { ...state, filters: { ...state.filters, active: action.payload } };
         case CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS:
-            return {
-                ...state, serviceSearchResult: {
-                    ...state.serviceSearchResult, itemList: updateService(state, action.payload)
-                }
-            }
+            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: updateService(state, action.payload) } }
         case CompanyServiceActionTypes.CREATE_COMPANY_SERVICE:
-            return {
-                ...state, serviceSearchResult: {
-                    ...state.serviceSearchResult, itemList: [action.payload, ...state.serviceSearchResult.itemList]
-                }
-            };
+            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: [action.payload, ...state.serviceSearchResult.itemList] } };
         case CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE:
             return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: updateService(state, action.payload) } };
         case CompanyServiceActionTypes.REMOVE_COMPANY_SERVICE:

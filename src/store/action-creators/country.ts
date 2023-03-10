@@ -46,6 +46,12 @@ export const setCountryLoading = (isLoading: boolean) => {
     }
 }
 
+export const setCountryPage = (page: number) => {
+    return async (dispatch: Dispatch<CountryAction>) => {
+        dispatch({ type: CountryActionTypes.SET_COUNTRY_PAGE, payload: page });
+    }
+}
+
 export const createCountry = (country: ICountry) => {
     return async (dispatch: Dispatch<CountryAction>) => {
         try {

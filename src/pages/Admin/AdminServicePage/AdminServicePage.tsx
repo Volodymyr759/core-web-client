@@ -1,21 +1,25 @@
+import { ChangeEvent, useEffect, useState } from "react";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { OrderType } from "../../../types/common/orderType";
+import { CompanyServiceStatus, ICompanyService } from "../../../types/companyService";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminServiceTable from "./AdminServiceTable";
-import { useState } from "react";
 import AdminServiceForm from "./AdminServiceForm";
-import { CompanyServiceStatus, ICompanyService } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
-import { useActions } from "../../../hooks/useActions";
-import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminServicePage(): JSX.Element {
-    const { getServices } = useActions();
-    const [showOnlyActiveServices, setShowOnlyActiveServices] = useState<boolean>(false);
+    const { serviceSearchResult, filters } = useTypedSelector(state => state.service);
+    const { getServices, setServiceActiveFilter } = useActions();
     const [service, setService] = useState<null | ICompanyService>(null);
 
-    const activeServicesFiilterHandler = () => {
-        const changedShowOnlyActiveServices = !showOnlyActiveServices;
-        getServices(100, 1, changedShowOnlyActiveServices ? CompanyServiceStatus.Active : CompanyServiceStatus.All, OrderType.Ascending);
-        setShowOnlyActiveServices(changedShowOnlyActiveServices);
+    useEffect(() => {
+        getServices(5, serviceSearchResult.currentPageNumber, filters.active, OrderType.Ascending);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [serviceSearchResult.currentPageNumber, filters])
+    
+    const activeServicesFilterHandler = (checked: boolean): void => {
+        checked ? setServiceActiveFilter(CompanyServiceStatus.Active) : setServiceActiveFilter(CompanyServiceStatus.All)
     }
 
     const onCreateEdit = (service: null | ICompanyService) => setService(service);
@@ -31,8 +35,8 @@ export default function AdminServicePage(): JSX.Element {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                onChange={activeServicesFiilterHandler}
-                                checked={showOnlyActiveServices}
+                                onChange={(event: ChangeEvent<HTMLInputElement>, checked: boolean) => activeServicesFilterHandler(checked)}
+                                checked={filters.active === CompanyServiceStatus.Active ? true : false}
                             />}
                         label="Show only active" />
                 </Grid>

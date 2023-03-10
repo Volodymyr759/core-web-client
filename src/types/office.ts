@@ -25,6 +25,7 @@ export enum OfficeActionTypes {
     GET_OFFICE_BY_ID = "GET_OFFICE_BY_ID",
     SET_OFFICE_ERROR = "SET_OFFICE_ERROR",
     SET_OFFICE_LOADING = "SET_OFFICE_LOADING",
+    SET_OFFICE_PAGE = "SET_OFFICE_PAGE",
     CREATE_OFFICE = "CREATE_OFFICE",
     UPDATE_OFFICE = "UPDATE_OFFICE",
     REMOVE_OFFICE = "REMOVE_OFFICE"
@@ -50,6 +51,11 @@ interface SetOfficeLoadingAction {
     payload: boolean;
 }
 
+interface SetOfficePageAction {
+    type: OfficeActionTypes.SET_OFFICE_PAGE;
+    payload: number;
+}
+
 interface CreateOfficeAction {
     type: OfficeActionTypes.CREATE_OFFICE;
     payload: IOffice;
@@ -69,6 +75,7 @@ export type OfficeAction = GetOfficesAction |
     GetOfficeByIdAction |
     SetOfficeErrorAction |
     SetOfficeLoadingAction |
+    SetOfficePageAction |
     CreateOfficeAction |
     UpdateOfficeAction |
     RemoveOfficeAction

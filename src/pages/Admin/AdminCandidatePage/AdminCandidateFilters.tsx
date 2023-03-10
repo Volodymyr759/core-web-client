@@ -11,7 +11,7 @@ export default function AdminCandidateFilters({ onAddNew }: AdminCandidateFilter
     const { filters } = useTypedSelector(state => state.candidate);
     const { setCandidateActiveFilter } = useActions();
 
-    const activeCandidatesFiilterHandler = (checked: boolean): void => {
+    const activeCandidatesFilterHandler = (checked: boolean): void => {
         checked ? setCandidateActiveFilter(CandidateStatus.Active) : setCandidateActiveFilter(CandidateStatus.All)
     }
 
@@ -21,7 +21,7 @@ export default function AdminCandidateFilters({ onAddNew }: AdminCandidateFilter
                 <FormControlLabel
                     control={
                         <Checkbox
-                            onChange={(event: ChangeEvent<HTMLInputElement>, checked: boolean) => activeCandidatesFiilterHandler(checked)}
+                            onChange={(event: ChangeEvent<HTMLInputElement>, checked: boolean) => activeCandidatesFilterHandler(checked)}
                             checked={filters.active === CandidateStatus.Active ? true : false}
                         />}
                     label="Show only active" />

@@ -6,25 +6,25 @@ import { Button, Grid } from "@mui/material";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminEmployeeForm from "./AdminEmployeeForm";
 import AdminEmployeeTable from "./AdminEmployeeTable";
+import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminTeamPage(): JSX.Element {
+    const { employeeSearchResult } = useTypedSelector(state => state.employee);
     const { offices } = useTypedSelector(state => state.vacancy);
-    const { getOfficeNameIdDtos } = useActions();
+    const { getEmployees, getOfficeNameIdDtos } = useActions();
     const [employee, setEmployee] = useState<IEmployee | null>(null);
 
     useEffect(() => {
+        getEmployees(5, employeeSearchResult.currentPageNumber, employeeSearchResult.searchCriteria, 'FullName', OrderType.Ascending);
         getOfficeNameIdDtos();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [employeeSearchResult.currentPageNumber])
 
     const onCreateEdit = (employee: IEmployee | null) => setEmployee(employee);
 
     return (
         <>
-            <PageHeader
-                title="Team Management"
-                text="Voluptatum deleniti atque."
-            />
+            <PageHeader title="Team Management" text="Voluptatum deleniti atque." />
             <Grid container justifyContent={'flex-end'} spacing={2} sx={{ margin: '20px 0' }}>
                 <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
                     <Button variant="contained" onClick={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })}>

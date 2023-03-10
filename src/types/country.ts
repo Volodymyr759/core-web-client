@@ -18,6 +18,7 @@ export enum CountryActionTypes {
     GET_COUNTRY_BY_ID = "GET_COUNTRY_BY_ID",
     SET_COUNTRY_ERROR = "SET_COUNTRY_ERROR",
     SET_COUNTRY_LOADING = "SET_COUNTRY_LOADING",
+    SET_COUNTRY_PAGE = "SET_COUNTRY_PAGE",
     CREATE_COUNTRY = "CREATE_COUNTRY",
     UPDATE_COUNTRY = "UPDATE_COUNTRY",
     REMOVE_COUNTRY = "REMOVE_COUNTRY"
@@ -43,6 +44,11 @@ interface SetCountryLoadingAction {
     payload: boolean;
 }
 
+interface SetCountryPageAction {
+    type: CountryActionTypes.SET_COUNTRY_PAGE;
+    payload: number;
+}
+
 interface CreateCountryAction {
     type: CountryActionTypes.CREATE_COUNTRY;
     payload: ICountry;
@@ -62,6 +68,7 @@ export type CountryAction = GetCoutriesAction |
     GetCountryByIdAction |
     SetCountryErrorAction |
     SetCountryLoadingAction |
+    SetCountryPageAction |
     CreateCountryAction |
     UpdateCountryAction |
     RemoveCountryAction
