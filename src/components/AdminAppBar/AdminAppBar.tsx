@@ -1,6 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IRoute, RouteNames } from "../../routing";
+import AdminCandidatePage from "../../pages/Admin/AdminCandidatePage/AdminCandidatePage";
 import AdminCountryPage from "../../pages/Admin/AdminCountryPage/AdminCountryPage";
 import AdminServicePage from "../../pages/Admin/AdminServicePage/AdminServicePage";
 import AdminOfficePage from "../../pages/Admin/AdminOfficePage/AdminOfficePage";
@@ -14,6 +15,7 @@ const adminMenuLinks: IRoute[] = [
     { path: RouteNames.ADMIN_SERVICES, title: "Services", component: <AdminServicePage /> },
     { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
     { path: RouteNames.ADMIN_VACANCIES, title: "Vacancies", component: <AdminVacancyPage /> },
+    { path: RouteNames.ADMIN_CANDIDATES, title: "Candidates", component: <AdminCandidatePage /> },
     { path: RouteNames.USERS, title: "Users", component: <UsersPage /> }
 ]
 

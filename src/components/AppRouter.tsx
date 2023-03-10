@@ -3,6 +3,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import AboutPage from '../pages/AboutPage/AboutPage';
 import { Roles } from '../types/auth';
 import { IRoute, RouteNames } from '../routing';
+import AdminCandidatePage from '../pages/Admin/AdminCandidatePage/AdminCandidatePage';
 import AdminCountryPage from '../pages/Admin/AdminCountryPage/AdminCountryPage';
 import AdminServicePage from '../pages/Admin/AdminServicePage/AdminServicePage';
 import AdminOfficePage from '../pages/Admin/AdminOfficePage/AdminOfficePage';
@@ -43,10 +44,11 @@ export default function AppRouter() {
     ]
 
     const adminRoleRoutes: IRoute[] = [
-        { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
+        { path: RouteNames.ADMIN_CANDIDATES, title: "Candidates", component: <AdminCandidatePage /> },
         { path: RouteNames.ADMIN_COUNTRIES, title: "Contries", component: <AdminCountryPage /> },
         { path: RouteNames.ADMIN_OFFICES, title: "Offices", component: <AdminOfficePage /> },
         { path: RouteNames.ADMIN_SERVICES, title: "Services", component: <AdminServicePage /> },
+        { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
         { path: RouteNames.ADMIN_VACANCIES, title: "Vacancies", component: <AdminVacancyPage /> },
         { path: RouteNames.USERS, title: "Users page", component: <UsersPage /> }
     ]

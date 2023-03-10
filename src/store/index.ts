@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './reducers/authReducer';
+import { candidateReducer } from './reducers/candidateReducer';
 import { countryReducer } from './reducers/countryReducer';
 import { employeeReducer } from './reducers/employeeReducer';
 import { officeReducer } from './reducers/officeReducer';
@@ -9,6 +10,7 @@ import { vacancyReducer } from './reducers/vacancyReducer';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
+    candidate: candidateReducer,
     country: countryReducer,
     employee: employeeReducer,
     office: officeReducer,

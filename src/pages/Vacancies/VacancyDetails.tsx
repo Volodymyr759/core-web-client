@@ -46,7 +46,7 @@ export default function VacancyDetailes(): JSX.Element {
             </Box>
             <Box sx={{ textAlign: 'right' }}>
                 <Button variant="outlined" size="small" onClick={() => onApply({
-                    fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: Number(vacancyId)
+                    id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: Number(vacancyId)
                 })}>Apply</Button>
             </Box>
             {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openServiceForm={true} />}

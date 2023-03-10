@@ -9,7 +9,7 @@ export interface IVacancy {
     previews: number;
     isActive: boolean;
     officeId: number;
-    candidates?: ICandidate[];
+    candidates?: { id: number, fullName: string }[];
     officeDto?: {
         name: string;
     }

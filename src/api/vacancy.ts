@@ -10,7 +10,7 @@ import { OrderType } from '../types/common/orderType';
  * @param search<string> Autocompleted search
  * @param vacancyStatus<VacancyStatus> Means Active / Disabled / All vacancy 'isActive' status
  * @param officeId<string> Choosed office
- * @param sortField<number> Field for sorting
+ * @param sortField<string> Field for sorting
  * @param order<OrderType> Sort direction (Ascending / Descending / None)
  */
 export async function getVacanciesAxios(
@@ -61,7 +61,7 @@ export async function updateVacancyIsActiveStatusAxios(id: number, isActive: boo
 /**
  * Creates a new vacancy
  * @param vacancy<IVacancy> object of type IVacancy
- * @returns<IVacancy> created vacancy
+ * @returns<IVacancy> Created vacancy
  */
 export async function createVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
     return (await axios.post("/vacancy/create", vacancy)).data;
@@ -69,8 +69,8 @@ export async function createVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
 
 /**
  * Updates the existing vacancy
- * @param vacancy<IVacancy> object of type IVacancy
- * @returns<IVacancy> updated vacancy object
+ * @param vacancy<IVacancy> Object of type IVacancy
+ * @returns<IVacancy> Updated vacancy object
  */
 export async function updateVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
     return (await axios.put("/vacancy/update", vacancy)).data;

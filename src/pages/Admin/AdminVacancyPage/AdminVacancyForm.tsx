@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from "yup";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminVacancyFormProps } from "./types";
 import { IVacancy } from "../../../types/vacancy";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from "yup";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
