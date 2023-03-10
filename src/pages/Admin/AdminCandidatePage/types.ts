@@ -1,7 +1,7 @@
 import { ICandidate } from "../../../types/candidate";
 
 export interface AdminCandidateFiltersProps {
-    onAddNew: (candidate: ICandidate) => void;
+    onAddNew: () => void;
 }
 
 export interface AdminCandidateTableProps {
@@ -10,6 +10,5 @@ export interface AdminCandidateTableProps {
 
 export interface AdminCandidateFormProps {
     candidate: ICandidate;
-    closeForm: (candidate: ICandidate) => void;
-    openForm: boolean;
+    closeForm: () => void;
 }

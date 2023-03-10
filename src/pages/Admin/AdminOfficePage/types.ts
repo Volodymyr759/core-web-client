@@ -6,6 +6,5 @@ export interface AdminOfficeTableProps {
 
 export interface AdminOfficeFormProps {
     office: IOffice;
-    closeForm: (office: IOffice) => void;
-    openForm: boolean;
+    closeForm: () => void;
 }

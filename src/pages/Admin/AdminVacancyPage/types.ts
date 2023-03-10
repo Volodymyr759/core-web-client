@@ -6,6 +6,5 @@ export interface AdminVacancyTableProps {
 
 export interface AdminVacancyFormProps {
     vacancy: IVacancy;
-    closeForm: (vacancy: IVacancy) => void;
-    openForm: boolean;
+    closeForm: () => void;
 }

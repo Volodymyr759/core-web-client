@@ -20,7 +20,7 @@ const style = {
     p: 4,
 };
 
-export default function AdminVacancyForm({ vacancy, openForm, closeForm }: AdminVacancyFormProps): JSX.Element {
+export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFormProps): JSX.Element {
     const { offices } = useTypedSelector(state => state.vacancy);
     const { createVacancy, updateVacancy } = useActions();
     const [error, setError] = useState<null | string>(null);
@@ -65,15 +65,13 @@ export default function AdminVacancyForm({ vacancy, openForm, closeForm }: Admin
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeForm(null);
+        closeForm();
     }
-
-    const handleClose = () => closeForm(null);
 
     return (
         <Modal
-            open={openForm}
-            onClose={handleClose}
+            open={true}
+            onClose={closeForm}
         >
             <Box sx={style}>
                 <form onSubmit={handleSubmit(onSubmit)}>

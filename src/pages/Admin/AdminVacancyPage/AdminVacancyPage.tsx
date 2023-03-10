@@ -41,14 +41,14 @@ export default function AdminVacancyPage(): JSX.Element {
                     <Button
                         variant="contained"
                         style={{ marginTop: '15px' }}
-                        onClick={() => onCreateEdit({ id: 0, title: '', description: '', previews: 0, isActive: true, officeId: offices[1].id })}>
+                        onClick={() => setVacancy({ id: 0, title: '', description: '', previews: 0, isActive: true, officeId: offices[1].id })}>
                         + Create New
                     </Button>
                 </Grid>
             </Grid>
 
             <AdminVacancyTable onEdit={onCreateEdit} />
-            {vacancy && <AdminVacancyForm vacancy={vacancy} openForm={true} closeForm={onCreateEdit} />}
+            {vacancy && <AdminVacancyForm vacancy={vacancy} closeForm={() => setVacancy(null)} />}
         </>
     )
 }

@@ -23,7 +23,7 @@ const style = {
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-export default function AdminCandidateForm({ candidate, openForm, closeForm }: AdminCandidateFormProps): JSX.Element {
+export default function AdminCandidateForm({ candidate, closeForm }: AdminCandidateFormProps): JSX.Element {
     const { createCandidate, updateCandidate } = useActions();
     const [error, setError] = useState<null | string>(null);
     const [joinedAtValue, setJoinedAtValue] = useState<Date>(candidate.joinedAt);
@@ -78,15 +78,13 @@ export default function AdminCandidateForm({ candidate, openForm, closeForm }: A
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeForm(null);
+        closeForm();
     }
-
-    const handleClose = () => closeForm(null);
 
     return (
         <Modal
-            open={openForm}
-            onClose={handleClose}
+            open={true}
+            onClose={closeForm}
         >
             <Box sx={style}>
                 <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>

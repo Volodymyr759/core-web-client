@@ -16,7 +16,7 @@ export default function AdminCandidatePage(): JSX.Element {
 
     useEffect(() => {
         getCandidates(candidateSearchResult.pageSize, candidateSearchResult.currentPageNumber, filters, "FullName", OrderType.Ascending)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters, candidateSearchResult.currentPageNumber]);
 
     const onCreateEdit = (candidate: null | ICandidate) => setCandidate(candidate);
@@ -27,9 +27,9 @@ export default function AdminCandidatePage(): JSX.Element {
                 title="Candidates Management"
                 text="Voluptatum deleniti atque."
             />
-            <AdminCandidateFilters onAddNew={onCreateEdit} />
+            <AdminCandidateFilters onAddNew={() => setCandidate({ id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: 0 })} />
             <AdminCandidateTable onEdit={onCreateEdit} />
-            {candidate && <AdminCandidateForm candidate={candidate} openForm={true} closeForm={onCreateEdit} />}
+            {candidate && <AdminCandidateForm candidate={candidate} closeForm={() => setCandidate(null)} />}
         </>
     )
 }

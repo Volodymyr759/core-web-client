@@ -8,7 +8,7 @@ import { ICompanyService } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
-export default function AdminServiceForm({ service, closeForm, openServiceForm }: AdminServiceFormProps): JSX.Element {
+export default function AdminServiceForm({ service, closeForm }: AdminServiceFormProps): JSX.Element {
     const { createService, updateService } = useActions();
     const [error, setError] = useState<null | string>(null);
 
@@ -22,7 +22,7 @@ export default function AdminServiceForm({ service, closeForm, openServiceForm }
             ) {
                 return;
             }
-            if (!open) closeForm(null);
+            if (!open) closeForm();
         };
 
     const validationSchema = Yup.object({
@@ -65,12 +65,12 @@ export default function AdminServiceForm({ service, closeForm, openServiceForm }
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeForm(null);
+        closeForm();
     }
 
     return (
         <SwipeableDrawer
-            open={openServiceForm}
+            open={true}
             anchor='left'
             onClose={toggleDrawer('left', false)}
             onOpen={toggleDrawer('left', true)}

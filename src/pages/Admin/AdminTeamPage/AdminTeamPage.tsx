@@ -27,20 +27,13 @@ export default function AdminTeamPage(): JSX.Element {
             />
             <Grid container justifyContent={'flex-end'} spacing={2} sx={{ margin: '20px 0' }}>
                 <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                    <Button variant="contained" onClick={() => onCreateEdit({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })}>
+                    <Button variant="contained" onClick={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })}>
                         + Create New
                     </Button>
                 </Grid>
             </Grid>
             <AdminEmployeeTable onEdit={onCreateEdit} />
-            {
-                employee &&
-                <AdminEmployeeForm
-                    employee={employee}
-                    closeForm={onCreateEdit}
-                    openForm={true}
-                />
-            }
+            {employee && <AdminEmployeeForm employee={employee} closeForm={() => setEmployee(null)} />}
         </>
     )
 }

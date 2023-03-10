@@ -37,20 +37,13 @@ export default function AdminServicePage(): JSX.Element {
                         label="Show only active" />
                 </Grid>
                 <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                    <Button variant="contained" onClick={() => onCreateEdit({ id: 0, title: '', description: '', imageUrl: '', isActive: true })}>
+                    <Button variant="contained" onClick={() => setService({ id: 0, title: '', description: '', imageUrl: '', isActive: true })}>
                         + Create New
                     </Button>
                 </Grid>
             </Grid>
             <AdminServiceTable onEdit={onCreateEdit} />
-            {
-                service &&
-                <AdminServiceForm
-                    service={service}
-                    closeForm={onCreateEdit}
-                    openServiceForm={true}
-                />
-            }
+            {service && <AdminServiceForm service={service} closeForm={() => setService(null)} />}
         </>
     )
 }

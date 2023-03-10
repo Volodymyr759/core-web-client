@@ -49,7 +49,7 @@ export default function VacancyDetailes(): JSX.Element {
                     id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: Number(vacancyId)
                 })}>Apply</Button>
             </Box>
-            {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openServiceForm={true} />}
+            {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openForm={true} />}
         </>
     )
 }

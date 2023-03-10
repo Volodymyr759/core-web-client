@@ -30,7 +30,7 @@ export default function AdminCandidateFilters({ onAddNew }: AdminCandidateFilter
                 <Button
                     variant="contained"
                     style={{ marginTop: '15px' }}
-                    onClick={() => onAddNew({ id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: 0 })}>
+                    onClick={onAddNew}>
                     + Create New
                 </Button>
             </Grid>

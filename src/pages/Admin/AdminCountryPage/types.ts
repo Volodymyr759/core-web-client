@@ -6,6 +6,5 @@ export interface AdminCountryTableProps {
 
 export interface AdminCountryFormProps {
     country: ICountry;
-    closeForm: (service: ICountry) => void;
-    openForm: boolean;
+    closeForm: () => void;
 }

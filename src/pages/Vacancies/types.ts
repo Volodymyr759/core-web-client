@@ -14,5 +14,5 @@ export interface VacancyCardProps extends DetailedHTMLProps<HTMLAttributes<HTMLD
 export interface VacancyApplyFormProps {
 	candidate: ICandidate;
 	closeForm: (candidate: ICandidate) => void;
-	openServiceForm: boolean;
+	openForm: boolean;
 }

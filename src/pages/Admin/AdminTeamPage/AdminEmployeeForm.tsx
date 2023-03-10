@@ -9,7 +9,7 @@ import { IEmployee } from "../../../types/employee";
 import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
-export default function AdminEmployeeForm({ employee, closeForm, openForm }: AdminEmployeeFormProps): JSX.Element {
+export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployeeFormProps): JSX.Element {
     const { offices } = useTypedSelector(state => state.vacancy);
     const { createEmployee, updateEmployee } = useActions();
     const [error, setError] = useState<null | string>(null);
@@ -21,7 +21,7 @@ export default function AdminEmployeeForm({ employee, closeForm, openForm }: Adm
             ) {
                 return;
             }
-            if (!open) closeForm(null);
+            if (!open) closeForm();
         };
 
     const validationSchema = Yup.object({
@@ -74,12 +74,12 @@ export default function AdminEmployeeForm({ employee, closeForm, openForm }: Adm
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeForm(null);
+        closeForm();
     }
 
     return (
         <SwipeableDrawer
-            open={openForm}
+            open={true}
             anchor='left'
             onClose={toggleDrawer('left', false)}
             onOpen={toggleDrawer('left', true)}

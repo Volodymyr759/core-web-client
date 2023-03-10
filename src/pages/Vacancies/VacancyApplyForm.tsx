@@ -8,7 +8,7 @@ import { createCandidateAxios } from "../../api/candidate";
 import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
-export default function VacancyApplyForm({ candidate, closeForm, openServiceForm }: VacancyApplyFormProps): JSX.Element {
+export default function VacancyApplyForm({ candidate, closeForm, openForm }: VacancyApplyFormProps): JSX.Element {
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -86,7 +86,7 @@ export default function VacancyApplyForm({ candidate, closeForm, openServiceForm
     }
 
     return (
-        <SwipeableDrawer open={openServiceForm} anchor='left'
+        <SwipeableDrawer open={openForm} anchor='left'
             onClose={toggleDrawer('left', false)} onOpen={toggleDrawer('left', true)}
         >
             <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>

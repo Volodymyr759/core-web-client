@@ -28,7 +28,7 @@ export default function AdminOfficePage(): JSX.Element {
             />
             <Grid container justifyContent={'flex-end'} spacing={2} sx={{ margin: '20px 0' }}>
                 <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                    <Button variant="contained" onClick={() => onCreateEdit({
+                    <Button variant="contained" onClick={() => setOffice({
                         id: 0, name: '', description: '', address: '', latitude: 0, longitude: 0, countryId: countrySearchResult.itemList[0].id
                     })}>
                         + Create New
@@ -36,14 +36,7 @@ export default function AdminOfficePage(): JSX.Element {
                 </Grid>
             </Grid>
             <AdminOfficeTable onEdit={onCreateEdit} />
-            {
-                office &&
-                <AdminOfficeForm
-                    office={office}
-                    closeForm={onCreateEdit}
-                    openForm={true}
-                />
-            }
+            {office && <AdminOfficeForm office={office} closeForm={() => setOffice(null)} />}
         </>
     )
 }

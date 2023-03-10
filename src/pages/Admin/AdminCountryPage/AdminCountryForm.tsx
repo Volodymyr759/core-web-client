@@ -8,7 +8,7 @@ import { ICountry } from "../../../types/country";
 import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
-export default function AdminCountryForm({ country, closeForm, openForm }: AdminCountryFormProps): JSX.Element {
+export default function AdminCountryForm({ country, closeForm }: AdminCountryFormProps): JSX.Element {
     const { createCountry, updateCountry } = useActions();
     const [error, setError] = useState<null | string>(null);
 
@@ -19,7 +19,7 @@ export default function AdminCountryForm({ country, closeForm, openForm }: Admin
             ) {
                 return;
             }
-            if (!open) closeForm(null);
+            if (!open) closeForm();
         };
 
     const validationSchema = Yup.object({
@@ -55,12 +55,12 @@ export default function AdminCountryForm({ country, closeForm, openForm }: Admin
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeForm(null);
+        closeForm();
     }
 
     return (
         <SwipeableDrawer
-            open={openForm}
+            open={true}
             anchor='left'
             onClose={toggleDrawer('left', false)}
             onOpen={toggleDrawer('left', true)}

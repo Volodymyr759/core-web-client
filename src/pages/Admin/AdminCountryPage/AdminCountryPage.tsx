@@ -18,20 +18,13 @@ export default function AdminCountryPage(): JSX.Element {
             />
             <Grid container justifyContent={'flex-end'} spacing={2} sx={{ margin: '20px 0' }}>
                 <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                    <Button variant="contained" onClick={() => onCreateEdit({ id: 0, name: '', code: '' })}>
+                    <Button variant="contained" onClick={() => setCountry({ id: 0, name: '', code: '' })}>
                         + Create New
                     </Button>
                 </Grid>
             </Grid>
             <AdminCountryTable onEdit={onCreateEdit} />
-            {
-                country &&
-                <AdminCountryForm
-                    country={country}
-                    closeForm={onCreateEdit}
-                    openForm={true}
-                />
-            }
+            {country && <AdminCountryForm country={country} closeForm={() => setCountry(null)} />}
         </>
     )
 }

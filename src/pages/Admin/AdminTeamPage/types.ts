@@ -6,6 +6,5 @@ export interface AdminEmployeeTableProps {
 
 export interface AdminEmployeeFormProps {
     employee: IEmployee;
-    closeForm: (service: IEmployee) => void;
-    openForm: boolean;
+    closeForm: () => void;
 }

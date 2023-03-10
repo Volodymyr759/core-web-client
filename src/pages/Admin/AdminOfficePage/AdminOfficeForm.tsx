@@ -9,7 +9,7 @@ import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-export default function AdminOfficeForm({ office, closeForm, openForm }: AdminOfficeFormProps): JSX.Element {
+export default function AdminOfficeForm({ office, closeForm }: AdminOfficeFormProps): JSX.Element {
     const { countrySearchResult } = useTypedSelector(state => state.country);
     const { createOffice, updateOffice } = useActions();
     const [error, setError] = useState<null | string>(null);
@@ -23,7 +23,7 @@ export default function AdminOfficeForm({ office, closeForm, openForm }: AdminOf
             ) {
                 return;
             }
-            if (!open) closeForm(null);
+            if (!open) closeForm();
         };
 
     const validationSchema = Yup.object({
@@ -76,12 +76,12 @@ export default function AdminOfficeForm({ office, closeForm, openForm }: AdminOf
     const onCancelHandler = () => {
         setError(null);
         reset();
-        closeForm(null);
+        closeForm();
     }
 
     return (
         <SwipeableDrawer
-            open={openForm}
+            open={true}
             anchor='left'
             onClose={toggleDrawer('left', false)}
             onOpen={toggleDrawer('left', true)}
