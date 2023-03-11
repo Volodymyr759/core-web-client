@@ -45,13 +45,20 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
-                                            <Tooltip title="Show candidates" placement="top">
-                                                <Badge badgeContent={vacancy.candidates?.length} color="primary">
+                                        {
+                                            vacancy.candidates?.length > 0 ?
+                                                <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
+                                                    <Tooltip title="Show candidates" placement="top">
+                                                        <Badge badgeContent={vacancy.candidates?.length} color="primary">
+                                                            {vacancy.title.length > 60 ? vacancy.title.substring(0, 60) + ' ...' : vacancy.title}
+                                                        </Badge>
+                                                    </Tooltip>
+                                                </Typography>
+                                                :
+                                                <Typography gutterBottom variant="body2" component="div" >
                                                     {vacancy.title.length > 60 ? vacancy.title.substring(0, 60) + ' ...' : vacancy.title}
-                                                </Badge>
-                                            </Tooltip>
-                                        </Typography>
+                                                </Typography>
+                                        }
                                     </TableCell>
                                     <TableCell align="center">{vacancy.previews}</TableCell>
                                     <TableCell align="center" >
