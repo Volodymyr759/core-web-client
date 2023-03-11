@@ -36,10 +36,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader>
-                        {['Title', 'Description', 'Previews', 'Is Active?', 'Office', 'Actions'].map((header, index) =>
-                            <TableCell key={index} align="center">{header}</TableCell>)}
-                    </TableHeader>
+                    <TableHeader titles={['Title', 'Description', 'Previews', 'Is Active?', 'Office', 'Actions']} />
                     <TableBody>
                         {vacancySearchResult.itemList.map((vacancy) => {
                             return (

@@ -29,10 +29,7 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader>
-                        {['Name', 'Code', 'Offices', 'Actions'].map((header, index) =>
-                            <TableCell key={index} align="center">{header}</TableCell>)}
-                    </TableHeader>
+                    <TableHeader titles={['Name', 'Code', 'Offices', 'Actions']} />
                     <TableBody>
                         {countrySearchResult.itemList.map((country) => (
                             <TableRow

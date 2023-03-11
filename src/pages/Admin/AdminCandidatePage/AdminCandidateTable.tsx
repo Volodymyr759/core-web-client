@@ -39,10 +39,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader>
-                        {['Full Name', 'Email', 'Phone', 'Notes', 'Dismissed?', 'Joined', 'Vacancy', 'Actions'].map((header, index) =>
-                            <TableCell key={index} align="center">{header}</TableCell>)}
-                    </TableHeader>
+                    <TableHeader titles={['Full Name', 'Email', 'Phone', 'Notes', 'Dismissed?', 'Joined', 'Vacancy', 'Actions']} />
                     <TableBody>
                         {candidateSearchResult.itemList.map((candidate) => (
                             <TableRow key={candidate.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

@@ -33,10 +33,7 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader>
-                        {['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions'].map((header, index) =>
-                            <TableCell key={index} align="center">{header}</TableCell>)}
-                    </TableHeader>
+                    <TableHeader titles={['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions']} />
                     <TableBody>
                         {officeSearchResult.itemList.map((office) => (
                             <TableRow

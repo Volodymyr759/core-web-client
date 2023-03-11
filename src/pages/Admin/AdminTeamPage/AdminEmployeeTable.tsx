@@ -33,10 +33,7 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader>
-                        {['Full Name', 'Email', 'Position', 'Description', 'Avatar Url', 'Office', 'Actions'].map((header, index) =>
-                            <TableCell key={index} align="center">{header}</TableCell>)}
-                    </TableHeader>
+                    <TableHeader titles={['Full Name', 'Email', 'Position', 'Description', 'Avatar Url', 'Office', 'Actions']} />
                     <TableBody>
                         {employeeSearchResult.itemList.map((employee) => (
                             <TableRow

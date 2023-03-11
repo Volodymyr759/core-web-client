@@ -38,10 +38,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader>
-                        {['Title', 'Description', 'Image Url', 'Is Active?', 'Actions'].map((header, index) =>
-                            <TableCell key={index} align="center">{header}</TableCell>)}
-                    </TableHeader>
+                    <TableHeader titles={['Title', 'Description', 'Image Url', 'Is Active?', 'Actions']} />
                     <TableBody>
                         {serviceSearchResult.itemList.map((service) => (
                             <TableRow
