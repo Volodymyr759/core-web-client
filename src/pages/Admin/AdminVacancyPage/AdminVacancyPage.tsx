@@ -17,7 +17,7 @@ export default function AdminVacancyPage(): JSX.Element {
     useEffect(() => {
         getOfficeNameIdDtos();
         getVacanciesTitles(vacancySearchResult.searchCriteria, filters.officeId);
-        getVacancies(10, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
+        getVacancies(5, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
             VacancyStatus.All, filters.officeId, "Title", vacancySearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vacancySearchResult.searchCriteria, filters.officeId, vacancySearchResult.currentPageNumber])
@@ -29,10 +29,7 @@ export default function AdminVacancyPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader
-                title="Vacancies Management"
-                text="Voluptatum deleniti atque."
-            />
+            <PageHeader title="Vacancies Management" text="Voluptatum deleniti atque." />
             <Grid container spacing={2}>
                 <Grid item xs={8}>
                     <VacanciesFilters offices={offices} />

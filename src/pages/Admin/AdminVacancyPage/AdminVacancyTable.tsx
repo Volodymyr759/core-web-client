@@ -36,7 +36,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Title', 'Description', 'Previews', 'Is Active?', 'Office', 'Actions']} />
+                    <TableHeader titles={['Title', 'Previews', 'Is Active?', 'Office', 'Actions']} />
                     <TableBody>
                         {vacancySearchResult.itemList.map((vacancy) => {
                             return (
@@ -46,13 +46,12 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                 >
                                     <TableCell component="th" scope="row">
                                         <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
-                                            <Badge badgeContent={vacancy.candidates?.length} color="primary">
-                                                {vacancy.title.length > 15 ? vacancy.title.substring(0, 15) + ' ...' : vacancy.title}
-                                            </Badge>
+                                            <Tooltip title="Show candidates" placement="top">
+                                                <Badge badgeContent={vacancy.candidates?.length} color="primary">
+                                                    {vacancy.title.length > 60 ? vacancy.title.substring(0, 60) + ' ...' : vacancy.title}
+                                                </Badge>
+                                            </Tooltip>
                                         </Typography>
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        {vacancy.description.length > 30 ? vacancy.description.slice(0, 30).concat('...') : vacancy.description}
                                     </TableCell>
                                     <TableCell align="center">{vacancy.previews}</TableCell>
                                     <TableCell align="center" >

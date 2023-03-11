@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactHtmlParser from 'react-html-parser';
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { ICandidate } from "../../types/candidate";
@@ -37,7 +38,7 @@ export default function VacancyDetailes(): JSX.Element {
                 </Typography>
             </Box>
             <Typography variant="body2" component={'div'}>
-                {currentVacancy.description}
+                {ReactHtmlParser(currentVacancy.description)}
             </Typography>
             <Box sx={{ textAlign: 'left', marginTop: '20px' }}>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

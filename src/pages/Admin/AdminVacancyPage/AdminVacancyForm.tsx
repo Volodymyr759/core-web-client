@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
@@ -13,8 +15,10 @@ const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
+    overflow: 'scroll',
+    maxHeight: '90%',
+    display: 'block',
     transform: 'translate(-50%, -50%)',
-    // width: 400,
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
@@ -24,6 +28,7 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
     const { offices } = useTypedSelector(state => state.vacancy);
     const { createVacancy, updateVacancy } = useActions();
     const [error, setError] = useState<null | string>(null);
+    const [editorValue, setEditorValue] = useState(vacancy.description);
 
     const validationSchema = Yup.object({
         id: Yup.number()
@@ -33,8 +38,7 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
             .min(1, 'Title must be at least 1 character.')
             .max(50, 'The field Title may not be greater than 50 characters.'),
         description: Yup.string()
-            .required()
-            .min(1, 'Description must be at least 1 characters.'),
+            .required('Description must be at least 1 characters.'),
         previews: Yup.number()
             .required(),
         isActive: Yup.boolean()
@@ -58,6 +62,7 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
     })
 
     const onSubmit = async (vacancy: IVacancy): Promise<void> => {
+        vacancy.description = editorValue;
         vacancy.id === 0 ? createVacancy(vacancy) : updateVacancy(vacancy);
         onCancelHandler();
     }
@@ -94,16 +99,22 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
                             />
                         </Grid>
                         <Grid item>
-                            <Controller
-                                name="description"
-                                control={control}
-                                render={({ field }) =>
-                                    <TextField {...field} label="Description"
-                                        fullWidth margin="normal" multiline rows={4} variant='outlined' style={{ height: 'none' }}
-                                        error={Boolean(errors.description)} helperText={errors.description?.message}
-                                    />
-                                }
-                            />
+                            <FormControl>
+                                <Controller
+                                    name="description"
+                                    control={control}
+                                    render={({ field }) =>
+                                        <ReactQuill
+                                            {...field}
+                                            style={{ width: '800px' }}
+                                            theme="snow"
+                                            value={editorValue}
+                                            onChange={setEditorValue}
+                                        />
+                                    }
+                                />
+                                <FormHelperText error={Boolean(errors.description)}>{errors.description?.message}</FormHelperText>
+                            </FormControl>
                         </Grid>
                         <Grid item>
                             <FormControlLabel
