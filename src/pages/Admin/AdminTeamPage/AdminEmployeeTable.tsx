@@ -2,11 +2,12 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IEmployee } from "../../../types/employee";
 import { AdminEmployeeTableProps } from "./types";
-import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
+import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import TablePagination from "../../../components/TablePagination/TablePagination";
+import TableHeader from "../../../components/TableHeader/TableHeader";
 
 export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps): JSX.Element {
     const { employeeSearchResult, error } = useTypedSelector(state => state.employee);
@@ -32,12 +33,10 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            {['Full Name', 'Email', 'Position', 'Description', 'Avatar Url', 'Office', 'Actions'].map((header, index) =>
-                                <TableCell key={index} align="center">{header}</TableCell>)}
-                        </TableRow>
-                    </TableHead>
+                    <TableHeader>
+                        {['Full Name', 'Email', 'Position', 'Description', 'Avatar Url', 'Office', 'Actions'].map((header, index) =>
+                            <TableCell key={index} align="center">{header}</TableCell>)}
+                    </TableHeader>
                     <TableBody>
                         {employeeSearchResult.itemList.map((employee) => (
                             <TableRow

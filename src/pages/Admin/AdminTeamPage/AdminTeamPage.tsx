@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IEmployee } from "../../../types/employee";
-import { Button, Grid } from "@mui/material";
+import { OrderType } from "../../../types/common/orderType";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminEmployeeForm from "./AdminEmployeeForm";
 import AdminEmployeeTable from "./AdminEmployeeTable";
-import { OrderType } from "../../../types/common/orderType";
+import CreateNewButton from "../../../components/Button/CreateNewButton";
 
 export default function AdminTeamPage(): JSX.Element {
     const { employeeSearchResult } = useTypedSelector(state => state.employee);
@@ -25,13 +25,10 @@ export default function AdminTeamPage(): JSX.Element {
     return (
         <>
             <PageHeader title="Team Management" text="Voluptatum deleniti atque." />
-            <Grid container justifyContent={'flex-end'} spacing={2} sx={{ margin: '20px 0' }}>
-                <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                    <Button variant="contained" onClick={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })}>
-                        + Create New
-                    </Button>
-                </Grid>
-            </Grid>
+            <CreateNewButton onAction={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })}
+            >
+                + Create New
+            </CreateNewButton>
             <AdminEmployeeTable onEdit={onCreateEdit} />
             {employee && <AdminEmployeeForm employee={employee} closeForm={() => setEmployee(null)} />}
         </>

@@ -1,11 +1,9 @@
 import { ChangeEvent } from "react";
-import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
-
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { CandidateStatus } from "../../../types/candidate";
 import { AdminCandidateFiltersProps } from "./types";
-
+import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material";
 
 export default function AdminCandidateFilters({ onAddNew }: AdminCandidateFiltersProps) {
     const { filters } = useTypedSelector(state => state.candidate);

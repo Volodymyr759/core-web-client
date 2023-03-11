@@ -11,3 +11,8 @@ export interface LoadMoreButtonProps extends DetailedHTMLProps<HTMLAttributes<HT
 	onClickHandler: () => void;
 	children: ReactNode;
 }
+
+export interface CreateNewButtonProps {
+	onAction: () => void;
+	children: ReactNode;
+}

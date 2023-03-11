@@ -1,12 +1,13 @@
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminOfficeTableProps } from "./types";
-import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
+import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import { IOffice } from "../../../types/office";
 import TablePagination from "../../../components/TablePagination/TablePagination";
+import TableHeader from "../../../components/TableHeader/TableHeader";
 
 export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX.Element {
     const { officeSearchResult, error } = useTypedSelector(state => state.office);
@@ -32,12 +33,10 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            {['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions'].map((header, index) =>
-                                <TableCell key={index} align="center">{header}</TableCell>)}
-                        </TableRow>
-                    </TableHead>
+                    <TableHeader>
+                        {['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions'].map((header, index) =>
+                            <TableCell key={index} align="center">{header}</TableCell>)}
+                    </TableHeader>
                     <TableBody>
                         {officeSearchResult.itemList.map((office) => (
                             <TableRow

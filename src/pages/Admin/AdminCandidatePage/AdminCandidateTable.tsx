@@ -3,10 +3,11 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { ICandidate } from "../../../types/candidate";
 import { AdminCandidateTableProps } from "./types";
-import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
+import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TablePagination from "../../../components/TablePagination/TablePagination";
+import TableHeader from "../../../components/TableHeader/TableHeader";
 
 export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps): JSX.Element {
     const { candidateSearchResult } = useTypedSelector(state => state.candidate);
@@ -38,12 +39,10 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            {['Full Name', 'Email', 'Phone', 'Notes', 'Dismissed?', 'Joined', 'Vacancy', 'Actions'].map((header, index) =>
-                                <TableCell key={index} align="center">{header}</TableCell>)}
-                        </TableRow>
-                    </TableHead>
+                    <TableHeader>
+                        {['Full Name', 'Email', 'Phone', 'Notes', 'Dismissed?', 'Joined', 'Vacancy', 'Actions'].map((header, index) =>
+                            <TableCell key={index} align="center">{header}</TableCell>)}
+                    </TableHeader>
                     <TableBody>
                         {candidateSearchResult.itemList.map((candidate) => (
                             <TableRow key={candidate.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
