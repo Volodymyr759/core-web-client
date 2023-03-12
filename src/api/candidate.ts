@@ -22,7 +22,7 @@ export async function getCandidatesAxios(
     sortField: string,
     order: OrderType): Promise<ISearchResult<ICandidate>> {
     return (
-        await axios.get(`/candidate/get?limit=${limit}&page=${page}&search=${search}&candidateStatus=${candidateStatus}&vacancyId=${vacancyId === 0 ? '' : vacancyId}&sortField=${sortField}&order=${order}`)).data;
+        await axios.get(`/candidate/get?limit=${limit}&page=${page}&search=${search}&candidateStatus=${candidateStatus}&vacancyId=${vacancyId == null ? '' : vacancyId}&sortField=${sortField}&order=${order}`)).data;
 }
 
 /**

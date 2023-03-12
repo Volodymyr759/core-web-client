@@ -51,7 +51,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                     <Switch checked={candidate.isDismissed} onClick={() => onChangeIsDismissed(candidate.id)} />
                                 </TableCell>
                                 <TableCell align="left">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
-                                <TableCell align="left">{candidate.vacancyDto?.title.slice(0, 50).concat('...')}</TableCell>
+                                <TableCell align="left">{candidate.vacancyDto?.title.length > 50 ? candidate.vacancyDto?.title.slice(0, 50).concat('...') : candidate.vacancyDto?.title}</TableCell>
                                 <TableCell align="center">
                                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                                         <Tooltip title="Edit Company Service" placement="top">

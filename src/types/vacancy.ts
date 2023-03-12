@@ -8,7 +8,7 @@ export interface IVacancy {
     previews: number;
     isActive: boolean;
     officeId: number;
-    candidates?: { id: number, fullName: string }[];
+    candidates?: { id: number, fullName: string, isDismissed: boolean }[];
     officeDto?: {
         name: string;
     }

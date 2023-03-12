@@ -48,8 +48,8 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                         {
                                             vacancy.candidates?.length > 0 ?
                                                 <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
-                                                    <Tooltip title="Show candidates" placement="top">
-                                                        <Badge badgeContent={vacancy.candidates?.length} color="primary">
+                                                    <Tooltip title="Show candidates (not dismissed)" placement="top">
+                                                        <Badge badgeContent={vacancy.candidates?.filter((c) => c.isDismissed === false).length} color="primary">
                                                             {vacancy.title.length > 60 ? vacancy.title.substring(0, 60) + ' ...' : vacancy.title}
                                                         </Badge>
                                                     </Tooltip>

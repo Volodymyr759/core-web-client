@@ -13,7 +13,7 @@ const initialState: CandidateState = {
     },
     filters: {
         active: CandidateStatus.All,
-        vacancyId: 0,
+        vacancyId: null,
         searchInFullName: ""
     },
     loading: true,
