@@ -1,11 +1,10 @@
-import { Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IVacancy, VacancyStatus } from "../../../types/vacancy";
-import VacanciesFilters from "../../Vacancies/VacanciesFilters";
+import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import PageHeader from "../../../components/PageHeader/PageHeader";
+import AdminVacancyFilters from "./AdminVacancyFilters";
 import AdminVacancyForm from "./AdminVacancyForm";
 import AdminVacancyTable from "./AdminVacancyTable";
 
@@ -29,21 +28,8 @@ export default function AdminVacancyPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Vacancies Management" text="Voluptatum deleniti atque." />
-            <Grid container spacing={2}>
-                <Grid item xs={8}>
-                    <VacanciesFilters offices={offices} />
-                </Grid>
-                <Grid item display={"flex"} alignItems={"center"} justifyContent="center" xs={4}>
-                    <Button
-                        variant="contained"
-                        style={{ marginTop: '15px' }}
-                        onClick={() => setVacancy({ id: 0, title: '', description: '', previews: 0, isActive: true, officeId: offices[1].id })}>
-                        + Create New
-                    </Button>
-                </Grid>
-            </Grid>
-
+            <PageHeader title="Vacancies Management" />
+            <AdminVacancyFilters onAddNew={() => setVacancy({ id: 0, title: '', description: '', previews: 0, isActive: true, officeId: offices[1].id })} />
             <AdminVacancyTable onEdit={onCreateEdit} />
             {vacancy && <AdminVacancyForm vacancy={vacancy} closeForm={() => setVacancy(null)} />}
         </>

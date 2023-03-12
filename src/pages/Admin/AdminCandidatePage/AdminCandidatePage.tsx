@@ -22,7 +22,7 @@ export default function AdminCandidatePage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Candidates Management" text="Voluptatum deleniti atque." />
+            <PageHeader title="Candidates Management" />
             <AdminCandidateFilters onAddNew={() => setCandidate({ id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: 0 })} />
             <AdminCandidateTable onEdit={onCreateEdit} />
             {candidate && <AdminCandidateForm candidate={candidate} closeForm={() => setCandidate(null)} />}

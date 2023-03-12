@@ -1,9 +1,10 @@
-import { ChangeEvent } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { CompanyServiceStatus } from "../../../types/companyService"
 import { AdminServiceFiltersProps } from "./types";
-import { Button, Checkbox, FormControlLabel, Grid } from "@mui/material"
+import { Grid } from "@mui/material"
+import CheckBoxFilter from "../../../components/FiltersArea/CheckBoxFilter/CheckBoxFilter";
+import CreateNewButton from "../../../components/FiltersArea/CreateNewButton/CreateNewButton";
 
 export default function AdminServiceFilters({ onAddNew }: AdminServiceFiltersProps): JSX.Element {
     const { filters } = useTypedSelector(state => state.service);
@@ -14,21 +15,9 @@ export default function AdminServiceFilters({ onAddNew }: AdminServiceFiltersPro
     }
 
     return (
-        <Grid container spacing={2} sx={{ margin: '20px 0' }}>
-            <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'left' }}>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            onChange={(event: ChangeEvent<HTMLInputElement>, checked: boolean) => activeServicesFilterHandler(checked)}
-                            checked={filters.active === CompanyServiceStatus.Active ? true : false}
-                        />}
-                    label="Show only active" />
-            </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12} sx={{ textAlign: 'right' }}>
-                <Button variant="contained" onClick={onAddNew}>
-                    + Create New
-                </Button>
-            </Grid>
+        <Grid container spacing={2} direction='row' justifyContent={'space-between'} alignItems={'center'}>
+            <CheckBoxFilter label="Show only active" onCheck={activeServicesFilterHandler} isChecked={filters.active === CompanyServiceStatus.Active ? true : false} />
+            <CreateNewButton onAction={onAddNew}>+ Create New</CreateNewButton>
         </Grid>
     )
 }

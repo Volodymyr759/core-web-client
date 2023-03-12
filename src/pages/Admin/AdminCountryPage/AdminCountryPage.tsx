@@ -6,7 +6,7 @@ import { ICountry } from "../../../types/country";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminCountryForm from "./AdminCountryForm";
 import AdminCountryTable from "./AdminCountryTable";
-import CreateNewButton from "../../../components/Button/CreateNewButton";
+import AdminCountryFilters from "./AdminCountryFilters";
 
 export default function AdminCountryPage(): JSX.Element {
     const { countrySearchResult } = useTypedSelector(state => state.country);
@@ -22,8 +22,8 @@ export default function AdminCountryPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Countries Management" text="Voluptatum deleniti atque." />
-            <CreateNewButton onAction={() => setCountry({ id: 0, name: '', code: '' })}>+ Create New</CreateNewButton>
+            <PageHeader title="Countries Management" />
+            <AdminCountryFilters onAddNew={() => setCountry({ id: 0, name: '', code: '' })} />
             <AdminCountryTable onEdit={onCreateEdit} />
             {country && <AdminCountryForm country={country} closeForm={() => setCountry(null)} />}
         </>

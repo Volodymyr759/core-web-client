@@ -8,3 +8,7 @@ export interface AdminCountryFormProps {
     country: ICountry;
     closeForm: () => void;
 }
+
+export interface AdminCountryFiltersProps {
+    onAddNew: () => void;
+}

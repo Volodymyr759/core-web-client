@@ -6,7 +6,7 @@ import { OrderType } from "../../../types/common/orderType";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminEmployeeForm from "./AdminEmployeeForm";
 import AdminEmployeeTable from "./AdminEmployeeTable";
-import CreateNewButton from "../../../components/Button/CreateNewButton";
+import AdminTeamFilters from "./AdminTeamFilters";
 
 export default function AdminTeamPage(): JSX.Element {
     const { employeeSearchResult } = useTypedSelector(state => state.employee);
@@ -24,11 +24,8 @@ export default function AdminTeamPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Team Management" text="Voluptatum deleniti atque." />
-            <CreateNewButton onAction={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })}
-            >
-                + Create New
-            </CreateNewButton>
+            <PageHeader title="Team Management" />
+            <AdminTeamFilters onAddNew={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })} />
             <AdminEmployeeTable onEdit={onCreateEdit} />
             {employee && <AdminEmployeeForm employee={employee} closeForm={() => setEmployee(null)} />}
         </>

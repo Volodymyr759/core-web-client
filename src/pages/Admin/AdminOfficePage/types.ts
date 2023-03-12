@@ -8,3 +8,7 @@ export interface AdminOfficeFormProps {
     office: IOffice;
     closeForm: () => void;
 }
+
+export interface AdminOfficeFiltersProps {
+    onAddNew: () => void;
+}

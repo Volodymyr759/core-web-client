@@ -1,4 +1,4 @@
-export interface Props {
-	title: string;
-    text: string;
+export interface PageHeaderProps {
+    title: string;
+    text?: string;
 }

@@ -1,15 +1,15 @@
-import { Typography } from "@mui/material";
-import { Props } from './types';
+import { Grid, Typography } from "@mui/material";
+import { PageHeaderProps } from './types';
 
-export default function PageHeader({ title, text }: Props): JSX.Element {
+export default function PageHeader({ title, text }: PageHeaderProps): JSX.Element {
     return (
-        <>
-            <Typography variant="h4" component={'p'} sx={{ padding: '20px', fontWeight: 600, textAlign: 'center' }}>
-                {title}
-            </Typography>
-            <Typography variant="body2" component={'p'} sx={{ textAlign: 'center' }}>
-                {text}
-            </Typography>
-        </>
+        <Grid container spacing={2} direction='row' justifyContent={'center'}>
+            <Grid item>
+                <Typography variant="h4" component={'p'} sx={{ padding: '20px', fontWeight: 600, textAlign: 'center' }}>
+                    {title}
+                </Typography>
+                {text && <Typography variant="body2" component={'p'} sx={{ textAlign: 'center' }}>{text}</Typography>}
+            </Grid>
+        </Grid>
     )
 };

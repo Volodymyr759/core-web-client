@@ -35,7 +35,7 @@ export const candidateReducer = (state: CandidateState = initialState, action: C
         case CandidateActionTypes.SET_CANDIDATE_VACANCY_FILTER:
             return { ...state, filters: { ...state.filters, vacancyId: action.payload } };
         case CandidateActionTypes.SET_CANDIDATE_SEARCH_CRITERIA:
-            return { ...state, candidateSearchResult: { ...state.candidateSearchResult, searchCriteria: action.payload } };
+            return { ...state, filters: { ...state.filters, searchInFullName: action.payload } };
         case CandidateActionTypes.UPDATE_CANDIDATE_ISDISMISSED_STATUS:
             return { ...state, candidateSearchResult: { ...state.candidateSearchResult, itemList: updateCandidate(state, action.payload) } }
         case CandidateActionTypes.CREATE_CANDIDATE:

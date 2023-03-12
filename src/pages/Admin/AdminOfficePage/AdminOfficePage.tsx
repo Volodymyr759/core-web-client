@@ -6,7 +6,7 @@ import { OrderType } from "../../../types/common/orderType";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminOfficeForm from "./AdminOfficeForm";
 import AdminOfficeTable from "./AdminOfficeTable";
-import CreateNewButton from "../../../components/Button/CreateNewButton";
+import AdminOfficeFilters from "./AdminOfficeFilters";
 
 export default function AdminOfficePage(): JSX.Element {
     const { officeSearchResult } = useTypedSelector(state => state.office);
@@ -28,11 +28,12 @@ export default function AdminOfficePage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Offices Management" text="Voluptatum deleniti atque." />
-            <CreateNewButton onAction={() => setOffice({ id: 0, name: '', description: '', address: '', latitude: 0, longitude: 0, countryId: countrySearchResult.itemList[0].id })}
+            <PageHeader title="Offices Management" />
+            {/* <CreateNewButton onAction={() => setOffice({ id: 0, name: '', description: '', address: '', latitude: 0, longitude: 0, countryId: countrySearchResult.itemList[0].id })}
             >
                 + Create New
-            </CreateNewButton>
+            </CreateNewButton> */}
+            <AdminOfficeFilters onAddNew={() => setOffice({ id: 0, name: '', description: '', address: '', latitude: 0, longitude: 0, countryId: countrySearchResult.itemList[0].id })} />
             <AdminOfficeTable onEdit={onCreateEdit} />
             {office && <AdminOfficeForm office={office} closeForm={() => setOffice(null)} />}
         </>

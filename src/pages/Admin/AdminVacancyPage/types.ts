@@ -8,3 +8,7 @@ export interface AdminVacancyFormProps {
     vacancy: IVacancy;
     closeForm: () => void;
 }
+
+export interface AdminVacancyFiltersProps {
+    onAddNew: () => void;
+}

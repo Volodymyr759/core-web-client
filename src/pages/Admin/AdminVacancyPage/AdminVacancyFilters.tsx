@@ -1,18 +1,14 @@
-import { useEffect } from "react";
-import { useActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Grid } from "@mui/material";
-import SelectItemsFilter from "../../components/FiltersArea/SelectItemFilter/SelectItemFilter";
-import AutocompleteFilter from "../../components/FiltersArea/AutocompleteFilter/AutocompleteFilter";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { AdminVacancyFiltersProps } from "./types";
+import AutocompleteFilter from "../../../components/FiltersArea/AutocompleteFilter/AutocompleteFilter";
+import CreateNewButton from "../../../components/FiltersArea/CreateNewButton/CreateNewButton";
+import SelectItemsFilter from "../../../components/FiltersArea/SelectItemFilter/SelectItemFilter";
 
-export default function VacanciesFilters(): JSX.Element {
-    const { getVacanciesTitles, setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
+export default function AdminVacancyFilters({ onAddNew }: AdminVacancyFiltersProps): JSX.Element {
     const { filters, offices, titles } = useTypedSelector(state => state.vacancy);
-
-    useEffect(() => {
-        getVacanciesTitles("", filters.officeId);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters.officeId])
+    const { setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
 
     const onSelectChanged = (newValue: string) => {
         setVacancyPage(1);
@@ -34,7 +30,7 @@ export default function VacanciesFilters(): JSX.Element {
                 value={filters.officeId}
             />
             <AutocompleteFilter label="Search by title" options={titles} onSearch={searchTitleChanged} />
+            <CreateNewButton onAction={onAddNew}>+ New Vacancy</CreateNewButton>
         </Grid>
     )
 }
-

@@ -8,3 +8,7 @@ export interface AdminEmployeeFormProps {
     employee: IEmployee;
     closeForm: () => void;
 }
+
+export interface AdminTeamFiltersProps {
+    onAddNew: () => void;
+}

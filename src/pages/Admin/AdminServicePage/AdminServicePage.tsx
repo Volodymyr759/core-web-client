@@ -22,7 +22,7 @@ export default function AdminServicePage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Services Management" text="Voluptatum deleniti atque." />
+            <PageHeader title="Services Management" />
             <AdminServiceFilters onAddNew={() => setService({ id: 0, title: '', description: '', imageUrl: '', isActive: true })} />
             <AdminServiceTable onEdit={onCreateEdit} />
             {service && <AdminServiceForm service={service} closeForm={() => setService(null)} />}

@@ -9,8 +9,7 @@ import VacanciesFilters from "./VacanciesFilters";
 import VacanciesList from "./VacanciesList";
 
 export default function VacanciesPage(): JSX.Element {
-    const { errorFilters, errorVacancies, loadingFilters, loadingVacancies,
-        offices, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
+    const { errorFilters, errorVacancies, loadingFilters, loadingVacancies, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
     const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies, setVacancyPage, loadMoreVacancies } = useActions();
 
     useEffect(() => {
@@ -32,11 +31,8 @@ export default function VacanciesPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader
-                title="OUR VACANCIES"
-                text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate."
-            />
-            <VacanciesFilters offices={offices} />
+            <PageHeader title="OUR VACANCIES" />
+            <VacanciesFilters />
             {loadingFilters && <Spinner />}
             <VacanciesList />
             {loadingVacancies && <Spinner />}
