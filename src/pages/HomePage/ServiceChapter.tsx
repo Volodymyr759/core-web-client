@@ -7,7 +7,7 @@ import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";
 import { OrderType } from "../../types/common/orderType";
 import { CompanyServiceStatus } from "../../types/companyService";
-import ButtonCentered from "../../components/Button/ButtonCentered";
+import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import { useNavigate } from "react-router-dom";
 import { RouteNames } from "../../routing";
 
@@ -31,9 +31,9 @@ export default function ServiceChapter(): JSX.Element {
             />
             <ServicesList services={serviceSearchResult.itemList} />
             {loading && <Spinner />}
-            <ButtonCentered isDisabled={false} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
+            <LoadMoreButton isDisabled={false} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
                 See All
-            </ButtonCentered>
+            </LoadMoreButton>
         </>
     )
 }

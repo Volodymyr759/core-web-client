@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
-import MainAppBar from '../MainAppBar/MainAppBar';
-import AdminAppBar from '../AdminAppBar/AdminAppBar';
+import MainAppBar from '../AppBars/MainAppBar/MainAppBar';
+import AdminAppBar from '../AppBars/AdminAppBar/AdminAppBar';
 import Footer from '../Footer/Footer';
 import { LayoutProps } from './types';
 import './styles.css';

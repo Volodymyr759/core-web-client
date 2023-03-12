@@ -6,7 +6,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import EmployeesList from "../../components/EmployeeList/EmployeesList";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
-import ButtonCentered from "../../components/Button/ButtonCentered";
+import LoadMoreButton from "../../components/Button/LoadMoreButton";
 
 export default function TeamPage(): JSX.Element {
     const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
@@ -32,12 +32,12 @@ export default function TeamPage(): JSX.Element {
             />
             <EmployeesList employees={employeeSearchResult.itemList} />
             {loading && <Spinner />}
-            <ButtonCentered
+            <LoadMoreButton
                 onClickHandler={loadMoreHandler}
                 isDisabled={employeeSearchResult.currentPageNumber * employeeSearchResult.pageSize >= employeeSearchResult.totalItemCount}
             >
                 {loading ? 'Loading...' : 'Load more'}
-            </ButtonCentered>
+            </LoadMoreButton>
         </>
     )
 }

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import ButtonCentered from "../../components/Button/ButtonCentered";
+import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Spinner from "../../components/Spinner/Spinner";
@@ -36,12 +36,12 @@ export default function VacanciesPage(): JSX.Element {
             {loadingFilters && <Spinner />}
             <VacanciesList />
             {loadingVacancies && <Spinner />}
-            <ButtonCentered
+            <LoadMoreButton
                 onClickHandler={loadMoreHandler}
                 isDisabled={vacancySearchResult.currentPageNumber * vacancySearchResult.pageSize >= vacancySearchResult.totalItemCount}
             >
                 {loadingVacancies ? 'Loading...' : 'Load more'}
-            </ButtonCentered>
+            </LoadMoreButton>
         </>
     )
 }

@@ -3,15 +3,15 @@ import { AppBar, Avatar, Box, Button, Container, Toolbar, Tooltip, IconButton, M
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useActions } from '../../hooks/useActions';
-import { IRoute, RouteNames } from '../../routing';
-import AboutPage from '../../pages/AboutPage/AboutPage';
-import VacanciesPage from '../../pages/Vacancies/VacanciesPage';
-import ContactPage from '../../pages/ContactPage/ContactPage';
-import HomePage from '../../pages/HomePage/HomePage';
-import ServicesPage from '../../pages/CompanyServices/ServicesPage';
-import TeamPage from '../../pages/TeamPage/TeamPage';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useActions } from '../../../hooks/useActions';
+import { IRoute, RouteNames } from '../../../routing';
+import AboutPage from '../../../pages/AboutPage/AboutPage';
+import VacanciesPage from '../../../pages/Vacancies/VacanciesPage';
+import ContactPage from '../../../pages/ContactPage/ContactPage';
+import HomePage from '../../../pages/HomePage/HomePage';
+import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
+import TeamPage from '../../../pages/TeamPage/TeamPage';
 
 const settings: IRoute[] = [
     { path: RouteNames.HOME, title: "Home", component: <HomePage /> },

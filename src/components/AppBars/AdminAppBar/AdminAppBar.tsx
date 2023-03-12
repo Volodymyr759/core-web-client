@@ -1,13 +1,13 @@
 import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { IRoute, RouteNames } from "../../routing";
-import AdminCandidatePage from "../../pages/Admin/AdminCandidatePage/AdminCandidatePage";
-import AdminCountryPage from "../../pages/Admin/AdminCountryPage/AdminCountryPage";
-import AdminServicePage from "../../pages/Admin/AdminServicePage/AdminServicePage";
-import AdminOfficePage from "../../pages/Admin/AdminOfficePage/AdminOfficePage";
-import AdminTeamPage from "../../pages/Admin/AdminTeamPage/AdminTeamPage";
-import AdminVacancyPage from "../../pages/Admin/AdminVacancyPage/AdminVacancyPage";
-import UsersPage from "../../pages/Admin/AdminUserPage/UsersPage";
+import { IRoute, RouteNames } from "../../../routing";
+import AdminCandidatePage from "../../../pages/Admin/AdminCandidatePage/AdminCandidatePage";
+import AdminCountryPage from "../../../pages/Admin/AdminCountryPage/AdminCountryPage";
+import AdminServicePage from "../../../pages/Admin/AdminServicePage/AdminServicePage";
+import AdminOfficePage from "../../../pages/Admin/AdminOfficePage/AdminOfficePage";
+import AdminTeamPage from "../../../pages/Admin/AdminTeamPage/AdminTeamPage";
+import AdminVacancyPage from "../../../pages/Admin/AdminVacancyPage/AdminVacancyPage";
+import UsersPage from "../../../pages/Admin/AdminUserPage/UsersPage";
 
 const adminMenuLinks: IRoute[] = [
     { path: RouteNames.ADMIN_COUNTRIES, title: "Countries", component: <AdminCountryPage /> },

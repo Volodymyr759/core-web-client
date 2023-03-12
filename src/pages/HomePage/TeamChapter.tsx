@@ -5,7 +5,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Spinner from "../../components/Spinner/Spinner";
 import { OrderType } from "../../types/common/orderType";
-import ButtonCentered from "../../components/Button/ButtonCentered";
+import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import { useNavigate } from "react-router-dom";
 import { RouteNames } from "../../routing";
 import EmployeesList from "../../components/EmployeeList/EmployeesList";
@@ -30,9 +30,9 @@ export default function TeamChapter(): JSX.Element {
             />
             <EmployeesList employees={employeeSearchResult.itemList} />
             {loading && <Spinner />}
-            <ButtonCentered isDisabled={false} onClickHandler={() => { navigate(RouteNames.TEAM); window.scroll(0, 0) }} >
+            <LoadMoreButton isDisabled={false} onClickHandler={() => { navigate(RouteNames.TEAM); window.scroll(0, 0) }} >
                 See All
-            </ButtonCentered>
+            </LoadMoreButton>
         </>
     )
 }

@@ -15,16 +15,6 @@
     cursor: pointer;
   }
   
-  .primary {
-    /* PS primary color */
-    background-color: #f93a73;
-  }
-  
-  .dark {
-    /* PS secondary color */
-    background-color: #343f4d;
-  }
-  
   @media (max-width: 768px) {
     .btn {
       width: 120px;

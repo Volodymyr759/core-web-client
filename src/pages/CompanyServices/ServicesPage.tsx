@@ -3,7 +3,7 @@ import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { OrderType } from "../../types/common/orderType";
 import { CompanyServiceStatus } from "../../types/companyService";
-import ButtonCentered from "../../components/Button/ButtonCentered";
+import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ServicesList from "../../components/ServiceList/ServicesList";
@@ -29,16 +29,16 @@ export default function ServicesPage(): JSX.Element {
         <>
             <PageHeader
                 title="OUR SERVICES"
-                text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
+                text="Voluptatum deleniti atque corrupti quos dolores et quas molestias..."
             />
             <ServicesList services={serviceSearchResult.itemList} />
             {loading && <Spinner />}
-            <ButtonCentered
+            <LoadMoreButton
                 onClickHandler={loadMoreHandler}
                 isDisabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}
             >
                 {loading ? 'Loading...' : 'Load more'}
-            </ButtonCentered>
+            </LoadMoreButton>
         </>
     )
 }
