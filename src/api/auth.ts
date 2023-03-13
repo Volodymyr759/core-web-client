@@ -16,3 +16,7 @@ export async function registerAxios(registerDto: IRegisterDto): Promise<IRegiste
 export async function refreshTokenAxios(accessToken: string, refreshToken: string): Promise<IAuth> {
     return (await axios.post<IAuth>("/account/refreshtoken", { accessToken, refreshToken })).data;
 }
+
+export async function confirmEmailAxios(code: string, email: string) {
+    await axios.get(`/account/confirmemail?code=${code}&email=${email}`);
+}

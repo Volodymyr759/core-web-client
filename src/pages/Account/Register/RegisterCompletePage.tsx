@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 import PageHeader from "../../../components/PageHeader/PageHeader"
 
 export default function RegisterCompletePage(): JSX.Element {

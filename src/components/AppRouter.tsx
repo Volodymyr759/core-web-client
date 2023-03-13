@@ -22,6 +22,7 @@ import VacanciesPage from '../pages/Vacancies/VacanciesPage';
 import VacancyDetailes from '../pages/Vacancies/VacancyDetails';
 import AdminLayout from './Layouts/AdminLayout';
 import PublicLayout from './Layouts/PublicLayout';
+import EmailConfirmPage from '../pages/Account/EmailConfirm/EmailConfirmPage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -36,6 +37,7 @@ export default function AppRouter() {
         { path: RouteNames.LOGIN, title: "Sign In", component: <LoginPage /> },
         { path: RouteNames.REGISTER, title: "Sign Up", component: <RegisterPage /> },
         { path: RouteNames.REGISTER_COMPLETE, title: "Registration Complete", component: <RegisterCompletePage /> },
+        { path: RouteNames.EMAIL_CONFIRM, title: "Email confirmation page", component: <EmailConfirmPage /> },
         { path: "*", title: "Error: wrong route!", component: <ErrorPage status='403' message='Access denied, try login to continue.' /> }
     ];
 

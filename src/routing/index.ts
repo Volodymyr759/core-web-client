@@ -16,6 +16,7 @@ export enum RouteNames {
     LOGIN = '/login',
     REGISTER = '/register',
     REGISTER_COMPLETE = '/register-complete',
+    EMAIL_CONFIRM = '/email-confirm',
     USERS = '/users',
     ADMIN_CANDIDATES = '/admin/candidates',
     ADMIN_COUNTRIES = '/admin/countries',

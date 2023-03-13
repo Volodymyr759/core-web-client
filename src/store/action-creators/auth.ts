@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { logoutAxios } from "../../api/auth";
-import { AuthAction, AuthActionTypes, IAuth, ILoginDto } from "../../types/auth";
+import { AuthAction, AuthActionTypes, IAuth } from "../../types/auth";
 
 export const login = (authModel: IAuth) => {
     return async (dispatch: Dispatch<AuthAction>) => {
