@@ -1,20 +1,10 @@
 import { Dispatch } from "redux";
-import { loginAxios, logoutAxios } from "../../api/auth";
-import { AuthAction, AuthActionTypes, ILoginDto } from "../../types/auth";
+import { logoutAxios } from "../../api/auth";
+import { AuthAction, AuthActionTypes, IAuth, ILoginDto } from "../../types/auth";
 
-export const login = (loginDto: ILoginDto) => {
+export const login = (authModel: IAuth) => {
     return async (dispatch: Dispatch<AuthAction>) => {
-        try {
-            dispatch({ type: AuthActionTypes.SET_AUTH_LOADING, payload: true });
-            dispatch({ type: AuthActionTypes.SET_AUTH_ERROR, payload: null });
-            const authModel = await loginAxios(loginDto);
-            localStorage.setItem("auth", JSON.stringify(authModel));
-            dispatch({ type: AuthActionTypes.LOGIN, payload: authModel });
-        } catch (error) {
-            dispatch({ type: AuthActionTypes.SET_AUTH_ERROR, payload: error.message || 'Unknown error.' }); // error.message comes from axios middleware
-        } finally {
-            dispatch({ type: AuthActionTypes.SET_AUTH_LOADING, payload: false });
-        }
+        dispatch({ type: AuthActionTypes.LOGIN, payload: authModel });
     }
 }
 

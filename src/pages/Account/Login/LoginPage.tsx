@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import { RouteNames } from "../../routing";
+import PageHeader from "../../../components/PageHeader/PageHeader";
+import { RouteNames } from "../../../routing";
 import LoginForm from "./LoginForm";
 
 export default function LoginPage(): JSX.Element {

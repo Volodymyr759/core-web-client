@@ -13,9 +13,9 @@ import ServicesPage from '../pages/CompanyServices/ServicesPage';
 import ContactPage from '../pages/ContactPage/ContactPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import HomePage from '../pages/HomePage/HomePage';
-import LoginPage from '../pages/Login/LoginPage';
-import RegisterCompletePage from '../pages/Register/RegisterCompletePage';
-import RegisterPage from '../pages/Register/RegisterPage';
+import LoginPage from '../pages/Account/Login/LoginPage';
+import RegisterCompletePage from '../pages/Account/Register/RegisterCompletePage';
+import RegisterPage from '../pages/Account/Register/RegisterPage';
 import TeamPage from '../pages/TeamPage/TeamPage';
 import UsersPage from '../pages/Admin/AdminUserPage/UsersPage';
 import VacanciesPage from '../pages/Vacancies/VacanciesPage';
@@ -36,7 +36,7 @@ export default function AppRouter() {
         { path: RouteNames.LOGIN, title: "Sign In", component: <LoginPage /> },
         { path: RouteNames.REGISTER, title: "Sign Up", component: <RegisterPage /> },
         { path: RouteNames.REGISTER_COMPLETE, title: "Registration Complete", component: <RegisterCompletePage /> },
-        { path: "*", title: "Error: wrong route!", component: <ErrorPage status='403' message='Access denied, try to login for continue.' /> }
+        { path: "*", title: "Error: wrong route!", component: <ErrorPage status='403' message='Access denied, try login to continue.' /> }
     ];
 
     const registeredRoleRoutes: IRoute[] = [

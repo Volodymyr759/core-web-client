@@ -3,11 +3,11 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import { Button, TextField } from "@mui/material";
-import { registerAxios } from "../../api/auth";
+import { registerAxios } from "../../../api/auth";
 import { useState } from "react";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import { RegisterFormState } from "./types";
-import { RouteNames } from "../../routing";
+import { RouteNames } from "../../../routing";
 
 export default function RegisterForm(): JSX.Element {
     const navigate = useNavigate();
@@ -47,9 +47,7 @@ export default function RegisterForm(): JSX.Element {
 
     const onSubmit = async (registerDto: { email: string, password: string, confirmPassword: string }) => {
         try {
-            setRegistrationState(prevRegisterFormState => {
-                return { loading: true, error: null };
-            })
+            setRegistrationState({ loading: true, error: null })
             await registerAxios({
                 email: registerDto.email,
                 password: registerDto.password,
@@ -58,13 +56,9 @@ export default function RegisterForm(): JSX.Element {
             reset();
             navigate(RouteNames.REGISTER_COMPLETE);
         } catch (e) {
-            setRegistrationState(prevRegisterFormState => {
-                return { ...prevRegisterFormState, error: e.message || 'Unknown server error.' }
-            })
+            setRegistrationState({ ...registrationState, error: e.message || 'Unknown server error.' })
         } finally {
-            setRegistrationState(prevRegisterFormState => {
-                return { ...prevRegisterFormState, loading: false }
-            })
+            setRegistrationState({ ...registrationState, loading: false })
         }
     }
 

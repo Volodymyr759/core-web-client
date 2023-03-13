@@ -1,18 +1,20 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
+import { useActions } from "../../../hooks/useActions";
+import { ILoginDto } from "../../../types/auth";
+import { loginAxios } from "../../../api/auth";
+import { RouteNames } from "../../../routing";
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
-import { useActions } from "../../hooks/useActions";
-import { ILoginDto } from "../../types/auth";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { RouteNames } from "../../routing";
+import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function LoginForm(): JSX.Element {
     const { login } = useActions();
     const navigate = useNavigate();
-    const { error, loading } = useTypedSelector(state => state.auth);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<null | string>(null);
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -27,22 +29,26 @@ export default function LoginForm(): JSX.Element {
             .required()
     })
 
-    const defaultValues: { email: string, password: string, remember: boolean } = {
-        email: '',
-        password: '',
-        remember: false
-    }
+    const defaultValues: ILoginDto = { email: '', password: '', remember: false }
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(validationSchema),
-        defaultValues
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(validationSchema), defaultValues
     })
 
-    const onSubmit = (loginModel: { email: string, password: string, remember: boolean }): void => {
-        login(loginModel as ILoginDto);
-        setTimeout(() => {
-            navigate(RouteNames.HOME);
-        }, 1000);
+    const onSubmit = async (loginModel: { email: string, password: string, remember: boolean }) => {
+        try {
+            setLoading(true);
+            setError(null);
+            const authModel = await loginAxios(loginModel);
+            localStorage.setItem("auth", JSON.stringify(authModel));
+            login(authModel);
+            reset();
+            navigate(RouteNames.HOME)
+        } catch (e) {
+            setError(e.message || 'Unknown server error.');
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -53,14 +59,8 @@ export default function LoginForm(): JSX.Element {
                         name="email"
                         control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Email"
-                                type="email"
-                                margin="normal"
-                                size="medium"
-                                error={Boolean(errors.email)}
-                                helperText={errors.email?.message}
+                            <TextField   {...field} label="Email" type="email" margin="normal" size="medium"
+                                error={Boolean(errors.email)} helperText={errors.email?.message}
                             />
                         }
                     />
@@ -70,14 +70,8 @@ export default function LoginForm(): JSX.Element {
                         name="password"
                         control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Password"
-                                type="password"
-                                margin="normal"
-                                fullWidth
-                                error={Boolean(errors.password)}
-                                helperText={errors.password?.message}
+                            <TextField  {...field} type="password" margin="normal" fullWidth
+                                error={Boolean(errors.password)} helperText={errors.password?.message}
                             />
                         }
                     />
@@ -85,9 +79,7 @@ export default function LoginForm(): JSX.Element {
                 <div>
                     <FormControlLabel
                         control={
-                            <Controller
-                                name="remember"
-                                control={control}
+                            <Controller name="remember" control={control}
                                 render={({ field: props }) =>
                                     <Checkbox
                                         {...props}
