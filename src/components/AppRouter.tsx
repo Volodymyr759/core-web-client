@@ -17,7 +17,7 @@ import LoginPage from '../pages/Account/Login/LoginPage';
 import RegisterCompletePage from '../pages/Account/RegisterComplete/RegisterCompletePage';
 import RegisterPage from '../pages/Account/Register/RegisterPage';
 import TeamPage from '../pages/TeamPage/TeamPage';
-import UsersPage from '../pages/Admin/AdminUserPage/UsersPage';
+import UsersPage from '../pages/Admin/AdminUserPage/AdminUsersPage';
 import VacanciesPage from '../pages/Vacancies/VacanciesPage';
 import VacancyDetailes from '../pages/Vacancies/VacancyDetails';
 import AdminLayout from './Layouts/AdminLayout';

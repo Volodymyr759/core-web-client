@@ -3,7 +3,7 @@ import { CandidateAction, CandidateActionTypes, CandidateState, ICandidate, Cand
 
 const initialState: CandidateState = {
     candidateSearchResult: {
-        itemList: [] as ICandidate[],
+        itemList: [],
         currentPageNumber: 1,
         order: OrderType.Ascending,
         pageCount: 0,

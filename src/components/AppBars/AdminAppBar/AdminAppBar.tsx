@@ -7,7 +7,7 @@ import AdminServicePage from "../../../pages/Admin/AdminServicePage/AdminService
 import AdminOfficePage from "../../../pages/Admin/AdminOfficePage/AdminOfficePage";
 import AdminTeamPage from "../../../pages/Admin/AdminTeamPage/AdminTeamPage";
 import AdminVacancyPage from "../../../pages/Admin/AdminVacancyPage/AdminVacancyPage";
-import UsersPage from "../../../pages/Admin/AdminUserPage/UsersPage";
+import AdminUsersPage from "../../../pages/Admin/AdminUserPage/AdminUsersPage";
 
 const adminMenuLinks: IRoute[] = [
     { path: RouteNames.ADMIN_COUNTRIES, title: "Countries", component: <AdminCountryPage /> },
@@ -16,7 +16,7 @@ const adminMenuLinks: IRoute[] = [
     { path: RouteNames.ADMIN_TEAM, title: "Team", component: <AdminTeamPage /> },
     { path: RouteNames.ADMIN_VACANCIES, title: "Vacancies", component: <AdminVacancyPage /> },
     { path: RouteNames.ADMIN_CANDIDATES, title: "Candidates", component: <AdminCandidatePage /> },
-    { path: RouteNames.USERS, title: "Users", component: <UsersPage /> }
+    { path: RouteNames.USERS, title: "Users", component: <AdminUsersPage /> }
 ]
 
 export default function AdminAppBar(): JSX.Element {
