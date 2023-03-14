@@ -6,7 +6,7 @@ import LoginForm from "./LoginForm";
 
 export default function LoginPage(): JSX.Element {
     return (
-        <Container>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="Sign in."
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."

@@ -1,9 +1,9 @@
-import { Grid, Typography } from "@mui/material"
+import { Container, Grid, Typography } from "@mui/material"
 import PageHeader from "../../../components/PageHeader/PageHeader"
 
 export default function RegisterCompletePage(): JSX.Element {
     return (
-        <>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="Registration successful."
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
@@ -15,6 +15,6 @@ export default function RegisterCompletePage(): JSX.Element {
                     </Typography>
                 </Grid>
             </Grid>
-        </>
+        </Container>
     )
 }

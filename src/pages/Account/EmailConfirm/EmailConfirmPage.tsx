@@ -1,3 +1,4 @@
+import { Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { confirmEmailAxios } from "../../../api/auth";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
@@ -29,17 +30,21 @@ export default function EmailConfirmPage(): JSX.Element {
     }, [])
 
     return (
-        <>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="Email Confirmation."
+                title="Email Confirmation"
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
             />
             {
                 loading ?
                     <Spinner />
                     :
-                    error ? <ErrorMessage message={error} /> : <p>Email Confirm Page</p>
+                    error ? <ErrorMessage message={error} />
+                        :
+                        <Typography component={'p'}>
+                            Email has been successfully verified. Please sign in to continue.
+                        </Typography>
             }
-        </>
+        </Container>
     )
 }

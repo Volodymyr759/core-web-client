@@ -10,4 +10,5 @@ export interface VacancyApplyFormProps {
 	candidate: ICandidate;
 	closeForm: (candidate: ICandidate) => void;
 	openForm: boolean;
+	onSuccess: () => void;
 }

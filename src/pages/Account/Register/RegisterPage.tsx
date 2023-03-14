@@ -4,7 +4,7 @@ import RegisterForm from "./RegisterForm";
 
 export default function RegisterPage(): JSX.Element {
     return (
-        <Container>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="Sign Up."
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."

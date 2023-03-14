@@ -58,10 +58,10 @@ export default function MainAppBar() {
     }
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{backgroundColor: '#158F7C'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography variant="h6" noWrap component="a" href="/" sx={{
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
@@ -72,7 +72,7 @@ export default function MainAppBar() {
                         textDecoration: 'none',
                     }}
                     >
-                        LOGO
+                        EIVOLO
                     </Typography>
 
                     {/* Hiden menu */}
@@ -115,23 +115,10 @@ export default function MainAppBar() {
                     </Box>
 
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                    <Typography variant="h5" noWrap component="a" href=""
+                        sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}
                     >
-                        LOGO
+                        EIVOLO
                     </Typography>
 
                     {/* Main Menu pages */}
@@ -185,11 +172,11 @@ export default function MainAppBar() {
                         :
                         <Button
                             onClick={handleCloseNavMenu}
-                            color="secondary"
+                            color="primary"
                             variant="contained"
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
                         >
-                            <Link to='/login' className="main-menu-link">Sign in</Link>
+                            <Link to='/login' className="main-menu-link">Sign In</Link>
                         </Button>
                     }
                 </Toolbar>

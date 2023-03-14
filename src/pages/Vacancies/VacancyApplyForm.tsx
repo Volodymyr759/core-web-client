@@ -8,7 +8,7 @@ import { createCandidateAxios } from "../../api/candidate";
 import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
-export default function VacancyApplyForm({ candidate, closeForm, openForm }: VacancyApplyFormProps): JSX.Element {
+export default function VacancyApplyForm({ candidate, closeForm, openForm, onSuccess }: VacancyApplyFormProps): JSX.Element {
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -67,6 +67,7 @@ export default function VacancyApplyForm({ candidate, closeForm, openForm }: Vac
         try {
             setLoading(true);
             await createCandidateAxios(candidate);
+            onSuccess();
         } catch (e) {
             setError(e.message || "Oops! Something went wrong while joining the vacancy.");
         } finally {

@@ -8,6 +8,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";
+import { Container } from "@mui/material";
 
 export default function ServicesPage(): JSX.Element {
     const { error, serviceSearchResult, loading } = useTypedSelector(state => state.service);
@@ -23,22 +24,30 @@ export default function ServicesPage(): JSX.Element {
         setServicePage(serviceSearchResult.currentPageNumber + 1);
     }
 
-    if (error) return <ErrorMessage message={error} />;
-
     return (
-        <>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="OUR SERVICES"
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias..."
             />
-            <ServicesList services={serviceSearchResult.itemList} />
-            {loading && <Spinner />}
-            <LoadMoreButton
-                onClickHandler={loadMoreHandler}
-                isDisabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}
-            >
-                {loading ? 'Loading...' : 'Load more'}
-            </LoadMoreButton>
-        </>
+            {
+                loading ? <Spinner />
+                    :
+                    error ?
+                        <ErrorMessage message={error} />
+                        :
+                        <>
+                            <ServicesList services={serviceSearchResult.itemList} />
+                            <LoadMoreButton
+                                onClickHandler={loadMoreHandler}
+                                isDisabled={serviceSearchResult.currentPageNumber * serviceSearchResult.pageSize >= serviceSearchResult.totalItemCount}
+                            >
+                                {loading ? 'Loading...' : 'Load more'}
+                            </LoadMoreButton>
+                        </>
+
+            }
+
+        </Container>
     )
 }

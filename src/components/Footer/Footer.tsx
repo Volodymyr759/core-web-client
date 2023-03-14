@@ -46,21 +46,23 @@ export default function Footer(): JSX.Element {
                     <strong>Email:</strong> info@example.com
                 </Typography>
             </Grid>
-            <Grid item xs={12} md={4} textAlign='center'>
-                <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 18, fontWeight: 600 }}>
-                    Useful Links
-                </Typography>
-                <List sx={{ marginLeft: '90px' }}>
-                    {mainMenuRoutes.map((page) => (
-                        <ListItemButton key={page.path} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
-                            <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
-                                <ArrowForwardIosIcon fontSize='small' htmlColor='#1976d2' />
-                            </ListItemIcon>
-                            &nbsp;&nbsp;
-                            <ListItemText primary={page.title} />
-                        </ListItemButton>
-                    ))}
-                </List>
+            <Grid item xs={12} md={4}>
+                <Grid container direction="column" alignContent="center">
+                    <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 18, fontWeight: 600 }}>
+                        Useful Links
+                    </Typography>
+                    <List>
+                        {mainMenuRoutes.map((page) => (
+                            <ListItemButton key={page.path} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
+                                <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
+                                    <ArrowForwardIosIcon fontSize='small' htmlColor='#1976d2' />
+                                </ListItemIcon>
+                                &nbsp;&nbsp;
+                                <ListItemText primary={page.title} />
+                            </ListItemButton>
+                        ))}
+                    </List>
+                </Grid>
             </Grid>
             <Grid item xs={12} md={4} textAlign='center' padding={'16px 40px !important'}>
                 <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 18, fontWeight: 600 }}>

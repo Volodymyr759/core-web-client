@@ -1,9 +1,9 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import PageHeader from "../../components/PageHeader/PageHeader";
 
 export default function AboutPage(): JSX.Element {
     return (
-        <>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="ABOUT US"
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas."
@@ -25,6 +25,6 @@ export default function AboutPage(): JSX.Element {
                     <Box component="img" sx={{ width: '100%' }} alt="About us 2nd img." src="/images/about2.jpg" />
                 </Grid>
             </Grid>
-        </>
+        </Container>
     )
 }

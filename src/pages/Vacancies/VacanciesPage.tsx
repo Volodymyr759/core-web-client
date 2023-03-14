@@ -7,6 +7,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import Spinner from "../../components/Spinner/Spinner";
 import VacanciesFilters from "./VacanciesFilters";
 import VacanciesList from "./VacanciesList";
+import { Container } from "@mui/material";
 
 export default function VacanciesPage(): JSX.Element {
     const { errorFilters, errorVacancies, loadingFilters, loadingVacancies, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
@@ -30,7 +31,7 @@ export default function VacanciesPage(): JSX.Element {
     if (errorVacancies) return <ErrorMessage message={errorVacancies} />;
 
     return (
-        <>
+        <Container maxWidth="lg" className='layout-container' >
             <PageHeader title="OUR VACANCIES" />
             <VacanciesFilters />
             {loadingFilters && <Spinner />}
@@ -42,6 +43,6 @@ export default function VacanciesPage(): JSX.Element {
             >
                 {loadingVacancies ? 'Loading...' : 'Load more'}
             </LoadMoreButton>
-        </>
+        </Container>
     )
 }
