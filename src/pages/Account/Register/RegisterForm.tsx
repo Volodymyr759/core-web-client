@@ -1,23 +1,18 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { Button, TextField } from "@mui/material";
-import { registerAxios } from "../../../api/auth";
-import { useState } from "react";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
-import { RegisterFormState } from "./types";
 import { RouteNames } from "../../../routing";
+import { IRegisterDto } from "../../../types/auth";
+import { Button, Grid, TextField } from "@mui/material";
+import { registerAxios } from "../../../api/auth";
+import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function RegisterForm(): JSX.Element {
     const navigate = useNavigate();
-
-    const initState: RegisterFormState = {
-        loading: false,
-        error: null
-    };
-
-    const [registrationState, setRegistrationState] = useState<RegisterFormState>(initState);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<null | string>(null);
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -34,20 +29,16 @@ export default function RegisterForm(): JSX.Element {
             .max(255, 'The field Description may not be greater than 255 characters.')
     })
 
-    const defaultValues: { email: string, password: string, confirmPassword: string } = {
-        email: '',
-        password: '',
-        confirmPassword: ''
-    }
+    const defaultValues: IRegisterDto = { email: '', password: '', confirmPassword: '' }
 
     const { control, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver(validationSchema),
-        defaultValues
+        resolver: yupResolver(validationSchema), defaultValues
     })
 
-    const onSubmit = async (registerDto: { email: string, password: string, confirmPassword: string }) => {
+    const onSubmit = async (registerDto: IRegisterDto) => {
         try {
-            setRegistrationState({ loading: true, error: null })
+            setLoading(true)
+            setError(null)
             await registerAxios({
                 email: registerDto.email,
                 password: registerDto.password,
@@ -56,78 +47,55 @@ export default function RegisterForm(): JSX.Element {
             reset();
             navigate(RouteNames.REGISTER_COMPLETE);
         } catch (e) {
-            setRegistrationState({ ...registrationState, error: e.message || 'Unknown server error.' })
+            setError(e.message || 'Unknown server error.');
         } finally {
-            setRegistrationState({ ...registrationState, loading: false })
+            setLoading(false);
         }
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <Controller
-                        name="email"
-                        control={control}
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container direction="column" alignContent="center" mt={2}>
+                <Grid item>
+                    <Controller name="email" control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Email"
-                                type="email"
-                                margin="normal"
-                                size="medium"
-                                error={Boolean(errors.email)}
-                                helperText={errors.email?.message}
-                            />
-                        }
+                            <TextField  {...field} label="Email" type="email" margin="normal" fullWidth
+                                error={Boolean(errors.email)} helperText={errors.email?.message} />}
                     />
-                </div>
-                <div>
-                    <Controller
-                        name="password"
-                        control={control}
+                </Grid>
+                <Grid item>
+                    <Controller name="password" control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Rassword"
-                                type="password"
-                                margin="normal"
-                                // size="medium"
-                                fullWidth
-                                error={Boolean(errors.password)}
-                                helperText={errors.password?.message}
-                            />
-                        }
+                            <TextField  {...field} label="Rassword" type="password" margin="normal" fullWidth
+                                error={Boolean(errors.password)} helperText={errors.password?.message} />}
                     />
-                </div>
-                <div>
-                    <Controller
-                        name="confirmPassword"
-                        control={control}
+                </Grid>
+                <Grid item>
+                    <Controller name="confirmPassword" control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Confirm Password"
-                                type="password"
-                                margin="normal"
-                                // size="medium"
-                                fullWidth
-                                error={Boolean(errors.password)}
-                                helperText={errors.password?.message}
-                            />
-                        }
+                            <TextField {...field} label="Confirm Password" type="password" margin="normal" fullWidth
+                                error={Boolean(errors.password)} helperText={errors.password?.message} />}
                     />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => navigate(RouteNames.HOME)}>
-                        Cancel
-                    </Button>
-                    <Button type="submit">
-                        {registrationState.loading ? 'Sending...' : 'Sign Up'}
-                    </Button>
-                </div>
-            </form>
-            {registrationState.error && <ErrorMessage message={registrationState.error} />}
-        </>
+                </Grid>
+                <Grid item my={3}>
+                    <Grid container spacing={5} direction="row" justifyContent="center">
+                        <Grid item>
+                            <Button variant="outlined" onClick={() => navigate(RouteNames.HOME)}>
+                                Cancel
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button variant="outlined" type="submit">
+                                {loading ? 'Sending...' : 'Sign Up'}
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                {error &&
+                    <Grid item>
+                        <ErrorMessage message={error} />
+                    </Grid>}
+            </Grid>
+        </form>
     )
 }

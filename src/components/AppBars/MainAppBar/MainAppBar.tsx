@@ -140,7 +140,7 @@ export default function MainAppBar() {
                             <Button
                                 key={page.path}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
                             >
                                 <Link to={page.path} className="main-menu-link">{page.title}</Link>
                             </Button>
@@ -185,9 +185,11 @@ export default function MainAppBar() {
                         :
                         <Button
                             onClick={handleCloseNavMenu}
+                            color="secondary"
+                            variant="contained"
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
-                            <Link to='/login' className="main-menu-link">Login</Link>
+                            <Link to='/login' className="main-menu-link">Sign in</Link>
                         </Button>
                     }
                 </Toolbar>

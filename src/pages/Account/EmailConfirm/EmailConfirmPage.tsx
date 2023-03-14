@@ -12,7 +12,6 @@ export default function EmailConfirmPage(): JSX.Element {
     const [error, setError] = useState<null | string>(null);
 
     const tryToConfirmEmailByUrlParams = async () => {
-        //
         try {
             setLoading(true);
             setError(null);

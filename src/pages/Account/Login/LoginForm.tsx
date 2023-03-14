@@ -7,7 +7,7 @@ import { useActions } from "../../../hooks/useActions";
 import { ILoginDto } from "../../../types/auth";
 import { loginAxios } from "../../../api/auth";
 import { RouteNames } from "../../../routing";
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function LoginForm(): JSX.Element {
@@ -51,57 +51,60 @@ export default function LoginForm(): JSX.Element {
         }
     }
 
+    if (error) return <ErrorMessage message={error} />;
+
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container direction="column" alignContent="center" mt={2}>
+                <Grid item>
                     <Controller
                         name="email"
                         control={control}
                         render={({ field }) =>
-                            <TextField   {...field} label="Email" type="email" margin="normal" size="medium"
+                            <TextField   {...field} label="Email" type="email" margin="normal" fullWidth
                                 error={Boolean(errors.email)} helperText={errors.email?.message}
                             />
                         }
                     />
-                </div>
-                <div>
+                </Grid>
+                <Grid item>
                     <Controller
                         name="password"
                         control={control}
                         render={({ field }) =>
-                            <TextField  {...field} type="password" margin="normal" fullWidth
+                            <TextField  {...field} label="Password" type="password" margin="normal" fullWidth
                                 error={Boolean(errors.password)} helperText={errors.password?.message}
                             />
                         }
                     />
-                </div>
-                <div>
+                </Grid>
+                <Grid item>
                     <FormControlLabel
                         control={
                             <Controller name="remember" control={control}
                                 render={({ field: props }) =>
-                                    <Checkbox
-                                        {...props}
-                                        checked={props.value}
-                                        onChange={(event) => props.onChange(event.target.checked)}
-                                    />
-                                }
+                                    <Checkbox  {...props} checked={props.value}
+                                        onChange={(event) => props.onChange(event.target.checked)} />}
                             />
                         }
                         label={<p>Remember Me?</p>}
                     />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => navigate(RouteNames.HOME)}>
-                        Cancel
-                    </Button>
-                    <Button type="submit">
-                        {loading ? 'Sending...' : 'Log In'}
-                    </Button>
-                </div>
-            </form>
-            {error && <ErrorMessage message={error} />}
-        </>
+                </Grid>
+                <Grid item>
+                    <Grid container spacing={5} direction="row" justifyContent="center">
+                        <Grid item>
+                            <Button variant="outlined" onClick={() => navigate(RouteNames.HOME)}>
+                                Cancel
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button variant="outlined" type="submit">
+                                {loading ? 'Sending...' : 'Log In'}
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </form>
     )
 }

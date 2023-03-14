@@ -8,7 +8,7 @@ export default function PageHeader({ title, text }: PageHeaderProps): JSX.Elemen
                 <Typography variant="h4" component={'p'} sx={{ padding: '20px', fontWeight: 600, textAlign: 'center' }}>
                     {title}
                 </Typography>
-                {text && <Typography variant="body2" component={'p'} sx={{ textAlign: 'center' }}>{text}</Typography>}
+                {text && <Typography component={'p'} sx={{ textAlign: 'center' }}>{text}</Typography>}
             </Grid>
         </Grid>
     )

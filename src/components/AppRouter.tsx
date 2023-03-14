@@ -14,7 +14,7 @@ import ContactPage from '../pages/ContactPage/ContactPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginPage from '../pages/Account/Login/LoginPage';
-import RegisterCompletePage from '../pages/Account/Register/RegisterCompletePage';
+import RegisterCompletePage from '../pages/Account/RegisterComplete/RegisterCompletePage';
 import RegisterPage from '../pages/Account/Register/RegisterPage';
 import TeamPage from '../pages/TeamPage/TeamPage';
 import UsersPage from '../pages/Admin/AdminUserPage/UsersPage';
