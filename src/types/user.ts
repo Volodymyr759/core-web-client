@@ -22,6 +22,7 @@ export interface UserState {
 
 export enum UserActionTypes {
     GET_USERS = "GET_All_USERS",
+    UPDATE_USER_EMAILCONFIRMED_STATUS = "UPDATE_USER_EMAILCONFIRMED_STATUS",
     SET_USER_SEARCH_CRITERIA = "SET_USER_SEARCH_CRITERIA",
     SET_USER_PAGE = "SET_USER_PAGE",
     SET_USER_ERROR = "SET_USER_ERROR",
@@ -31,6 +32,11 @@ export enum UserActionTypes {
 interface GetUsersAction {
     type: UserActionTypes.GET_USERS;
     payload: ISearchResult<IUser>;
+}
+
+interface UpdateUserEmailConfirmedStatus {
+    type: UserActionTypes.UPDATE_USER_EMAILCONFIRMED_STATUS;
+    payload: IUser;
 }
 
 interface SetUserSearchCriteriaAction {
@@ -54,6 +60,7 @@ interface SetUserLoadingAction {
 }
 
 export type UserAction = GetUsersAction |
+    UpdateUserEmailConfirmedStatus |
     SetUserSearchCriteriaAction |
     SetUserPagesAction |
     SetUserErrorAction |

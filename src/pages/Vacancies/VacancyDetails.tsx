@@ -12,6 +12,7 @@ import VacancyApplyForm from "./VacancyApplyForm";
 export default function VacancyDetailes(): JSX.Element {
     const { vacancyId } = useParams();
     const { errorVacancies, currentVacancy, loadingVacancies } = useTypedSelector(state => state.vacancy)
+    const { auth } = useTypedSelector(state => state.auth)
     const { getVacancyById } = useActions();
     const [candidate, setCandidate] = useState<ICandidate | null>(null);
     const[snackbarOpened, setSnackbarOpened] = useState<boolean>(false);
@@ -54,7 +55,14 @@ export default function VacancyDetailes(): JSX.Element {
             </Box>
             <Box sx={{ textAlign: 'right' }}>
                 <Button variant="outlined" size="small" onClick={() => onApply({
-                    id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: Number(vacancyId)
+                    id: 0, 
+                    fullName: auth.user.userName, 
+                    email: auth.user.email, 
+                    phone: auth.user.phoneNumber || '', 
+                    notes: '', 
+                    isDismissed: false, 
+                    joinedAt: new Date(), 
+                    vacancyId: Number(vacancyId)
                 })}>Apply</Button>
             </Box>
             {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openForm={true} onSuccess={() => setSnackbarOpened(true)} />}

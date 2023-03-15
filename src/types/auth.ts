@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface ILoginDto {
     email: string;
     password: string;
@@ -11,7 +13,7 @@ export interface IRegisterDto{
 }
 
 export interface IAuth{
-    email: string;
+    user: IUser;
     roles: string[];
     tokens: {
         accessToken: string;

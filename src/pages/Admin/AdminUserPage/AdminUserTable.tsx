@@ -1,36 +1,20 @@
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IUser } from "../../../types/user";
-import { AdminUserTableProps } from "./types";
-import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
+import { Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import TableHeader from "../../../components/TableHeader/TableHeader";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 
-export default function AdminUserTable({ onEdit }: AdminUserTableProps): JSX.Element {
-    const { userSearchResult, loading, error } = useTypedSelector(state => state.user);
-    const { getUsers, setUserPage } = useActions();
+export default function AdminUserTable(): JSX.Element {
+    const { userSearchResult } = useTypedSelector(state => state.user);
+    const { setUserPage, updateUserEmailConfirmedStatus } = useActions();
 
     const onChangeEmailConfirmed = (id: string): void => {
         const choosedUser = userSearchResult.itemList.find(c => c.id === id);
         const userToUpdate: IUser = { ...choosedUser };
         userToUpdate.emailConfirmed = !choosedUser.emailConfirmed;
-        // updateCandidateIsDismissedStatus(id, userToUpdate);
-        console.log('userToUpdate: ', userToUpdate);
-    }
-
-    const onEditHandler = (id: string) => {
-        const choosedUser = userSearchResult.itemList.find(c => c.id === id);
-        const userToUpdate: IUser = {
-            id: choosedUser.id,
-            userName: choosedUser.userName,
-            email: choosedUser.email,
-            emailConfirmed: choosedUser.emailConfirmed,
-            phoneNumber: choosedUser.phoneNumber,
-            avatarUrl: choosedUser.avatarUrl
-        };
-        onEdit(userToUpdate);
+        updateUserEmailConfirmedStatus(id, userToUpdate);
     }
 
     return (
@@ -50,10 +34,6 @@ export default function AdminUserTable({ onEdit }: AdminUserTableProps): JSX.Ele
                                 <TableCell align="left">{user.avatarUrl}</TableCell>
                                 <TableCell align="center">
                                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Tooltip title="Edit User" placement="top">
-                                            <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(user.id)} />
-                                        </Tooltip>
-                                        <Divider orientation="vertical" flexItem />
                                         <Tooltip title="Remove User" placement="top">
                                             <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => alert("Delete is not implemented yet." + user.id)} />
                                         </Tooltip>

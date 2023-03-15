@@ -53,12 +53,12 @@ export default function MainAppBar() {
     };
 
     const handleLogout = () => {
-        logout(auth.email, auth.tokens.accessToken);
+        logout(auth.user.email, auth.tokens.accessToken);
         navigate(RouteNames.HOME);
     }
 
     return (
-        <AppBar position="static" sx={{backgroundColor: '#158F7C'}}>
+        <AppBar position="static" sx={{ backgroundColor: '#158F7C' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -137,9 +137,13 @@ export default function MainAppBar() {
                     {/* Avatar */}
                     {auth ?
                         <Box sx={{ flexGrow: 0 }}>
+                            <Typography component="span">
+                                {auth.user.userName + ' '}
+                            </Typography>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                                    <Avatar alt="Remy Sharp" src={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
                                 </IconButton>
                             </Tooltip>
                             <Menu
