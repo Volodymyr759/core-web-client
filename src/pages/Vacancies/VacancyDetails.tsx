@@ -28,7 +28,6 @@ export default function VacancyDetailes(): JSX.Element {
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') return;
-
         setSnackbarOpened(false);
       };
 

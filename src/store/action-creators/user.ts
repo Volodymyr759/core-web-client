@@ -16,13 +16,6 @@ export const getUsers = (limit: number, page: number, filters: UserFilters) => {
     }
 }
 
-export const setUserSearchCriteria = (search: string) => {
-    return async (dispatch: Dispatch<UserAction>) => {
-        dispatch({ type: UserActionTypes.SET_USER_SEARCH_CRITERIA, payload: search });
-    }
-}
-
-
 export const updateUserEmailConfirmedStatus = (id: string, userToUpdate: IUser) => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {
@@ -38,8 +31,20 @@ export const updateUserEmailConfirmedStatus = (id: string, userToUpdate: IUser) 
     }
 }
 
+export const setUserSearchCriteria = (search: string) => {
+    return async (dispatch: Dispatch<UserAction>) => {
+        dispatch({ type: UserActionTypes.SET_USER_SEARCH_CRITERIA, payload: search });
+    }
+}
+
 export const setUserPage = (page: number) => {
     return async (dispatch: Dispatch<UserAction>) => {
         dispatch({ type: UserActionTypes.SET_USER_PAGE, payload: page });
+    }
+}
+
+export const setUserError = (message: string) => {
+    return async (dispatch: Dispatch<UserAction>) => {
+        dispatch({ type: UserActionTypes.SET_USER_ERROR, payload: message });
     }
 }

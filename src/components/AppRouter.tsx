@@ -23,6 +23,7 @@ import VacancyDetailes from '../pages/Vacancies/VacancyDetails';
 import AdminLayout from './Layouts/AdminLayout';
 import PublicLayout from './Layouts/PublicLayout';
 import EmailConfirmPage from '../pages/Account/EmailConfirm/EmailConfirmPage';
+import ProfilePage from '../pages/Account/Profile/ProfilePage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -42,6 +43,7 @@ export default function AppRouter() {
     ];
 
     const registeredRoleRoutes: IRoute[] = [
+        { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
         { path: RouteNames.VACANCY_DETAILES, title: "Vacancy Detailes", component: <VacancyDetailes /> }
     ]
 

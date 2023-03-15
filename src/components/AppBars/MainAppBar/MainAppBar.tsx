@@ -12,9 +12,10 @@ import ContactPage from '../../../pages/ContactPage/ContactPage';
 import HomePage from '../../../pages/HomePage/HomePage';
 import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../../pages/TeamPage/TeamPage';
+import ProfilePage from '../../../pages/Account/Profile/ProfilePage';
 
 const settings: IRoute[] = [
-    { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
+    { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
     { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
     { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> }
 ];

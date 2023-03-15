@@ -34,7 +34,7 @@ interface GetUsersAction {
     payload: ISearchResult<IUser>;
 }
 
-interface UpdateUserEmailConfirmedStatus {
+interface UpdateUserEmailConfirmedStatusAction {
     type: UserActionTypes.UPDATE_USER_EMAILCONFIRMED_STATUS;
     payload: IUser;
 }
@@ -60,7 +60,7 @@ interface SetUserLoadingAction {
 }
 
 export type UserAction = GetUsersAction |
-    UpdateUserEmailConfirmedStatus |
+    UpdateUserEmailConfirmedStatusAction |
     SetUserSearchCriteriaAction |
     SetUserPagesAction |
     SetUserErrorAction |

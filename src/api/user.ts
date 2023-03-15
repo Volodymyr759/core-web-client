@@ -19,3 +19,12 @@ export async function getUsersAxios(limit: number, page: number, search: string)
 export async function updateUserEmailConfirmedStatusAxios(id: string, confirmed: boolean): Promise<void> {
     await axios.patch(`/account/partialuserupdate/${id}`, [{ op: "replace", path: "/emailConfirmed", value: confirmed }]);
 }
+
+/**
+ * Updates the existing user
+ * @param user<IUser> Object of type IUser
+ * @returns<IUser> Updated user object
+ */
+export async function updateUserAxios(user: IUser): Promise<IUser> {
+    return (await axios.post("/account/update", user)).data;
+}

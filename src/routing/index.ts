@@ -14,6 +14,7 @@ export enum RouteNames {
     VACANCY_DETAILES = '/vacancy/:vacancyId',
     ERROR = '/error',
     LOGIN = '/login',
+    PROFILE = "/profile",
     REGISTER = '/register',
     REGISTER_COMPLETE = '/register-complete',
     EMAIL_CONFIRM = '/email-confirm',
