@@ -9,6 +9,8 @@ import { IRoute, RouteNames } from '../../../routing';
 import AboutPage from '../../../pages/AboutPage/AboutPage';
 import VacanciesPage from '../../../pages/Vacancies/VacanciesPage';
 import ContactPage from '../../../pages/ContactPage/ContactPage';
+import ChangeEmailPage from '../../../pages/Account/ChangeEmail/ChangeEmailPage';
+import ChangePasswordPage from '../../../pages/Account/ChangePassword/ChangePasswordPage';
 import HomePage from '../../../pages/HomePage/HomePage';
 import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../../pages/TeamPage/TeamPage';
@@ -16,8 +18,8 @@ import ProfilePage from '../../../pages/Account/Profile/ProfilePage';
 
 const settings: IRoute[] = [
     { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
-    { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
-    { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> }
+    { path: RouteNames.CHANGE_EMAIL, title: "Change email", component: <ChangeEmailPage /> },
+    { path: RouteNames.CHANGE_PASSWORD, title: "Change password", component: <ChangePasswordPage /> }
 ];
 
 const mainMenuRoutes: IRoute[] = [

@@ -18,15 +18,15 @@ export default function RegisterForm(): JSX.Element {
         email: Yup.string()
             .required()
             .min(2, 'Email must be at least 2 characters.')
-            .max(255, 'The field Title may not be greater than 255 characters.'),
+            .max(50, 'The field Email may not be greater than 50 characters.'),
         password: Yup.string()
             .required()
-            .min(2, 'Password must be at least 2 characters.')
-            .max(255, 'The field Description may not be greater than 255 characters.'),
+            .min(7, 'Password must be at least 7 characters.')
+            .max(100, 'The field Password may not be greater than 100 characters.'),
         confirmPassword: Yup.string()
             .required()
             .min(2, 'Confirmed password must be at least 2 characters.')
-            .max(255, 'The field Description may not be greater than 255 characters.')
+            .max(255, 'The field Confirmed password may not be greater than 255 characters.')
     })
 
     const defaultValues: IRegisterDto = { email: '', password: '', confirmPassword: '' }

@@ -1,5 +1,14 @@
 import axios from 'axios';
-import { IAuth, ILoginDto, IRegisterDto } from '../types/auth';
+import { IAuth, IChangePasswordDto, ILoginDto, IRegisterDto } from '../types/auth';
+
+/**
+ * Changes the password of current user
+ * @param changePasswordDto<IChangePasswordDto> Object of type IChangePasswordDto
+ * @returns<string> Success confirmation message
+ */
+export async function changePasswordAxios(changePasswordDto: IChangePasswordDto): Promise<string> {
+    return (await axios.post<string>("/account/changepassword", changePasswordDto)).data;
+}
 
 export async function loginAxios(loginDto: ILoginDto): Promise<IAuth> {
     return (await axios.post<IAuth>("/account/login", loginDto)).data;

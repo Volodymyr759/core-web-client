@@ -24,6 +24,8 @@ import AdminLayout from './Layouts/AdminLayout';
 import PublicLayout from './Layouts/PublicLayout';
 import EmailConfirmPage from '../pages/Account/EmailConfirm/EmailConfirmPage';
 import ProfilePage from '../pages/Account/Profile/ProfilePage';
+import ChangeEmailPage from '../pages/Account/ChangeEmail/ChangeEmailPage';
+import ChangePasswordPage from '../pages/Account/ChangePassword/ChangePasswordPage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -43,6 +45,8 @@ export default function AppRouter() {
     ];
 
     const registeredRoleRoutes: IRoute[] = [
+        { path: RouteNames.CHANGE_EMAIL, title: "Change email", component: <ChangeEmailPage /> },
+        { path: RouteNames.CHANGE_PASSWORD, title: "Change password", component: <ChangePasswordPage /> },
         { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
         { path: RouteNames.VACANCY_DETAILES, title: "Vacancy Detailes", component: <VacancyDetailes /> }
     ]

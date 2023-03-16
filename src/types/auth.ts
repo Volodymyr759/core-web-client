@@ -1,24 +1,31 @@
 import { IUser } from "./user";
 
-export interface ILoginDto {
-    email: string;
-    password: string;
-    remember: boolean;
-  }
-
-export interface IRegisterDto{
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
-
-export interface IAuth{
+export interface IAuth {
     user: IUser;
     roles: string[];
     tokens: {
         accessToken: string;
         refreshToken: string;
     }
+}
+
+export interface ILoginDto {
+    email: string;
+    password: string;
+    remember: boolean;
+}
+
+export interface IRegisterDto {
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
+export interface IChangePasswordDto {
+    email: string;
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
 }
 
 export enum Roles {

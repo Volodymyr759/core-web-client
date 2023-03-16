@@ -7,6 +7,8 @@ export interface IRoute {
 export enum RouteNames {
     ABOUT = '/about',
     CONTACT = '/contact',
+    CHANGE_EMAIL = '/change-email',
+    CHANGE_PASSWORD ='/change-password',
     HOME = "/",
     SERVICES = '/services',
     TEAM = '/team',

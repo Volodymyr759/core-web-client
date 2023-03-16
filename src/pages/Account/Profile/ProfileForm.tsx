@@ -50,8 +50,8 @@ export default function ProfileForm(): JSX.Element {
     const updateUserData = async (user: IUser) => {
         try {
             setLoading(true);
-            await updateUserAxios(user);
             setUserError(null);
+            await updateUserAxios(user);
             setSnackbarOpened(true);
         } catch (e) {
             setUserError(e.message);
