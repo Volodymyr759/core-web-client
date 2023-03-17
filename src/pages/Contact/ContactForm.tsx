@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { IMailMessage } from "../../types/common/mailMessage";
+import { EMAIL_REG_EXP } from "../../types/common/RegularExpressions";
 import { sendEmailAxios } from "../../api/email";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function ContactForm(): JSX.Element {
     const [error, setError] = useState<null | string>(null);
@@ -17,9 +19,8 @@ export default function ContactForm(): JSX.Element {
             .min(2, 'Name must be at least 2 characters.')
             .max(50, 'The field Name may not be greater than 50 characters.'),
         senderEmail: Yup.string()
-            .required()
-            .min(6, 'Email must be at least 6 characters.')
-            .max(255, 'The field Title may not be greater than 255 characters.'),
+            .max(50, 'The field Email may not be greater than 50 characters.')
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid."),
         subject: Yup.string()
             .required()
             .min(2, 'Subject must be at least 2 characters.')
@@ -30,7 +31,7 @@ export default function ContactForm(): JSX.Element {
             .max(1024, 'The field Message may not be greater than 1024 characters.')
     })
 
-    const defaultValues: { senderName: string, senderEmail: string, subject: string, message: string } = {
+    const defaultValues: IMailMessage = {
         senderName: '', senderEmail: '', subject: '', message: ''
     }
 
@@ -61,16 +62,8 @@ export default function ContactForm(): JSX.Element {
                             name="senderName"
                             control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Name"
-                                    type="text"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.senderName)}
-                                    helperText={errors.senderName?.message}
-                                />
-                            }
+                                <TextField  {...field} label="Name" type="text" margin="normal" fullWidth
+                                    error={Boolean(errors.senderName)} helperText={errors.senderName?.message} />}
                         />
                     </Grid>
                     <Grid item sm={6} xs={12}>
@@ -78,16 +71,16 @@ export default function ContactForm(): JSX.Element {
                             name="senderEmail"
                             control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Email"
-                                    type="email"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.senderEmail)}
-                                    helperText={errors.senderEmail?.message}
-                                />
-                            }
+                                <TextField  {...field} label="Email" type="email" margin="normal" fullWidth
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton edge="end" >
+                                                    <MailOutlineIcon />
+                                                </IconButton>
+                                            </InputAdornment>),
+                                    }}
+                                    error={Boolean(errors.senderEmail)} helperText={errors.senderEmail?.message} />}
                         />
                     </Grid>
 
@@ -97,17 +90,8 @@ export default function ContactForm(): JSX.Element {
                         name="subject"
                         control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Subject"
-                                type="text"
-                                margin="normal"
-                                size="medium"
-                                fullWidth
-                                error={Boolean(errors.subject)}
-                                helperText={errors.subject?.message}
-                            />
-                        }
+                            <TextField  {...field} label="Subject" type="text" margin="normal" size="medium" fullWidth
+                                error={Boolean(errors.subject)} helperText={errors.subject?.message} />}
                     />
                 </Grid>
                 <Grid>
@@ -115,17 +99,8 @@ export default function ContactForm(): JSX.Element {
                         name="message"
                         control={control}
                         render={({ field }) =>
-                            <TextField
-                                {...field}
-                                label="Message"
-                                type="text"
-                                margin="normal"
-                                size="medium"
-                                fullWidth
-                                error={Boolean(errors.message)}
-                                helperText={errors.message?.message}
-                            />
-                        }
+                            <TextField {...field} label="Message" type="text" margin="normal" size="medium" fullWidth
+                                error={Boolean(errors.message)} helperText={errors.message?.message} />}
                     />
                 </Grid>
                 <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px 0' }} >

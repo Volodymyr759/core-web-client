@@ -6,14 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
 import { IRoute, RouteNames } from '../../../routing';
-import AboutPage from '../../../pages/AboutPage/AboutPage';
+import AboutPage from '../../../pages/About/AboutPage';
 import VacanciesPage from '../../../pages/Vacancies/VacanciesPage';
-import ContactPage from '../../../pages/ContactPage/ContactPage';
+import ContactPage from '../../../pages/Contact/ContactPage';
 import ChangeEmailPage from '../../../pages/Account/ChangeEmail/ChangeEmailPage';
 import ChangePasswordPage from '../../../pages/Account/ChangePassword/ChangePasswordPage';
-import HomePage from '../../../pages/HomePage/HomePage';
+import HomePage from '../../../pages/Home/HomePage';
 import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
-import TeamPage from '../../../pages/TeamPage/TeamPage';
+import TeamPage from '../../../pages/Team/TeamPage';
 import ProfilePage from '../../../pages/Account/Profile/ProfilePage';
 
 const settings: IRoute[] = [

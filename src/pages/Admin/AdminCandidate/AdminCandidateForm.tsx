@@ -6,10 +6,13 @@ import moment from "moment";
 import { useActions } from "../../../hooks/useActions";
 import { AdminCandidateFormProps } from "./types";
 import { ICandidate } from "../../../types/candidate";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
-import { Box, Button, Checkbox, FormControlLabel, Grid, Modal, TextField, Typography } from "@mui/material";
+import { EMAIL_REG_EXP, PHONE_REG_EXP } from "../../../types/common/RegularExpressions";
+import { Box, Button, Checkbox, FormControlLabel, Grid, IconButton, InputAdornment, Modal, TextField, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
+import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -20,8 +23,6 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export default function AdminCandidateForm({ candidate, closeForm }: AdminCandidateFormProps): JSX.Element {
     const { createCandidate, updateCandidate } = useActions();
@@ -36,13 +37,10 @@ export default function AdminCandidateForm({ candidate, closeForm }: AdminCandid
             .min(1, 'Full Name must be at least 1 character.')
             .max(50, 'The field FullName may not be greater than 50 characters.'),
         email: Yup.string()
-            .required()
-            .min(1, 'Email must be at least 1 character.')
-            .max(50, 'The field Email may not be greater than 50 characters.'),
-        phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid, should contain up to 15 numeric symbols.')
-            .required()
-            .min(1, 'Phone must be at least 1 character.')
-            .max(15, 'The field Phone may not be greater than 15 characters.'),
+            .max(50, 'The field Email may not be greater than 50 characters.')
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid."),
+        phone: Yup.string()
+            .matches(PHONE_REG_EXP, 'Phone number is not valid. Must contain from 11 up to 13 characters, valid formats: +31636363634, 1234567890, 075-63546725, 123-456-7890, (123)456-7890, (123) 456-7890, 123.456.7890'),
         notes: Yup.string()
             .required()
             .min(1, 'Notes must be at least 1 characters.'),
@@ -85,10 +83,11 @@ export default function AdminCandidateForm({ candidate, closeForm }: AdminCandid
         <Modal
             open={true}
             onClose={closeForm}
+            sx={{ overflowY: 'scroll'}}
         >
             <Box sx={style}>
                 <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
-                <input {...register("id")} type="hidden" />
+                    <input {...register("id")} type="hidden" />
                     <Grid container direction={'column'} justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                         <Typography variant="h4" component={'p'} sx={{ padding: '20px', fontWeight: 600 }}>
                             Candidate Form
@@ -105,12 +104,28 @@ export default function AdminCandidateForm({ candidate, closeForm }: AdminCandid
                                 control={control}
                                 render={({ field }) =>
                                     <TextField  {...field} label="Email" type="email" margin="normal" fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton edge="end" >
+                                                        <MailOutlineIcon />
+                                                    </IconButton>
+                                                </InputAdornment>),
+                                        }}
                                         error={Boolean(errors.email)} helperText={errors.email?.message} />} />
                         </Grid>
                         <Grid item>
                             <Controller name="phone" control={control}
                                 render={({ field }) =>
                                     <TextField {...field} label="Phone" type="text" margin="normal" fullWidth
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton edge="end" >
+                                                        <PhoneIcon />
+                                                    </IconButton>
+                                                </InputAdornment>),
+                                        }}
                                         error={Boolean(errors.phone)} helperText={errors.phone?.message} />} />
                         </Grid>
                         <Grid item>

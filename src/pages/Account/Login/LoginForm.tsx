@@ -5,9 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import { useActions } from "../../../hooks/useActions";
 import { ILoginDto } from "../../../types/auth";
+import { EMAIL_REG_EXP, PASSWORD_REG_EXP } from "../../../types/common/RegularExpressions";
 import { loginAxios } from "../../../api/auth";
 import { RouteNames } from "../../../routing";
-import { Button, Checkbox, FormControlLabel, Grid, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function LoginForm(): JSX.Element {
@@ -15,21 +18,20 @@ export default function LoginForm(): JSX.Element {
     const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<null | string>(null);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const validationSchema = Yup.object({
         email: Yup.string()
-            .required()
-            .min(2, 'Email must be at least 2 characters.')
-            .max(255, 'The field Email may not be greater than 255 characters.'),
+            .max(50, 'The field Email may not be greater than 50 characters.')
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid and may not be greater than 50 characters."),
         password: Yup.string()
-            .required()
-            .min(2, 'Password must be at least 2 characters.')
-            .max(255, 'The field Paeeword may not be greater than 255 characters.'),
+            .max(100, 'The field Password may not be greater than 100 characters.')
+            .matches(PASSWORD_REG_EXP, "Password is not valid. Must contain at least one number and one uppercase and lowercase letter, and lenght 7 up to 100 characters."),
         remember: Yup.boolean()
             .required()
     })
 
-    const defaultValues: ILoginDto = { email: '', password: '', remember: false }
+    const defaultValues: ILoginDto = { email: '', password: '', remember: true }
 
     const { control, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(validationSchema), defaultValues
@@ -54,32 +56,51 @@ export default function LoginForm(): JSX.Element {
     if (error) return <ErrorMessage message={error} />;
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="form-centered">
             <Grid container direction="column" alignContent="center" mt={2}>
                 <Grid item>
                     <Controller
                         name="email"
                         control={control}
                         render={({ field }) =>
-                            <TextField   {...field} label="Email" type="email" margin="normal" fullWidth
+                            <TextField {...field} label="Email" type="email" margin="normal" className="form-text-input"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton edge="end" >
+                                                <MailOutlineIcon />
+                                            </IconButton>
+                                        </InputAdornment>),
+                                }}
                                 error={Boolean(errors.email)} helperText={errors.email?.message}
                             />
                         }
                     />
                 </Grid>
                 <Grid item>
-                    <Controller
-                        name="password"
-                        control={control}
+                    <Controller name="password" control={control}
                         render={({ field }) =>
-                            <TextField  {...field} label="Password" type="password" margin="normal" fullWidth
-                                error={Boolean(errors.password)} helperText={errors.password?.message}
-                            />
-                        }
+                            <TextField  {...field} label="Password" type={showPassword ? 'text' : 'password'}
+                                margin="normal" className="form-text-input"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                onMouseDown={(event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault()}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                error={Boolean(errors.password)} helperText={errors.password?.message} />}
                     />
                 </Grid>
                 <Grid item>
                     <FormControlLabel
+                        sx={{ marginTop: '10px' }}
                         control={
                             <Controller name="remember" control={control}
                                 render={({ field: props }) =>
@@ -91,7 +112,7 @@ export default function LoginForm(): JSX.Element {
                     />
                 </Grid>
                 <Grid item>
-                    <Grid container spacing={5} direction="row" justifyContent="center">
+                    <Grid container sx={{ marginTop: '-20px' }} spacing={5} direction="row" justifyContent="center">
                         <Grid item>
                             <Button variant="outlined" onClick={() => navigate(RouteNames.HOME)}>
                                 Cancel

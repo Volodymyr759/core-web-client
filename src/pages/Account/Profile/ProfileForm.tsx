@@ -5,9 +5,11 @@ import * as Yup from "yup";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IUser } from "../../../types/user";
-import { PHONE_REGULAR_EXPRESSION } from "../../../types/common/RegularExpressions";
+import { EMAIL_REG_EXP, PHONE_REG_EXP } from "../../../types/common/RegularExpressions";
 import { updateUserAxios } from "../../../api/user";
-import { Button, Checkbox, FormControlLabel, Grid, Snackbar, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Grid, IconButton, InputAdornment, Snackbar, TextField } from "@mui/material";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function ProfileForm(): JSX.Element {
@@ -27,9 +29,10 @@ export default function ProfileForm(): JSX.Element {
             .required()
             .max(50, 'The field User Name may not be greater than 50 characters.'),
         email: Yup.string()
-            .required()
-            .max(50, 'The field Email may not be greater than 50 characters.'),
-        phoneNumber: Yup.string().matches(PHONE_REGULAR_EXPRESSION, 'Phone number is not valid, should contain up to 15 numeric symbols.'),
+            .max(50, 'The field Email may not be greater than 50 characters.')
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid."),
+        phoneNumber: Yup.string()
+            .matches(PHONE_REG_EXP, 'Phone number is not valid. Must contain from 11 up to 13 characters, valid formats: +31636363634, 1234567890, 075-63546725, 123-456-7890, (123)456-7890, (123) 456-7890, 123.456.7890'),
         avatarUrl: Yup.string()
             .max(1000, 'The field Avatar Url may not be greater than 1000 characters.'),
     })
@@ -63,20 +66,28 @@ export default function ProfileForm(): JSX.Element {
     const onSubmit = async (user: IUser) => updateUserData(user);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="form-centered">
             <input {...register("id")} type="hidden" />
             <Grid container direction="column" alignContent="center" mt={2}>
                 <Grid item>
                     <Controller name="userName" control={control}
                         render={({ field }) =>
-                            <TextField  {...field} label="User Name" type="text" margin="normal" fullWidth
+                            <TextField  {...field} label="User Name" type="text" margin="normal" className="form-text-input"
                                 error={Boolean(errors.userName)} helperText={errors.userName?.message} />}
                     />
                 </Grid>
                 <Grid item>
                     <Controller name="email" control={control}
                         render={({ field }) =>
-                            <TextField  {...field} label="Email" type="email" margin="normal" fullWidth disabled
+                            <TextField  {...field} label="Email" type="email" margin="normal" className="form-text-input" disabled
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton edge="end" >
+                                                <MailOutlineIcon />
+                                            </IconButton>
+                                        </InputAdornment>),
+                                }}
                                 error={Boolean(errors.email)} helperText={errors.email?.message} />}
                     />
                 </Grid>
@@ -100,13 +111,21 @@ export default function ProfileForm(): JSX.Element {
                 <Grid item>
                     <Controller name="phoneNumber" control={control}
                         render={({ field }) =>
-                            <TextField {...field} label="Phone" type="text" margin="normal" fullWidth
+                            <TextField {...field} label="Phone" type="text" margin="normal" className="form-text-input"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton edge="end" >
+                                                <PhoneIcon />
+                                            </IconButton>
+                                        </InputAdornment>),
+                                }}
                                 error={Boolean(errors.phoneNumber)} helperText={errors.phoneNumber?.message} />} />
                 </Grid>
                 <Grid item>
                     <Controller name="avatarUrl" control={control}
                         render={({ field }) =>
-                            <TextField  {...field} label="Avatar Url" type="text" margin="normal" fullWidth
+                            <TextField  {...field} label="Avatar Url" type="text" margin="normal" className="form-text-input"
                                 error={Boolean(errors.avatarUrl)} helperText={errors.avatarUrl?.message} />}
                     />
                 </Grid>

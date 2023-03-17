@@ -6,7 +6,9 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminEmployeeFormProps } from "./types";
 import { IEmployee } from "../../../types/employee";
-import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
+import { EMAIL_REG_EXP } from "../../../types/common/RegularExpressions";
+import { Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployeeFormProps): JSX.Element {
@@ -32,9 +34,8 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
             .min(1, 'Full Name must be at least 1 character.')
             .max(50, 'The field Full Name may not be greater than 50 characters.'),
         email: Yup.string()
-            .required()
-            .min(1, 'Email must be at least 1 characters.')
-            .max(50, 'The field Email may not be greater than 50 characters.'),
+            .max(50, 'The field Email may not be greater than 50 characters.')
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid and may not be greater than 50 characters."),
         position: Yup.string()
             .required()
             .min(1, 'Position must be at least 1 character.')
@@ -109,6 +110,14 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
                             render={({ field }) =>
                                 <TextField {...field} label="Email" type="email"
                                     margin="normal" fullWidth
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton edge="end" >
+                                                    <MailOutlineIcon />
+                                                </IconButton>
+                                            </InputAdornment>),
+                                    }}
                                     error={Boolean(errors.email)} helperText={errors.email?.message}
                                 />
                             }

@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import SubscriptionForm from './SubscriptionForm';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IRoute, RouteNames } from '../../routing';
-import HomePage from '../../pages/HomePage/HomePage';
-import AboutPage from '../../pages/AboutPage/AboutPage';
+import HomePage from '../../pages/Home/HomePage';
+import AboutPage from '../../pages/About/AboutPage';
 import ServicesPage from '../../pages/CompanyServices/ServicesPage';
-import TeamPage from '../../pages/TeamPage/TeamPage';
+import TeamPage from '../../pages/Team/TeamPage';
 import VacanciesPage from '../../pages/Vacancies/VacanciesPage';
-import ContactPage from '../../pages/ContactPage/ContactPage';
+import ContactPage from '../../pages/Contact/ContactPage';
 
 const mainMenuRoutes: IRoute[] = [
     { path: RouteNames.HOME, title: "Home", component: <HomePage /> },

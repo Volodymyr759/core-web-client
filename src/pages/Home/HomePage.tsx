@@ -1,8 +1,8 @@
 import { Button, Container, Grid, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { RouteNames } from '../../routing';
-import AboutPage from '../AboutPage/AboutPage';
-import ContactPage from '../ContactPage/ContactPage';
+import AboutPage from '../About/AboutPage';
+import ContactPage from '../Contact/ContactPage';
 import ServiceChapter from './ServiceChapter';
 import TeamChapter from './TeamChapter';
 
