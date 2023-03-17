@@ -24,3 +24,5 @@ export const logout = (email: string, token: string) => {
         }
     }
 }
+
+

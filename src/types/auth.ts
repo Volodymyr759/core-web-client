@@ -28,6 +28,12 @@ export interface IChangePasswordDto {
     confirmNewPassword: string;
 }
 
+export interface IChangeEmailDto {
+    existingEmail: string;
+    newEmail: string;
+    password: string;
+}
+
 export enum Roles {
     ADMIN = "Admin",
     REGISTERED = "Registered"
