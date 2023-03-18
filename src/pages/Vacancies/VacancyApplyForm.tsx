@@ -11,6 +11,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ErrorMessage from "../../components/Messages/ErrorMessage";
 import { EMAIL_REG_EXP, PHONE_REG_EXP } from "../../types/common/RegularExpressions";
+import { MessageAppearance } from "../../components/Messages/types";
 
 export default function VacancyApplyForm({ candidate, closeForm, openForm, onSuccess }: VacancyApplyFormProps): JSX.Element {
     const [error, setError] = useState<null | string>(null);
@@ -154,7 +155,7 @@ export default function VacancyApplyForm({ candidate, closeForm, openForm, onSuc
                     </Grid>
                 </Grid>
             </form>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </SwipeableDrawer>
     )
 }

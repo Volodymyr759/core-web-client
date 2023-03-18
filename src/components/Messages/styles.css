@@ -7,3 +7,13 @@
 .success-message-large {
     color: #158F7C;
 }
+
+.error-message-regular {
+    color: red;
+    font-weight: bold;
+    margin: '30px 0';
+}
+
+.error-message-large {
+    color: red;
+}

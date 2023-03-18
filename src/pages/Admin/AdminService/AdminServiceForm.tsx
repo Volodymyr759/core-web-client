@@ -7,6 +7,7 @@ import { AdminServiceFormProps } from "./types";
 import { ICompanyService } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminServiceForm({ service, closeForm }: AdminServiceFormProps): JSX.Element {
     const { createService, updateService } = useActions();
@@ -168,7 +169,7 @@ export default function AdminServiceForm({ service, closeForm }: AdminServiceFor
                     </Grid>
                 </Grid>
             </form>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </SwipeableDrawer>
     )
 }

@@ -7,6 +7,7 @@ import { AdminCountryFormProps } from "./types";
 import { ICountry } from "../../../types/country";
 import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminCountryForm({ country, closeForm }: AdminCountryFormProps): JSX.Element {
     const { createCountry, updateCountry } = useActions();
@@ -109,7 +110,7 @@ export default function AdminCountryForm({ country, closeForm }: AdminCountryFor
                     </Grid>
                 </Grid>
             </form>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </SwipeableDrawer>
     )
 }

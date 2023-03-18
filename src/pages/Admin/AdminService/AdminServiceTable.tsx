@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorMessage from '../../../components/Messages/ErrorMessage';
 import TablePagination from '../../../components/TablePagination/TablePagination';
 import TableHeader from '../../../components/TableHeader/TableHeader';
+import { MessageAppearance } from '../../../components/Messages/types';
 
 export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
     const { serviceSearchResult, error } = useTypedSelector(state => state.service);
@@ -32,7 +33,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
         updateServiceIsActiveStatus(id, serviceToUpdate);
     }
 
-    if (error) return <ErrorMessage message={error} />;
+    if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>

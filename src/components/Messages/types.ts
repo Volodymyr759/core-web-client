@@ -6,10 +6,6 @@ export enum MessageAppearance {
 	LARGE
 }
 
-export interface ErrorMessageProps {
-	message: string;
-}
-
 export interface MessageProps {
 	appearance: MessageAppearance;
 	children: ReactNode;

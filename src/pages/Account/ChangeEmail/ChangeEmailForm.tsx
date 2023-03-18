@@ -13,6 +13,7 @@ import { Button, Grid, IconButton, InputAdornment, Snackbar, TextField } from "@
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function ChangeEmailForm(): JSX.Element {
     const navigate = useNavigate();
@@ -134,10 +135,7 @@ export default function ChangeEmailForm(): JSX.Element {
                         </Grid>
                     </Grid>
                 </Grid>
-                {error &&
-                    <Grid item>
-                        <ErrorMessage message={error} />
-                    </Grid>}
+                {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
             </Grid>
             <Snackbar
                 open={snackbarOpened}

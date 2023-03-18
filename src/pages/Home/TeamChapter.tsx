@@ -9,6 +9,7 @@ import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import { useNavigate } from "react-router-dom";
 import { RouteNames } from "../../routing";
 import EmployeesList from "../../components/EmployeeList/EmployeesList";
+import { MessageAppearance } from "../../components/Messages/types";
 
 export default function TeamChapter(): JSX.Element {
     const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
@@ -20,20 +21,19 @@ export default function TeamChapter(): JSX.Element {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (error) return <ErrorMessage message={error} />;
-
     return (
         <>
             <PageHeader
                 title="OUR TEAM"
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas."
             />
-            {
-                loading ?
-                    <Spinner /> :
+            {loading ?
+                <Spinner /> :
+                error ?
+                    <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage> :
                     <EmployeesList employees={employeeSearchResult.itemList} />
             }
-            <LoadMoreButton isDisabled={false} onClickHandler={() => { navigate(RouteNames.TEAM); window.scroll(0, 0) }} >
+            <LoadMoreButton isDisabled={error && error.length > 0} onClickHandler={() => { navigate(RouteNames.TEAM); window.scroll(0, 0) }} >
                 See All
             </LoadMoreButton>
         </>

@@ -37,15 +37,13 @@ export default function EmailConfirmPage(): JSX.Element {
                 title="Email Confirmation"
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
             />
-            {
-                loading ?
-                    <Spinner />
+            {loading ? <Spinner />
+                :
+                error ? <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage>
                     :
-                    error ? <ErrorMessage message={error} />
-                        :
-                        <SuccessMessage appearance={MessageAppearance.LARGE}>
-                            Email has been successfully verified. Please Sign In to continue.
-                        </SuccessMessage>
+                    <SuccessMessage appearance={MessageAppearance.LARGE}>
+                        Email has been successfully verified. Please Sign In to continue.
+                    </SuccessMessage>
             }
         </Container>
     )

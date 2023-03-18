@@ -13,6 +13,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LinkIcon from '@mui/icons-material/Link';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function ProfileForm(): JSX.Element {
     const { auth } = useTypedSelector(state => state.auth);
@@ -156,10 +157,7 @@ export default function ProfileForm(): JSX.Element {
                         </Grid>
                     </Grid>
                 </Grid>
-                {error &&
-                    <Grid item>
-                        <ErrorMessage message={error} />
-                    </Grid>}
+                {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
             </Grid>
             <Snackbar
                 open={snackbarOpened}

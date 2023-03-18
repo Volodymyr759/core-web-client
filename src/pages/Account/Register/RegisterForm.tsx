@@ -11,6 +11,7 @@ import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/materi
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function RegisterForm(): JSX.Element {
     const navigate = useNavigate();
@@ -129,10 +130,7 @@ export default function RegisterForm(): JSX.Element {
                         </Grid>
                     </Grid>
                 </Grid>
-                {error &&
-                    <Grid item>
-                        <ErrorMessage message={error} />
-                    </Grid>}
+                {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
             </Grid>
         </form>
     )

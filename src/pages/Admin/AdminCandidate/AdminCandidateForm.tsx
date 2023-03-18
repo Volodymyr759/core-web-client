@@ -13,6 +13,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -175,7 +176,7 @@ export default function AdminCandidateForm({ candidate, closeForm }: AdminCandid
                         </Grid>
                     </Grid>
                 </form>
-                {error && <ErrorMessage message={error} />}
+                {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
             </Box >
         </Modal >
     )

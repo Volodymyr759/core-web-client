@@ -8,6 +8,7 @@ import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { ICountry } from "../../../types/country";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): JSX.Element {
     const { countrySearchResult, error } = useTypedSelector(state => state.country);
@@ -23,7 +24,7 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
         onEdit(countryToUpdate);
     }
 
-    if (error) return <ErrorMessage message={error} />;
+    if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>

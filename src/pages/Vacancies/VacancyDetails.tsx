@@ -8,6 +8,7 @@ import { Box, Button, Container, Snackbar, Typography } from "@mui/material";
 import ErrorMessage from "../../components/Messages/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import VacancyApplyForm from "./VacancyApplyForm";
+import { MessageAppearance } from "../../components/Messages/types";
 
 export default function VacancyDetailes(): JSX.Element {
     const { vacancyId } = useParams();
@@ -15,7 +16,7 @@ export default function VacancyDetailes(): JSX.Element {
     const { auth } = useTypedSelector(state => state.auth)
     const { getVacancyById } = useActions();
     const [candidate, setCandidate] = useState<ICandidate | null>(null);
-    const[snackbarOpened, setSnackbarOpened] = useState<boolean>(false);
+    const [snackbarOpened, setSnackbarOpened] = useState<boolean>(false);
 
     useEffect(() => {
         getVacancyById(Number(vacancyId));
@@ -29,9 +30,9 @@ export default function VacancyDetailes(): JSX.Element {
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') return;
         setSnackbarOpened(false);
-      };
+    };
 
-    if (errorVacancies) return <ErrorMessage message={errorVacancies} />;
+    if (errorVacancies) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorVacancies}</ErrorMessage>;
 
     return (
         <Container maxWidth="lg" className='layout-container'>
@@ -54,13 +55,13 @@ export default function VacancyDetailes(): JSX.Element {
             </Box>
             <Box sx={{ textAlign: 'right' }}>
                 <Button variant="outlined" size="small" onClick={() => onApply({
-                    id: 0, 
-                    fullName: auth.user.userName, 
-                    email: auth.user.email, 
-                    phone: auth.user.phoneNumber || '', 
-                    notes: '', 
-                    isDismissed: false, 
-                    joinedAt: new Date(), 
+                    id: 0,
+                    fullName: auth.user.userName,
+                    email: auth.user.email,
+                    phone: auth.user.phoneNumber || '',
+                    notes: '',
+                    isDismissed: false,
+                    joinedAt: new Date(),
                     vacancyId: Number(vacancyId)
                 })}>Apply</Button>
             </Box>

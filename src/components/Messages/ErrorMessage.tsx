@@ -1,12 +1,35 @@
-import { Typography } from "@mui/material";
-import { ErrorMessageProps } from "./types";
+import { Grid, Typography } from "@mui/material";
+import { MessageAppearance, MessageProps } from "./types";
+import './styles.css';
 
-export default function ErrorMessage({ message }: ErrorMessageProps): JSX.Element {
+export default function ErrorMessage({ children, appearance }: MessageProps): JSX.Element {
+    let cssClass: string;
+    switch (appearance) {
+        case MessageAppearance.LARGE:
+            cssClass = 'error-message-large';
+            break;
+        default:
+            cssClass = 'error-message-regular';
+    }
+
     return (
-        <p style={{ textAlign: 'center' }}>
-            <Typography variant="body2" component={'span'} sx={{ color: 'red' }}>
-                {message}
+        // <p style={{ textAlign: 'center' }}>
+        //     <Typography variant="body2" component={'span'} sx={{ color: 'red' }}>
+        //         {message}
+        //     </Typography>
+        // </p>
+        <Grid container
+            direction="row"
+            justifyContent="center"
+            my={appearance === MessageAppearance.LARGE ? 5 : 1}
+        >
+            <Typography
+                variant={appearance === MessageAppearance.LARGE ? "h6" : 'body2'}
+                component={'span'}
+                className={cssClass}
+            >
+                {children}
             </Typography>
-        </p>
+        </Grid>
     )
 }

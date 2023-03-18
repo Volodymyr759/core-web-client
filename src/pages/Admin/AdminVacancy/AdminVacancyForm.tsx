@@ -10,6 +10,7 @@ import { AdminVacancyFormProps } from "./types";
 import { IVacancy } from "../../../types/vacancy";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -165,7 +166,7 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
                         </Grid>
                     </Grid>
                 </form>
-                {error && <ErrorMessage message={error} />}
+                {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
             </Box >
         </Modal >
     )

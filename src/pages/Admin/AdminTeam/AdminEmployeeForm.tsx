@@ -10,6 +10,7 @@ import { EMAIL_REG_EXP } from "../../../types/common/RegularExpressions";
 import { Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployeeFormProps): JSX.Element {
     const { offices } = useTypedSelector(state => state.vacancy);
@@ -189,7 +190,7 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
                     </Grid>
                 </Grid>
             </form>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </SwipeableDrawer>
     )
 }

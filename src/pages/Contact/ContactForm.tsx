@@ -8,6 +8,7 @@ import { sendEmailAxios } from "../../api/email";
 import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../components/Messages/types";
 
 export default function ContactForm(): JSX.Element {
     const [error, setError] = useState<null | string>(null);
@@ -116,7 +117,7 @@ export default function ContactForm(): JSX.Element {
                     </Grid>
                 </Grid>
             </form>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </>
     )
 }

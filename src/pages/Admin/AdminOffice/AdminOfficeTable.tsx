@@ -8,6 +8,7 @@ import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { IOffice } from "../../../types/office";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX.Element {
     const { officeSearchResult, error } = useTypedSelector(state => state.office);
@@ -27,7 +28,7 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
         onEdit(officeToUpdate);
     }
 
-    if (error) return <ErrorMessage message={error} />;
+    if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>

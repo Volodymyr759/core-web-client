@@ -8,6 +8,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import VacanciesFilters from "./VacanciesFilters";
 import VacanciesList from "./VacanciesList";
 import { Container } from "@mui/material";
+import { MessageAppearance } from "../../components/Messages/types";
 
 export default function VacanciesPage(): JSX.Element {
     const { errorFilters, errorVacancies, loadingFilters, loadingVacancies, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
@@ -27,16 +28,21 @@ export default function VacanciesPage(): JSX.Element {
         setVacancyPage(vacancySearchResult.currentPageNumber + 1);
     }
 
-    if (errorFilters) return <ErrorMessage message={errorFilters} />;
-    if (errorVacancies) return <ErrorMessage message={errorVacancies} />;
-
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader title="OUR VACANCIES" />
-            <VacanciesFilters />
-            {loadingFilters && <Spinner />}
-            <VacanciesList />
-            {loadingVacancies && <Spinner />}
+            {loadingFilters ?
+                <Spinner /> :
+                errorFilters ?
+                    <ErrorMessage appearance={MessageAppearance.LARGE}>{errorFilters}</ErrorMessage> :
+                    <VacanciesFilters />
+            }
+            {loadingVacancies ?
+                <Spinner /> :
+                errorVacancies ?
+                    <ErrorMessage appearance={MessageAppearance.LARGE}>{errorVacancies}</ErrorMessage> :
+                    <VacanciesList />
+            }
             <LoadMoreButton
                 onClickHandler={loadMoreHandler}
                 isDisabled={vacancySearchResult.currentPageNumber * vacancySearchResult.pageSize >= vacancySearchResult.totalItemCount}

@@ -10,6 +10,7 @@ import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";
 import { OrderType } from "../../types/common/orderType";
 import LoadMoreButton from "../../components/Button/LoadMoreButton";
+import { MessageAppearance } from "../../components/Messages/types";
 
 export default function ServiceChapter(): JSX.Element {
     const { error, serviceSearchResult, loading } = useTypedSelector(state => state.service);
@@ -21,16 +22,19 @@ export default function ServiceChapter(): JSX.Element {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (error) return <ErrorMessage message={error} />;
-
     return (
         <>
             <PageHeader
                 title="Services"
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
             />
-            {loading ? <Spinner /> : <ServicesList services={serviceSearchResult.itemList} />}
-            <LoadMoreButton isDisabled={false} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
+            {loading ?
+                <Spinner /> :
+                error ?
+                    <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage> :
+                    <ServicesList services={serviceSearchResult.itemList} />
+            }
+            <LoadMoreButton isDisabled={error && error.length > 0} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
                 See All
             </LoadMoreButton>
         </>

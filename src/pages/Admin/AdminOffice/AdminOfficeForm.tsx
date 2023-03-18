@@ -8,6 +8,7 @@ import { IOffice } from "../../../types/office";
 import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminOfficeForm({ office, closeForm }: AdminOfficeFormProps): JSX.Element {
     const { countrySearchResult } = useTypedSelector(state => state.country);
@@ -182,7 +183,7 @@ export default function AdminOfficeForm({ office, closeForm }: AdminOfficeFormPr
                     </Grid>
                 </Grid>
             </form>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </SwipeableDrawer>
     )
 }

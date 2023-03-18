@@ -7,6 +7,7 @@ import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminVacancyFilters from "./AdminVacancyFilters";
 import AdminVacancyForm from "./AdminVacancyForm";
 import AdminVacancyTable from "./AdminVacancyTable";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminVacancyPage(): JSX.Element {
     const { errorFilters, errorVacancies, offices, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
@@ -23,8 +24,8 @@ export default function AdminVacancyPage(): JSX.Element {
 
     const onCreateEdit = (vacancy: null | IVacancy) => setVacancy(vacancy);
 
-    if (errorFilters) return <ErrorMessage message={errorFilters} />;
-    if (errorVacancies) return <ErrorMessage message={errorVacancies} />;
+    if (errorFilters) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorFilters}</ErrorMessage>;
+    if (errorVacancies) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorVacancies}</ErrorMessage>;
 
     return (
         <>
