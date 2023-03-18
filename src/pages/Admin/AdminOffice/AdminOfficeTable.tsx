@@ -4,7 +4,7 @@ import { AdminOfficeTableProps } from "./types";
 import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { IOffice } from "../../../types/office";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";

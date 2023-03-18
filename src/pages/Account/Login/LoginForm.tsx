@@ -11,7 +11,7 @@ import { RouteNames } from "../../../routing";
 import { Button, Checkbox, FormControlLabel, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 export default function LoginForm(): JSX.Element {
     const { login } = useActions();

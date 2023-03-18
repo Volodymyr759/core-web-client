@@ -9,7 +9,7 @@ import { IEmployee } from "../../../types/employee";
 import { EMAIL_REG_EXP } from "../../../types/common/RegularExpressions";
 import { Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployeeFormProps): JSX.Element {
     const { offices } = useTypedSelector(state => state.vacancy);

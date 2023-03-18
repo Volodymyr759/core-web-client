@@ -4,7 +4,7 @@ import { RouteNames } from "../../routing";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { CompanyServiceStatus } from "../../types/companyService";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/Messages/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";

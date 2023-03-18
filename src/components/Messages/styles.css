@@ -1,0 +1,9 @@
+.success-message-regular {
+    color: #158F7C;
+    font-weight: bold;
+    margin: '30px 0';
+}
+
+.success-message-large {
+    color: #158F7C;
+}

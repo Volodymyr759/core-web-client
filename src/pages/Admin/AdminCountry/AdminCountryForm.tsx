@@ -6,7 +6,7 @@ import { useActions } from "../../../hooks/useActions";
 import { AdminCountryFormProps } from "./types";
 import { ICountry } from "../../../types/country";
 import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 export default function AdminCountryForm({ country, closeForm }: AdminCountryFormProps): JSX.Element {
     const { createCountry, updateCountry } = useActions();

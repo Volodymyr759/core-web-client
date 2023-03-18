@@ -6,7 +6,7 @@ import { useActions } from "../../../hooks/useActions";
 import { AdminOfficeFormProps } from "./types";
 import { IOffice } from "../../../types/office";
 import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 export default function AdminOfficeForm({ office, closeForm }: AdminOfficeFormProps): JSX.Element {

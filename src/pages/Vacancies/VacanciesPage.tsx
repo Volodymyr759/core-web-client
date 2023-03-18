@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import LoadMoreButton from "../../components/Button/LoadMoreButton";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/Messages/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Spinner from "../../components/Spinner/Spinner";
 import VacanciesFilters from "./VacanciesFilters";

@@ -4,7 +4,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { OrderType } from "../../types/common/orderType";
 import { CompanyServiceStatus } from "../../types/companyService";
 import LoadMoreButton from "../../components/Button/LoadMoreButton";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/Messages/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";

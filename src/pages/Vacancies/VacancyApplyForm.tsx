@@ -5,8 +5,12 @@ import * as Yup from "yup";
 import { VacancyApplyFormProps } from "./types";
 import { ICandidate } from "../../types/candidate";
 import { createCandidateAxios } from "../../api/candidate";
-import { Button, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { Button, Grid, IconButton, InputAdornment, SwipeableDrawer, TextField, Typography } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
+import ErrorMessage from "../../components/Messages/ErrorMessage";
+import { EMAIL_REG_EXP, PHONE_REG_EXP } from "../../types/common/RegularExpressions";
 
 export default function VacancyApplyForm({ candidate, closeForm, openForm, onSuccess }: VacancyApplyFormProps): JSX.Element {
     const [error, setError] = useState<null | string>(null);
@@ -28,20 +32,15 @@ export default function VacancyApplyForm({ candidate, closeForm, openForm, onSuc
 
     const validationSchema = Yup.object({
         fullName: Yup.string()
-            .required()
-            .min(2, 'Full name must be at least 2 characters.')
-            .max(50, 'The field Full name may not be greater than 50 characters.'),
+            .required('The field Name is a required field (up to 50 characters).')
+            .max(50, 'The field Name may not be greater than 50 characters.'),
         email: Yup.string()
-            .required()
-            .min(6, 'Email must be at least 6 characters.')
-            .max(50, 'The field Email may not be greater than 50 characters.'),
+            .max(50, 'The field Email may not be greater than 50 characters.')
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid and may not be greater than 50 characters."),
         phone: Yup.string()
-            .required()
-            .min(2, 'Phone must be at least 2 characters.')
-            .max(15, 'The field Phone may not be greater than 15 characters.'),
+            .matches(PHONE_REG_EXP, 'Phone number is not valid. Must contain from 11 up to 13 characters, valid formats: +31636363634, 1234567890, 075-63546725, 123-456-7890, (123)456-7890, (123) 456-7890, 123.456.7890'),
         notes: Yup.string()
-            .required()
-            .min(2, 'Note must be at least 2 characters.')
+            .required('The field Note is a required field (up to 1024 characters).')
             .max(1024, 'The field Note may not be greater than 1024 characters.'),
         isDismissed: Yup.boolean()
             .required(),
@@ -98,28 +97,49 @@ export default function VacancyApplyForm({ candidate, closeForm, openForm, onSuc
                     <Grid item>
                         <Controller name="fullName" control={control}
                             render={({ field }) =>
-                                <TextField  {...field} label="Full Name" type="text" margin="normal" fullWidth
+                                <TextField  {...field} label="Name" type="text" margin="normal" className="form-text-input"
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton edge="end" >
+                                                    <AccountCircleIcon />
+                                                </IconButton>
+                                            </InputAdornment>),
+                                    }}
                                     error={Boolean(errors.fullName)} helperText={errors.fullName?.message} />} />
                     </Grid>
                     <Grid item>
-                        <Controller
-                            name="email"
-                            control={control}
+                        <Controller name="email" control={control}
                             render={({ field }) =>
-                                <TextField  {...field} label="Email" type="email" margin="normal" fullWidth
+                                <TextField  {...field} label="Email" type="email" margin="normal" className="form-text-input"
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton edge="end" >
+                                                    <MailOutlineIcon />
+                                                </IconButton>
+                                            </InputAdornment>),
+                                    }}
                                     error={Boolean(errors.email)} helperText={errors.email?.message} />} />
                     </Grid>
                     <Grid item>
                         <Controller name="phone" control={control}
                             render={({ field }) =>
-                                <TextField {...field} label="Phone" type="text" margin="normal" fullWidth
+                                <TextField {...field} label="Phone" type="text" margin="normal" className="form-text-input"
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton edge="end" >
+                                                    <PhoneIcon />
+                                                </IconButton>
+                                            </InputAdornment>),
+                                    }}
                                     error={Boolean(errors.phone)} helperText={errors.phone?.message} />} />
                     </Grid>
                     <Grid item>
                         <Controller name="notes" control={control}
                             render={({ field }) =>
-                                <TextField {...field} label="Notes" fullWidth
-                                    margin="normal" multiline rows={4} variant='outlined' style={{ height: 'none' }}
+                                <TextField {...field} label="Notes" margin="normal" className="form-text-input" multiline rows={4}
                                     error={Boolean(errors.notes)} helperText={errors.notes?.message} />} />
                     </Grid>
                 </Grid>

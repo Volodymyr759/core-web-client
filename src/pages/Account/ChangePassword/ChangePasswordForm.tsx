@@ -11,7 +11,7 @@ import { IChangePasswordDto } from "../../../types/auth";
 import { EMAIL_REG_EXP, PASSWORD_REG_EXP } from "../../../types/common/RegularExpressions";
 import { Button, Grid, IconButton, InputAdornment, Snackbar, TextField } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function ChangePasswordForm(): JSX.Element {

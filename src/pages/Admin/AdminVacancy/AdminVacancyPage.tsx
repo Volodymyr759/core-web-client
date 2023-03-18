@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IVacancy, VacancyStatus } from "../../../types/vacancy";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminVacancyFilters from "./AdminVacancyFilters";
 import AdminVacancyForm from "./AdminVacancyForm";

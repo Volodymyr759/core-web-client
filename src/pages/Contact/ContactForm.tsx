@@ -7,7 +7,7 @@ import { EMAIL_REG_EXP } from "../../types/common/RegularExpressions";
 import { sendEmailAxios } from "../../api/email";
 import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/Messages/ErrorMessage";
 
 export default function ContactForm(): JSX.Element {
     const [error, setError] = useState<null | string>(null);

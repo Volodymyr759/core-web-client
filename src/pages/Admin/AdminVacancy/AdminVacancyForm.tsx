@@ -9,7 +9,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminVacancyFormProps } from "./types";
 import { IVacancy } from "../../../types/vacancy";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 const style = {
     position: 'absolute' as 'absolute',

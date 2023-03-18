@@ -8,9 +8,11 @@ import { IUser } from "../../../types/user";
 import { EMAIL_REG_EXP, PHONE_REG_EXP } from "../../../types/common/RegularExpressions";
 import { updateUserAxios } from "../../../api/user";
 import { Button, Checkbox, FormControlLabel, Grid, IconButton, InputAdornment, Snackbar, TextField } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LinkIcon from '@mui/icons-material/Link';
 import PhoneIcon from '@mui/icons-material/Phone';
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 export default function ProfileForm(): JSX.Element {
     const { auth } = useTypedSelector(state => state.auth);
@@ -30,7 +32,7 @@ export default function ProfileForm(): JSX.Element {
             .max(50, 'The field User Name may not be greater than 50 characters.'),
         email: Yup.string()
             .max(50, 'The field Email may not be greater than 50 characters.')
-            .matches(EMAIL_REG_EXP, "Required field Email is not valid."),
+            .matches(EMAIL_REG_EXP, "Required field Email is not valid and may not be greater than 50 characters."),
         phoneNumber: Yup.string()
             .matches(PHONE_REG_EXP, 'Phone number is not valid. Must contain from 11 up to 13 characters, valid formats: +31636363634, 1234567890, 075-63546725, 123-456-7890, (123)456-7890, (123) 456-7890, 123.456.7890'),
         avatarUrl: Yup.string()
@@ -43,7 +45,7 @@ export default function ProfileForm(): JSX.Element {
         email: auth.user.email,
         emailConfirmed: auth.user.emailConfirmed,
         phoneNumber: auth.user.phoneNumber || '',
-        avatarUrl: auth.user.avatarUrl
+        avatarUrl: auth.user.avatarUrl || ''
     }
 
     const { control, handleSubmit, formState: { errors }, register } = useForm({
@@ -73,6 +75,14 @@ export default function ProfileForm(): JSX.Element {
                     <Controller name="userName" control={control}
                         render={({ field }) =>
                             <TextField  {...field} label="User Name" type="text" margin="normal" className="form-text-input"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton edge="end" >
+                                                <AccountCircleIcon />
+                                            </IconButton>
+                                        </InputAdornment>),
+                                }}
                                 error={Boolean(errors.userName)} helperText={errors.userName?.message} />}
                     />
                 </Grid>
@@ -126,6 +136,14 @@ export default function ProfileForm(): JSX.Element {
                     <Controller name="avatarUrl" control={control}
                         render={({ field }) =>
                             <TextField  {...field} label="Avatar Url" type="text" margin="normal" className="form-text-input"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton edge="end" >
+                                                <LinkIcon />
+                                            </IconButton>
+                                        </InputAdornment>),
+                                }}
                                 error={Boolean(errors.avatarUrl)} helperText={errors.avatarUrl?.message} />}
                     />
                 </Grid>

@@ -5,7 +5,7 @@ import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { ICandidate } from "../../types/candidate";
 import { Box, Button, Container, Snackbar, Typography } from "@mui/material";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../components/Messages/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import VacancyApplyForm from "./VacancyApplyForm";
 

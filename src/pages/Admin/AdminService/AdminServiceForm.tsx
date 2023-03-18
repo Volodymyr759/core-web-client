@@ -6,7 +6,7 @@ import { useActions } from "../../../hooks/useActions";
 import { AdminServiceFormProps } from "./types";
 import { ICompanyService } from "../../../types/companyService";
 import { Button, Checkbox, FormControlLabel, Grid, SwipeableDrawer, TextField, Typography } from "@mui/material";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 export default function AdminServiceForm({ service, closeForm }: AdminServiceFormProps): JSX.Element {
     const { createService, updateService } = useActions();

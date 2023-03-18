@@ -10,7 +10,7 @@ import { EMAIL_REG_EXP, PASSWORD_REG_EXP } from "../../../types/common/RegularEx
 import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
 
 export default function RegisterForm(): JSX.Element {
     const navigate = useNavigate();

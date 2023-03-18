@@ -14,8 +14,7 @@ export class AxiosMiddleware {
                     const keys = JSON.parse(authFromLocalStorage);
                     config.headers = {
                         'Authorization': `Bearer ${keys.tokens.accessToken}`,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Accept': 'application/json'
                     }
                 }
                 return config;
