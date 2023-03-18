@@ -14,7 +14,8 @@ export class AxiosMiddleware {
                     const keys = JSON.parse(authFromLocalStorage);
                     config.headers = {
                         'Authorization': `Bearer ${keys.tokens.accessToken}`,
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }
                 return config;
@@ -54,8 +55,11 @@ export class AxiosMiddleware {
                 }
                 switch (error.status) {
                     case ErrorStatus['Bad Request']:
-                        if (error.response && error.response.data['title']) {
-                            throw new Error(error.response.data['title'])
+                        if (error.response) {
+                            if (error.response.data) {
+                                throw new Error(error.response.data['title']);
+                            }
+                            throw new Error('Network unavailable or server is not running.');
                         }
                         throw new Error("Bad Request Error");
                     case ErrorStatus.Forbidden:

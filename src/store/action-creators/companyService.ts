@@ -13,6 +13,7 @@ export const getServices = (limit: number, page: number, companyServiceStatus: C
                     await getServicesAxios(limit, page, companyServiceStatus, order)
             });
         } catch (error) {
+            console.log('error ', error)
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: error.message || "Error of loading services." })
         } finally {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: false });

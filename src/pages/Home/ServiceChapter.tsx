@@ -1,15 +1,15 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { RouteNames } from "../../routing";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { CompanyServiceStatus } from "../../types/companyService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";
 import { OrderType } from "../../types/common/orderType";
-import { CompanyServiceStatus } from "../../types/companyService";
 import LoadMoreButton from "../../components/Button/LoadMoreButton";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "../../routing";
 
 export default function ServiceChapter(): JSX.Element {
     const { error, serviceSearchResult, loading } = useTypedSelector(state => state.service);
@@ -29,8 +29,7 @@ export default function ServiceChapter(): JSX.Element {
                 title="Services"
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
             />
-            <ServicesList services={serviceSearchResult.itemList} />
-            {loading && <Spinner />}
+            {loading ? <Spinner /> : <ServicesList services={serviceSearchResult.itemList} />}
             <LoadMoreButton isDisabled={false} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
                 See All
             </LoadMoreButton>
