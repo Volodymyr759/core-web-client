@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { IMailMessage } from "../../types/common/mailMessage";
 import { EMAIL_REG_EXP } from "../../types/common/RegularExpressions";
 import { sendEmailAxios } from "../../api/email";
-import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Button, Grid, IconButton, InputAdornment, Snackbar, TextField } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../components/Messages/types";
@@ -13,6 +13,8 @@ import { MessageAppearance } from "../../components/Messages/types";
 export default function ContactForm(): JSX.Element {
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
+    const [serverConfirmation, setServerConfirmation] = useState<string>('');
 
     const validationSchema = Yup.object({
         senderName: Yup.string()
@@ -41,9 +43,10 @@ export default function ContactForm(): JSX.Element {
     const sendEmail = async (message: IMailMessage) => {
         try {
             setLoading(true);
-            await sendEmailAxios(message);
+            const responceFromServer: string = await sendEmailAxios(message);
+            setServerConfirmation(responceFromServer);
+            setOpenSnackBar(true);
         } catch (e) {
-            console.log('error from axios: ', e.message);
             setError("Oops! Something while sending sending the message. Please try again later.");
         } finally {
             setLoading(false);
@@ -52,6 +55,11 @@ export default function ContactForm(): JSX.Element {
 
     const onSubmit = (message: IMailMessage): void => {
         sendEmail(message);
+    }
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') return;
+        setOpenSnackBar(false);
     }
 
     return (
@@ -116,6 +124,7 @@ export default function ContactForm(): JSX.Element {
                         </Button>
                     </Grid>
                 </Grid>
+                <Snackbar open={openSnackBar} message={serverConfirmation} autoHideDuration={4000} onClose={handleClose} />
             </form>
             {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </>

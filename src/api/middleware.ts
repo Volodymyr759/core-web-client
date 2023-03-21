@@ -4,7 +4,7 @@ import { refreshTokenAxios } from './auth';
 
 export class AxiosMiddleware {
     static boot(): void {
-        axios.defaults.baseURL = process.env.REACT_APP_BASE_API_URL_PROD;
+        axios.defaults.baseURL = process.env.REACT_APP_BASE_API_URL_DEV;
 
         // Request interceptor for API calls
         axios.interceptors.request.use(

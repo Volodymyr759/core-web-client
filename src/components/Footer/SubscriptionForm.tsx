@@ -7,9 +7,12 @@ import { IMailSubscriber } from "../../types/mailSubscriber";
 import { EMAIL_REG_EXP } from "../../types/common/RegularExpressions";
 import { Button, IconButton, InputAdornment, Snackbar, TextField } from "@mui/material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ErrorMessage from "../Messages/ErrorMessage";
+import { MessageAppearance } from "../Messages/types";
 
 export default function SubscriptionForm(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<null | string>(null);
     const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
 
     const validationSchema = Yup.object({
@@ -27,13 +30,21 @@ export default function SubscriptionForm(): JSX.Element {
         defaultValues
     })
 
+    const createdSubscriber = async (subscriber: IMailSubscriber) => {
+        try {
+            setLoading(true);
+            await subscribeAxios(subscriber);
+            setOpenSnackBar(true);
+        } catch (e) {
+            setError(e.message || "Oops! Something went wrong while subscribing.");
+        } finally {
+            setLoading(false);
+            reset();
+        }
+    }
+
     const onSubmit = async (emailAddress: { email: string }): Promise<void> => {
-        setLoading(true);
-        const createdSubscriber = await subscribeAxios({ email: emailAddress.email, isSubscribed: true, mailSubscriptionId: 1 } as IMailSubscriber)
-        console.log("createdSubscriber: ", createdSubscriber);
-        setLoading(false);
-        reset();
-        setOpenSnackBar(true);
+        createdSubscriber({ email: emailAddress.email, isSubscribed: true, mailSubscriptionId: 1 });
     }
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -66,6 +77,7 @@ export default function SubscriptionForm(): JSX.Element {
                 </Button>
                 <Snackbar open={openSnackBar} message='Subscribed.' autoHideDuration={4000} onClose={handleClose} />
             </div>
+            {error && <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>}
         </form>
     )
 }

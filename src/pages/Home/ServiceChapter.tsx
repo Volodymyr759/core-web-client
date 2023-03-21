@@ -32,7 +32,7 @@ export default function ServiceChapter(): JSX.Element {
                 <Spinner /> :
                 error ?
                     <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage> :
-                    <ServicesList services={serviceSearchResult.itemList} />
+                    <ServicesList services={serviceSearchResult.itemList.slice(0, 3)} />
             }
             <LoadMoreButton isDisabled={error && error.length > 0} onClickHandler={() => { navigate(RouteNames.SERVICES); window.scroll(0, 0) }} >
                 See All

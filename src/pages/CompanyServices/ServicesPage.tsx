@@ -31,12 +31,10 @@ export default function ServicesPage(): JSX.Element {
                 title="OUR SERVICES"
                 text="Voluptatum deleniti atque corrupti quos dolores et quas molestias..."
             />
+            <ServicesList services={serviceSearchResult.itemList} />
             {loading ?
                 <Spinner /> :
-                error ?
-                    <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage>
-                    :
-                    <ServicesList services={serviceSearchResult.itemList} />
+                error && <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage>
             }
             <LoadMoreButton
                 onClickHandler={loadMoreHandler}
