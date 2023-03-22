@@ -8,13 +8,13 @@ export default function LoginPage(): JSX.Element {
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="Sign in."
+                title="Sign In."
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
             />
             <Grid container direction="column" alignItems="center">
                 <LoginForm />
                 <Typography component={'p'} my={3} >
-                    Or <Link to={RouteNames.REGISTER}>Sign Up</Link> if you already have an account.
+                    Or <Link to={RouteNames.REGISTER}>Sign Up</Link> if you don't have an account yet.
                 </Typography>
             </Grid>
         </Container>
