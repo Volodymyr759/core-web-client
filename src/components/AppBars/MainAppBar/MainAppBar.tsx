@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppBar, Avatar, Box, Button, Container, Toolbar, Tooltip, IconButton, Menu, MenuItem, Typography, } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
+// import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
@@ -65,17 +65,18 @@ export default function MainAppBar() {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-                    <Typography variant="h6" noWrap component="a" href={RouteNames.HOME} sx={{
+                    <Typography variant="h6" component="a" href={RouteNames.HOME} sx={{
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
+                        fontSize: '28px',
+                        lineHeight: '1',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
                         color: 'inherit',
                         textDecoration: 'none',
                     }}
                     >
-                        EIVOLO
+                        Shuffle
                     </Typography>
 
                     {/* Hiden menu */}
@@ -117,11 +118,19 @@ export default function MainAppBar() {
                         </Menu>
                     </Box>
 
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography variant="h5" noWrap component="a" href=""
-                        sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}
+                    <Typography variant="h6" component="a" href={RouteNames.HOME} sx={{
+                        mr: 2,
+                        display: { xs: 'flex', md: 'none' },
+                        flexGrow: 1,
+                        fontSize: '28px',
+                        lineHeight: '1',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                        color: 'inherit',
+                        textDecoration: 'none',
+                    }}
                     >
-                        EIVOLO
+                        Shuffle
                     </Typography>
 
                     {/* Main Menu pages */}
@@ -130,7 +139,7 @@ export default function MainAppBar() {
                             <Button
                                 key={page.path}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+                                sx={{ my: 2, display: 'block' }}
                             >
                                 <Link to={page.path} className="main-menu-link">{page.title}</Link>
                             </Button>

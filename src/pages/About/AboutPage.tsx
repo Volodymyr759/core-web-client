@@ -10,7 +10,6 @@ export default function AboutPage(): JSX.Element {
             />
             <Grid container spacing={2} className="page-chapter-container">
                 <Grid item xs={12} md={6} textAlign='center'>
-                    {/* <Box component="img" sx={{ width: '100%' }} alt="About us img." src="/images/about.jpg" /> */}
                     <Box component="img" sx={{ width: '100%' }} alt="About us img." src="https://volodymyr57.somee.com/Uploads/about.jpg" />
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -23,7 +22,6 @@ export default function AboutPage(): JSX.Element {
                     <Typography component={'p'} sx={{ padding: '30px 0' }}>
                         Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
                     </Typography>
-                    {/* <Box component="img" sx={{ width: '100%' }} alt="About us 2nd img." src="/images/about2.jpg" /> */}
                     <Box component="img" sx={{ width: '100%' }} alt="About us 2nd img." src="https://volodymyr57.somee.com/uploads/about2.jpg" />
                 </Grid>
             </Grid>

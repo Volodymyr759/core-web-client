@@ -12,6 +12,7 @@ export enum RouteNames {
     HOME = "/",
     SERVICES = '/services',
     TEAM = '/team',
+    TEST_UI = '/test',
     VACANCY = '/vacancy',
     VACANCY_DETAILES = '/vacancy/:vacancyId',
     ERROR = '/error',

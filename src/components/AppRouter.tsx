@@ -26,6 +26,7 @@ import EmailConfirmPage from '../pages/Account/EmailConfirm/EmailConfirmPage';
 import ProfilePage from '../pages/Account/Profile/ProfilePage';
 import ChangeEmailPage from '../pages/Account/ChangeEmail/ChangeEmailPage';
 import ChangePasswordPage from '../pages/Account/ChangePassword/ChangePasswordPage';
+import TestUI from '../pages/Test/TestUI';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -36,6 +37,7 @@ export default function AppRouter() {
         { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
         { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
         { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
+        { path: RouteNames.TEST_UI, title: "UI Tests", component: <TestUI /> },
         { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
         { path: RouteNames.LOGIN, title: "Sign In", component: <LoginPage /> },
         { path: RouteNames.REGISTER, title: "Sign Up", component: <RegisterPage /> },
