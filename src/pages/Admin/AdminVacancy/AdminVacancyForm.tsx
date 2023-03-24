@@ -38,8 +38,8 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
             .required()
             .min(1, 'Title must be at least 1 character.')
             .max(50, 'The field Title may not be greater than 50 characters.'),
-        description: Yup.string()
-            .required('Description must be at least 1 characters.'),
+        // description: Yup.string()
+        //     .required('Description must be at least 1 characters.'),
         previews: Yup.number()
             .required(),
         isActive: Yup.boolean()

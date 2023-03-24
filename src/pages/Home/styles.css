@@ -1,0 +1,30 @@
+/*-------HeaderChapter-------*/
+.header-chapter-header {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 3rem;
+    line-height: 1.167;
+    letter-spacing: 0em;
+    color: white;
+}
+
+#description {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.334;
+    letter-spacing: 0em;
+    color: white;
+}
+
+.btn-transit {
+    text-transform: none !important;
+    transition: all 1s !important;
+}
+
+.btn-transit:hover {
+    background-color: palevioletred !important;
+    font-size: 1rem;
+}

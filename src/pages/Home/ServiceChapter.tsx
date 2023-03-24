@@ -4,11 +4,11 @@ import { RouteNames } from "../../routing";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { CompanyServiceStatus } from "../../types/companyService";
+import { OrderType } from "../../types/common/orderType";
 import ErrorMessage from "../../components/Messages/ErrorMessage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ServicesList from "../../components/ServiceList/ServicesList";
 import Spinner from "../../components/Spinner/Spinner";
-import { OrderType } from "../../types/common/orderType";
 import LoadMoreButton from "../../components/Button/LoadMoreButton";
 import { MessageAppearance } from "../../components/Messages/types";
 

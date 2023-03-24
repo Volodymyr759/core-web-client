@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import './styles.css';
+import '../../index.css';
 
 export default function TestUI(): JSX.Element {
 

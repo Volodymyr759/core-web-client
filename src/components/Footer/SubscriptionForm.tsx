@@ -54,7 +54,7 @@ export default function SubscriptionForm(): JSX.Element {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
+            <div >
                 <Controller
                     name="email"
                     control={control}

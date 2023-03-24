@@ -30,7 +30,7 @@ export default function AdminVacancyPage(): JSX.Element {
     return (
         <>
             <PageHeader title="Vacancies Management" />
-            <AdminVacancyFilters onAddNew={() => setVacancy({ id: 0, title: '', description: '', previews: 0, isActive: true, officeId: offices[1].id })} />
+            <AdminVacancyFilters onAddNew={() => setVacancy({ id: 0, title: '', description: 'Vacancy Description', previews: 0, isActive: true, officeId: offices[1].id })} />
             <AdminVacancyTable onEdit={onCreateEdit} />
             {vacancy && <AdminVacancyForm vacancy={vacancy} closeForm={() => setVacancy(null)} />}
         </>

@@ -8,5 +8,4 @@ export default function ServicesList({ services }: ServiceListProps): JSX.Elemen
             {services.map(service => <ServiceCard key={service.id} service={service} />)}
         </Grid>
     )
-
 }

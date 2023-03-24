@@ -55,7 +55,7 @@ export default function Footer(): JSX.Element {
                         {mainMenuRoutes.map((page) => (
                             <ListItemButton key={page.path} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
                                 <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
-                                    <ArrowForwardIosIcon fontSize='small' htmlColor='#1976d2' />
+                                    <ArrowForwardIosIcon sx={{ fontSize: '1rem' }} htmlColor='#3D4F4C' />
                                 </ListItemIcon>
                                 &nbsp;&nbsp;
                                 <ListItemText primary={page.title} />
@@ -64,7 +64,7 @@ export default function Footer(): JSX.Element {
                     </List>
                 </Grid>
             </Grid>
-            <Grid item xs={12} md={4} textAlign='center' padding={'16px 40px !important'}>
+            <Grid item xs={12} md={4} textAlign='center' sx={{ padding: '16px' }}>
                 <Typography sx={{ margin: '0 0 20px 0', padding: '2px 0 2px 0', fontSize: 18, fontWeight: 600 }}>
                     Our Newsletter
                 </Typography>

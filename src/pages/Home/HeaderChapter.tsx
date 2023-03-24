@@ -1,6 +1,7 @@
-import { Button, Container, Grid, Paper, Typography } from "@mui/material";
+import { Button, Container, Grid, Paper } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { RouteNames } from '../../routing';
+import './styles.css';
 
 export default function HeaderChapter(): JSX.Element {
     const navigate = useNavigate();
@@ -10,14 +11,12 @@ export default function HeaderChapter(): JSX.Element {
             <Container fixed maxWidth='md' >
                 <Grid container direction="column" alignContent="center" maxWidth="50%">
                     <Grid item mt={10} mb={3}>
-                        <Typography variant='h3' color="white">
-                            Eivolo Solutions
-                        </Typography>
+                        <h3 className="header-chapter-header">Eivolo Solutions</h3>
                     </Grid>
                     <Grid item>
-                        <Typography variant='h5' color="white">
+                        <p id="description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quo non praesentium quas.
-                        </Typography>
+                        </p>
                     </Grid>
                     <Grid item mt={4} mb={8}>
                         <Button className='btn-transit' variant='contained' color='primary'

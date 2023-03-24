@@ -1,0 +1,16 @@
+.card-header {
+    color: #334240;
+    font-family: "Roboto", sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    text-align: center;
+}
+
+.card-header:hover {
+    color: #1BBCA3;
+}
+
+#service-description {
+    padding: 15px;
+}
