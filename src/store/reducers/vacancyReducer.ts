@@ -7,7 +7,7 @@ const initialState: VacancyState = {
         currentPageNumber: 1,
         order: OrderType.Ascending,
         pageCount: 0,
-        pageSize: 9,
+        pageSize: 6,
         searchCriteria: "",
         totalItemCount: 0
     },

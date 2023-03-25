@@ -3,6 +3,7 @@ import { authReducer } from './reducers/authReducer';
 import { candidateReducer } from './reducers/candidateReducer';
 import { countryReducer } from './reducers/countryReducer';
 import { employeeReducer } from './reducers/employeeReducer';
+import { favoriteVacancyReducer } from './reducers/favoriteVacancyReducer';
 import { officeReducer } from './reducers/officeReducer';
 import { serviceReducer } from './reducers/serviceReducer';
 import { userReducer } from './reducers/userReduser';
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
     candidate: candidateReducer,
     country: countryReducer,
     employee: employeeReducer,
+    favoriteVacancy: favoriteVacancyReducer,
     office: officeReducer,
     service: serviceReducer,
     user: userReducer,

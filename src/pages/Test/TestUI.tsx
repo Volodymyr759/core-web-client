@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import '../../index.css';
 
 export default function TestUI(): JSX.Element {
@@ -11,6 +11,19 @@ export default function TestUI(): JSX.Element {
             </p>
             <br />
             <hr />
+            <div className='test-page-header'>Grid:</div>
+            <br />
+            use <a href="https://mui.com/material-ui/react-grid/#interactive" target="_blank" rel="noreferrer">Interactive mui Grid</a>
+            <br />
+            <Grid container direction="column" justifyContent="center" alignItems="stretch">
+                <p style={{ border: '1px solid black' }}>123</p>
+                <p style={{ border: '1px solid black' }}>123</p>
+                <Grid container direction="row" justifyContent="space-between" alignItems="center" >
+                    <span style={{ border: '1px solid black' }}>123</span>
+                    <span style={{ border: '1px solid black' }}>123</span>
+                </Grid>
+                <p style={{ border: '1px solid black' }}>123</p>
+            </Grid>
             <div className='test-page-header'>Typography - Headers:</div>
             <br />
             <Typography variant="h4" component={'h4'} className="test-page-header">

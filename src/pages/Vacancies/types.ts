@@ -2,6 +2,10 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 import { ICandidate } from "../../types/candidate";
 import { IVacancy } from "../../types/vacancy";
 
+export interface VacancyListProps {
+	vacancies: IVacancy[];
+}
+
 export interface VacancyCardProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	vacancy: IVacancy;
 }

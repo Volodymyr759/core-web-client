@@ -27,6 +27,7 @@ import ProfilePage from '../pages/Account/Profile/ProfilePage';
 import ChangeEmailPage from '../pages/Account/ChangeEmail/ChangeEmailPage';
 import ChangePasswordPage from '../pages/Account/ChangePassword/ChangePasswordPage';
 import TestUI from '../pages/Test/TestUI';
+import FavoriteVacanciesPage from '../pages/Vacancies/FavoriteVacanciesPage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -49,6 +50,7 @@ export default function AppRouter() {
     const registeredRoleRoutes: IRoute[] = [
         { path: RouteNames.CHANGE_EMAIL, title: "Change email", component: <ChangeEmailPage /> },
         { path: RouteNames.CHANGE_PASSWORD, title: "Change password", component: <ChangePasswordPage /> },
+        { path: RouteNames.FAVORITE_VACANCIES, title: "Favorite Vacancies", component: <FavoriteVacanciesPage /> },
         { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
         { path: RouteNames.VACANCY_DETAILES, title: "Vacancy Detailes", component: <VacancyDetailes /> }
     ]

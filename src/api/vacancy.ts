@@ -26,6 +26,22 @@ export async function getVacanciesAxios(
 }
 
 /**
+ * Get list of vacancies for current office
+ * @param limit<number> Page size
+ * @param page<number> Current page
+ * @param email<string> Candidate email
+ * @param order<OrderType> Sort direction (Ascending / Descending / None)
+ */
+export async function getFavoriteVacanciesAxios(
+    limit: number,
+    page: number,
+    email: string,
+    order: OrderType): Promise<ISearchResult<IVacancy>> {
+    return (
+        await axios.get(`/vacancy/getfavorite?limit=${limit}&page=${page}&email=${email}&order=${order}`)).data;
+}
+
+/**
  * Get vacancy specified by identifier
  * @param id<string> Vacancy identifier
  */

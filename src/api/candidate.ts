@@ -33,15 +33,6 @@ export async function getCandidateByIdAxios(id: number): Promise<ICandidate> {
     return (await axios.get(`/candidate/getbyid/${id.toString()}`)).data;
 }
 
-// /**
-//  * Get sorted list of all vacancies titles
-//  * @param searchValue<string> Search paremeter
-//  * @param officeId<string> Identifier of the office which vacancy belongs. If it's '' in request query - means all offices.
-//  */
-// export async function searchVacanciesTitlesAxios(searchValue: string, officeId: string): Promise<VacancyTitleDto[]> {
-//     return (await axios.get(`/vacancy/searchvacanciestitles?searchValue=${searchValue}&officeId=${officeId}`)).data;
-// }
-
 /**
  * @param id<string> Candidate identifier
  * @param isDismissed<boolean> Candidate status
@@ -66,4 +57,12 @@ export async function createCandidateAxios(candidate: ICandidate): Promise<ICand
  */
 export async function updateCandidateAxios(candidate: ICandidate): Promise<ICandidate> {
     return (await axios.put("/candidate/update", candidate)).data;
+}
+
+/**
+ * Delete's the candidate specified by identifier
+ * @param id<string> Identifier
+ */
+export async function removeCandidateAxios(id: number): Promise<void> {
+    return await axios.delete(`/candidate/delete/${id}`);
 }

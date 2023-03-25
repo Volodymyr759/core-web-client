@@ -37,11 +37,10 @@ export default function VacanciesPage(): JSX.Element {
                     <ErrorMessage appearance={MessageAppearance.LARGE}>{errorFilters}</ErrorMessage> :
                     <VacanciesFilters />
             }
+            <VacanciesList vacancies={vacancySearchResult.itemList} />
             {loadingVacancies ?
                 <Spinner /> :
-                errorVacancies ?
-                    <ErrorMessage appearance={MessageAppearance.LARGE}>{errorVacancies}</ErrorMessage> :
-                    <VacanciesList />
+                errorVacancies || <ErrorMessage appearance={MessageAppearance.LARGE}>{errorVacancies}</ErrorMessage>
             }
             <LoadMoreButton
                 onClickHandler={loadMoreHandler}

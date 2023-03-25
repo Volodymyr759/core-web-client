@@ -15,9 +15,11 @@ import HomePage from '../../../pages/Home/HomePage';
 import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../../pages/Team/TeamPage';
 import ProfilePage from '../../../pages/Account/Profile/ProfilePage';
+import FavoriteVacanciesPage from '../../../pages/Vacancies/FavoriteVacanciesPage';
 
 const settings: IRoute[] = [
     { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
+    { path: RouteNames.FAVORITE_VACANCIES, title: "Favorite Vacancies", component: <FavoriteVacanciesPage /> },
     { path: RouteNames.CHANGE_EMAIL, title: "Change email", component: <ChangeEmailPage /> },
     { path: RouteNames.CHANGE_PASSWORD, title: "Change password", component: <ChangePasswordPage /> }
 ];

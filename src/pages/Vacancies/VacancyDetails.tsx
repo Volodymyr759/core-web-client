@@ -14,7 +14,7 @@ export default function VacancyDetailes(): JSX.Element {
     const { vacancyId } = useParams();
     const { errorVacancies, currentVacancy, loadingVacancies } = useTypedSelector(state => state.vacancy)
     const { auth } = useTypedSelector(state => state.auth)
-    const { getVacancyById } = useActions();
+    const { getVacancyById, updateFavoriteVacancyStatus } = useActions();
     const [candidate, setCandidate] = useState<ICandidate | null>(null);
     const [snackbarOpened, setSnackbarOpened] = useState<boolean>(false);
 
@@ -25,6 +25,10 @@ export default function VacancyDetailes(): JSX.Element {
 
     const onApply = (candidate: ICandidate | null) => {
         setCandidate(candidate);
+    }
+
+    const onRemove = () => {
+        updateFavoriteVacancyStatus(currentVacancy.candidates?.filter(c => c.email === auth.user.email)[0].id);
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -53,18 +57,25 @@ export default function VacancyDetailes(): JSX.Element {
                     {'Previews: ' + currentVacancy.previews}
                 </Typography>
             </Box>
-            <Box sx={{ textAlign: 'right' }}>
-                <Button variant="outlined" size="small" onClick={() => onApply({
-                    id: 0,
-                    fullName: auth.user.userName,
-                    email: auth.user.email,
-                    phone: auth.user.phoneNumber || '',
-                    notes: '',
-                    isDismissed: false,
-                    joinedAt: new Date(),
-                    vacancyId: Number(vacancyId)
-                })}>Apply</Button>
-            </Box>
+            {
+                currentVacancy.candidates?.filter(c => c.email === auth.user.email).length > 0 ?
+                    <Box sx={{ textAlign: 'right' }} my={2}>
+                        <Button
+                            variant="outlined" size="small" color="error"
+                            onClick={onRemove}
+                        >
+                            Remove
+                        </Button>
+                    </Box>
+                    :
+                    <Box sx={{ textAlign: 'right' }} my={2}>
+                        <Button variant="outlined" size="small" onClick={() => onApply({
+                            id: 0, fullName: auth.user.userName, email: auth.user.email,
+                            phone: auth.user.phoneNumber || '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: Number(vacancyId)
+                        })}>Apply</Button>
+                    </Box>
+            }
+
             {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openForm={true} onSuccess={() => setSnackbarOpened(true)} />}
             <Snackbar
                 open={snackbarOpened}
