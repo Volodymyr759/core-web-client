@@ -14,7 +14,7 @@ export default function VacancyCard({ vacancy }: VacancyCardProps): JSX.Element 
     const showDetailesHandler = () => {
         incrementPreviews(vacancy.id, vacancy.previews + 1);
         setCurrentVacancy(vacancy);
-        navigate(RouteNames.VACANCY + "/" + vacancy.id);
+        navigate(RouteNames.VACANCY + `/${vacancy.id}`);
     }
 
     return (
@@ -26,7 +26,9 @@ export default function VacancyCard({ vacancy }: VacancyCardProps): JSX.Element 
                             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                 {vacancy.officeDto.name}
                             </Typography>
-                            {vacancy.candidates?.filter(c => c.email === auth.user.email).length > 0 && <FavoriteIcon color="primary" />}
+                            {
+                                auth && vacancy.candidates?.filter(c => c.email === auth.user.email).length > 0 && <FavoriteIcon color="primary" />
+                            }
                         </Grid>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                             {vacancy.officeDto.address}

@@ -13,11 +13,6 @@ export default function ErrorMessage({ children, appearance }: MessageProps): JS
     }
 
     return (
-        // <p style={{ textAlign: 'center' }}>
-        //     <Typography variant="body2" component={'span'} sx={{ color: 'red' }}>
-        //         {message}
-        //     </Typography>
-        // </p>
         <Grid container
             direction="row"
             justifyContent="center"

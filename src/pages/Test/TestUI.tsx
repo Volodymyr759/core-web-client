@@ -1,8 +1,10 @@
 import { Grid, Typography } from '@mui/material';
+import ErrorMessage from '../../components/Messages/ErrorMessage';
+import { MessageAppearance } from '../../components/Messages/types';
 import '../../index.css';
 
 export default function TestUI(): JSX.Element {
-
+//
     return (
         <>
             <div className='test-ui-page-header'>Tests of UI Components</div>
@@ -11,6 +13,11 @@ export default function TestUI(): JSX.Element {
             </p>
             <br />
             <hr />
+            <br />
+            <ErrorMessage appearance={MessageAppearance.REGULAR}>Error of loading this Vacancy</ErrorMessage>
+            <br />
+            <hr />
+            <br />
             <div className='test-page-header'>Grid:</div>
             <br />
             use <a href="https://mui.com/material-ui/react-grid/#interactive" target="_blank" rel="noreferrer">Interactive mui Grid</a>
