@@ -33,6 +33,7 @@ export default function SubscriptionForm(): JSX.Element {
     const createdSubscriber = async (subscriber: IMailSubscriber) => {
         try {
             setLoading(true);
+            setError(null);
             await subscribeAxios(subscriber);
             setOpenSnackBar(true);
         } catch (e) {
