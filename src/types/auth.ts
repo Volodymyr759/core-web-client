@@ -34,6 +34,13 @@ export interface IChangeEmailDto {
     password: string;
 }
 
+export interface IResetPasswordDto {
+    code: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
 export enum Roles {
     ADMIN = "Admin",
     REGISTERED = "Registered"

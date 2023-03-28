@@ -28,6 +28,8 @@ import ChangeEmailPage from '../pages/Account/ChangeEmail/ChangeEmailPage';
 import ChangePasswordPage from '../pages/Account/ChangePassword/ChangePasswordPage';
 import TestUI from '../pages/Test/TestUI';
 import FavoriteVacanciesPage from '../pages/Vacancies/FavoriteVacanciesPage';
+import ForgotPasswordPage from '../pages/Account/ForgotPassword/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/Account/ResetPassword/ResetPasswordPage';
 
 export default function AppRouter() {
     const { auth } = useTypedSelector(state => state.auth);
@@ -35,6 +37,8 @@ export default function AppRouter() {
     const anonimousRoleRoutes: IRoute[] = [
         { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
         { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> },
+        { path: RouteNames.EMAIL_CONFIRM, title: "Email confirmation page", component: <EmailConfirmPage /> },
+        { path: RouteNames.FORGOT_PASSWORD, title: "Forgot Password", component: <ForgotPasswordPage /> },
         { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
         { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
         { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
@@ -43,7 +47,7 @@ export default function AppRouter() {
         { path: RouteNames.LOGIN, title: "Sign In", component: <LoginPage /> },
         { path: RouteNames.REGISTER, title: "Sign Up", component: <RegisterPage /> },
         { path: RouteNames.REGISTER_COMPLETE, title: "Registration Complete", component: <RegisterCompletePage /> },
-        { path: RouteNames.EMAIL_CONFIRM, title: "Email confirmation page", component: <EmailConfirmPage /> },
+        { path: RouteNames.RESET_PASSWORD, title: "Reset Your Password", component: <ResetPasswordPage /> },
         { path: "*", title: "Error: wrong route!", component: <ErrorPage status='403' message='Access denied, try login to continue.' /> }
     ];
 

@@ -16,6 +16,9 @@ export default function LoginPage(): JSX.Element {
                 <Typography component={'p'} my={3} >
                     Or <Link to={RouteNames.REGISTER}>Sign Up</Link> if you don't have an account yet.
                 </Typography>
+                <Typography component={'p'} mb={3} >
+                    <Link to={RouteNames.FORGOT_PASSWORD}>Forgot password?</Link>
+                </Typography>
             </Grid>
         </Container>
     )

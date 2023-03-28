@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IAuth, IChangeEmailDto, IChangePasswordDto, ILoginDto, IRegisterDto } from '../types/auth';
+import { IAuth, IChangeEmailDto, IChangePasswordDto, ILoginDto, IRegisterDto, IResetPasswordDto } from '../types/auth';
 
 /**
  * Changes the email of current user
@@ -21,6 +21,14 @@ export async function changePasswordAxios(changePasswordDto: IChangePasswordDto)
 
 export async function confirmEmailAxios(code: string, email: string) {
     await axios.get(`/account/confirmemail?code=${code}&email=${email}`);
+}
+
+export async function forgotPasswordAxios(email: string) {
+    await axios.get(`/account/forgotpassword?email=${email}`);
+}
+
+export async function resetPasswordAxios(resetPasswordDto: IResetPasswordDto): Promise<string> {
+    return (await axios.post<string>("/account/resetPassword", resetPasswordDto)).data;
 }
 
 export async function loginAxios(loginDto: ILoginDto): Promise<IAuth> {
