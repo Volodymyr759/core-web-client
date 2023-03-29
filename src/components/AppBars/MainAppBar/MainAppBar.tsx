@@ -67,7 +67,7 @@ export default function MainAppBar() {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-                    <Typography variant="h6" component="a" href={RouteNames.HOME} sx={{
+                    <Typography variant="h6" component="a" href="https://volodymyr759.github.io/core-web-client" sx={{
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
                         fontSize: '28px',
@@ -120,7 +120,7 @@ export default function MainAppBar() {
                         </Menu>
                     </Box>
 
-                    <Typography variant="h6" component="a" href={RouteNames.HOME} sx={{
+                    <Typography variant="h6" component="a" href="https://volodymyr759.github.io/core-web-client" sx={{
                         mr: 2,
                         display: { xs: 'flex', md: 'none' },
                         flexGrow: 1,

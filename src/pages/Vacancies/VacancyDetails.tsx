@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { ICandidate } from "../../types/candidate";
-import { Box, Button, Container, Snackbar, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import ErrorMessage from "../../components/Messages/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import VacancyApplyForm from "./VacancyApplyForm";
 import { MessageAppearance } from "../../components/Messages/types";
+import SuccessMessage from "../../components/Messages/SuccessMessage";
+import { RouteNames } from "../../routing";
 
 export default function VacancyDetailes(): JSX.Element {
     const { vacancyId } = useParams();
@@ -16,27 +18,34 @@ export default function VacancyDetailes(): JSX.Element {
     const { auth } = useTypedSelector(state => state.auth)
     const { getVacancyById, updateFavoriteVacancyStatus } = useActions();
     const [candidate, setCandidate] = useState<ICandidate | null>(null);
-    const [snackbarOpened, setSnackbarOpened] = useState<boolean>(false);
+    const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
+    const [showRemoveOrApplyButton, setShowRemoveOrApplyButton] = useState<boolean>(false); // true - Remove, false - Apply
 
     useEffect(() => {
         getVacancyById(Number(vacancyId));
+        currentVacancy.candidates?.filter(c => c.email === auth.user.email).length > 0 ?
+            setShowRemoveOrApplyButton(true) :
+            setShowRemoveOrApplyButton(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [currentVacancy, auth.user.email])
 
     const onApply = (candidate: ICandidate | null) => {
-        setCandidate(candidate);
+        setShowSuccessMessage(false);
+        try {
+            setCandidate(candidate);
+            setShowSuccessMessage(true);
+            setShowRemoveOrApplyButton(true);
+        } catch { }
     }
 
     const onRemove = () => {
-        updateFavoriteVacancyStatus(currentVacancy.candidates?.filter(c => c.email === auth.user.email)[0].id);
+        setShowSuccessMessage(false);
+        try {
+            updateFavoriteVacancyStatus(currentVacancy.candidates?.filter(c => c.email === auth.user.email)[0].id);
+            setShowSuccessMessage(true);
+            setShowRemoveOrApplyButton(false);
+        } catch { }
     }
-
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') return;
-        setSnackbarOpened(false);
-    };
-
-    if (errorVacancies) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorVacancies}</ErrorMessage>;
 
     return (
         <Container maxWidth="lg" className='layout-container'>
@@ -58,7 +67,7 @@ export default function VacancyDetailes(): JSX.Element {
                 </Typography>
             </Box>
             {
-                currentVacancy.candidates?.filter(c => c.email === auth.user.email).length > 0 ?
+                showRemoveOrApplyButton ?
                     <Box sx={{ textAlign: 'right' }} my={2}>
                         <Button
                             variant="outlined" size="small" color="error"
@@ -75,14 +84,11 @@ export default function VacancyDetailes(): JSX.Element {
                         })}>Apply</Button>
                     </Box>
             }
-
-            {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openForm={true} onSuccess={() => setSnackbarOpened(true)} />}
-            <Snackbar
-                open={snackbarOpened}
-                autoHideDuration={4000}
-                onClose={handleClose}
-                message="Successfully applied!"
-            />
+            {candidate && <VacancyApplyForm candidate={candidate} closeForm={onApply} openForm={true} onSuccess={() => setShowSuccessMessage(true)} />}
+            {errorVacancies && <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorVacancies}</ErrorMessage>}
+            {showSuccessMessage && <SuccessMessage appearance={MessageAppearance.REGULAR}>
+                Successfully, go back to <Link to={RouteNames.VACANCY}>All Vacancies</Link> to continue.
+            </SuccessMessage>}
         </Container>
     )
 }
