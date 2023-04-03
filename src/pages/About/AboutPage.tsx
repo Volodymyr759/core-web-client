@@ -6,20 +6,20 @@ export default function AboutPage(): JSX.Element {
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="ABOUT US"
-                text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas."
+                title="Why Shuffle?"
+                text="We founded Eivolo from a desire to deliver what we felt was lacking in the industry; exceptional tech talent and a high level of service, packaged in a way that could be customised to suit any client’s needs. We blend talent, resources and finely-tuned processes to bring you high-quality service at a sustainable cost."
             />
             <Grid container spacing={2} alignItems="center" className="page-chapter-container">
                 <Grid item xs={12} md={6} textAlign='center'>
                     <Box component="img" sx={{ width: '100%' }} alt="About us img." src="https://volodymyr57.somee.com/Uploads/about.jpg" />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <h3>Voluptatem dignissimos <strong>provident quasi corporis voluptates</strong></h3>
+                    <h3>At Shuffle, <strong>our values underpin everything we do.</strong></h3>
                     <p>
-                        <i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</i>
+                        <i>We believe our high moral standards and dedication to our values is what sets us apart in the industry and has helped us retain so many of our valuable clients on an ongoing basis.</i>
                     </p>
                     <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+                        In such a highly specialised field, our clients found that there was often a gap in understanding between them and their technology partners, which led to challenges in communicating and lengthy project delays. This saw them overspending on some of the most basic web development services.
                     </p>
                     <Box component="img" sx={{ width: '100%' }} alt="About us 2nd img." src="https://volodymyr57.somee.com/uploads/about2.jpg" />
                 </Grid>

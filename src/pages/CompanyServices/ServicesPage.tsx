@@ -28,8 +28,8 @@ export default function ServicesPage(): JSX.Element {
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="OUR SERVICES"
-                text="Voluptatum deleniti atque corrupti quos dolores et quas molestias..."
+                title="Services"
+                text="Shuffle works with a variety of different technologies, offering our clients a wide range of flexibility."
             />
             <ServicesList services={serviceSearchResult.itemList} />
             {loading ?

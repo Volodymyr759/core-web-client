@@ -69,7 +69,7 @@ export default function Footer(): JSX.Element {
                     Our Newsletter
                 </Typography>
                 <Typography variant="body2" component={'p'}>
-                    Tamen quem nulla quae legam multos aute sint culpa legam noster magna
+                    Get In Touch
                 </Typography>
                 <SubscriptionForm />
             </Grid>

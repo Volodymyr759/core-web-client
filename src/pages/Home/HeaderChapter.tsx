@@ -11,11 +11,11 @@ export default function HeaderChapter(): JSX.Element {
             <Container fixed maxWidth='md' >
                 <Grid container direction="column" alignContent="center" maxWidth="50%">
                     <Grid item mt={10} mb={3}>
-                        <h3 className="header-chapter-header">Eivolo Solutions</h3>
+                        <h3 className="header-chapter-header">Shuffle Solutions</h3>
                     </Grid>
                     <Grid item>
                         <p id="description">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quo non praesentium quas.
+                            Our industry leading team will drive and support your digital projects end to end.
                         </p>
                     </Grid>
                     <Grid item mt={4} mb={8}>

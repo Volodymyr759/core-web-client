@@ -26,7 +26,7 @@ export default function ServiceChapter(): JSX.Element {
         <>
             <PageHeader
                 title="Services"
-                text="Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
+                text="Shuffle works with a variety of different technologies, offering our clients a wide range of flexibility."
             />
             {loading ?
                 <Spinner /> :

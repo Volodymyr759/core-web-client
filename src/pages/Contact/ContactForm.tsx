@@ -18,18 +18,18 @@ export default function ContactForm(): JSX.Element {
 
     const validationSchema = Yup.object({
         senderName: Yup.string()
-            .required()
+            .required('Name is a required field.')
             .min(2, 'Name must be at least 2 characters.')
             .max(50, 'The field Name may not be greater than 50 characters.'),
         senderEmail: Yup.string()
             .max(50, 'The field Email may not be greater than 50 characters.')
             .matches(EMAIL_REG_EXP, "Required field Email is not valid."),
         subject: Yup.string()
-            .required()
+            .required('Subject is a required field')
             .min(2, 'Subject must be at least 2 characters.')
             .max(255, 'The field Subject may not be greater than 255 characters.'),
         message: Yup.string()
-            .required()
+            .required('Message is a required field')
             .min(2, 'Message must be at least 2 characters.')
             .max(1024, 'The field Message may not be greater than 1024 characters.')
     })
