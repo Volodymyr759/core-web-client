@@ -7,7 +7,7 @@ export default function AboutPage(): JSX.Element {
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="Why Shuffle?"
-                text="We founded Eivolo from a desire to deliver what we felt was lacking in the industry; exceptional tech talent and a high level of service, packaged in a way that could be customised to suit any client’s needs. We blend talent, resources and finely-tuned processes to bring you high-quality service at a sustainable cost."
+                text="We founded Shuffle from a desire to deliver what we felt was lacking in the industry; exceptional tech talent and a high level of service, packaged in a way that could be customised to suit any client’s needs. We blend talent, resources and finely-tuned processes to bring you high-quality service at a sustainable cost."
             />
             <Grid container spacing={2} alignItems="center" className="page-chapter-container">
                 <Grid item xs={12} md={6} textAlign='center'>
