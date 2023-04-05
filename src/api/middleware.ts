@@ -61,7 +61,7 @@ export class AxiosMiddleware {
                             throw new Error('Network unavailable or server is not running.');
                         }
                         throw new Error("Bad Request Error");
-                    case ErrorStatus.Forbidden:
+                    case ErrorStatus.Forbidden.toString():
                         return;
                     case ErrorStatus['Not Found']:
                         throw new Error(error.response.data['title'] || 'Not Found Error');
