@@ -15,7 +15,7 @@ export default function TeamPage(): JSX.Element {
     const { getEmployees, loadMoreEmployees, setEmployeePage } = useActions();
 
     useEffect(() => {
-        getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending)
+        if (employeeSearchResult.itemList.length === 0) getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

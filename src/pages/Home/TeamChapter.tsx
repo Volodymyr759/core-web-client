@@ -17,7 +17,7 @@ export default function TeamChapter(): JSX.Element {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending)
+        if (employeeSearchResult.itemList.length === 0) getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -31,7 +31,7 @@ export default function TeamChapter(): JSX.Element {
                 <Spinner /> :
                 error ?
                     <ErrorMessage appearance={MessageAppearance.LARGE}>{error}</ErrorMessage> :
-                    <EmployeesList employees={employeeSearchResult.itemList} />
+                    <EmployeesList employees={employeeSearchResult.itemList.slice(0, 3)} />
             }
             <LoadMoreButton isDisabled={error && error.length > 0} onClickHandler={() => { navigate(RouteNames.TEAM); window.scroll(0, 0) }} >
                 See All
