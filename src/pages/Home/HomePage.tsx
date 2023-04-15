@@ -4,6 +4,7 @@ import ContactPage from '../Contact/ContactPage';
 import HeaderChapter from './HeaderChapter';
 import ServiceChapter from './ServiceChapter';
 import TeamChapter from './TeamChapter';
+import StatisticsChapter from './StatisticsChapter';
 
 export default function HomePage(): JSX.Element {
     return (
@@ -14,6 +15,8 @@ export default function HomePage(): JSX.Element {
                 <AboutPage />
 
                 <ServiceChapter />
+
+                <StatisticsChapter />
 
                 <TeamChapter />
 
