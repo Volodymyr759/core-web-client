@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getOfficeNameIdsAxios } from "../../api/office";
-import { createVacancyAxios, getVacanciesAxios, getVacancyByIdAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
+import { createVacancyAxios, getVacanciesAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
 import { OrderType } from "../../types/common/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes, VacancyStatus } from "../../types/vacancy";
 
@@ -15,20 +15,6 @@ export const getVacancies = (limit: number, page: number, search: string, vacanc
             });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading vacancies." })
-        } finally {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
-        }
-    }
-}
-
-export const getVacancyById = (id: number) => {
-    return async (dispatch: Dispatch<VacancyAction>) => {
-        try {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
-            dispatch({ type: VacancyActionTypes.GET_VACANCY_BY_ID, payload: await getVacancyByIdAxios(id) });
-        } catch (error) {
-            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error of loading choosed vacancy." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }
@@ -111,12 +97,6 @@ export const setVacancyOfficeFilter = (officeId: string) => {
 export const setVacancySearchCriteria = (search: string) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.SET_VACANCY_SEARCH_CRITERIA, payload: search });
-    }
-}
-
-export const setCurrentVacancy = (vacancy: IVacancy) => {
-    return async (dispatch: Dispatch<VacancyAction>) => {
-        dispatch({ type: VacancyActionTypes.SET_CURRENT_VACANCY, payload: vacancy });
     }
 }
 

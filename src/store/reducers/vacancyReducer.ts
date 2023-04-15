@@ -11,7 +11,6 @@ const initialState: VacancyState = {
         searchCriteria: "",
         totalItemCount: 0
     },
-    currentVacancy: null,
     offices: [],
     titles: [],
     filters: {
@@ -71,8 +70,6 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             return { ...state, offices: vacancyOffices };
         case VacancyActionTypes.SET_VACANCIES_TITLES:
             return { ...state, titles: action.payload };
-        case VacancyActionTypes.SET_CURRENT_VACANCY:
-            return { ...state, currentVacancy: action.payload };
         case VacancyActionTypes.INCREMENT_PREVIEWS:
             return { ...state };
         case VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS:

@@ -8,12 +8,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function VacancyCard({ vacancy }: VacancyCardProps): JSX.Element {
     const navigate = useNavigate();
-    const { setCurrentVacancy, incrementPreviews } = useActions();
+    const { incrementPreviews } = useActions();
     const { auth } = useTypedSelector(state => state.auth);
 
     const showDetailesHandler = () => {
         incrementPreviews(vacancy.id, vacancy.previews + 1);
-        setCurrentVacancy(vacancy);
         navigate(RouteNames.VACANCY + `/${vacancy.id}`);
     }
 

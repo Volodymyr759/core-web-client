@@ -34,7 +34,6 @@ export interface VacancyTitleDto {
 export interface VacancyState {
     vacancySearchResult: ISearchResult<IVacancy>;
     filters: VacancyFilters;
-    currentVacancy: null | IVacancy;
     offices: OfficeNameIdDto[];
     titles: VacancyTitleDto[];
     loadingFilters: boolean;
@@ -45,7 +44,6 @@ export interface VacancyState {
 
 export enum VacancyActionTypes {
     GET_VACANCIES = "GET_VACANCIES",
-    GET_VACANCY_BY_ID = "GET_VACANCY_BY_ID",
     LOAD_MORE_VACANCIES = "LOAD_MORE_VACANCIES",
     SET_VACANCY_ERROR = "SET_VACANCY_ERROR",
     SET_VACANCY_LOADING = "SET_VACANCY_LOADING",
@@ -57,7 +55,6 @@ export enum VacancyActionTypes {
     SET_VACANCY_SEARCH_CRITERIA = "SET_VACANCY_SEARCH_CRITERIA",
     SET_VACANCY_OFFICES = "SET_VACANCY_OFFICES",
     SET_VACANCIES_TITLES = "SET_VACANCIES_TITLES",
-    SET_CURRENT_VACANCY = "SET_CURRENT_VACANCY",
     INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS",
     UPDATE_VACANCY_ISACTIVE_STATUS = "UPDATE_VACANCY_ISACTIVE_STATUS",
     CREATE_VACANCY = "CREATE_VACANCY",
@@ -67,11 +64,6 @@ export enum VacancyActionTypes {
 interface GetVacanciesAction {
     type: VacancyActionTypes.GET_VACANCIES;
     payload: ISearchResult<IVacancy>;
-}
-
-interface GetVacancyByIdAction {
-    type: VacancyActionTypes.GET_VACANCY_BY_ID;
-    payload: IVacancy;
 }
 
 interface LoadMoreVacanciesAction {
@@ -129,11 +121,6 @@ interface SetVacanciesTitlesAction {
     payload: VacancyTitleDto[];
 }
 
-interface SetCurrentVacancyAction {
-    type: VacancyActionTypes.SET_CURRENT_VACANCY;
-    payload: IVacancy;
-}
-
 interface IncrementPreviewsAction {
     type: VacancyActionTypes.INCREMENT_PREVIEWS;
     payload: number;
@@ -155,7 +142,6 @@ interface UpdateVacancy {
 }
 
 export type VacancyAction = GetVacanciesAction |
-    GetVacancyByIdAction |
     LoadMoreVacanciesAction |
     SetErrorVacancyAction |
     SetLoadingVacancyAction |
@@ -167,7 +153,6 @@ export type VacancyAction = GetVacanciesAction |
     SetVacancySearchCriteriaAction |
     SetVacancyOfficesAction |
     SetVacanciesTitlesAction |
-    SetCurrentVacancyAction |
     IncrementPreviewsAction |
     UpdateVacancyIsActiveStatus |
     CreateVacancy |
