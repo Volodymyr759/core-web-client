@@ -1,0 +1,10 @@
+.contact-info-card {
+    margin-top: 20px !important;
+    padding: 5px;
+    text-align: center;
+    transition: all 1s !important;
+}
+
+.contact-info-card:hover {
+    box-shadow: 10px 5px 5px #5F7C78;
+}

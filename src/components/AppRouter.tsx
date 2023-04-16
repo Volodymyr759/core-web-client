@@ -39,7 +39,7 @@ export default function AppRouter() {
         { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> },
         { path: RouteNames.EMAIL_CONFIRM, title: "Email confirmation page", component: <EmailConfirmPage /> },
         { path: RouteNames.FORGOT_PASSWORD, title: "Forgot Password", component: <ForgotPasswordPage /> },
-        { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
+        { path: RouteNames.HOME, title: "Shuffle Solutions", component: <HomePage /> },
         { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
         { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
         { path: RouteNames.TEST_UI, title: "UI Tests", component: <TestUI /> },

@@ -25,8 +25,20 @@
 }
 
 .btn-transit:hover {
-    background-color: palevioletred !important;
+    background-color: rgb(27, 188, 163) !important;
     font-size: 1rem;
+}
+
+.stat-card {
+    width: 220px;
+    height: 200px;
+    margin: 10px 5px;
+    transition: all 1s !important;
+}
+
+.stat-card:hover {
+    width: 230px !important;
+    height: 210px;
 }
 
 .stat-card-top {

@@ -2,6 +2,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ContactForm from "./ContactForm";
 import ContactInfoCardsList from "./ContactInfoCardsList";
+import './styles.css';
 
 export default function ContactPage(): JSX.Element {
     return (

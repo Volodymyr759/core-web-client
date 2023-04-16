@@ -15,7 +15,7 @@ export default function ContactInfoCard({ contactInfoItem }: IContactInfoCardPro
     ]
 
     return (
-        <Grid item xs={12} md={6} textAlign='center' sx={{ marginTop: '20px' }}>
+        <Grid item xs={12} md={6} className="contact-info-card" >
             {icons[contactInfoItem.icon]}
             <br />
             <Typography variant="h6">

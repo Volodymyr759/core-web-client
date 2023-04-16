@@ -8,16 +8,14 @@ export default function EmployeeCard({ employee }: EmployeeCardProps): JSX.Eleme
             <Card elevation={16}>
                 <Box
                     component="img"
-                    sx={{ width: '90%', paddingTop: '15px' }}
+                    className="employee-card-img"
+                    // sx={{ width: '90%', paddingTop: '15px' }}
                     alt="Employee photo."
                     src={employee.avatarUrl}
                 />
                 <CardContent>
-                    {/* <Typography gutterBottom variant="h5" component="div">
-                        {employee.fullName} - {employee.position}
-                    </Typography> */}
-                    <p id="full-name">{employee.fullName}</p>
-                    <p id="position">{employee.position}</p>
+                    <p className="full-name">{employee.fullName}</p>
+                    <p className="position">{employee.position}</p>
                     <Typography variant="body2" color="text.secondary">
                         {employee.description}
                     </Typography>
