@@ -7,7 +7,7 @@ export default function HeaderChapter(): JSX.Element {
     const navigate = useNavigate();
 
     return (
-        <Paper sx={{ backgroundImage: 'url(https://source.unsplash.com/random)', backgroundSize: '100%', borderRadius: '0' }}>
+        <Paper sx={{ backgroundImage: 'url(https://volodymyr57.somee.com/Uploads/header_bg.jpg)', backgroundSize: '100%', borderRadius: '0' }}>
             <Container fixed maxWidth='md' >
                 <Grid container direction="column" alignContent="center" maxWidth="50%">
                     <Grid item mt={10} mb={3}>
