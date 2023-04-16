@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/core-web-client/static/css/main.5f630539.chunk.css",
-    "main.js": "/core-web-client/static/js/main.14a29180.chunk.js",
-    "main.js.map": "/core-web-client/static/js/main.14a29180.chunk.js.map",
-    "runtime-main.js": "/core-web-client/static/js/runtime-main.af86ef76.js",
-    "runtime-main.js.map": "/core-web-client/static/js/runtime-main.af86ef76.js.map",
+    "main.css": "/core-web-client/static/css/main.fd95e52f.chunk.css",
+    "main.js": "/core-web-client/static/js/main.6227819f.chunk.js",
+    "main.js.map": "/core-web-client/static/js/main.6227819f.chunk.js.map",
+    "runtime-main.js": "/core-web-client/static/js/runtime-main.d18e4742.js",
+    "runtime-main.js.map": "/core-web-client/static/js/runtime-main.d18e4742.js.map",
     "static/css/2.f83b9687.chunk.css": "/core-web-client/static/css/2.f83b9687.chunk.css",
-    "static/js/2.5ed2d7e1.chunk.js": "/core-web-client/static/js/2.5ed2d7e1.chunk.js",
-    "static/js/2.5ed2d7e1.chunk.js.map": "/core-web-client/static/js/2.5ed2d7e1.chunk.js.map",
-    "static/js/3.14d8901a.chunk.js": "/core-web-client/static/js/3.14d8901a.chunk.js",
-    "static/js/3.14d8901a.chunk.js.map": "/core-web-client/static/js/3.14d8901a.chunk.js.map",
+    "static/js/2.7d290fe3.chunk.js": "/core-web-client/static/js/2.7d290fe3.chunk.js",
+    "static/js/2.7d290fe3.chunk.js.map": "/core-web-client/static/js/2.7d290fe3.chunk.js.map",
+    "static/js/3.aad1d76f.chunk.js": "/core-web-client/static/js/3.aad1d76f.chunk.js",
+    "static/js/3.aad1d76f.chunk.js.map": "/core-web-client/static/js/3.aad1d76f.chunk.js.map",
     "index.html": "/core-web-client/index.html",
     "static/css/2.f83b9687.chunk.css.map": "/core-web-client/static/css/2.f83b9687.chunk.css.map",
-    "static/css/main.5f630539.chunk.css.map": "/core-web-client/static/css/main.5f630539.chunk.css.map",
-    "static/js/2.5ed2d7e1.chunk.js.LICENSE.txt": "/core-web-client/static/js/2.5ed2d7e1.chunk.js.LICENSE.txt"
+    "static/css/main.fd95e52f.chunk.css.map": "/core-web-client/static/css/main.fd95e52f.chunk.css.map",
+    "static/js/2.7d290fe3.chunk.js.LICENSE.txt": "/core-web-client/static/js/2.7d290fe3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.af86ef76.js",
+    "static/js/runtime-main.d18e4742.js",
     "static/css/2.f83b9687.chunk.css",
-    "static/js/2.5ed2d7e1.chunk.js",
-    "static/css/main.5f630539.chunk.css",
-    "static/js/main.14a29180.chunk.js"
+    "static/js/2.7d290fe3.chunk.js",
+    "static/css/main.fd95e52f.chunk.css",
+    "static/js/main.6227819f.chunk.js"
   ]
 }
