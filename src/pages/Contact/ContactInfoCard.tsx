@@ -1,12 +1,22 @@
 import { Grid, Typography } from "@mui/material";
 import { IContactInfoCardProps } from "./types";
-
-import AutoFixHigh from "@mui/icons-material/AutoFixHigh";
+import HomeIcon from '@mui/icons-material/Home';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 export default function ContactInfoCard({ contactInfoItem }: IContactInfoCardProps): JSX.Element {
+
+    const icons = [
+        <HomeIcon fontSize='large' style={{ color: 'rgb(27, 188, 163)' }} />,
+        <LocalPhoneIcon fontSize='large' style={{ color: 'rgb(27, 188, 163)' }} />,
+        <MailOutlineIcon fontSize='large' style={{ color: 'rgb(27, 188, 163)' }} />,
+        <AccessTimeIcon fontSize='large' style={{ color: 'rgb(27, 188, 163)' }} />
+    ]
+
     return (
         <Grid item xs={12} md={6} textAlign='center' sx={{ marginTop: '20px' }}>
-            <AutoFixHigh />
+            {icons[contactInfoItem.icon]}
             <br />
             <Typography variant="h6">
                 <strong>{contactInfoItem.title}</strong>
