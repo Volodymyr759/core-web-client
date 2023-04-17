@@ -9,6 +9,13 @@
     color: white;
 }
 
+.header-chapter-bg {
+    background-image: url(https://volodymyr57.somee.com/Uploads/header_bg.jpeg);
+    background-repeat: no-repeat round;
+    background-size: 100%;
+    border-radius: 0 !important;
+}
+
 #description {
     margin: 0;
     font-family: "Roboto", sans-serif;
