@@ -5,22 +5,37 @@ import HeaderChapter from './HeaderChapter';
 import ServiceChapter from './ServiceChapter';
 import TeamChapter from './TeamChapter';
 import StatisticsChapter from './StatisticsChapter';
+import { AnimateIn } from '../../components/AnimateIn/AnimateIn';
 
 export default function HomePage(): JSX.Element {
     return (
         <>
-            <HeaderChapter />
+            <AnimateIn>
+                <HeaderChapter />
+            </AnimateIn >
 
             <Container maxWidth="lg" className='layout-container' >
-                <AboutPage />
 
-                <ServiceChapter />
+                <AnimateIn>
+                    <AboutPage />
+                </AnimateIn >
 
-                <StatisticsChapter />
+                <AnimateIn>
+                    <ServiceChapter />
+                </AnimateIn >
 
-                <TeamChapter />
+                <AnimateIn>
+                    <StatisticsChapter />
+                </AnimateIn >
 
-                <ContactPage />
+                <AnimateIn>
+                    <TeamChapter />
+                </AnimateIn >
+
+                <AnimateIn>
+                    <ContactPage />
+                </AnimateIn >
+
             </Container>
 
         </>
