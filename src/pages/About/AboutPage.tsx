@@ -11,7 +11,7 @@ export default function AboutPage(): JSX.Element {
             />
             <Grid container spacing={2} alignItems="center" className="page-chapter-container">
                 <Grid item xs={12} md={6} textAlign='center'>
-                    <Box component="img" sx={{ width: '100%' }} alt="About us img." src="https://volodymyr57.somee.com/Uploads/about.jpg" />
+                    <Box component="img" sx={{ width: '100%' }} alt="About us img." src="https://volodymyr57.somee.com/uploads/about.webp" />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <h3>At Shuffle, <strong>our values underpin everything we do.</strong></h3>
@@ -21,7 +21,7 @@ export default function AboutPage(): JSX.Element {
                     <p>
                         In such a highly specialised field, our clients found that there was often a gap in understanding between them and their technology partners, which led to challenges in communicating and lengthy project delays. This saw them overspending on some of the most basic web development services.
                     </p>
-                    <Box component="img" sx={{ width: '100%' }} alt="About us 2nd img." src="https://volodymyr57.somee.com/uploads/about2.jpg" />
+                    <Box component="img" sx={{ width: '100%' }} alt="About us 2nd img." src="https://volodymyr57.somee.com/uploads/about2.webp" />
                 </Grid>
             </Grid>
         </Container>
