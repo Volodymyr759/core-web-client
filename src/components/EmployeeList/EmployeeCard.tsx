@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { EmployeeCardProps } from "./types";
 import './styles.css';
 
@@ -6,11 +6,10 @@ export default function EmployeeCard({ employee }: EmployeeCardProps): JSX.Eleme
     return (
         <Grid item xs={12} md={4} textAlign='center'>
             <Card elevation={16}>
-                <Box
-                    component="img"
+                <img
                     className="employee-card-img"
-                    // sx={{ width: '90%', paddingTop: '15px' }}
-                    alt="Employee photo."
+                    width='90%'
+                    alt="Employee"
                     src={employee.avatarUrl}
                 />
                 <CardContent>

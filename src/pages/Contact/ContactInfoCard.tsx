@@ -17,11 +17,9 @@ export default function ContactInfoCard({ contactInfoItem }: IContactInfoCardPro
     return (
         <Grid item xs={12} md={6} className="contact-info-card" >
             {icons[contactInfoItem.icon]}
-            <br />
-            <Typography variant="h6">
+            <p className="contact-info-header">
                 <strong>{contactInfoItem.title}</strong>
-            </Typography>
-            <br />
+            </p>
             {contactInfoItem.lines.map((line) => <Typography key={line} variant="body2">{line}</Typography>)}
         </Grid>
     )

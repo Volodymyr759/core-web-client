@@ -53,13 +53,15 @@ export default function Footer(): JSX.Element {
                     </Typography>
                     <List>
                         {mainMenuRoutes.map((page) => (
-                            <ListItemButton key={page.path} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
-                                <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
-                                    <ArrowForwardIosIcon sx={{ fontSize: '1rem' }} htmlColor='#3D4F4C' />
-                                </ListItemIcon>
-                                &nbsp;&nbsp;
-                                <ListItemText primary={page.title} />
-                            </ListItemButton>
+                            <li>
+                                <ListItemButton key={page.path} sx={{ padding: '0' }} onClick={() => { navigate(page.path); window.scroll(0, 0) }}>
+                                    <ListItemIcon sx={{ minWidth: '20px', maxWidth: '30px' }}>
+                                        <ArrowForwardIosIcon sx={{ fontSize: '1rem' }} htmlColor='#3D4F4C' />
+                                    </ListItemIcon>
+                                    &nbsp;&nbsp;
+                                    <ListItemText primary={page.title} />
+                                </ListItemButton>
+                            </li>
                         ))}
                     </List>
                 </Grid>

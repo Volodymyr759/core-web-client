@@ -5,7 +5,6 @@ import HeaderChapter from './HeaderChapter';
 import ServiceChapter from './ServiceChapter';
 import TeamChapter from './TeamChapter';
 import StatisticsChapter from './StatisticsChapter';
-import { AnimateIn } from '../../components/AnimateIn/AnimateIn';
 
 export default function HomePage(): JSX.Element {
     return (
@@ -18,15 +17,11 @@ export default function HomePage(): JSX.Element {
 
                 <ServiceChapter />
 
-                <AnimateIn>
-                    <StatisticsChapter />
-                </AnimateIn >
+                <StatisticsChapter />
 
                 <TeamChapter />
 
-                <AnimateIn>
-                    <ContactPage />
-                </AnimateIn >
+                <ContactPage />
 
             </Container>
         </>

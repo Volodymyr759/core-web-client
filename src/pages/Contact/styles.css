@@ -8,3 +8,12 @@
 .contact-info-card:hover {
     box-shadow: 10px 5px 5px #5F7C78;
 }
+
+.contact-info-header {
+    margin: 0;
+    color: #4b605c;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+}
