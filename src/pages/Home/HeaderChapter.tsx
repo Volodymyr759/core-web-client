@@ -8,7 +8,7 @@ export default function HeaderChapter(): JSX.Element {
 
     return (
         <Paper className="header-chapter-bg">
-            <Container fixed maxWidth='md' >
+            <Container fixed maxWidth='md' sx={{ padding: '0 30px' }} >
                 <Grid container direction="column" alignContent="center" maxWidth="50%">
                     <Grid item mt={10} mb={3}>
                         <h3 className="header-chapter-header">Shuffle Solutions</h3>

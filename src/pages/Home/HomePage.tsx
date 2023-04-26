@@ -10,34 +10,25 @@ import { AnimateIn } from '../../components/AnimateIn/AnimateIn';
 export default function HomePage(): JSX.Element {
     return (
         <>
-            <AnimateIn>
-                <HeaderChapter />
-            </AnimateIn >
+            <HeaderChapter />
 
             <Container maxWidth="lg" className='layout-container' >
 
-                <AnimateIn>
-                    <AboutPage />
-                </AnimateIn >
+                <AboutPage />
 
-                <AnimateIn>
-                    <ServiceChapter />
-                </AnimateIn >
+                <ServiceChapter />
 
                 <AnimateIn>
                     <StatisticsChapter />
                 </AnimateIn >
 
-                <AnimateIn>
-                    <TeamChapter />
-                </AnimateIn >
+                <TeamChapter />
 
                 <AnimateIn>
                     <ContactPage />
                 </AnimateIn >
 
             </Container>
-
         </>
     );
 };
