@@ -8,7 +8,7 @@ export default function ContactPage(): JSX.Element {
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="CONTACT US"
+                title="Contact Us"
                 text="We can’t wait to hear about your latest project. Need to request a quote, learn more about our service offering or ask a question?"
             />
             <Grid container spacing={2} className="page-chapter-container">

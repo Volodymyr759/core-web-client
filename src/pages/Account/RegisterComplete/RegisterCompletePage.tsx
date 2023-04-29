@@ -5,7 +5,7 @@ export default function RegisterCompletePage(): JSX.Element {
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="Registration successful."
+                title="Registration Successful."
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
             />
             <Grid container>

@@ -11,7 +11,7 @@ import { Container } from "@mui/material";
 import { MessageAppearance } from "../../components/Messages/types";
 
 export default function VacanciesPage(): JSX.Element {
-    const { errorFilters, errorVacancies, loadingFilters, loadingVacancies, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
+    const { errorFilters, errorVacancies, loadingVacancies, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
     const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies, setVacancyPage, loadMoreVacancies } = useActions();
 
     useEffect(() => {
@@ -30,12 +30,11 @@ export default function VacanciesPage(): JSX.Element {
 
     return (
         <Container maxWidth="lg" className='layout-container' >
-            <PageHeader title="OUR VACANCIES" />
-            {loadingFilters ?
-                <Spinner /> :
+            <PageHeader title="Vacancies" />
+            {
                 errorFilters ?
-                    <ErrorMessage appearance={MessageAppearance.LARGE}>{errorFilters}</ErrorMessage> :
-                    <VacanciesFilters />
+                <ErrorMessage appearance={MessageAppearance.LARGE}>{errorFilters}</ErrorMessage> :
+                <VacanciesFilters />
             }
             <VacanciesList vacancies={vacancySearchResult.itemList} />
             {loadingVacancies ?

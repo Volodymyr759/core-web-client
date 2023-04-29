@@ -10,9 +10,14 @@
 }
 
 .header-chapter-bg {
-    background-image: url(https://volodymyr57.somee.com/Uploads/header_bg.jpeg);
-    background-repeat: no-repeat round;
-    background-size: 100%;
+    /* generator css background: https://cssgradient.io/ */
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(13, 13, 98, 1) 21%,
+        rgba(0, 212, 255, 1) 100%
+    );
     border-radius: 0 !important;
 }
 

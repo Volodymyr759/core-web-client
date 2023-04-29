@@ -6,7 +6,7 @@ export default function ChangePasswordPage(): JSX.Element {
     return (
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
-                title="Change password"
+                title="Change Password"
                 text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
             />
             <Grid container direction="column" alignItems="center">
