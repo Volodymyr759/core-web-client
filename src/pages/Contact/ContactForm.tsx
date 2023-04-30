@@ -84,7 +84,7 @@ export default function ContactForm(): JSX.Element {
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
-                                                <IconButton edge="end" >
+                                                <IconButton edge="end" aria-label="Email" >
                                                     <MailOutlineIcon />
                                                 </IconButton>
                                             </InputAdornment>),
