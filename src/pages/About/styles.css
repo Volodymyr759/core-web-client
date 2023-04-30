@@ -1,6 +1,10 @@
-div h3{
-    color: #58716D;
+div h3 {
+    color: #58716d;
     font-family: "Poppins", sans-serif;
     font-size: 24px;
     font-weight: 500;
+}
+
+.about-img {
+    width: 100%;
 }

@@ -10,7 +10,7 @@ export default function ServiceCard({ service }: ServiceCardProps): JSX.Element 
                 <p id="service-description">{service.description}</p>
             </Grid>
             <Grid item xs={12} md={6}>
-                <img width='100%' alt="Company service" src={service.imageUrl} />
+                <img className="card-img" alt="Company service" src={service.imageUrl} />
             </Grid>
         </>
     )

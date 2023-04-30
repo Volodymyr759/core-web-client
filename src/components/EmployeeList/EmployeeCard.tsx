@@ -8,7 +8,7 @@ export default function EmployeeCard({ employee }: EmployeeCardProps): JSX.Eleme
             <Card elevation={16}>
                 <img
                     className="employee-card-img"
-                    width='90%'
+                    // width='90%'
                     alt="Employee"
                     src={employee.avatarUrl}
                 />

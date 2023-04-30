@@ -7,8 +7,12 @@
     text-align: center;
 }
 
+.card-img {
+    width: 100%;
+}
+
 .card-header:hover {
-    color: #1BBCA3;
+    color: #1bbca3;
 }
 
 #service-description {
