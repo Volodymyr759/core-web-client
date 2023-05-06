@@ -24,9 +24,9 @@ export default function VacanciesFilters(): JSX.Element {
         setVacancyOfficeFilter(newValue);
     }
 
-    const searchTitleChanged = (event, values) => {
+    function searchTitleChanged(event, values) {
         setVacancyPage(1);
-        setVacancySearchCriteria(values);
+        setVacancySearchCriteria(values === null ? "" : values);
     }
 
     return (
@@ -37,7 +37,7 @@ export default function VacanciesFilters(): JSX.Element {
                 onSelectChanged={onSelectChanged}
                 value={filters.officeId}
             />
-            <AutocompleteFilter label="Search by title" options={titles} onSearch={searchTitleChanged} />
+            <AutocompleteFilter label="Search by title" options={titles} onSearch={(event, values) => searchTitleChanged(event, values)} />
         </Grid>
     )
 }

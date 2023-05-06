@@ -8,9 +8,9 @@ export default function AutocompleteFilter({ label, options, onSearch }: Autocom
         <Grid item >
             <Autocomplete
                 freeSolo
-                disableClearable
+                disableClearable={false}
                 options={options.map((option) => option.value)}
-                onChange={(event: React.SyntheticEvent, values) => onSearch(event, values)}
+                onChange={onSearch}
                 renderInput={(params) => (
                     <TextField
                         sx={{ width: 300 }}
