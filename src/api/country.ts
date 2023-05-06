@@ -20,7 +20,7 @@ export async function getCountriesAxios(limit: number, page: number, sortField: 
  * @returns<ICountry> Object of service
  */
 export async function getCountryByIdAxios(id: number): Promise<ICountry> {
-    return (await axios.get(`/country/getbyid/${id.toString()}`)).data;
+    return (await axios.get(`/country/get/${id.toString()}`)).data;
 }
 
 /**

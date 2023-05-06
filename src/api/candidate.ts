@@ -30,7 +30,7 @@ export async function getCandidatesAxios(
  * @param id<string> Candidate identifier
  */
 export async function getCandidateByIdAxios(id: number): Promise<ICandidate> {
-    return (await axios.get(`/candidate/getbyid/${id.toString()}`)).data;
+    return (await axios.get(`/candidate/get/${id.toString()}`)).data;
 }
 
 /**

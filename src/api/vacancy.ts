@@ -46,7 +46,7 @@ export async function getFavoriteVacanciesAxios(
  * @param id<string> Vacancy identifier
  */
 export async function getVacancyByIdAxios(id: number): Promise<IVacancy> {
-    return (await axios.get(`/vacancy/getbyid/${id.toString()}`)).data;
+    return (await axios.get(`/vacancy/get/${id.toString()}`)).data;
 }
 
 /**

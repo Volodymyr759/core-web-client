@@ -20,7 +20,7 @@ export async function getServicesAxios(limit: number, page: number, companyServi
  * @returns<ICompanyService> Object of service
  */
 export async function getServiceByIdAxios(id: number): Promise<ICompanyService> {
-    return (await axios.get(`/companyservice/getbyid/${id.toString()}`)).data;
+    return (await axios.get(`/companyservice/get/${id.toString()}`)).data;
 }
 
 /**

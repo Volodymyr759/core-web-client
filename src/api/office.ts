@@ -29,7 +29,7 @@ export async function getOfficeNameIdsAxios(): Promise<OfficeNameIdDto[]> {
  * @returns<IOffice> Object of office
  */
 export async function getOfficeByIdAxios(id: number): Promise<IOffice> {
-    return (await axios.get(`/office/getbyid/${id.toString()}`)).data;
+    return (await axios.get(`/office/get/${id.toString()}`)).data;
 }
 
 /**
