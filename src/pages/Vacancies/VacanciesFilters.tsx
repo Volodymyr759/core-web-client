@@ -6,8 +6,13 @@ import SelectItemsFilter from "../../components/FiltersArea/SelectItemFilter/Sel
 import AutocompleteFilter from "../../components/FiltersArea/AutocompleteFilter/AutocompleteFilter";
 
 export default function VacanciesFilters(): JSX.Element {
-    const { getVacanciesTitles, setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
+    const { getOfficeNameIdDtos, getVacanciesTitles, setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
     const { filters, offices, titles } = useTypedSelector(state => state.vacancy);
+
+    useEffect(() => {
+        getOfficeNameIdDtos();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
         getVacanciesTitles("", filters.officeId);
@@ -17,7 +22,6 @@ export default function VacanciesFilters(): JSX.Element {
     const onSelectChanged = (newValue: string) => {
         setVacancyPage(1);
         setVacancyOfficeFilter(newValue);
-        setVacancySearchCriteria("");
     }
 
     const searchTitleChanged = (event, values) => {

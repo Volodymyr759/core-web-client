@@ -12,11 +12,9 @@ import { MessageAppearance } from "../../components/Messages/types";
 
 export default function VacanciesPage(): JSX.Element {
     const { errorFilters, errorVacancies, loadingVacancies, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
-    const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies, setVacancyPage, loadMoreVacancies } = useActions();
+    const { getVacancies, setVacancyPage, loadMoreVacancies } = useActions();
 
     useEffect(() => {
-        getOfficeNameIdDtos();
-        getVacanciesTitles(vacancySearchResult.searchCriteria, filters.officeId);
         getVacancies(vacancySearchResult.pageSize, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
             filters.active, filters.officeId, "Title", vacancySearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
