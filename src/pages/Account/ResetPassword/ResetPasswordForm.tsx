@@ -28,9 +28,9 @@ export default function ResetPasswordForm(): JSX.Element {
             .matches(EMAIL_REG_EXP, "Required field Email is not valid and may not be greater than 50 characters."),
         password: Yup.string()
             .max(100, 'The field Password may not be greater than 100 characters.')
-            .matches(PASSWORD_REG_EXP, "Password is not valid. Must contain at least one number and one uppercase and lowercase letter, and lenght 7 up to 100 characters."),
+            .matches(PASSWORD_REG_EXP, "Password is not valid. Must contain at least one uppercase, one symbol and at least 7 or more characters."),
         confirmPassword: Yup.string()
-            .matches(PASSWORD_REG_EXP, "The field Confirm New Password is not valid.")
+            .matches(PASSWORD_REG_EXP, "Password is not valid. Must contain at least one uppercase, one symbol and at least 7 or more characters.")
     })
 
     const defaultValues: IResetPasswordDto = { code: searchParams.get("code"), email: searchParams.get("email"), password: '', confirmPassword: '' }

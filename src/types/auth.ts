@@ -43,7 +43,8 @@ export interface IResetPasswordDto {
 
 export enum Roles {
     ADMIN = "Admin",
-    REGISTERED = "Registered"
+    REGISTERED = "Registered",
+    DEMO = "Demo"
 }
 
 export interface AuthState {

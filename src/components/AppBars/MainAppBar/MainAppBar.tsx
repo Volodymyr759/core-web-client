@@ -2,6 +2,13 @@ import * as React from 'react';
 import { AppBar, Avatar, Box, Button, Container, Toolbar, Tooltip, IconButton, Menu, MenuItem, Typography, } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 // import AdbIcon from '@mui/icons-material/Adb';
+import HomeIcon from '@mui/icons-material/Home';
+import BrightnessAutoIcon from '@mui/icons-material/BrightnessAuto';
+import BuildIcon from '@mui/icons-material/Build';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import Groups2Icon from '@mui/icons-material/Groups2';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
@@ -31,6 +38,15 @@ const mainMenuRoutes: IRoute[] = [
     { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
     { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
     { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> }
+]
+
+const mainMenuIcons = [
+    <HomeIcon sx={{ color: "#4b605c" }} />,
+    <BrightnessAutoIcon sx={{ color: "#4b605c" }} />,
+    <BuildIcon sx={{ color: "#4b605c" }} />,
+    <Groups2Icon sx={{ color: "#4b605c" }} />,
+    <Diversity3Icon sx={{ color: "#4b605c" }} />,
+    <ConnectWithoutContactIcon sx={{ color: "#4b605c" }} />
 ]
 
 export default function MainAppBar() {
@@ -112,8 +128,9 @@ export default function MainAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {mainMenuRoutes.map((page) => (
+                            {mainMenuRoutes.map((page, index) => (
                                 <MenuItem key={page.path} component={Link} to={page.path} onClick={handleCloseNavMenu}>
+                                    {mainMenuIcons[index]}&nbsp;
                                     <Typography textAlign="center">{page.title}</Typography>
                                 </MenuItem>
                             ))}

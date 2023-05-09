@@ -83,7 +83,7 @@ export default function AppRouter() {
                 }
             </Routes >
             :
-            auth.roles.includes(Roles.ADMIN) ?
+            auth.roles.includes(Roles.ADMIN) || auth.roles.includes(Roles.DEMO) ?
                 <Routes>
                     {
                         anonimousRoleRoutes.concat(registeredRoleRoutes).concat(adminRoleRoutes).map((route) => {
