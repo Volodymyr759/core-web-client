@@ -9,10 +9,14 @@ import { ICountry } from "../../../types/country";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
 import { MessageAppearance } from "../../../components/Messages/types";
+import { useState } from "react";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): JSX.Element {
     const { countrySearchResult, error } = useTypedSelector(state => state.country);
     const { removeCountry, setCountryPage } = useActions();
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+    const [countryIdToDelete, setCountryIdToDelete] = useState<null | number>(null);
 
     const onEditHandler = (id: number) => {
         const choosedCountry = countrySearchResult.itemList.find(c => c.id === id);
@@ -22,6 +26,13 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
             code: choosedCountry.code,
         }
         onEdit(countryToUpdate);
+    }
+
+    const onDeleteHandler = (id: number) => {
+        setCountryIdToDelete(id);
+        setTimeout(() => {
+            setConfirmDialogOpen(true);
+        }, 100);
     }
 
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
@@ -37,7 +48,7 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                                 key={country.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{country.name}</TableCell>
+                                <TableCell align="left">{country.name}</TableCell>
                                 <TableCell align="left">{country.code}</TableCell>
                                 <TableCell align="left">{
                                     country.officeDtos &&
@@ -52,7 +63,7 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                                         </Tooltip>
                                         <Divider orientation="vertical" flexItem />
                                         <Tooltip title="Remove Country" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => removeCountry(country.id)} />
+                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(country.id)} />
                                         </Tooltip>
                                     </div>
                                 </TableCell>
@@ -65,6 +76,7 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                 count={Math.ceil(countrySearchResult.totalItemCount / countrySearchResult.pageSize)}
                 onChangePage={(value: number) => setCountryPage(value)}
             />
+            {confirmDialogOpen && <AppDeleteConfirmDialog onCancel={() => setConfirmDialogOpen(false)} onDelete={() => removeCountry(countryIdToDelete)} />}
         </>
     )
 }

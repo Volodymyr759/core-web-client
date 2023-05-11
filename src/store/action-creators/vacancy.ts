@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { getOfficeNameIdsAxios } from "../../api/office";
-import { createVacancyAxios, getVacanciesAxios, incrementPreviewsAxios, searchVacanciesTitlesAxios, updateVacancyAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
+import { createVacancyAxios, getVacanciesAxios, incrementPreviewsAxios, removeVacancyAxios, searchVacanciesTitlesAxios, updateVacancyAxios, updateVacancyIsActiveStatusAxios } from "../../api/vacancy";
 import { OrderType } from "../../types/common/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes, VacancyStatus } from "../../types/vacancy";
 
@@ -153,6 +153,21 @@ export const updateVacancy = (vacancy: IVacancy) => {
             dispatch({ type: VacancyActionTypes.UPDATE_VACANCY, payload: await updateVacancyAxios(vacancy) });
         } catch (error) {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error while updating the vacancy." })
+        } finally {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
+        }
+    }
+}
+
+export const removeVacancy = (id: number) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        try {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: null });
+            await removeVacancyAxios(id);
+            dispatch({ type: VacancyActionTypes.REMOVE_VACANCY, payload: id });
+        } catch (error) {
+            dispatch({ type: VacancyActionTypes.SET_VACANCY_ERROR, payload: error.message || "Error while removing the vacancy." })
         } finally {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: false });
         }

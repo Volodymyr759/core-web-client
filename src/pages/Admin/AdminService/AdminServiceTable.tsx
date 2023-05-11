@@ -9,10 +9,14 @@ import ErrorMessage from '../../../components/Messages/ErrorMessage';
 import TablePagination from '../../../components/TablePagination/TablePagination';
 import TableHeader from '../../../components/TableHeader/TableHeader';
 import { MessageAppearance } from '../../../components/Messages/types';
+import { useState } from 'react';
+import AppDeleteConfirmDialog from '../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog';
 
 export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
     const { serviceSearchResult, error } = useTypedSelector(state => state.service);
     const { removeService, updateServiceIsActiveStatus, setServicePage } = useActions();
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+    const [serviceIdToDelete, setServiceIdToDelete] = useState<null | number>(null);
 
     const onEditHandler = (id: number) => {
         const choosedService = serviceSearchResult.itemList.find(s => s.id === id);
@@ -31,6 +35,13 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
         const serviceToUpdate: ICompanyService = { ...choosedService };
         serviceToUpdate.isActive = !choosedService.isActive;
         updateServiceIsActiveStatus(id, serviceToUpdate);
+    }
+
+    const onDeleteHandler = (id: number) => {
+        setServiceIdToDelete(id);
+        setTimeout(() => {
+            setConfirmDialogOpen(true);
+        }, 100);
     }
 
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
@@ -61,7 +72,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                                         </Tooltip>
                                         <Divider orientation="vertical" flexItem />
                                         <Tooltip title="Remove Company Service" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => removeService(service.id)} />
+                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(service.id)} />
                                         </Tooltip>
                                     </div>
                                 </TableCell>
@@ -74,6 +85,7 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                 count={Math.ceil(serviceSearchResult.totalItemCount / serviceSearchResult.pageSize)}
                 onChangePage={(value: number) => setServicePage(value)}
             />
+            {confirmDialogOpen && <AppDeleteConfirmDialog onCancel={() => setConfirmDialogOpen(false)} onDelete={() => removeService(serviceIdToDelete)} />}
         </>
     )
 }

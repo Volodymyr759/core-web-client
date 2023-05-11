@@ -72,76 +72,45 @@ export default function AdminServiceForm({ service, closeForm }: AdminServiceFor
     return (
         <SwipeableDrawer
             open={true}
-            anchor='left'
-            onClose={toggleDrawer('left', false)}
-            onOpen={toggleDrawer('left', true)}
+            anchor='right'
+            transitionDuration={1500}
+            sx={{ zIndex: 1202 }}
+            onClose={toggleDrawer('right', false)}
+            onOpen={toggleDrawer('right', true)}
         >
             <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
                 <input {...register("id")} type="hidden" />
-                <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
+                <Grid container direction={'column'} justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                     <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400 }}>
-                        Company Service Form
+                        {service.id === 0 ? 'Add Service' : 'Edit Service'}
                     </Typography>
                     <Grid item>
-                        <Controller
-                            name="title"
-                            control={control}
+                        <Controller name="title" control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Title"
-                                    type="text"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.title)}
-                                    helperText={errors.title?.message}
-                                />
+                                <TextField  {...field} label="Title" type="text" margin="normal" fullWidth
+                                    error={Boolean(errors.title)} helperText={errors.title?.message} />
                             }
                         />
                     </Grid>
                     <Grid item>
-                        <Controller
-                            name="description"
-                            control={control}
+                        <Controller name="description" control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Description"
-                                    fullWidth
-                                    margin="normal"
-                                    multiline
-                                    rows={4}
-                                    variant='outlined'
-                                    style={{ height: 'none' }}
-                                    error={Boolean(errors.description)}
-                                    helperText={errors.description?.message}
-                                />
-                            }
-                        />
+                                <TextField {...field} label="Notes" fullWidth
+                                    margin="normal" multiline rows={4} variant='outlined' style={{ height: 'none' }}
+                                    error={Boolean(errors.description)} helperText={errors.description?.message} />} />
                     </Grid>
                     <Grid item>
-                        <Controller
-                            name="imageUrl"
-                            control={control}
+                        <Controller name="imageUrl" control={control}
                             render={({ field }) =>
-                                <TextField
-                                    {...field}
-                                    label="Image Url"
-                                    type="text"
-                                    margin="normal"
-                                    fullWidth
-                                    error={Boolean(errors.imageUrl)}
-                                    helperText={errors.imageUrl?.message}
-                                />
+                                <TextField {...field} label="Image Url" type="text" margin="normal" fullWidth
+                                    error={Boolean(errors.imageUrl)} helperText={errors.imageUrl?.message} />
                             }
                         />
                     </Grid>
                     <Grid item>
                         <FormControlLabel
                             control={
-                                <Controller
-                                    name="isActive"
-                                    control={control}
+                                <Controller name="isActive" control={control}
                                     render={({ field: props }) => (
                                         <Checkbox
                                             {...props}

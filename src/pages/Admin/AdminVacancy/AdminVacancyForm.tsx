@@ -85,7 +85,7 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
                     <input {...register("previews")} type="hidden" />
                     <Grid container direction="column" justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                         <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400, textAlign: 'center' }}>
-                            Vacancy Form
+                            {vacancy.id === 0 ? 'Add Vacancy' : 'Edit Vacancy'}
                         </Typography>
                         <Grid item>
                             <Controller

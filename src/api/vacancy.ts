@@ -91,3 +91,11 @@ export async function createVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
 export async function updateVacancyAxios(vacancy: IVacancy): Promise<IVacancy> {
     return (await axios.put("/vacancy/update", vacancy)).data;
 }
+
+/**
+ * Delete's the 'Vacancy' object specified by identifier
+ * @param id<string> Identifier
+ */
+export async function removeVacancyAxios(id: number): Promise<void> {
+    return await axios.delete(`/vacancy/delete/${id}`);
+}

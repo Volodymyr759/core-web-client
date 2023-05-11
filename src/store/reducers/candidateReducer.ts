@@ -42,6 +42,8 @@ export const candidateReducer = (state: CandidateState = initialState, action: C
             return { ...state, candidateSearchResult: { ...state.candidateSearchResult, itemList: [action.payload, ...state.candidateSearchResult.itemList] } }
         case CandidateActionTypes.UPDATE_CANDIDATE:
             return { ...state, candidateSearchResult: { ...state.candidateSearchResult, itemList: updateCandidate(state, action.payload) } }
+        case CandidateActionTypes.REMOVE_CANDIDATE:
+            return { ...state, candidateSearchResult: { ...state.candidateSearchResult, itemList: deleteCandidate(state, action) } };
         default: return state;
     }
 }
@@ -51,4 +53,8 @@ function updateCandidate(state: CandidateState, candidateToUpdate: ICandidate): 
         if (candidate.id === candidateToUpdate.id) return candidateToUpdate;
         return candidate;
     })
+}
+
+function deleteCandidate(state: CandidateState, action: CandidateAction): Array<ICandidate> {
+    return state.candidateSearchResult.itemList.filter(candidate => candidate.id !== action.payload)
 }

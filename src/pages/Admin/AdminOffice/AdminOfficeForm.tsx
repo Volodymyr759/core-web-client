@@ -83,15 +83,17 @@ export default function AdminOfficeForm({ office, closeForm }: AdminOfficeFormPr
     return (
         <SwipeableDrawer
             open={true}
-            anchor='left'
-            onClose={toggleDrawer('left', false)}
-            onOpen={toggleDrawer('left', true)}
+            anchor='right'
+            transitionDuration={1500}
+            sx={{ zIndex: 1202 }}
+            onClose={toggleDrawer('right', false)}
+            onOpen={toggleDrawer('right', true)}
         >
             <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
                 <input {...register("id")} type="hidden" />
                 <Grid container direction="column" justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                     <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400 }}>
-                        Office Form
+                        {office.id === 0 ? 'Add Office' : 'Edit Office'}
                     </Typography>
                     <Grid item>
                         <Controller

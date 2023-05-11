@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import PageHeader from '../../../components/PageHeader/PageHeader';
 import AdminUserFilters from './AdminUserFilters';
 import AdminUserTable from './AdminUserTable';
 
@@ -16,7 +15,6 @@ export default function AdminUsersPage(): JSX.Element {
     
     return (
         <>
-            <PageHeader title="Users Management" />
             <AdminUserFilters />
             <AdminUserTable />
         </>

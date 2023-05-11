@@ -13,6 +13,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
+import { Roles } from "../../../types/auth";
 
 export default function LoginForm(): JSX.Element {
     const { login } = useActions();
@@ -38,7 +39,7 @@ export default function LoginForm(): JSX.Element {
         resolver: yupResolver(validationSchema), defaultValues
     })
 
-    const onSubmit = async (loginModel: { email: string, password: string, remember: boolean }) => {
+    const onSubmit = async (loginModel: ILoginDto) => {
         try {
             setLoading(true);
             setError(null);
@@ -46,7 +47,8 @@ export default function LoginForm(): JSX.Element {
             localStorage.setItem("auth", JSON.stringify(authModel));
             login(authModel);
             reset();
-            navigate(RouteNames.HOME)
+            (authModel.roles.includes(Roles.ADMIN) || authModel.roles.includes(Roles.DEMO)) ?
+                navigate(RouteNames.DASHBOARD) : navigate(RouteNames.HOME)
         } catch (e) {
             setError(e.message || 'Unknown server error.');
         } finally {

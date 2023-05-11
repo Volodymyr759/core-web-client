@@ -3,7 +3,6 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IEmployee } from "../../../types/employee";
 import { OrderType } from "../../../types/common/orderType";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminEmployeeForm from "./AdminEmployeeForm";
 import AdminEmployeeTable from "./AdminEmployeeTable";
 import AdminTeamFilters from "./AdminTeamFilters";
@@ -24,7 +23,6 @@ export default function AdminTeamPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Team Management" />
             <AdminTeamFilters onAddNew={() => setEmployee({ id: 0, fullName: '', email: '', position: '', description: '', avatarUrl: '', officeId: offices[1].id })} />
             <AdminEmployeeTable onEdit={onCreateEdit} />
             {employee && <AdminEmployeeForm employee={employee} closeForm={() => setEmployee(null)} />}

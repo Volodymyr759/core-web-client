@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { ICandidate } from "../../../types/candidate";
@@ -22,7 +21,6 @@ export default function AdminCandidatePage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Candidates Management" />
             <AdminCandidateFilters onAddNew={() => setCandidate({ id: 0, fullName: '', email: '', phone: '', notes: '', isDismissed: false, joinedAt: new Date(), vacancyId: 0 })} />
             <AdminCandidateTable onEdit={onCreateEdit} />
             {candidate && <AdminCandidateForm candidate={candidate} closeForm={() => setCandidate(null)} />}

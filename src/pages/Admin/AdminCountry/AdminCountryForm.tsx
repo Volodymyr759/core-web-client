@@ -62,15 +62,17 @@ export default function AdminCountryForm({ country, closeForm }: AdminCountryFor
     return (
         <SwipeableDrawer
             open={true}
-            anchor='left'
-            onClose={toggleDrawer('left', false)}
-            onOpen={toggleDrawer('left', true)}
+            anchor='right'
+            transitionDuration={1500}
+            sx={{ zIndex: 1202 }}
+            onClose={toggleDrawer('right', false)}
+            onOpen={toggleDrawer('right', true)}
         >
             <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: '360px' }}>
                 <input {...register("id")} type="hidden" />
                 <Grid container direction="column" justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
                     <Typography variant="h5" component={'p'} sx={{ padding: '20px', fontWeight: 400 }}>
-                        Country Form
+                        {country.id === 0 ? 'Add Country' : 'Edit Country'}
                     </Typography>
                     <Grid item>
                         <Controller

@@ -8,10 +8,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
+import { useState } from "react";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps): JSX.Element {
     const { candidateSearchResult } = useTypedSelector(state => state.candidate);
-    const { updateCandidateIsDismissedStatus, setCandidatePage } = useActions();
+    const { updateCandidateIsDismissedStatus, removeCandidate, setCandidatePage } = useActions();
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+    const [candidateIdToDelete, setCandidateIdToDelete] = useState<null | number>(null);
 
     const onChangeIsDismissed = (id: number): void => {
         const choosedCandidate = candidateSearchResult.itemList.find(c => c.id === id);
@@ -33,6 +37,13 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
             vacancyId: choosedCandidate.vacancyId
         };
         onEdit(candidateToUpdate);
+    }
+
+    const onDeleteHandler = (id: number) => {
+        setCandidateIdToDelete(id);
+        setTimeout(() => {
+            setConfirmDialogOpen(true);
+        }, 100);
     }
 
     return (
@@ -59,7 +70,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                         </Tooltip>
                                         <Divider orientation="vertical" flexItem />
                                         <Tooltip title="Remove Company Service" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => alert("Delete is not implemented yet." + candidate.id)} />
+                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(candidate.id)} />
                                         </Tooltip>
                                     </div>
                                 </TableCell>
@@ -72,6 +83,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                 count={Math.ceil(candidateSearchResult.totalItemCount / candidateSearchResult.pageSize)}
                 onChangePage={(value: number) => setCandidatePage(value)}
             />
+            {confirmDialogOpen && <AppDeleteConfirmDialog onCancel={() => setConfirmDialogOpen(false)} onDelete={() => removeCandidate(candidateIdToDelete)} />}
         </>
     )
 }

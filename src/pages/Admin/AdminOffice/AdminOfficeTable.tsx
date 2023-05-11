@@ -9,10 +9,14 @@ import { IOffice } from "../../../types/office";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
 import { MessageAppearance } from "../../../components/Messages/types";
+import { useState } from "react";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX.Element {
     const { officeSearchResult, error } = useTypedSelector(state => state.office);
     const { removeOffice, setOfficePage } = useActions();
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+    const [officeIdToDelete, setOfficeIdToDelete] = useState<null | number>(null);
 
     const onEditHandler = (id: number) => {
         const choosedOffice = officeSearchResult.itemList.find(c => c.id === id);
@@ -26,6 +30,13 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
             countryId: choosedOffice.countryId
         };
         onEdit(officeToUpdate);
+    }
+
+    const onDeleteHandler = (id: number) => {
+        setOfficeIdToDelete(id);
+        setTimeout(() => {
+            setConfirmDialogOpen(true);
+        }, 100);
     }
 
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
@@ -53,7 +64,7 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
                                         </Tooltip>
                                         <Divider orientation="vertical" flexItem />
                                         <Tooltip title="Remove Office" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => removeOffice(office.id)} />
+                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(office.id)} />
                                         </Tooltip>
                                     </div>
                                 </TableCell>
@@ -66,6 +77,7 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
                 count={Math.ceil(officeSearchResult.totalItemCount / officeSearchResult.pageSize)}
                 onChangePage={(value: number) => setOfficePage(value)}
             />
+            {confirmDialogOpen && <AppDeleteConfirmDialog onCancel={() => setConfirmDialogOpen(false)} onDelete={() => removeOffice(officeIdToDelete)} />}
         </>
     )
 }

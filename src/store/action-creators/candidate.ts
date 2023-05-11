@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { createCandidateAxios, getCandidatesAxios, getCandidateByIdAxios, updateCandidateIsDismissedStatusAxios, updateCandidateAxios } from "../../api/candidate";
+import { createCandidateAxios, getCandidatesAxios, getCandidateByIdAxios, updateCandidateIsDismissedStatusAxios, updateCandidateAxios, removeCandidateAxios } from "../../api/candidate";
 import { OrderType } from "../../types/common/orderType";
 import { ICandidate, CandidateAction, CandidateActionTypes, CandidateStatus, CandidateFilters } from "../../types/candidate";
 
@@ -101,6 +101,21 @@ export const updateCandidate = (candidate: ICandidate) => {
             dispatch({ type: CandidateActionTypes.UPDATE_CANDIDATE, payload: await updateCandidateAxios(candidate) });
         } catch (error) {
             dispatch({ type: CandidateActionTypes.SET_CANDIDATE_ERROR, payload: error.message || "Error while updating the candidate." })
+        } finally {
+            dispatch({ type: CandidateActionTypes.SET_CANDIDATE_LOADING, payload: false });
+        }
+    }
+}
+
+export const removeCandidate = (id: number) => {
+    return async (dispatch: Dispatch<CandidateAction>) => {
+        try {
+            dispatch({ type: CandidateActionTypes.SET_CANDIDATE_LOADING, payload: true });
+            dispatch({ type: CandidateActionTypes.SET_CANDIDATE_ERROR, payload: null });
+            await removeCandidateAxios(id);
+            dispatch({ type: CandidateActionTypes.REMOVE_CANDIDATE, payload: id });
+        } catch (error) {
+            dispatch({ type: CandidateActionTypes.SET_CANDIDATE_ERROR, payload: error.message || "Error while removing the candidate." })
         } finally {
             dispatch({ type: CandidateActionTypes.SET_CANDIDATE_LOADING, payload: false });
         }

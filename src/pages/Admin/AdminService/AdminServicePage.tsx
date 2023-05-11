@@ -3,7 +3,6 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { OrderType } from "../../../types/common/orderType";
 import { ICompanyService } from "../../../types/companyService";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminServiceTable from "./AdminServiceTable";
 import AdminServiceForm from "./AdminServiceForm";
 import AdminServiceFilters from "./AdminServiceFilters";
@@ -22,7 +21,6 @@ export default function AdminServicePage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Services Management" />
             <AdminServiceFilters onAddNew={() => setService({ id: 0, title: '', description: '', imageUrl: '', isActive: true })} />
             <AdminServiceTable onEdit={onCreateEdit} />
             {service && <AdminServiceForm service={service} closeForm={() => setService(null)} />}

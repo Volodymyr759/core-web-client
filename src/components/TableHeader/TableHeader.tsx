@@ -1,4 +1,4 @@
-import { TableCell, TableHead, TableRow } from "@mui/material";
+import { TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { TableHeaderProps } from "./types";
 
 export default function TableHeader({ titles }: TableHeaderProps): JSX.Element {
@@ -6,7 +6,11 @@ export default function TableHeader({ titles }: TableHeaderProps): JSX.Element {
         <TableHead>
             <TableRow>
                 {titles.map((header, index) =>
-                    <TableCell key={index} align="center">{header}</TableCell>)}
+                    <TableCell key={index} align="center">
+                        <Typography variant="overline" gutterBottom>
+                            {header}
+                        </Typography>
+                    </TableCell>)}
             </TableRow>
         </TableHead>
     )

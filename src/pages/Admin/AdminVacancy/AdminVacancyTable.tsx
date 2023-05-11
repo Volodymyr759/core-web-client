@@ -7,10 +7,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
+import { useState } from "react";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): JSX.Element {
     const { vacancySearchResult } = useTypedSelector(state => state.vacancy);
-    const { setVacancyPage, updateVacancyIsActiveStatus } = useActions();
+    const { removeVacancy, setVacancyPage, updateVacancyIsActiveStatus } = useActions();
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+    const [vacancyIdToDelete, setVacancyIdToDelete] = useState<null | number>(null);
 
     const onEditHandler = (id: number) => {
         const vacancy = vacancySearchResult.itemList.find(v => v.id === id);
@@ -30,6 +34,13 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
         const vacancyToUpdate: IVacancy = { ...choosedVacancy };
         vacancyToUpdate.isActive = !choosedVacancy.isActive;
         updateVacancyIsActiveStatus(id, vacancyToUpdate);
+    }
+
+    const onDeleteHandler = (id: number) => {
+        setVacancyIdToDelete(id);
+        setTimeout(() => {
+            setConfirmDialogOpen(true);
+        }, 100);
     }
 
     return (
@@ -67,12 +78,12 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                     <TableCell align="left">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
                                     <TableCell align="center">
                                         <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <Tooltip title="Edit Company Service" placement="top">
+                                            <Tooltip title="Edit Vacancy" placement="top">
                                                 <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(vacancy.id)} />
                                             </Tooltip>
                                             <Divider orientation="vertical" flexItem />
-                                            <Tooltip title="Remove Company Service" placement="top">
-                                                <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => alert("Delete is not implemented yet." + vacancy.id)} />
+                                            <Tooltip title="Remove Vacancy" placement="top">
+                                                <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(vacancy.id)} />
                                             </Tooltip>
                                         </div>
                                     </TableCell>
@@ -86,6 +97,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                 count={Math.ceil(vacancySearchResult.totalItemCount / vacancySearchResult.pageSize)}
                 onChangePage={(value: number) => setVacancyPage(value)}
             />
+            {confirmDialogOpen && <AppDeleteConfirmDialog onCancel={() => setConfirmDialogOpen(false)} onDelete={() => removeVacancy(vacancyIdToDelete)} />}
         </>
     )
 }

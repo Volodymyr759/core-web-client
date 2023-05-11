@@ -9,10 +9,14 @@ import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
 import { MessageAppearance } from "../../../components/Messages/types";
+import { useState } from "react";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps): JSX.Element {
     const { employeeSearchResult, error } = useTypedSelector(state => state.employee);
     const { removeEmployee, setEmployeePage } = useActions();
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+    const [employeeIdToDelete, setEmployeeIdToDelete] = useState<null | number>(null);
 
     const onEditHandler = (id: number) => {
         const choosedEmployee = employeeSearchResult.itemList.find(e => e.id === id);
@@ -26,6 +30,13 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
             officeId: choosedEmployee.officeId
         }
         onEdit(employeeToUpdate);
+    }
+
+    const onDeleteHandler = (id: number) => {
+        setEmployeeIdToDelete(id);
+        setTimeout(() => {
+            setConfirmDialogOpen(true);
+        }, 100);
     }
 
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
@@ -54,7 +65,7 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                                         </Tooltip>
                                         <Divider orientation="vertical" flexItem />
                                         <Tooltip title="Remove Employee" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => removeEmployee(employee.id)} />
+                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(employee.id)} />
                                         </Tooltip>
                                     </div>
                                 </TableCell>
@@ -67,6 +78,7 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                 count={Math.ceil(employeeSearchResult.totalItemCount / employeeSearchResult.pageSize)}
                 onChangePage={(value: number) => setEmployeePage(value)}
             />
+            {confirmDialogOpen && <AppDeleteConfirmDialog onCancel={() => setConfirmDialogOpen(false)} onDelete={() => removeEmployee(employeeIdToDelete)} />}
         </>
     )
 }

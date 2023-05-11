@@ -3,7 +3,6 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { OrderType } from "../../../types/common/orderType";
 import { ICountry } from "../../../types/country";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminCountryForm from "./AdminCountryForm";
 import AdminCountryTable from "./AdminCountryTable";
 import AdminCountryFilters from "./AdminCountryFilters";
@@ -22,7 +21,6 @@ export default function AdminCountryPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Countries Management" />
             <AdminCountryFilters onAddNew={() => setCountry({ id: 0, name: '', code: '' })} />
             <AdminCountryTable onEdit={onCreateEdit} />
             {country && <AdminCountryForm country={country} closeForm={() => setCountry(null)} />}

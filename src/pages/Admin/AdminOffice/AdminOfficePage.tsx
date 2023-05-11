@@ -3,7 +3,6 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { IOffice } from "../../../types/office";
 import { OrderType } from "../../../types/common/orderType";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminOfficeForm from "./AdminOfficeForm";
 import AdminOfficeTable from "./AdminOfficeTable";
 import AdminOfficeFilters from "./AdminOfficeFilters";
@@ -28,11 +27,6 @@ export default function AdminOfficePage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Offices Management" />
-            {/* <CreateNewButton onAction={() => setOffice({ id: 0, name: '', description: '', address: '', latitude: 0, longitude: 0, countryId: countrySearchResult.itemList[0].id })}
-            >
-                + Create New
-            </CreateNewButton> */}
             <AdminOfficeFilters onAddNew={() => setOffice({ id: 0, name: '', description: '', address: '', latitude: 0, longitude: 0, countryId: countrySearchResult.itemList[0].id })} />
             <AdminOfficeTable onEdit={onCreateEdit} />
             {office && <AdminOfficeForm office={office} closeForm={() => setOffice(null)} />}

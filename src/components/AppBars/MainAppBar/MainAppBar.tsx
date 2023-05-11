@@ -1,35 +1,24 @@
 import * as React from 'react';
-import { AppBar, Avatar, Box, Button, Container, Toolbar, Tooltip, IconButton, Menu, MenuItem, Typography, } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { IRoute, RouteNames } from '../../../routing';
+import { AppBar, Box, Button, Container, Toolbar, IconButton, Menu, MenuItem, Typography, Tooltip, } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-// import AdbIcon from '@mui/icons-material/Adb';
 import HomeIcon from '@mui/icons-material/Home';
 import BrightnessAutoIcon from '@mui/icons-material/BrightnessAuto';
 import BuildIcon from '@mui/icons-material/Build';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import Groups2Icon from '@mui/icons-material/Groups2';
-
-import { Link, useNavigate } from 'react-router-dom';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { useActions } from '../../../hooks/useActions';
-import { IRoute, RouteNames } from '../../../routing';
 import AboutPage from '../../../pages/About/AboutPage';
 import VacanciesPage from '../../../pages/Vacancies/VacanciesPage';
 import ContactPage from '../../../pages/Contact/ContactPage';
-import ChangeEmailPage from '../../../pages/Account/ChangeEmail/ChangeEmailPage';
-import ChangePasswordPage from '../../../pages/Account/ChangePassword/ChangePasswordPage';
 import HomePage from '../../../pages/Home/HomePage';
 import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../../pages/Team/TeamPage';
-import ProfilePage from '../../../pages/Account/Profile/ProfilePage';
-import FavoriteVacanciesPage from '../../../pages/Vacancies/FavoriteVacanciesPage';
-
-const settings: IRoute[] = [
-    { path: RouteNames.PROFILE, title: "Profile", component: <ProfilePage /> },
-    { path: RouteNames.FAVORITE_VACANCIES, title: "Favorite Vacancies", component: <FavoriteVacanciesPage /> },
-    { path: RouteNames.CHANGE_EMAIL, title: "Change email", component: <ChangeEmailPage /> },
-    { path: RouteNames.CHANGE_PASSWORD, title: "Change password", component: <ChangePasswordPage /> }
-];
+import AppAvatar from '../../AppAvatar/AppAvatar';
+import { Roles } from '../../../types/auth';
 
 const mainMenuRoutes: IRoute[] = [
     { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
@@ -51,11 +40,7 @@ const mainMenuIcons = [
 
 export default function MainAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
     const { auth } = useTypedSelector(state => state.auth)
-    const { logout } = useActions();
-    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -65,24 +50,10 @@ export default function MainAppBar() {
         setAnchorElNav(null);
     };
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
-    const handleLogout = () => {
-        logout(auth.user.email, auth.tokens.accessToken);
-        navigate(RouteNames.HOME);
-    }
-
     return (
         <AppBar position="static" sx={{ backgroundColor: '#158F7C' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography variant="h6" component="a" href="https://volodymyr759.github.io/core-web-client" sx={{
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
@@ -167,42 +138,16 @@ export default function MainAppBar() {
 
                     {/* Avatar */}
                     {auth ?
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Typography component="span">
-                                {auth.user.userName + ' '}
-                            </Typography>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                                    <Avatar alt="Remy Sharp" src={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting.path} component={Link} to={setting.path} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting.title}</Typography>
-                                    </MenuItem>
-                                ))}
-                                <hr />
-                                <MenuItem component={Link} to={RouteNames.HOME} onClick={handleLogout}>
-                                    <Typography textAlign="center">Logout</Typography>
-                                </MenuItem>
-                            </Menu>
+                        <Box sx={{ display: 'flex', alignItems: 'center', columnGap: '10px' }}>
+                            {
+                                (auth.roles.includes(Roles.ADMIN) || auth.roles.includes(Roles.DEMO)) &&
+                                <Link to={RouteNames.DASHBOARD} className="main-menu-link">
+                                    <Tooltip title="Dashboard" placement="bottom">
+                                        <DashboardIcon sx={{ color: 'white' }} />
+                                    </Tooltip>
+                                </Link>
+                            }
+                            <AppAvatar />
                         </Box>
                         :
                         <Button

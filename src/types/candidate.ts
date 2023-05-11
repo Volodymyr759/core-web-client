@@ -43,7 +43,8 @@ export enum CandidateActionTypes {
     SET_CANDIDATE_SEARCH_CRITERIA = "SET_CANDIDATE_SEARCH_CRITERIA",
     UPDATE_CANDIDATE_ISDISMISSED_STATUS = "UPDATE_CANDIDATE_ISDISMISSED_STATUS",
     CREATE_CANDIDATE = "CREATE_CANDIDATE",
-    UPDATE_CANDIDATE = "UPDATE_CANDIDATE"
+    UPDATE_CANDIDATE = "UPDATE_CANDIDATE",
+    REMOVE_CANDIDATE = "REMOVE_CANDIDATE"
 }
 
 interface GetCandidatesAction {
@@ -101,6 +102,11 @@ interface UpdateCandidateAction {
     payload: ICandidate;
 }
 
+interface RemoveCandidateAction {
+    type: CandidateActionTypes.REMOVE_CANDIDATE;
+    payload: number;
+}
+
 export type CandidateAction = GetCandidatesAction |
     GetCandidateByIdAction |
     SetCandidateErrorAction |
@@ -111,4 +117,5 @@ export type CandidateAction = GetCandidatesAction |
     SetCandidatesSearchCriteriaAction |
     UpdateCandidateIsDismissedAction |
     CreateCandidateAction |
-    UpdateCandidateAction
+    UpdateCandidateAction |
+    RemoveCandidateAction

@@ -21,7 +21,7 @@ export default function AdminUserTable(): JSX.Element {
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['User Name', 'Email', 'Email Confirmed?', 'Phone', 'Avatar Url', 'Actions']} />
+                    <TableHeader titles={['Username', 'Email', 'Email Confirmed?', 'Phone', 'Avatar Url', 'Actions']} />
                     <TableBody>
                         {userSearchResult.itemList.map((user) => (
                             <TableRow key={user.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -31,7 +31,7 @@ export default function AdminUserTable(): JSX.Element {
                                     <Switch checked={user.emailConfirmed} onClick={() => onChangeEmailConfirmed(user.id)} />
                                 </TableCell>
                                 <TableCell align="left">{user.phoneNumber}</TableCell>
-                                <TableCell align="left">{user.avatarUrl}</TableCell>
+                                <TableCell align="left">{user.avatarUrl.slice(0, 15).concat('...')}</TableCell>
                                 <TableCell align="center">
                                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                                         <Tooltip title="Remove User" placement="top">

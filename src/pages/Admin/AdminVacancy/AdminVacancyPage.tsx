@@ -3,7 +3,6 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IVacancy, VacancyStatus } from "../../../types/vacancy";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import AdminVacancyFilters from "./AdminVacancyFilters";
 import AdminVacancyForm from "./AdminVacancyForm";
 import AdminVacancyTable from "./AdminVacancyTable";
@@ -29,7 +28,6 @@ export default function AdminVacancyPage(): JSX.Element {
 
     return (
         <>
-            <PageHeader title="Vacancies Management" />
             <AdminVacancyFilters onAddNew={() => setVacancy({ id: 0, title: '', description: 'Vacancy Description', previews: 0, isActive: true, officeId: offices[1].id })} />
             <AdminVacancyTable onEdit={onCreateEdit} />
             {vacancy && <AdminVacancyForm vacancy={vacancy} closeForm={() => setVacancy(null)} />}

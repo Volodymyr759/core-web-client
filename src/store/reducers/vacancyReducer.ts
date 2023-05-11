@@ -91,6 +91,8 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
                     ...state.vacancySearchResult, itemList: updateVacancy(state, action.payload)
                 }
             }
+        case VacancyActionTypes.REMOVE_VACANCY:
+            return { ...state, vacancySearchResult: { ...state.vacancySearchResult, itemList: deleteVacancy(state, action) } };
         default: return state;
     }
 }
@@ -100,4 +102,8 @@ function updateVacancy(state: VacancyState, vacancyToUpdate: IVacancy): Array<IV
         if (vacancy.id === vacancyToUpdate.id) return vacancyToUpdate;
         return vacancy;
     })
+}
+
+function deleteVacancy(state: VacancyState, action: VacancyAction): Array<IVacancy> {
+    return state.vacancySearchResult.itemList.filter(vacancy => vacancy.id !== action.payload)
 }
