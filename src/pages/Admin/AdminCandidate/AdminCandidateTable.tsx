@@ -1,15 +1,15 @@
+import { useState } from "react";
 import moment from "moment";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { ICandidate } from "../../../types/candidate";
 import { AdminCandidateTableProps } from "./types";
-import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import TablePagination from "../../../components/TablePagination/TablePagination";
-import TableHeader from "../../../components/TableHeader/TableHeader";
-import { useState } from "react";
+import { Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
+import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
+import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
+import TableHeader from "../../../components/TableHeader/TableHeader";
+import TablePagination from "../../../components/TablePagination/TablePagination";
 
 export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps): JSX.Element {
     const { candidateSearchResult } = useTypedSelector(state => state.candidate);
@@ -54,25 +54,29 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                     <TableBody>
                         {candidateSearchResult.itemList.map((candidate) => (
                             <TableRow key={candidate.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell component="th" scope="row">{candidate.fullName}</TableCell>
+                                <TableCell align="left">{candidate.fullName}</TableCell>
                                 <TableCell align="left">{candidate.email}</TableCell>
                                 <TableCell align="left">{candidate.phone}</TableCell>
-                                <TableCell align="left">{candidate.notes.slice(0, 50).concat('...')}</TableCell>
                                 <TableCell align="left">
-                                    <Switch checked={candidate.isDismissed} onClick={() => onChangeIsDismissed(candidate.id)} />
+                                    {candidate.notes.length > 53 ?
+                                        candidate.notes.slice(0, 50).concat('...') : candidate.notes
+                                    }
+                                </TableCell>
+                                <TableCell align="left">
+                                    <Switch
+                                        color="error"
+                                        checked={candidate.isDismissed}
+                                        onClick={() => onChangeIsDismissed(candidate.id)}
+                                    />
                                 </TableCell>
                                 <TableCell align="left">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
                                 <TableCell align="left">{candidate.vacancyDto?.title.length > 50 ? candidate.vacancyDto?.title.slice(0, 50).concat('...') : candidate.vacancyDto?.title}</TableCell>
                                 <TableCell align="center">
-                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Tooltip title="Edit Company Service" placement="top">
-                                            <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(candidate.id)} />
-                                        </Tooltip>
+                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <StyledEditIcon tooltipTitle="Edit Candidate" onEdit={() => onEditHandler(candidate.id)} />
                                         <Divider orientation="vertical" flexItem />
-                                        <Tooltip title="Remove Company Service" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(candidate.id)} />
-                                        </Tooltip>
-                                    </div>
+                                        <StyledDeleteIcon tooltipTitle="Remove Candidate" onDelete={() => onDeleteHandler(candidate.id)} />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}

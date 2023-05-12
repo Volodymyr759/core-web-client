@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
 import { ICompanyService } from '../../../types/companyService';
 import { AdminServiceTableProps } from './types';
-import { Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ErrorMessage from '../../../components/Messages/ErrorMessage';
-import TablePagination from '../../../components/TablePagination/TablePagination';
-import TableHeader from '../../../components/TableHeader/TableHeader';
-import { MessageAppearance } from '../../../components/Messages/types';
-import { useState } from 'react';
+import { Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import AppDeleteConfirmDialog from '../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog';
+import ErrorMessage from '../../../components/Messages/ErrorMessage';
+import { MessageAppearance } from '../../../components/Messages/types';
+import StyledEditIcon from '../../../components/StyledIcons/StyledEditIcon';
+import StyledDeleteIcon from '../../../components/StyledIcons/StyledDeleteIcon';
+import TableHeader from '../../../components/TableHeader/TableHeader';
+import TablePagination from '../../../components/TablePagination/TablePagination';
 
 export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
     const { serviceSearchResult, error } = useTypedSelector(state => state.service);
@@ -57,24 +57,28 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                                 key={service.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">
+                                <TableCell align="left">
                                     {service.title}
                                 </TableCell>
-                                <TableCell align="left">{service.description.slice(0, 50).concat('...')}</TableCell>
-                                <TableCell align="left">{service.imageUrl.slice(0, 15).concat('...')}</TableCell>
+                                <TableCell align="left">
+                                    {service.description.length > 53 ?
+                                        service.description.slice(0, 50).concat('...') : service.description
+                                    }
+                                </TableCell>
+                                <TableCell align="left">
+                                    {service.imageUrl.length > 18 ?
+                                        service.imageUrl.slice(0, 15).concat('...') : service.imageUrl
+                                    }
+                                </TableCell>
                                 <TableCell align="left">
                                     <Switch checked={service.isActive} onClick={() => onChangeIsActive(service.id)} />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Tooltip title="Edit Company Service" placement="top">
-                                            <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(service.id)} />
-                                        </Tooltip>
+                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <StyledEditIcon tooltipTitle="Edit Company Service" onEdit={() => onEditHandler(service.id)} />
                                         <Divider orientation="vertical" flexItem />
-                                        <Tooltip title="Remove Company Service" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(service.id)} />
-                                        </Tooltip>
-                                    </div>
+                                        <StyledDeleteIcon tooltipTitle="Remove Service" onDelete={() => onDeleteHandler(service.id)} />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}

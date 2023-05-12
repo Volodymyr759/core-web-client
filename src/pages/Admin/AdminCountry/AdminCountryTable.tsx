@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminCountryTableProps } from "./types";
-import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { ICountry } from "../../../types/country";
+import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
+import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
+import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
-import { MessageAppearance } from "../../../components/Messages/types";
-import { useState } from "react";
-import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): JSX.Element {
     const { countrySearchResult, error } = useTypedSelector(state => state.country);
@@ -57,15 +57,11 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                                     })
                                 }</TableCell>
                                 <TableCell align="center">
-                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Tooltip title="Edit Country" placement="top">
-                                            <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(country.id)} />
-                                        </Tooltip>
+                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <StyledEditIcon tooltipTitle="Edit Country" onEdit={() => onEditHandler(country.id)} />
                                         <Divider orientation="vertical" flexItem />
-                                        <Tooltip title="Remove Country" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(country.id)} />
-                                        </Tooltip>
-                                    </div>
+                                        <StyledDeleteIcon tooltipTitle="Remove Country" onDelete={() => onDeleteHandler(country.id)} />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}

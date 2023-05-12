@@ -1,16 +1,17 @@
+import { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IEmployee } from "../../../types/employee";
 import { AdminEmployeeTableProps } from "./types";
-import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ErrorMessage from "../../../components/Messages/ErrorMessage";
-import TablePagination from "../../../components/TablePagination/TablePagination";
-import TableHeader from "../../../components/TableHeader/TableHeader";
-import { MessageAppearance } from "../../../components/Messages/types";
-import { useState } from "react";
+import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
+import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
+import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
+import TableHeader from "../../../components/TableHeader/TableHeader";
+import TablePagination from "../../../components/TablePagination/TablePagination";
+import AppTableAvatar from "../../../components/AppAvatar/AppTableAvatar";
 
 export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps): JSX.Element {
     const { employeeSearchResult, error } = useTypedSelector(state => state.employee);
@@ -45,29 +46,26 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Full Name', 'Email', 'Position', 'Description', 'Avatar Url', 'Office', 'Actions']} />
+                    <TableHeader titles={['Employee', 'Position', 'Description', 'Office', 'Actions']} />
                     <TableBody>
                         {employeeSearchResult.itemList.map((employee) => (
-                            <TableRow
-                                key={employee.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">{employee.fullName}</TableCell>
-                                <TableCell align="left">{employee.email}</TableCell>
+                            <TableRow key={employee.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell>
+                                    <AppTableAvatar name={employee.fullName} email={employee.email} avatarUrl={employee.avatarUrl} />
+                                </TableCell>
                                 <TableCell align="left">{employee.position}</TableCell>
-                                <TableCell align="left">{employee.description.slice(0, 15).concat('...')}</TableCell>
-                                <TableCell align="left">{employee.avatarUrl.slice(0, 15).concat('...')}</TableCell>
-                                <TableCell align="left">{employee.officeDto ? employee.officeDto.name : '...Please refresh the page...'}</TableCell>
+                                <TableCell align="left">
+                                    {employee.description.length > 18 ?
+                                        employee.description.slice(0, 15).concat('...') : employee.description
+                                    }
+                                </TableCell>
+                                <TableCell align="left">{employee.officeDto.name}</TableCell>
                                 <TableCell align="center">
-                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Tooltip title="Edit Employee" placement="top">
-                                            <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(employee.id)} />
-                                        </Tooltip>
+                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <StyledEditIcon tooltipTitle="Edit Employee" onEdit={() => onEditHandler(employee.id)} />
                                         <Divider orientation="vertical" flexItem />
-                                        <Tooltip title="Remove Employee" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(employee.id)} />
-                                        </Tooltip>
-                                    </div>
+                                        <StyledDeleteIcon tooltipTitle="Remove Employee" onDelete={() => onDeleteHandler(employee.id)} />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminOfficeTableProps } from "./types";
-import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { IOffice } from "../../../types/office";
+import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
+import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
+import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import TableHeader from "../../../components/TableHeader/TableHeader";
-import { MessageAppearance } from "../../../components/Messages/types";
-import { useState } from "react";
-import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 
 export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX.Element {
     const { officeSearchResult, error } = useTypedSelector(state => state.office);
@@ -52,21 +52,25 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
                                 key={office.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{office.name}</TableCell>
-                                <TableCell align="left">{office.description.slice(0, 15).concat('...')}</TableCell>
-                                <TableCell align="left">{office.address.slice(0, 15).concat('...')}</TableCell>
+                                <TableCell align="left">{office.name}</TableCell>
+                                <TableCell align="left">
+                                    {office.description.length > 18 ?
+                                        office.description.slice(0, 15).concat('...') : office.description
+                                    }
+                                </TableCell>
+                                <TableCell align="left">
+                                    {office.address.length > 18 ?
+                                        office.address.slice(0, 15).concat('...') : office.address
+                                    }
+                                    </TableCell>
                                 <TableCell align="center">{office.countryDto?.code}</TableCell>
                                 <TableCell align="center">{office.vacancyDtos?.length}</TableCell>
                                 <TableCell align="center">
-                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Tooltip title="Edit Office" placement="top">
-                                            <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(office.id)} />
-                                        </Tooltip>
+                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <StyledEditIcon tooltipTitle="Edit Office" onEdit={() => onEditHandler(office.id)} />
                                         <Divider orientation="vertical" flexItem />
-                                        <Tooltip title="Remove Office" placement="top">
-                                            <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(office.id)} />
-                                        </Tooltip>
-                                    </div>
+                                        <StyledDeleteIcon tooltipTitle="Remove Office" onDelete={() => onDeleteHandler(office.id)} />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminVacancyTableProps } from "./types";
 import { IVacancy } from "../../../types/vacancy";
-import { Badge, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import TablePagination from "../../../components/TablePagination/TablePagination";
-import TableHeader from "../../../components/TableHeader/TableHeader";
-import { useState } from "react";
+import { Badge, Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
+import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
+import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
+import TableHeader from "../../../components/TableHeader/TableHeader";
+import TablePagination from "../../../components/TablePagination/TablePagination";
 
 export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): JSX.Element {
     const { vacancySearchResult } = useTypedSelector(state => state.vacancy);
@@ -77,15 +77,11 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                     </TableCell>
                                     <TableCell align="left">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
                                     <TableCell align="center">
-                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <Tooltip title="Edit Vacancy" placement="top">
-                                                <EditIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: '#0072ea' }} onClick={() => onEditHandler(vacancy.id)} />
-                                            </Tooltip>
+                                        <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <StyledEditIcon tooltipTitle="Edit Vacancy" onEdit={() => onEditHandler(vacancy.id)} />
                                             <Divider orientation="vertical" flexItem />
-                                            <Tooltip title="Remove Vacancy" placement="top">
-                                                <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => onDeleteHandler(vacancy.id)} />
-                                            </Tooltip>
-                                        </div>
+                                            <StyledDeleteIcon tooltipTitle="Remove Vacancy" onDelete={() => onDeleteHandler(vacancy.id)} />
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             );

@@ -15,10 +15,10 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './DashboardLeftMenuItems';
 import { LayoutProps } from './types';
 import { RouteNames } from '../../routing';
 import AppAvatar from '../AppAvatar/AppAvatar';
+import LeftMenuItems from './LeftMenuItems';
 
 function Copyright(props: any) {
     return (
@@ -162,9 +162,7 @@ export default function DemoAppBar({ children, title }: LayoutProps): JSX.Elemen
                     </Toolbar>
                     <Divider />
                     <List component="nav">
-                        {mainListItems}
-                        <Divider sx={{ my: 1 }} />
-                        {secondaryListItems}
+                        <LeftMenuItems />
                     </List>
                 </Drawer>
                 <Box
