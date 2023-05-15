@@ -7,18 +7,22 @@ import { useActions } from "../../../hooks/useActions";
 import { AdminCandidateFormProps } from "./types";
 import { ICandidate } from "../../../types/candidate";
 import { EMAIL_REG_EXP, PHONE_REG_EXP } from "../../../types/common/RegularExpressions";
-import { Button, Checkbox, FormControlLabel, Grid, IconButton, InputAdornment, SwipeableDrawer, TextField, Typography } from "@mui/material";
+import { Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 export default function AdminCandidateForm({ candidate, closeForm }: AdminCandidateFormProps): JSX.Element {
     const { createCandidate, updateCandidate } = useActions();
+    const { vacancySearchResult } = useTypedSelector(state => state.vacancy);
     const [error, setError] = useState<null | string>(null);
     const [joinedAtValue, setJoinedAtValue] = useState<Date>(candidate.joinedAt);
+
+    const vacancies = vacancySearchResult.itemList;
 
     const toggleDrawer = (anchor: string, open: boolean) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -60,7 +64,8 @@ export default function AdminCandidateForm({ candidate, closeForm }: AdminCandid
         notes: candidate.notes,
         isDismissed: candidate.isDismissed,
         joinedAt: candidate.joinedAt,
-        vacancyId: candidate.vacancyId !== 0 ? candidate.vacancyId : null // ???
+        vacancyId: candidate.vacancyId,
+        vacancyDto: candidate.vacancyDto
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
@@ -153,6 +158,22 @@ export default function AdminCandidateForm({ candidate, closeForm }: AdminCandid
                             }
                             label="Dismissed?"
                         />
+                    </Grid>
+                    <Grid item>
+                        <FormControl sx={{ width: 300 }}>
+                            <InputLabel id="level-label">Vacancy</InputLabel>
+                            <Controller
+                                name="vacancyId"
+                                defaultValue={vacancies[0].id}
+                                control={control}
+                                render={({ field }) => (
+                                    <Select label="Vacancy" {...field}>
+                                        {vacancies.map((vacancy) => <MenuItem key={vacancy.id} value={vacancy.id}>{vacancy.title}</MenuItem>)}
+                                    </Select>
+                                )}
+                            />
+                            <FormHelperText error={true}>{errors.vacancyId?.message}</FormHelperText>
+                        </FormControl>
                     </Grid>
                     <Grid item>
                         <Controller name="joinedAt" control={control}

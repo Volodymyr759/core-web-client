@@ -55,7 +55,6 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    {/* <TableHeader titles={['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions']} /> */}
                     <TableHead>
                         <TableRow>
                             {["Name", "Description", "Address", "Country", "Vacancies", "Actions"].map((field) => {

@@ -14,6 +14,7 @@ const initialState: UserState = {
     filters: {
         searchInUserName: ""
     },
+    sortField: "UserName",
     loading: false,
     error: null
 }
@@ -32,7 +33,10 @@ export const userReducer = (state: UserState = initialState, action: UserAction)
             return { ...state, error: action.payload };
         case UserActionTypes.SET_USER_LOADING:
             return { ...state, loading: action.payload };
-
+        case UserActionTypes.SET_USER_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case UserActionTypes.SET_USER_SORT:
+            return { ...state, userSearchResult: { ...state.userSearchResult, order: action.payload } };
         default: return state;
     }
 }

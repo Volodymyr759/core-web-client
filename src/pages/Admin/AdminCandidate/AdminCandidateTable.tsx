@@ -101,7 +101,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                     />
                                 </TableCell>
                                 <TableCell align="left">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
-                                <TableCell align="left">{candidate.vacancyDto?.title.length > 50 ? candidate.vacancyDto?.title.slice(0, 50).concat('...') : candidate.vacancyDto?.title}</TableCell>
+                                <TableCell align="left">{candidate.vacancyDto?.title.length > 18 ? candidate.vacancyDto?.title.slice(0, 15).concat('...') : candidate.vacancyDto?.title}</TableCell>
                                 <TableCell align="center">
                                     <Box style={{ display: 'flex', justifyContent: 'center' }}>
                                         <StyledEditIcon tooltipTitle="Edit Candidate" onEdit={() => onEditHandler(candidate.id)} />

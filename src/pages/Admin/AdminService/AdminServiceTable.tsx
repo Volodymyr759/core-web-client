@@ -58,7 +58,6 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    {/* <TableHeader titles={['Title', 'Description', 'Image Url', 'Is Active?', 'Actions']} /> */}
                     <TableHead>
                         <TableRow>
                             {["Title", "Description", "Image Url", "Is Active?", "Actions"].map((field) => {

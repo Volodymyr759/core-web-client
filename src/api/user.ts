@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ISearchResult } from '../types/common/searchResult';
 import { IUser } from '../types/user';
+import { OrderType } from '../types/common/orderType';
 
 /**
  * Get list of candidates
@@ -8,8 +9,8 @@ import { IUser } from '../types/user';
  * @param page<number> Current page
  * @param search<string> Search text for candadate full name
  */
-export async function getUsersAxios(limit: number, page: number, search: string): Promise<ISearchResult<IUser>> {
-    return (await axios.get(`/account/get?limit=${limit}&page=${page}&search=${search}`)).data;
+export async function getUsersAxios(limit: number, page: number, search: string, sortField: string, order: OrderType): Promise<ISearchResult<IUser>> {
+    return (await axios.get(`/account/get?limit=${limit}&page=${page}&search=${search}&sortField=${sortField}&order=${order}`)).data;
 }
 
 /**

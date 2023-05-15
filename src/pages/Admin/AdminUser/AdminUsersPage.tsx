@@ -5,14 +5,14 @@ import AdminUserFilters from './AdminUserFilters';
 import AdminUserTable from './AdminUserTable';
 
 export default function AdminUsersPage(): JSX.Element {
-    const { userSearchResult, filters } = useTypedSelector(state => state.user);
+    const { userSearchResult, filters, sortField } = useTypedSelector(state => state.user);
     const { getUsers } = useActions();
-    
+
     useEffect(() => {
-        getUsers(userSearchResult.pageSize, userSearchResult.currentPageNumber, filters)
+        getUsers(userSearchResult.pageSize, userSearchResult.currentPageNumber, filters, sortField, userSearchResult.order)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters, userSearchResult.currentPageNumber]);
-    
+    }, [filters, userSearchResult.currentPageNumber, sortField, userSearchResult.order]);
+
     return (
         <>
             <AdminUserFilters />

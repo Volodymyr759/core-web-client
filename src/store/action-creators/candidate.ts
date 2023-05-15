@@ -3,14 +3,11 @@ import { createCandidateAxios, getCandidatesAxios, getCandidateByIdAxios, update
 import { OrderType } from "../../types/common/orderType";
 import { ICandidate, CandidateAction, CandidateActionTypes, CandidateStatus, CandidateFilters } from "../../types/candidate";
 
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
 export const getCandidates = (limit: number, page: number, filters: CandidateFilters, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<CandidateAction>) => {
         try {
             dispatch({ type: CandidateActionTypes.SET_CANDIDATE_LOADING, payload: true });
             dispatch({ type: CandidateActionTypes.SET_CANDIDATE_ERROR, payload: null });
-            await delay(1000);
             dispatch({
                 type: CandidateActionTypes.GET_CANDIDATES, payload:
                     await getCandidatesAxios(limit, page, filters.searchInFullName, filters.active, filters.vacancyId, sortField, order)
@@ -51,6 +48,7 @@ export const setCandidatePage = (page: number) => {
 
 export const setCandidateActiveFilter = (status: CandidateStatus) => {
     return async (dispatch: Dispatch<CandidateAction>) => {
+        dispatch({ type: CandidateActionTypes.SET_CANDIDATE_PAGE, payload: 1 });
         dispatch({ type: CandidateActionTypes.SET_CANDIDATE_ACTIVE_FILTER, payload: status });
     }
 }

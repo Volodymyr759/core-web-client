@@ -1,3 +1,4 @@
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 
 export interface IUser {
@@ -16,6 +17,7 @@ export interface UserFilters {
 export interface UserState {
     userSearchResult: ISearchResult<IUser>;
     filters: UserFilters;
+    sortField: string;
     loading: boolean;
     error: null | string;
 }
@@ -26,7 +28,9 @@ export enum UserActionTypes {
     SET_USER_SEARCH_CRITERIA = "SET_USER_SEARCH_CRITERIA",
     SET_USER_PAGE = "SET_USER_PAGE",
     SET_USER_ERROR = "SET_USER_ERROR",
-    SET_USER_LOADING = "SET_USER_LOADING"
+    SET_USER_LOADING = "SET_USER_LOADING",
+    SET_USER_SORTFIELD = "SET_USER_SORTFIELD",
+    SET_USER_SORT = "SET_USER_SORT",
 }
 
 interface GetUsersAction {
@@ -59,9 +63,21 @@ interface SetUserLoadingAction {
     payload: boolean;
 }
 
+interface SetUserSortFieldAction {
+    type: UserActionTypes.SET_USER_SORTFIELD;
+    payload: string;
+}
+
+interface SetUserSortAction {
+    type: UserActionTypes.SET_USER_SORT;
+    payload: OrderType;
+}
+
 export type UserAction = GetUsersAction |
     UpdateUserEmailConfirmedStatusAction |
     SetUserSearchCriteriaAction |
     SetUserPagesAction |
     SetUserErrorAction |
-    SetUserLoadingAction
+    SetUserLoadingAction |
+    SetUserSortFieldAction |
+    SetUserSortAction

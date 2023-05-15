@@ -1,15 +1,19 @@
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IUser } from "../../../types/user";
-import { Box, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip } from "@mui/material";
+import { OrderType } from "../../../types/common/orderType";
+import { Box, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Tooltip, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import TableHeader from "../../../components/TableHeader/TableHeader";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import AppTableAvatar from "../../../components/AppAvatar/AppTableAvatar";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminUserTable(): JSX.Element {
-    const { userSearchResult } = useTypedSelector(state => state.user);
-    const { setUserPage, updateUserEmailConfirmedStatus } = useActions();
+    const { userSearchResult, sortField, error, loading } = useTypedSelector(state => state.user);
+    const { setUserPage, updateUserEmailConfirmedStatus, setUserSort, setUserSortfield } = useActions();
+
+    const sortableFields = ["UserName", "PhoneNumber", "EmailConfirmed"];
 
     const onChangeEmailConfirmed = (id: string): void => {
         const choosedUser = userSearchResult.itemList.find(c => c.id === id);
@@ -17,12 +21,37 @@ export default function AdminUserTable(): JSX.Element {
         userToUpdate.emailConfirmed = !choosedUser.emailConfirmed;
         updateUserEmailConfirmedStatus(id, userToUpdate);
     }
+    const onSortFieldHandler = (field: string) => {
+        field === sortField ?
+            setUserSort(userSearchResult.order === OrderType.Ascending ? OrderType.Descending : OrderType.Ascending) :
+            setUserSortfield(field);
+    }
+
+    if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Username', 'Email Confirmed?', 'Phone', 'Actions']} />
+                    <TableHead>
+                        <TableRow>
+                            {["UserName", "EmailConfirmed", "PhoneNumber", "Actions"].map((field) => {
+                                return (
+                                    <TableCell key={field} align="center">
+                                        <Typography variant="overline" gutterBottom>
+                                            {field}
+                                        </Typography>
+                                        {sortableFields.filter(f => f === field).length > 0 &&
+                                            <TableSortLabel
+                                                active={sortField === field}
+                                                direction={userSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                onClick={() => onSortFieldHandler(field)}
+                                            />}
+                                    </TableCell>
+                                )
+                            })}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {userSearchResult.itemList.map((user) => (
                             <TableRow key={user.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
