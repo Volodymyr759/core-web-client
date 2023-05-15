@@ -1,3 +1,4 @@
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 
 export interface ICountry {
@@ -9,6 +10,7 @@ export interface ICountry {
 
 export interface CountryState {
     countrySearchResult: ISearchResult<ICountry>;
+    sortField: string;
     loading: boolean;
     error: null | string;
 }
@@ -19,6 +21,8 @@ export enum CountryActionTypes {
     SET_COUNTRY_ERROR = "SET_COUNTRY_ERROR",
     SET_COUNTRY_LOADING = "SET_COUNTRY_LOADING",
     SET_COUNTRY_PAGE = "SET_COUNTRY_PAGE",
+    SET_COUNTRY_SORTFIELD = "SET_COUNTRY_SORTFIELD",
+    SET_SORT = "SET_SORT",
     CREATE_COUNTRY = "CREATE_COUNTRY",
     UPDATE_COUNTRY = "UPDATE_COUNTRY",
     REMOVE_COUNTRY = "REMOVE_COUNTRY"
@@ -49,6 +53,16 @@ interface SetCountryPageAction {
     payload: number;
 }
 
+interface SetCountrySortField {
+    type: CountryActionTypes.SET_COUNTRY_SORTFIELD;
+    payload: string;
+}
+
+interface SetCountrySort {
+    type: CountryActionTypes.SET_SORT;
+    payload: OrderType;
+}
+
 interface CreateCountryAction {
     type: CountryActionTypes.CREATE_COUNTRY;
     payload: ICountry;
@@ -69,6 +83,8 @@ export type CountryAction = GetCoutriesAction |
     SetCountryErrorAction |
     SetCountryLoadingAction |
     SetCountryPageAction |
+    SetCountrySortField |
+    SetCountrySort |
     CreateCountryAction |
     UpdateCountryAction |
     RemoveCountryAction

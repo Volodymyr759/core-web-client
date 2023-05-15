@@ -3,20 +3,22 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminCountryTableProps } from "./types";
 import { ICountry } from "../../../types/country";
-import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Typography } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
 import TablePagination from "../../../components/TablePagination/TablePagination";
-import TableHeader from "../../../components/TableHeader/TableHeader";
+import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): JSX.Element {
-    const { countrySearchResult, error } = useTypedSelector(state => state.country);
-    const { removeCountry, setCountryPage } = useActions();
+    const { countrySearchResult, sortField, error, loading } = useTypedSelector(state => state.country);
+    const { removeCountry, setCountryPage, setCountrySort, setCountrySortfield } = useActions();
     const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
     const [countryIdToDelete, setCountryIdToDelete] = useState<null | number>(null);
+
+    const sortableFields = ["Name", "Code"];
 
     const onEditHandler = (id: number) => {
         const choosedCountry = countrySearchResult.itemList.find(c => c.id === id);
@@ -24,24 +26,47 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
             id: choosedCountry.id,
             name: choosedCountry.name,
             code: choosedCountry.code,
+            officeDtos: choosedCountry.officeDtos
         }
         onEdit(countryToUpdate);
     }
 
     const onDeleteHandler = (id: number) => {
         setCountryIdToDelete(id);
-        setTimeout(() => {
-            setConfirmDialogOpen(true);
-        }, 100);
+        setTimeout(() => { setConfirmDialogOpen(true) }, 100);
+    }
+
+    const onSortFieldHandler = (field: string) => {
+        field === sortField ?
+            setCountrySort(countrySearchResult.order === OrderType.Ascending ? OrderType.Descending : OrderType.Ascending) :
+            setCountrySortfield(field);
     }
 
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Name', 'Code', 'Offices', 'Actions']} />
+                    <TableHead>
+                        <TableRow>
+                            {["Name", "Code", "Offices", "Actions"].map((field) => {
+                                return (
+                                    <TableCell key={field} align="center">
+                                        <Typography variant="overline" gutterBottom>
+                                            {field}
+                                        </Typography>
+                                        {sortableFields.filter(f => f === field).length > 0 &&
+                                            <TableSortLabel
+                                                active={sortField === field}
+                                                direction={countrySearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                onClick={() => onSortFieldHandler(field)}
+                                            />}
+                                    </TableCell>
+                                )
+                            })}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {countrySearchResult.itemList.map((country) => (
                             <TableRow

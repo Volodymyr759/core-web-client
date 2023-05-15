@@ -3,21 +3,23 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IEmployee } from "../../../types/employee";
 import { AdminEmployeeTableProps } from "./types";
-import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Typography } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
-import TableHeader from "../../../components/TableHeader/TableHeader";
 import TablePagination from "../../../components/TablePagination/TablePagination";
 import AppTableAvatar from "../../../components/AppAvatar/AppTableAvatar";
+import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps): JSX.Element {
-    const { employeeSearchResult, error } = useTypedSelector(state => state.employee);
-    const { removeEmployee, setEmployeePage } = useActions();
+    const { employeeSearchResult, sortField, error, loading } = useTypedSelector(state => state.employee);
+    const { removeEmployee, setEmployeePage, setEmployeeSort, setEmployeeSortfield } = useActions();
     const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
     const [employeeIdToDelete, setEmployeeIdToDelete] = useState<null | number>(null);
+
+    const sortableFields = ["FullName", "Position", "Description"];
 
     const onEditHandler = (id: number) => {
         const choosedEmployee = employeeSearchResult.itemList.find(e => e.id === id);
@@ -28,7 +30,8 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
             position: choosedEmployee.position,
             description: choosedEmployee.description,
             avatarUrl: choosedEmployee.avatarUrl,
-            officeId: choosedEmployee.officeId
+            officeId: choosedEmployee.officeId,
+            officeDto: choosedEmployee.officeDto
         }
         onEdit(employeeToUpdate);
     }
@@ -40,13 +43,37 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
         }, 100);
     }
 
+    const onSortFieldHandler = (field: string) => {
+        field === sortField ?
+            setEmployeeSort(employeeSearchResult.order === OrderType.Ascending ? OrderType.Descending : OrderType.Ascending) :
+            setEmployeeSortfield(field);
+    }
+
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Employee', 'Position', 'Description', 'Office', 'Actions']} />
+                    <TableHead>
+                        <TableRow>
+                            {["FullName", "Position", "Description", "Office", "Actions"].map((field) => {
+                                return (
+                                    <TableCell key={field} align="center">
+                                        <Typography variant="overline" gutterBottom>
+                                            {field}
+                                        </Typography>
+                                        {sortableFields.filter(f => f === field).length > 0 &&
+                                            <TableSortLabel
+                                                active={sortField === field}
+                                                direction={employeeSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                onClick={() => onSortFieldHandler(field)}
+                                            />}
+                                    </TableCell>
+                                )
+                            })}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {employeeSearchResult.itemList.map((employee) => (
                             <TableRow key={employee.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

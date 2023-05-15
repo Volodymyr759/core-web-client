@@ -18,6 +18,7 @@ const initialState: VacancyState = {
         officeId: "",
         searchInTitle: ""
     },
+    sortField: "Title",
     loadingFilters: true,
     errorFilters: null,
     loadingVacancies: true,
@@ -70,6 +71,10 @@ export const vacancyReducer = (state: VacancyState = initialState, action: Vacan
             return { ...state, offices: vacancyOffices };
         case VacancyActionTypes.SET_VACANCIES_TITLES:
             return { ...state, titles: action.payload };
+        case VacancyActionTypes.SET_VACANCY_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case VacancyActionTypes.SET_VACANCY_SORT:
+            return { ...state, vacancySearchResult: { ...state.vacancySearchResult, order: action.payload } };
         case VacancyActionTypes.INCREMENT_PREVIEWS:
             return { ...state };
         case VacancyActionTypes.UPDATE_VACANCY_ISACTIVE_STATUS:

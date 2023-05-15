@@ -5,12 +5,13 @@ const initialState: OfficeState = {
     officeSearchResult: {
         itemList: [] as IOffice[],
         currentPageNumber: 1,
-        order: OrderType.Descending,
+        order: OrderType.Ascending,
         pageCount: 0,
-        pageSize: 10,
+        pageSize: 5,
         searchCriteria: "",
         totalItemCount: 0
     },
+    sortField: "Name",
     loading: true,
     error: null
 }
@@ -25,6 +26,10 @@ export const officeReducer = (state: OfficeState = initialState, action: OfficeA
             return { ...state, loading: action.payload };
         case OfficeActionTypes.SET_OFFICE_PAGE:
             return { ...state, officeSearchResult: { ...state.officeSearchResult, currentPageNumber: action.payload } };
+        case OfficeActionTypes.SET_OFFICE_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case OfficeActionTypes.SET_OFFICE_SORT:
+            return { ...state, officeSearchResult: { ...state.officeSearchResult, order: action.payload } };
         case OfficeActionTypes.CREATE_OFFICE:
             return { ...state, officeSearchResult: { ...state.officeSearchResult, itemList: [action.payload, ...state.officeSearchResult.itemList] } };
         case OfficeActionTypes.UPDATE_OFFICE:

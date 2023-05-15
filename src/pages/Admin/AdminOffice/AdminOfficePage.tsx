@@ -8,20 +8,20 @@ import AdminOfficeTable from "./AdminOfficeTable";
 import AdminOfficeFilters from "./AdminOfficeFilters";
 
 export default function AdminOfficePage(): JSX.Element {
-    const { officeSearchResult } = useTypedSelector(state => state.office);
+    const { officeSearchResult, sortField } = useTypedSelector(state => state.office);
     const { countrySearchResult } = useTypedSelector(state => state.country);
     const { getCountries, getOffices } = useActions();
     const [office, setOffice] = useState<IOffice | null>(null);
 
     useEffect(() => {
-        getCountries(100, countrySearchResult.currentPageNumber, 'Name', OrderType.Ascending);
+        getCountries(100, 1, 'Name', OrderType.Ascending);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        getOffices(5, officeSearchResult.currentPageNumber, 'Name', OrderType.Ascending);
+        getOffices(officeSearchResult.pageSize, officeSearchResult.currentPageNumber, sortField, officeSearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [officeSearchResult.currentPageNumber])
+    }, [officeSearchResult.currentPageNumber, officeSearchResult.order, sortField])
 
     const onCreateEdit = (office: IOffice | null) => setOffice(office);
 

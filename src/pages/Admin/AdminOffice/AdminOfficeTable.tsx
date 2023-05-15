@@ -3,20 +3,22 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminOfficeTableProps } from "./types";
 import { IOffice } from "../../../types/office";
-import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Typography } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
 import TablePagination from "../../../components/TablePagination/TablePagination";
-import TableHeader from "../../../components/TableHeader/TableHeader";
+import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX.Element {
-    const { officeSearchResult, error } = useTypedSelector(state => state.office);
-    const { removeOffice, setOfficePage } = useActions();
+    const { officeSearchResult, sortField, error, loading } = useTypedSelector(state => state.office);
+    const { removeOffice, setOfficePage, setOfficeSort, setOfficeSortfield } = useActions();
     const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
     const [officeIdToDelete, setOfficeIdToDelete] = useState<null | number>(null);
+
+    const sortableFields = ["Name", "Description", "Address"];
 
     const onEditHandler = (id: number) => {
         const choosedOffice = officeSearchResult.itemList.find(c => c.id === id);
@@ -27,7 +29,9 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
             address: choosedOffice.address,
             latitude: choosedOffice.latitude,
             longitude: choosedOffice.longitude,
-            countryId: choosedOffice.countryId
+            countryId: choosedOffice.countryId,
+            countryDto: choosedOffice.countryDto,
+            vacancyDtos: choosedOffice.vacancyDtos
         };
         onEdit(officeToUpdate);
     }
@@ -39,13 +43,39 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
         }, 100);
     }
 
+    const onSortFieldHandler = (field: string) => {
+        field === sortField ?
+            setOfficeSort(officeSearchResult.order === OrderType.Ascending ? OrderType.Descending : OrderType.Ascending) :
+            setOfficeSortfield(field);
+    }
+
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions']} />
+                    {/* <TableHeader titles={['Name', 'Description', 'Address', 'Country', 'Vacancies', 'Actions']} /> */}
+                    <TableHead>
+                        <TableRow>
+                            {["Name", "Description", "Address", "Country", "Vacancies", "Actions"].map((field) => {
+                                return (
+                                    <TableCell key={field} align="center">
+                                        <Typography variant="overline" gutterBottom>
+                                            {field}
+                                        </Typography>
+
+                                        {sortableFields.filter(f => f === field).length > 0 &&
+                                            <TableSortLabel
+                                                active={sortField === field}
+                                                direction={officeSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                onClick={() => onSortFieldHandler(field)}
+                                            />}
+                                    </TableCell>
+                                )
+                            })}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {officeSearchResult.itemList.map((office) => (
                             <TableRow
@@ -62,7 +92,7 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
                                     {office.address.length > 18 ?
                                         office.address.slice(0, 15).concat('...') : office.address
                                     }
-                                    </TableCell>
+                                </TableCell>
                                 <TableCell align="center">{office.countryDto?.code}</TableCell>
                                 <TableCell align="center">{office.vacancyDtos?.length}</TableCell>
                                 <TableCell align="center">

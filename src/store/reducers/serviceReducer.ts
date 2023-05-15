@@ -14,6 +14,7 @@ const initialState: CompanyServiceState = {
     filters: {
         active: CompanyServiceStatus.All,
     },
+    sortField: "Title",
     loading: true,
     error: null
 }
@@ -32,6 +33,10 @@ export const serviceReducer = (state: CompanyServiceState = initialState, action
             return { ...state, serviceSearchResult: { ...state.serviceSearchResult, currentPageNumber: action.payload } };
         case CompanyServiceActionTypes.SET_COMPANY_SERVICE_ACTIVE_FILTER:
             return { ...state, filters: { ...state.filters, active: action.payload } };
+        case CompanyServiceActionTypes.SET_SERVICE_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case CompanyServiceActionTypes.SET_SERVICE_SORT:
+            return { ...state, serviceSearchResult: { ...state.serviceSearchResult, order: action.payload } };
         case CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS:
             return { ...state, serviceSearchResult: { ...state.serviceSearchResult, itemList: updateService(state, action.payload) } }
         case CompanyServiceActionTypes.CREATE_COMPANY_SERVICE:

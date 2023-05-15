@@ -52,6 +52,18 @@ export const setCountryPage = (page: number) => {
     }
 }
 
+export const setCountrySortfield = (sortField: string) => {
+    return async (dispatch: Dispatch<CountryAction>) => {
+        dispatch({ type: CountryActionTypes.SET_COUNTRY_SORTFIELD, payload: sortField });
+    }
+}
+
+export const setCountrySort = (sort: OrderType) => {
+    return async (dispatch: Dispatch<CountryAction>) => {
+        dispatch({ type: CountryActionTypes.SET_SORT, payload: sort });
+    }
+}
+
 export const createCountry = (country: ICountry) => {
     return async (dispatch: Dispatch<CountryAction>) => {
         try {

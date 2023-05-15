@@ -16,6 +16,7 @@ const initialState: CandidateState = {
         vacancyId: null,
         searchInFullName: ""
     },
+    sortField: "FullName",
     loading: true,
     error: null
 }
@@ -36,6 +37,10 @@ export const candidateReducer = (state: CandidateState = initialState, action: C
             return { ...state, filters: { ...state.filters, vacancyId: action.payload } };
         case CandidateActionTypes.SET_CANDIDATE_SEARCH_CRITERIA:
             return { ...state, filters: { ...state.filters, searchInFullName: action.payload } };
+        case CandidateActionTypes.SET_CANDIDATE_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case CandidateActionTypes.SET_CANDIDATE_SORT:
+            return { ...state, candidateSearchResult: { ...state.candidateSearchResult, order: action.payload } };
         case CandidateActionTypes.UPDATE_CANDIDATE_ISDISMISSED_STATUS:
             return { ...state, candidateSearchResult: { ...state.candidateSearchResult, itemList: updateCandidate(state, action.payload) } }
         case CandidateActionTypes.CREATE_CANDIDATE:

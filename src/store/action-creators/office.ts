@@ -52,6 +52,18 @@ export const setOfficePage = (page: number) => {
     }
 }
 
+export const setOfficeSortfield = (sortField: string) => {
+    return async (dispatch: Dispatch<OfficeAction>) => {
+        dispatch({ type: OfficeActionTypes.SET_OFFICE_SORTFIELD, payload: sortField });
+    }
+}
+
+export const setOfficeSort = (sort: OrderType) => {
+    return async (dispatch: Dispatch<OfficeAction>) => {
+        dispatch({ type: OfficeActionTypes.SET_OFFICE_SORT, payload: sort });
+    }
+}
+
 export const createOffice = (office: IOffice) => {
     return async (dispatch: Dispatch<OfficeAction>) => {
         try {

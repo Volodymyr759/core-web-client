@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { IVacancy, VacancyStatus } from "../../../types/vacancy";
-import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import AdminVacancyFilters from "./AdminVacancyFilters";
 import AdminVacancyForm from "./AdminVacancyForm";
 import AdminVacancyTable from "./AdminVacancyTable";
-import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminVacancyPage(): JSX.Element {
-    const { errorFilters, errorVacancies, offices, vacancySearchResult, filters } = useTypedSelector(state => state.vacancy);
+    const { offices, vacancySearchResult, filters, sortField } = useTypedSelector(state => state.vacancy);
     const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies } = useActions();
     const [vacancy, setVacancy] = useState<IVacancy | null>(null);
 
@@ -17,14 +15,11 @@ export default function AdminVacancyPage(): JSX.Element {
         getOfficeNameIdDtos();
         getVacanciesTitles(vacancySearchResult.searchCriteria, filters.officeId);
         getVacancies(5, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
-            VacancyStatus.All, filters.officeId, "Title", vacancySearchResult.order);
+            VacancyStatus.All, filters.officeId, sortField, vacancySearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [vacancySearchResult.searchCriteria, filters.officeId, vacancySearchResult.currentPageNumber])
+    }, [vacancySearchResult.searchCriteria, filters.officeId, vacancySearchResult.currentPageNumber, sortField, vacancySearchResult.order])
 
     const onCreateEdit = (vacancy: null | IVacancy) => setVacancy(vacancy);
-
-    if (errorFilters) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorFilters}</ErrorMessage>;
-    if (errorVacancies) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{errorVacancies}</ErrorMessage>;
 
     return (
         <>

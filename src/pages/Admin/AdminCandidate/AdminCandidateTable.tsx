@@ -4,18 +4,22 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { ICandidate } from "../../../types/candidate";
 import { AdminCandidateTableProps } from "./types";
-import { Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Typography } from "@mui/material";
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
-import TableHeader from "../../../components/TableHeader/TableHeader";
 import TablePagination from "../../../components/TablePagination/TablePagination";
+import ErrorMessage from "../../../components/Messages/ErrorMessage";
+import { MessageAppearance } from "../../../components/Messages/types";
+import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps): JSX.Element {
-    const { candidateSearchResult } = useTypedSelector(state => state.candidate);
-    const { updateCandidateIsDismissedStatus, removeCandidate, setCandidatePage } = useActions();
+    const { candidateSearchResult, sortField, error, loading } = useTypedSelector(state => state.candidate);
+    const { updateCandidateIsDismissedStatus, removeCandidate, setCandidatePage, setCandidateSort, setCandidateSortfield } = useActions();
     const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
     const [candidateIdToDelete, setCandidateIdToDelete] = useState<null | number>(null);
+
+    const sortableFields = ["FullName", "Email", "Phone", "Notes", "IsDismissed", "JoinedAt"];
 
     const onChangeIsDismissed = (id: number): void => {
         const choosedCandidate = candidateSearchResult.itemList.find(c => c.id === id);
@@ -34,7 +38,8 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
             notes: choosedCandidate.notes,
             isDismissed: choosedCandidate.isDismissed,
             joinedAt: choosedCandidate.joinedAt,
-            vacancyId: choosedCandidate.vacancyId
+            vacancyId: choosedCandidate.vacancyId,
+            vacancyDto: choosedCandidate.vacancyDto
         };
         onEdit(candidateToUpdate);
     }
@@ -46,11 +51,37 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
         }, 100);
     }
 
+    const onSortFieldHandler = (field: string) => {
+        field === sortField ?
+            setCandidateSort(candidateSearchResult.order === OrderType.Ascending ? OrderType.Descending : OrderType.Ascending) :
+            setCandidateSortfield(field);
+    }
+
+    if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
+
     return (
         <>
-            <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Full Name', 'Email', 'Phone', 'Notes', 'Dismissed?', 'Joined', 'Vacancy', 'Actions']} />
+                    <TableHead>
+                        <TableRow>
+                            {["FullName", "Email", "Phone", "Notes", "IsDismissed", "JoinedAt", "Vacancy", "Actions"].map((field) => {
+                                return (
+                                    <TableCell key={field} align="center">
+                                        <Typography variant="overline" gutterBottom>
+                                            {field}
+                                        </Typography>
+                                        {sortableFields.filter(f => f === field).length > 0 &&
+                                            <TableSortLabel
+                                                active={sortField === field}
+                                                direction={candidateSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                onClick={() => onSortFieldHandler(field)}
+                                            />}
+                                    </TableCell>
+                                )
+                            })}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {candidateSearchResult.itemList.map((candidate) => (
                             <TableRow key={candidate.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

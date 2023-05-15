@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { OrderType } from "../../../types/common/orderType";
 import { ICompanyService } from "../../../types/companyService";
 import AdminServiceTable from "./AdminServiceTable";
 import AdminServiceForm from "./AdminServiceForm";
 import AdminServiceFilters from "./AdminServiceFilters";
 
 export default function AdminServicePage(): JSX.Element {
-    const { serviceSearchResult, filters } = useTypedSelector(state => state.service);
+    const { serviceSearchResult, filters, sortField } = useTypedSelector(state => state.service);
     const { getServices } = useActions();
     const [service, setService] = useState<null | ICompanyService>(null);
 
     useEffect(() => {
-        getServices(5, serviceSearchResult.currentPageNumber, filters.active, OrderType.Ascending);
+        getServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber, filters.active, sortField, serviceSearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [serviceSearchResult.currentPageNumber, filters])
+    }, [serviceSearchResult.currentPageNumber, filters, serviceSearchResult.order, sortField])
 
     const onCreateEdit = (service: null | ICompanyService) => setService(service);
 

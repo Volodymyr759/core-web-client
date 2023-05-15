@@ -101,6 +101,18 @@ export const setVacancySearchCriteria = (search: string) => {
     }
 }
 
+export const setVacancySortfield = (sortField: string) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        dispatch({ type: VacancyActionTypes.SET_VACANCY_SORTFIELD, payload: sortField });
+    }
+}
+
+export const setVacancySort = (sort: OrderType) => {
+    return async (dispatch: Dispatch<VacancyAction>) => {
+        dispatch({ type: VacancyActionTypes.SET_VACANCY_SORT, payload: sort });
+    }
+}
+
 export const incrementPreviews = (id: number, number: number) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {

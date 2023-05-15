@@ -3,14 +3,14 @@ import { getServicesAxios, getServiceByIdAxios, removeServiceAxios, createServic
 import { OrderType } from "../../types/common/orderType";
 import { ICompanyService, CompanyServiceAction, CompanyServiceActionTypes, CompanyServiceStatus } from "../../types/companyService";
 
-export const getServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: OrderType) => {
+export const getServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
             dispatch({
                 type: CompanyServiceActionTypes.GET_COMPANY_SERVICES, payload:
-                    await getServicesAxios(limit, page, companyServiceStatus, order)
+                    await getServicesAxios(limit, page, companyServiceStatus, sortField, order)
             });
         } catch (error) {
             console.log('error ', error)
@@ -35,14 +35,14 @@ export const getServiceById = (id: number) => {
     }
 }
 
-export const loadMoreServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: OrderType) => {
+export const loadMoreServices = (limit: number, page: number, companyServiceStatus: CompanyServiceStatus, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         try {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: true });
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: null });
             dispatch({
                 type: CompanyServiceActionTypes.LOAD_MORE_COMPANY_SERVICES, payload:
-                    await getServicesAxios(limit, page, companyServiceStatus, order)
+                    await getServicesAxios(limit, page, companyServiceStatus, sortField, order)
             });
         } catch (error) {
             dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_ERROR, payload: "Error of loading services." })
@@ -73,6 +73,18 @@ export const setServiceError = (message: string) => {
 export const setServiceLoading = (isLoading: boolean) => {
     return async (dispatch: Dispatch<CompanyServiceAction>) => {
         dispatch({ type: CompanyServiceActionTypes.SET_COMPANY_SERVICE_LOADING, payload: isLoading });
+    }
+}
+
+export const setServiceSortfield = (sortField: string) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        dispatch({ type: CompanyServiceActionTypes.SET_SERVICE_SORTFIELD, payload: sortField });
+    }
+}
+
+export const setServiceSort = (sort: OrderType) => {
+    return async (dispatch: Dispatch<CompanyServiceAction>) => {
+        dispatch({ type: CompanyServiceActionTypes.SET_SERVICE_SORT, payload: sort });
     }
 }
 

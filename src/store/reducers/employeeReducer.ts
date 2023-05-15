@@ -12,6 +12,7 @@ const initialState: EmployeeState = {
         totalItemCount: 0
     },
     offices: [],
+    sortField: "FullName",
     loading: false,
     error: null
 }
@@ -37,6 +38,10 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
                 ...state,
                 employeeSearchResult: { ...state.employeeSearchResult, currentPageNumber: action.payload }
             };
+        case EmployeeActionTypes.SET_EMPLOYEE_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case EmployeeActionTypes.SET_EMPLOYEE_SORT:
+            return { ...state, employeeSearchResult: { ...state.employeeSearchResult, order: action.payload } };
         case EmployeeActionTypes.CREATE_EMPLOYEE:
             return {
                 ...state, employeeSearchResult: {

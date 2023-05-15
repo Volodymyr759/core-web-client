@@ -3,20 +3,22 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
 import { ICompanyService } from '../../../types/companyService';
 import { AdminServiceTableProps } from './types';
-import { Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import { Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Typography } from '@mui/material';
 import AppDeleteConfirmDialog from '../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog';
 import ErrorMessage from '../../../components/Messages/ErrorMessage';
 import { MessageAppearance } from '../../../components/Messages/types';
 import StyledEditIcon from '../../../components/StyledIcons/StyledEditIcon';
 import StyledDeleteIcon from '../../../components/StyledIcons/StyledDeleteIcon';
-import TableHeader from '../../../components/TableHeader/TableHeader';
 import TablePagination from '../../../components/TablePagination/TablePagination';
+import { OrderType } from '../../../types/common/orderType';
 
 export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): JSX.Element {
-    const { serviceSearchResult, error } = useTypedSelector(state => state.service);
-    const { removeService, updateServiceIsActiveStatus, setServicePage } = useActions();
+    const { serviceSearchResult, sortField, error, loading } = useTypedSelector(state => state.service);
+    const { removeService, updateServiceIsActiveStatus, setServicePage, setServiceSort, setServiceSortfield } = useActions();
     const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
     const [serviceIdToDelete, setServiceIdToDelete] = useState<null | number>(null);
+
+    const sortableFields = ["Title", "Description"];
 
     const onEditHandler = (id: number) => {
         const choosedService = serviceSearchResult.itemList.find(s => s.id === id);
@@ -44,13 +46,38 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
         }, 100);
     }
 
+    const onSortFieldHandler = (field: string) => {
+        field === sortField ?
+            setServiceSort(serviceSearchResult.order === OrderType.Ascending ? OrderType.Descending : OrderType.Ascending) :
+            setServiceSortfield(field);
+    }
+
     if (error) return <ErrorMessage appearance={MessageAppearance.REGULAR}>{error}</ErrorMessage>;
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ margin: '20px 0' }}>
+            <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHeader titles={['Title', 'Description', 'Image Url', 'Is Active?', 'Actions']} />
+                    {/* <TableHeader titles={['Title', 'Description', 'Image Url', 'Is Active?', 'Actions']} /> */}
+                    <TableHead>
+                        <TableRow>
+                            {["Title", "Description", "Image Url", "Is Active?", "Actions"].map((field) => {
+                                return (
+                                    <TableCell key={field} align="center">
+                                        <Typography variant="overline" gutterBottom>
+                                            {field}
+                                        </Typography>
+                                        {sortableFields.filter(f => f === field).length > 0 &&
+                                            <TableSortLabel
+                                                active={sortField === field}
+                                                direction={serviceSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                onClick={() => onSortFieldHandler(field)}
+                                            />}
+                                    </TableCell>
+                                )
+                            })}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {serviceSearchResult.itemList.map((service) => (
                             <TableRow

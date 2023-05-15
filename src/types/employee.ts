@@ -1,4 +1,5 @@
 import { OfficeNameIdDto } from "./common/officeNameIdDto";
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 
 export interface IEmployee {
@@ -17,6 +18,7 @@ export interface IEmployee {
 export interface EmployeeState {
     employeeSearchResult: ISearchResult<IEmployee>;
     offices: OfficeNameIdDto[];
+    sortField: string;
     loading: boolean;
     error: null | string;
 }
@@ -27,6 +29,8 @@ export enum EmployeeActionTypes {
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
     SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING",
     SET_EMPLOYEE_PAGE = "SET_EMPLOYEE_PAGE",
+    SET_EMPLOYEE_SORTFIELD = "SET_EMPLOYEE_SORTFIELD",
+    SET_EMPLOYEE_SORT = "SET_EMPLOYEE_SORT",
     CREATE_EMPLOYEE = "CREATE_EMPLOYEE",
     UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE",
     REMOVE_EMPLOYEE = "REMOVE_EMPLOYEE"
@@ -57,6 +61,16 @@ interface SetPageEmployeeAction {
     payload: number;
 }
 
+interface SetSortFieldEmployeeAction {
+    type: EmployeeActionTypes.SET_EMPLOYEE_SORTFIELD;
+    payload: string;
+}
+
+interface SetSortEmployeeAction {
+    type: EmployeeActionTypes.SET_EMPLOYEE_SORT;
+    payload: OrderType;
+}
+
 interface CreateCompanyService {
     type: EmployeeActionTypes.CREATE_EMPLOYEE;
     payload: IEmployee;
@@ -72,12 +86,14 @@ interface RemoveEmployee {
     payload: number;
 }
 
-export type EmployeeAction = 
-GetEmployeesAction | 
-LoadMoreEmployeesAction | 
-SetErrorEmployeeAction | 
-SetLoadingEmployeeAction | 
-SetPageEmployeeAction |
-CreateCompanyService |
-UpdateCompanyService |
-RemoveEmployee
+export type EmployeeAction =
+    GetEmployeesAction |
+    LoadMoreEmployeesAction |
+    SetErrorEmployeeAction |
+    SetLoadingEmployeeAction |
+    SetPageEmployeeAction |
+    SetSortFieldEmployeeAction |
+    SetSortEmployeeAction |
+    CreateCompanyService |
+    UpdateCompanyService |
+    RemoveEmployee

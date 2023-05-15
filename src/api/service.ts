@@ -8,10 +8,11 @@ import { OrderType } from '../types/common/orderType';
  * @param limit<number> Page size
  * @param page<number> Current page
  * @param companyServiceStatus<CompanyServiceStatus> Possible values: 0 - Active, 1 - Disabled, 2 - All
+ * @param sortField<string>Field name for sorting, available fields: Title, Description
  * @param order<OrderType> Sort direction (0 - Ascending / 1 - Descending / 2 - None)
  */
-export async function getServicesAxios(limit: number, page: number, companyServiceStatus: CompanyServiceStatus, order: OrderType): Promise<ISearchResult<ICompanyService>> {
-    return (await axios.get(`/companyservice/get?limit=${limit}&page=${page}&companyServiceStatus=${companyServiceStatus}&order=${order}`)).data;
+export async function getServicesAxios(limit: number, page: number, companyServiceStatus: CompanyServiceStatus, sortField: string, order: OrderType): Promise<ISearchResult<ICompanyService>> {
+    return (await axios.get(`/companyservice/get?limit=${limit}&page=${page}&companyServiceStatus=${companyServiceStatus}&sortField=${sortField}&order=${order}`)).data;
 }
 
 /**

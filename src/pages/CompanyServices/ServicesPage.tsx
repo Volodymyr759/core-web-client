@@ -16,13 +16,13 @@ export default function ServicesPage(): JSX.Element {
     const { getServices, loadMoreServices, setServicePage } = useActions();
 
     useEffect(() => {
-        if (serviceSearchResult.itemList.length === 0) 
-            getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
+        if (serviceSearchResult.itemList.length === 0)
+            getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, "Title", OrderType.Ascending);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const loadMoreHandler = () => {
-        loadMoreServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber + 1, CompanyServiceStatus.Active, OrderType.Ascending);
+        loadMoreServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber + 1, CompanyServiceStatus.Active, "Title", OrderType.Ascending);
         setServicePage(serviceSearchResult.currentPageNumber + 1);
     }
 

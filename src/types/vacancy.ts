@@ -1,4 +1,5 @@
 import { OfficeNameIdDto } from "./common/officeNameIdDto";
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 
 export interface IVacancy {
@@ -36,6 +37,7 @@ export interface VacancyState {
     filters: VacancyFilters;
     offices: OfficeNameIdDto[];
     titles: VacancyTitleDto[];
+    sortField: string;
     loadingFilters: boolean;
     errorFilters: null | string;
     loadingVacancies: boolean;
@@ -55,6 +57,8 @@ export enum VacancyActionTypes {
     SET_VACANCY_SEARCH_CRITERIA = "SET_VACANCY_SEARCH_CRITERIA",
     SET_VACANCY_OFFICES = "SET_VACANCY_OFFICES",
     SET_VACANCIES_TITLES = "SET_VACANCIES_TITLES",
+    SET_VACANCY_SORTFIELD = "SET_VACANCY_SORTFIELD",
+    SET_VACANCY_SORT = "SET_VACANCY_SORT",
     INCREMENT_PREVIEWS = "INCREMENT_PREVIEWS",
     UPDATE_VACANCY_ISACTIVE_STATUS = "UPDATE_VACANCY_ISACTIVE_STATUS",
     CREATE_VACANCY = "CREATE_VACANCY",
@@ -122,6 +126,17 @@ interface SetVacanciesTitlesAction {
     payload: VacancyTitleDto[];
 }
 
+interface SetVacancySortFieldAction {
+    type: VacancyActionTypes.SET_VACANCY_SORTFIELD;
+    payload: string;
+}
+
+interface SetVacancySortAction {
+    type: VacancyActionTypes.SET_VACANCY_SORT;
+    payload: OrderType;
+}
+
+
 interface IncrementPreviewsAction {
     type: VacancyActionTypes.INCREMENT_PREVIEWS;
     payload: number;
@@ -159,6 +174,8 @@ export type VacancyAction = GetVacanciesAction |
     SetVacancySearchCriteriaAction |
     SetVacancyOfficesAction |
     SetVacanciesTitlesAction |
+    SetVacancySortFieldAction |
+    SetVacancySortAction |
     IncrementPreviewsAction |
     UpdateVacancyIsActiveStatus |
     CreateVacancy |

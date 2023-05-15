@@ -61,7 +61,9 @@ export default function AdminOfficeForm({ office, closeForm }: AdminOfficeFormPr
         address: office.address,
         latitude: office.latitude,
         longitude: office.longitude,
-        countryId: office.countryId
+        countryId: office.countryId,
+        countryDto: office.countryDto,
+        vacancyDtos: office.vacancyDtos
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({

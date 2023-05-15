@@ -1,3 +1,4 @@
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 import { ICountry } from "./country";
 import { IVacancy } from "./vacancy";
@@ -16,6 +17,7 @@ export interface IOffice {
 
 export interface OfficeState {
     officeSearchResult: ISearchResult<IOffice>;
+    sortField: string;
     loading: boolean;
     error: null | string;
 }
@@ -26,6 +28,8 @@ export enum OfficeActionTypes {
     SET_OFFICE_ERROR = "SET_OFFICE_ERROR",
     SET_OFFICE_LOADING = "SET_OFFICE_LOADING",
     SET_OFFICE_PAGE = "SET_OFFICE_PAGE",
+    SET_OFFICE_SORTFIELD = "SET_OFFICE_SORTFIELD",
+    SET_OFFICE_SORT = "SET_OFFICE_SORT",
     CREATE_OFFICE = "CREATE_OFFICE",
     UPDATE_OFFICE = "UPDATE_OFFICE",
     REMOVE_OFFICE = "REMOVE_OFFICE"
@@ -56,6 +60,16 @@ interface SetOfficePageAction {
     payload: number;
 }
 
+interface SetOfficeSortField {
+    type: OfficeActionTypes.SET_OFFICE_SORTFIELD;
+    payload: string;
+}
+
+interface SetOfficeSort {
+    type: OfficeActionTypes.SET_OFFICE_SORT;
+    payload: OrderType;
+}
+
 interface CreateOfficeAction {
     type: OfficeActionTypes.CREATE_OFFICE;
     payload: IOffice;
@@ -76,6 +90,8 @@ export type OfficeAction = GetOfficesAction |
     SetOfficeErrorAction |
     SetOfficeLoadingAction |
     SetOfficePageAction |
+    SetOfficeSortField |
+    SetOfficeSort |
     CreateOfficeAction |
     UpdateOfficeAction |
     RemoveOfficeAction

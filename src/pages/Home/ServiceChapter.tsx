@@ -18,8 +18,8 @@ export default function ServiceChapter(): JSX.Element {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (serviceSearchResult.itemList.length === 0) 
-            getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, OrderType.Ascending);
+        if (serviceSearchResult.itemList.length === 0)
+            getServices(serviceSearchResult.pageSize, 1, CompanyServiceStatus.Active, "Title", OrderType.Ascending);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

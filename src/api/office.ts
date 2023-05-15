@@ -8,7 +8,7 @@ import { IOffice } from '../types/office';
  * Gets list of offices with pagination properties
  * @param limit<number> Page size
  * @param page<number> Current page
- * @param sortField<string> Field for sorting, for now only by Name
+ * @param sortField<string> Field name for sorting, available fields: Name, Description, Address
  * @param order<OrderType> Sort direction (0 - Ascending / 1 - Descending / 2 - None)
  */
 export async function getOfficesAxios(limit: number, page: number, sortField: string, order: OrderType): Promise<ISearchResult<IOffice>> {

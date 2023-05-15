@@ -16,12 +16,17 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
+}
+
+.loading-opacity {
+    opacity: 0.5;
+    transition: all 1s !important;
 }
 
 .main-menu-link {

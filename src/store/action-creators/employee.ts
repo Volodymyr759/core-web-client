@@ -3,7 +3,6 @@ import { createEmployeeAxios, getEmployeesAxios, removeEmployeeAxios, updateEmpl
 import { EmployeeAction, EmployeeActionTypes, IEmployee } from "../../types/employee";
 import { OrderType } from "../../types/common/orderType";
 
-
 export const getEmployees = (limit: number, page: number, search: string, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<EmployeeAction>) => {
         try {
@@ -35,6 +34,18 @@ export const loadMoreEmployees = (limit: number, page: number, search: string, s
 export const setEmployeePage = (page: number) => {
     return async (dispatch: Dispatch<EmployeeAction>) => {
         dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_PAGE, payload: page });
+    }
+}
+
+export const setEmployeeSortfield = (sortField: string) => {
+    return async (dispatch: Dispatch<EmployeeAction>) => {
+        dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_SORTFIELD, payload: sortField });
+    }
+}
+
+export const setEmployeeSort = (sort: OrderType) => {
+    return async (dispatch: Dispatch<EmployeeAction>) => {
+        dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE_SORT, payload: sort });
     }
 }
 

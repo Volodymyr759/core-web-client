@@ -5,12 +5,13 @@ const initialState: CountryState = {
     countrySearchResult: {
         itemList: [] as ICountry[],
         currentPageNumber: 1,
-        order: OrderType.Descending,
+        order: OrderType.Ascending,
         pageCount: 0,
-        pageSize: 10,
+        pageSize: 5,
         searchCriteria: "",
         totalItemCount: 0
     },
+    sortField: "Name",
     loading: true,
     error: null
 }
@@ -25,6 +26,10 @@ export const countryReducer = (state: CountryState = initialState, action: Count
             return { ...state, loading: action.payload };
         case CountryActionTypes.SET_COUNTRY_PAGE:
             return { ...state, countrySearchResult: { ...state.countrySearchResult, currentPageNumber: action.payload } };
+        case CountryActionTypes.SET_COUNTRY_SORTFIELD:
+            return { ...state, sortField: action.payload };
+        case CountryActionTypes.SET_SORT:
+            return { ...state, countrySearchResult: { ...state.countrySearchResult, order: action.payload } };
         case CountryActionTypes.CREATE_COUNTRY:
             return { ...state, countrySearchResult: { ...state.countrySearchResult, itemList: [action.payload, ...state.countrySearchResult.itemList] } };
         case CountryActionTypes.UPDATE_COUNTRY:

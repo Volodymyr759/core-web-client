@@ -1,3 +1,4 @@
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 
 export interface ICompanyService {
@@ -18,7 +19,8 @@ export interface CompanyServiceState {
     serviceSearchResult: ISearchResult<ICompanyService>;
     filters: {
         active: CompanyServiceStatus
-    }
+    },
+    sortField,
     loading: boolean;
     error: null | string;
 }
@@ -31,6 +33,8 @@ export enum CompanyServiceActionTypes {
     SET_COMPANY_SERVICE_LOADING = "SET_COMPANY_SERVICE_LOADING",
     SET_COMPANY_SERVICE_PAGE = "SET_COMPANY_SERVICE_PAGE",
     SET_COMPANY_SERVICE_ACTIVE_FILTER = "SET_COMPANY_SERVICE_ACTIVE_FILTER",
+    SET_SERVICE_SORTFIELD = "SET_SERVICE_SORTFIELD",
+    SET_SERVICE_SORT = "SET_SERVICE_SORT",
     UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS = "UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS",
     CREATE_COMPANY_SERVICE = "CREATE_COMPANY_SERVICE",
     UPDATE_COMPANY_SERVICE = "UPDATE_COMPANY_SERVICE",
@@ -72,6 +76,16 @@ interface SetServiceActiveFilterAction {
     payload: CompanyServiceStatus;
 }
 
+interface SetServiceSortField {
+    type: CompanyServiceActionTypes.SET_SERVICE_SORTFIELD;
+    payload: string;
+}
+
+interface SetServiceSort {
+    type: CompanyServiceActionTypes.SET_SERVICE_SORT;
+    payload: OrderType;
+}
+
 interface UpdateServiceIsActiveStatusAction {
     type: CompanyServiceActionTypes.UPDATE_COMPANY_SERVICE_ISACTIVE_STATUS;
     payload: ICompanyService;
@@ -99,6 +113,8 @@ export type CompanyServiceAction = GetServicesAction |
     SetServiceLoadingAction |
     SetServicePageAction |
     SetServiceActiveFilterAction |
+    SetServiceSortField |
+    SetServiceSort |
     UpdateServiceIsActiveStatusAction |
     CreateCompanyServiceAction |
     UpdateCompanyServiceAction |

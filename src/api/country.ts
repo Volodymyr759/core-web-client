@@ -7,7 +7,7 @@ import { ICountry } from '../types/country';
  * Gets list of countries
  * @param limit<number> Page size
  * @param page<number> Current page
- * @param sortField<string> Field for sorting, for now only by Name
+ * @param sortField<string>Field name for sorting, available fields: Name, Code
  * @param order<OrderType> Sort direction (0 - Ascending / 1 - Descending / 2 - None)
  */
 export async function getCountriesAxios(limit: number, page: number, sortField: string, order: OrderType): Promise<ISearchResult<ICountry>> {

@@ -1,3 +1,4 @@
+import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
 import { IVacancy } from "./vacancy";
 
@@ -28,6 +29,7 @@ export interface CandidateFilters {
 export interface CandidateState {
     candidateSearchResult: ISearchResult<ICandidate>;
     filters: CandidateFilters;
+    sortField: string;
     loading: boolean;
     error: null | string;
 }
@@ -41,6 +43,8 @@ export enum CandidateActionTypes {
     SET_CANDIDATE_ACTIVE_FILTER = "SET_CANDIDATE_ACTIVE_FILTER",
     SET_CANDIDATE_VACANCY_FILTER = "SET_CANDIDATE_VACANCY_FILTER",
     SET_CANDIDATE_SEARCH_CRITERIA = "SET_CANDIDATE_SEARCH_CRITERIA",
+    SET_CANDIDATE_SORTFIELD = "SET_CANDIDATE_SORTFIELD",
+    SET_CANDIDATE_SORT = "SET_CANDIDATE_SORT",
     UPDATE_CANDIDATE_ISDISMISSED_STATUS = "UPDATE_CANDIDATE_ISDISMISSED_STATUS",
     CREATE_CANDIDATE = "CREATE_CANDIDATE",
     UPDATE_CANDIDATE = "UPDATE_CANDIDATE",
@@ -87,6 +91,16 @@ interface SetCandidatesSearchCriteriaAction {
     payload: string;
 }
 
+interface SetCandidateSortField {
+    type: CandidateActionTypes.SET_CANDIDATE_SORTFIELD;
+    payload: string;
+}
+
+interface SetCandidateSort {
+    type: CandidateActionTypes.SET_CANDIDATE_SORT;
+    payload: OrderType;
+}
+
 interface UpdateCandidateIsDismissedAction {
     type: CandidateActionTypes.UPDATE_CANDIDATE_ISDISMISSED_STATUS;
     payload: ICandidate;
@@ -115,6 +129,8 @@ export type CandidateAction = GetCandidatesAction |
     SetCandidateActiveFilterAction |
     SetCandidateVacancyFilterAction |
     SetCandidatesSearchCriteriaAction |
+    SetCandidateSortField |
+    SetCandidateSort |
     UpdateCandidateIsDismissedAction |
     CreateCandidateAction |
     UpdateCandidateAction |

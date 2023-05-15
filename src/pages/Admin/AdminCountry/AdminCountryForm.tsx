@@ -40,7 +40,7 @@ export default function AdminCountryForm({ country, closeForm }: AdminCountryFor
         id: country.id,
         name: country.name,
         code: country.code,
-        officeDtos: null
+        officeDtos: country.officeDtos
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
