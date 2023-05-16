@@ -7,7 +7,7 @@ const initialState: CompanyServiceState = {
         currentPageNumber: 1,
         order: OrderType.Descending,
         pageCount: 0,
-        pageSize: 3,
+        pageSize: 5,
         searchCriteria: "",
         totalItemCount: 0
     },

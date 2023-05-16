@@ -18,7 +18,7 @@ export async function getVacanciesAxios(
     page: number,
     search: string,
     vacancyStatus: VacancyStatus,
-    officeId: string,
+    officeId: number,
     sortField: string,
     order: OrderType): Promise<ISearchResult<IVacancy>> {
     return (
@@ -54,7 +54,7 @@ export async function getVacancyByIdAxios(id: number): Promise<IVacancy> {
  * @param searchValue<string> Search paremeter
  * @param officeId<string> Identifier of the office which vacancy belongs. If it's '' in request query - means all offices.
  */
-export async function searchVacanciesTitlesAxios(searchValue: string, officeId: string): Promise<VacancyTitleDto[]> {
+export async function searchVacanciesTitlesAxios(searchValue: string, officeId: number): Promise<VacancyTitleDto[]> {
     return (await axios.get(`/vacancy/searchvacanciestitles?searchValue=${searchValue}&officeId=${officeId}`)).data;
 }
 

@@ -7,11 +7,14 @@ const initialState: EmployeeState = {
         currentPageNumber: 1,
         order: OrderType.Ascending,
         pageCount: 0,
-        pageSize: 3,
+        pageSize: 5,
         searchCriteria: "",
         totalItemCount: 0
     },
     offices: [],
+    filters: {
+        officeId: 0
+    },
     sortField: "FullName",
     loading: false,
     error: null
@@ -38,6 +41,15 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
                 ...state,
                 employeeSearchResult: { ...state.employeeSearchResult, currentPageNumber: action.payload }
             };
+        case EmployeeActionTypes.SET_EMPLOYEE_OFFICE_FILTER:
+            return {
+                ...state,
+                filters: { ...state.filters, officeId: action.payload }
+            };
+        case EmployeeActionTypes.SET_EMPLOYEE_OFFICES:
+            let employeeOffices = action.payload;
+            employeeOffices.unshift({ id: 0, name: "All" });
+            return { ...state, offices: employeeOffices };
         case EmployeeActionTypes.SET_EMPLOYEE_SORTFIELD:
             return { ...state, sortField: action.payload };
         case EmployeeActionTypes.SET_EMPLOYEE_SORT:

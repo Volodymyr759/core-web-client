@@ -6,11 +6,11 @@ import SelectItemsFilter from "../../components/FiltersArea/SelectItemFilter/Sel
 import AutocompleteFilter from "../../components/FiltersArea/AutocompleteFilter/AutocompleteFilter";
 
 export default function VacanciesFilters(): JSX.Element {
-    const { getOfficeNameIdDtos, getVacanciesTitles, setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
+    const { getVacanciesOfficeNameIdDtos, getVacanciesTitles, setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
     const { filters, offices, titles } = useTypedSelector(state => state.vacancy);
 
     useEffect(() => {
-        getOfficeNameIdDtos();
+        getVacanciesOfficeNameIdDtos();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -21,7 +21,7 @@ export default function VacanciesFilters(): JSX.Element {
 
     const onSelectChanged = (newValue: string) => {
         setVacancyPage(1);
-        setVacancyOfficeFilter(newValue);
+        setVacancyOfficeFilter(Number(newValue));
     }
 
     function searchTitleChanged(event, values) {
@@ -35,7 +35,7 @@ export default function VacanciesFilters(): JSX.Element {
                 items={offices.map((o) => { return { id: o.id, name: o.name } })}
                 label="Office"
                 onSelectChanged={onSelectChanged}
-                value={filters.officeId}
+                value={filters.officeId.toString()}
             />
             <AutocompleteFilter label="Search by title" options={titles} onSearch={(event, values) => searchTitleChanged(event, values)} />
         </Grid>

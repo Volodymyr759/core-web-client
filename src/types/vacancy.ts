@@ -24,7 +24,7 @@ export enum VacancyStatus {
 
 export interface VacancyFilters {
     active: VacancyStatus;
-    officeId: string;
+    officeId: number;
     searchInTitle: string;
 }
 
@@ -108,7 +108,7 @@ interface SetVacancyActiveFilterAction {
 
 interface SetVacancyOfficeFilterAction {
     type: VacancyActionTypes.SET_VACANCY_OFFICE_FILTER;
-    payload: string;
+    payload: number;
 }
 
 interface SetVacancySearchCriteriaAction {

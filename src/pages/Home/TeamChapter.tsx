@@ -12,12 +12,12 @@ import EmployeesList from "../../components/EmployeeList/EmployeesList";
 import { MessageAppearance } from "../../components/Messages/types";
 
 export default function TeamChapter(): JSX.Element {
-    const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
+    const { error, employeeSearchResult, filters, loading } = useTypedSelector(state => state.employee);
     const { getEmployees } = useActions();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (employeeSearchResult.itemList.length === 0) getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending);
+        if (employeeSearchResult.itemList.length === 0) getEmployees(employeeSearchResult.pageSize, 1, '', filters.officeId, 'FullName', OrderType.Ascending);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

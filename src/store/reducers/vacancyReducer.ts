@@ -15,7 +15,7 @@ const initialState: VacancyState = {
     titles: [],
     filters: {
         active: VacancyStatus.Active,
-        officeId: "",
+        officeId: 0,
         searchInTitle: ""
     },
     sortField: "Title",

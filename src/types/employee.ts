@@ -15,8 +15,13 @@ export interface IEmployee {
     }
 }
 
+export interface EmployeeFilters {
+    officeId: number;
+}
+
 export interface EmployeeState {
     employeeSearchResult: ISearchResult<IEmployee>;
+    filters: EmployeeFilters;
     offices: OfficeNameIdDto[];
     sortField: string;
     loading: boolean;
@@ -29,6 +34,8 @@ export enum EmployeeActionTypes {
     SET_EMPLOYEE_ERROR = "SET_EMPLOYEE_ERROR",
     SET_EMPLOYEE_LOADING = "SET_EMPLOYEE_LOADING",
     SET_EMPLOYEE_PAGE = "SET_EMPLOYEE_PAGE",
+    SET_EMPLOYEE_OFFICE_FILTER = "SET_EMPLOYEE_OFFICE_FILTER",
+    SET_EMPLOYEE_OFFICES = "SET_EMPLOYEE_OFFICES",
     SET_EMPLOYEE_SORTFIELD = "SET_EMPLOYEE_SORTFIELD",
     SET_EMPLOYEE_SORT = "SET_EMPLOYEE_SORT",
     CREATE_EMPLOYEE = "CREATE_EMPLOYEE",
@@ -59,6 +66,16 @@ interface SetLoadingEmployeeAction {
 interface SetPageEmployeeAction {
     type: EmployeeActionTypes.SET_EMPLOYEE_PAGE;
     payload: number;
+}
+
+interface SetEmployeeOfficeFilterAction {
+    type: EmployeeActionTypes.SET_EMPLOYEE_OFFICE_FILTER;
+    payload: number;
+}
+
+interface SetEmployeeOfficesAction {
+    type: EmployeeActionTypes.SET_EMPLOYEE_OFFICES;
+    payload: OfficeNameIdDto[];
 }
 
 interface SetSortFieldEmployeeAction {
@@ -92,6 +109,8 @@ export type EmployeeAction =
     SetErrorEmployeeAction |
     SetLoadingEmployeeAction |
     SetPageEmployeeAction |
+    SetEmployeeOfficeFilterAction |
+    SetEmployeeOfficesAction |
     SetSortFieldEmployeeAction |
     SetSortEmployeeAction |
     CreateCompanyService |

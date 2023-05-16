@@ -13,7 +13,7 @@ import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 
 export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployeeFormProps): JSX.Element {
-    const { offices } = useTypedSelector(state => state.vacancy);
+    const { offices } = useTypedSelector(state => state.employee);
     const { createEmployee, updateEmployee } = useActions();
     const [error, setError] = useState<null | string>(null);
 
@@ -31,22 +31,22 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
         id: Yup.number()
             .required(),
         fullName: Yup.string()
-            .required()
+            .required('Full Name is a required field')
             .min(1, 'Full Name must be at least 1 character.')
             .max(50, 'The field Full Name may not be greater than 50 characters.'),
         email: Yup.string()
             .max(50, 'The field Email may not be greater than 50 characters.')
             .matches(EMAIL_REG_EXP, "Required field Email is not valid and may not be greater than 50 characters."),
         position: Yup.string()
-            .required()
+            .required('Position is a required field')
             .min(1, 'Position must be at least 1 character.')
             .max(50, 'The field Position may not be greater than 50 characters.'),
         description: Yup.string()
-            .required()
+            .required('Description is a required field')
             .min(1, 'Description must be at least 1 characters.')
             .max(1024, 'The field Description may not be greater than 1024 characters.'),
         avatarUrl: Yup.string()
-            .required()
+            .required('Avatar Url is a required field')
             .min(2, 'ImageUrl must be at least 2 characters.')
             .max(1024, 'The field ImageUrl may not be greater than 1024 characters.'),
         officeId: Yup.number()
@@ -164,7 +164,7 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
                     </Grid>
                     <Grid item>
                         <FormControl sx={{ width: 300 }}>
-                            <InputLabel id="level-label">Office</InputLabel>
+                            <InputLabel>Office</InputLabel>
                             <Controller
                                 name="officeId"
                                 defaultValue={offices[1].id}

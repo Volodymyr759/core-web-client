@@ -11,16 +11,16 @@ import { Container } from "@mui/material";
 import { MessageAppearance } from "../../components/Messages/types";
 
 export default function TeamPage(): JSX.Element {
-    const { error, employeeSearchResult, loading } = useTypedSelector(state => state.employee);
+    const { error, employeeSearchResult, filters, loading } = useTypedSelector(state => state.employee);
     const { getEmployees, loadMoreEmployees, setEmployeePage } = useActions();
 
     useEffect(() => {
-        if (employeeSearchResult.itemList.length === 0) getEmployees(employeeSearchResult.pageSize, 1, '', 'FullName', OrderType.Ascending)
+        if (employeeSearchResult.itemList.length === 0) getEmployees(employeeSearchResult.pageSize, 1, '', filters.officeId, 'FullName', OrderType.Ascending)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const loadMoreHandler = () => {
-        loadMoreEmployees(3, employeeSearchResult.currentPageNumber + 1, '', 'FullName', OrderType.Ascending);
+        loadMoreEmployees(3, employeeSearchResult.currentPageNumber + 1, '', filters.officeId, 'FullName', OrderType.Ascending);
         setEmployeePage(employeeSearchResult.currentPageNumber + 1);
     }
 

@@ -4,9 +4,9 @@ import { SelectItemFilterProps } from "./types";
 export default function SelectItemsFilter({ items, label, onSelectChanged, value }: SelectItemFilterProps): JSX.Element {
 
     return (
-        <Grid item>
-            <FormControl sx={{ width: 300 }}>
-                <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <Grid item sx={{ minWidth: 300 }}>
+            <FormControl fullWidth>
+                <InputLabel>{label}</InputLabel>
                 <Select
                     value={value}
                     label={label}

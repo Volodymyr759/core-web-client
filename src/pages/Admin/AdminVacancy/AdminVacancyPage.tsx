@@ -8,11 +8,15 @@ import AdminVacancyTable from "./AdminVacancyTable";
 
 export default function AdminVacancyPage(): JSX.Element {
     const { offices, vacancySearchResult, filters, sortField } = useTypedSelector(state => state.vacancy);
-    const { getOfficeNameIdDtos, getVacanciesTitles, getVacancies } = useActions();
+    const { getVacanciesOfficeNameIdDtos, getVacanciesTitles, getVacancies } = useActions();
     const [vacancy, setVacancy] = useState<IVacancy | null>(null);
 
     useEffect(() => {
-        getOfficeNameIdDtos();
+        getVacanciesOfficeNameIdDtos();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
         getVacanciesTitles(vacancySearchResult.searchCriteria, filters.officeId);
         getVacancies(5, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
             VacancyStatus.All, filters.officeId, sortField, vacancySearchResult.order);

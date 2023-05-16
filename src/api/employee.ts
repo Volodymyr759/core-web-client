@@ -12,8 +12,8 @@ import { ISearchResult } from '../types/common/searchResult';
  * @param order<OrderType> Sort direction: 0 - Ascending or 1 - Descending, 2 - None
  * @returns<ISearchResult> SearchResult: List of Employees and pagination options
  */
-export async function getEmployeesAxios(limit: number, page: number, search: string, sortField: string, order: OrderType): Promise<ISearchResult<IEmployee>> {
-    return (await axios.get(`/employee/get?limit=${limit}&page=${page}&search=${search}&sortfield=${sortField}&order=${order}`)).data;
+export async function getEmployeesAxios(limit: number, page: number, search: string, officeId: number, sortField: string, order: OrderType): Promise<ISearchResult<IEmployee>> {
+    return (await axios.get(`/employee/get?limit=${limit}&page=${page}&search=${search}&officeId=${officeId}&sortfield=${sortField}&order=${order}`)).data;
 }
 
 /**

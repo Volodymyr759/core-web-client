@@ -7,16 +7,22 @@ import AdminEmployeeTable from "./AdminEmployeeTable";
 import AdminTeamFilters from "./AdminTeamFilters";
 
 export default function AdminTeamPage(): JSX.Element {
-    const { employeeSearchResult, sortField } = useTypedSelector(state => state.employee);
-    const { offices } = useTypedSelector(state => state.vacancy);
-    const { getEmployees, getOfficeNameIdDtos } = useActions();
+    const { employeeSearchResult, filters, sortField } = useTypedSelector(state => state.employee);
+    const { offices } = useTypedSelector(state => state.employee);
+    const { getEmployees, getEmployeesOfficeNameIdDtos } = useActions();
     const [employee, setEmployee] = useState<IEmployee | null>(null);
 
     useEffect(() => {
-        getEmployees(employeeSearchResult.pageSize, employeeSearchResult.currentPageNumber, employeeSearchResult.searchCriteria, sortField, employeeSearchResult.order);
-        getOfficeNameIdDtos();
+        getEmployeesOfficeNameIdDtos();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [employeeSearchResult.currentPageNumber, employeeSearchResult.order, sortField])
+    }, [])
+
+    useEffect(() => {
+        getEmployees(employeeSearchResult.pageSize, employeeSearchResult.currentPageNumber, employeeSearchResult.searchCriteria, 
+            filters.officeId, sortField, employeeSearchResult.order);
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [employeeSearchResult.currentPageNumber, filters.officeId, employeeSearchResult.order, sortField])
 
     const onCreateEdit = (employee: IEmployee | null) => setEmployee(employee);
 

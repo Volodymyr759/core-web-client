@@ -12,7 +12,7 @@ export default function AdminVacancyFilters({ onAddNew }: AdminVacancyFiltersPro
 
     const onSelectChanged = (newValue: string) => {
         setVacancyPage(1);
-        setVacancyOfficeFilter(newValue);
+        setVacancyOfficeFilter(Number(newValue));
         setVacancySearchCriteria("");
     }
 
@@ -27,7 +27,7 @@ export default function AdminVacancyFilters({ onAddNew }: AdminVacancyFiltersPro
                 items={offices.map((o) => { return { id: o.id, name: o.name } })}
                 label="Office"
                 onSelectChanged={onSelectChanged}
-                value={filters.officeId}
+                value={filters.officeId.toString()}
             />
             <AutocompleteFilter label="Search by title" options={titles} onSearch={searchTitleChanged} />
             <CreateNewButton onAction={onAddNew}>+ New Vacancy</CreateNewButton>

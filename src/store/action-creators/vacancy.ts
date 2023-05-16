@@ -4,7 +4,7 @@ import { createVacancyAxios, getVacanciesAxios, incrementPreviewsAxios, removeVa
 import { OrderType } from "../../types/common/orderType";
 import { IVacancy, VacancyAction, VacancyActionTypes, VacancyStatus } from "../../types/vacancy";
 
-export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: VacancyStatus, officeId: string, sortField: string, order: OrderType) => {
+export const getVacancies = (limit: number, page: number, search: string, vacancyStatus: VacancyStatus, officeId: number, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
@@ -21,7 +21,7 @@ export const getVacancies = (limit: number, page: number, search: string, vacanc
     }
 }
 
-export const getOfficeNameIdDtos = () => {
+export const getVacanciesOfficeNameIdDtos = () => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_FILTERS_LOADING, payload: true });
@@ -35,7 +35,7 @@ export const getOfficeNameIdDtos = () => {
     }
 }
 
-export const getVacanciesTitles = (search: string, officeId: string) => {
+export const getVacanciesTitles = (search: string, officeId: number) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
@@ -50,7 +50,7 @@ export const getVacanciesTitles = (search: string, officeId: string) => {
     }
 }
 
-export const loadMoreVacancies = (limit: number, page: number, search: string, vacancyStatus: VacancyStatus, officeId: string, sortField: string, order: OrderType) => {
+export const loadMoreVacancies = (limit: number, page: number, search: string, vacancyStatus: VacancyStatus, officeId: number, sortField: string, order: OrderType) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         try {
             dispatch({ type: VacancyActionTypes.SET_VACANCY_LOADING, payload: true });
@@ -89,7 +89,7 @@ export const setVacancyLoading = (isLoading: boolean) => {
     }
 }
 
-export const setVacancyOfficeFilter = (officeId: string) => {
+export const setVacancyOfficeFilter = (officeId: number) => {
     return async (dispatch: Dispatch<VacancyAction>) => {
         dispatch({ type: VacancyActionTypes.SET_VACANCY_OFFICE_FILTER, payload: officeId });
     }
