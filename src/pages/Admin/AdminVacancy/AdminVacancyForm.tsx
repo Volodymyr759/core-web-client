@@ -38,8 +38,8 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
             .required()
             .min(1, 'Title must be at least 1 character.')
             .max(50, 'The field Title may not be greater than 50 characters.'),
-        // description: Yup.string()
-        //     .required('Description must be at least 1 characters.'),
+        description: Yup.string()
+            .required('Description is a required field.'),
         previews: Yup.number()
             .required(),
         isActive: Yup.boolean()
@@ -54,7 +54,9 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
         description: vacancy.description,
         previews: vacancy.previews,
         isActive: vacancy.isActive,
-        officeId: vacancy.officeId
+        officeId: vacancy.officeId,
+        officeDto: vacancy.officeDto,
+        candidates: vacancy.candidates
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
@@ -140,11 +142,11 @@ export default function AdminVacancyForm({ vacancy, closeForm }: AdminVacancyFor
                                 <InputLabel id="level-label">Office</InputLabel>
                                 <Controller
                                     name="officeId"
-                                    defaultValue={offices[1].id}
+                                    defaultValue={offices[0].id}
                                     control={control}
                                     render={({ field }) => (
                                         <Select label="Office" {...field}>
-                                            {offices.slice(1).map((office) => <MenuItem key={office.id} value={office.id}>{office.name}</MenuItem>)}
+                                            {offices.map((office) => <MenuItem key={office.id} value={office.id}>{office.name}</MenuItem>)}
                                         </Select>
                                     )}
                                 />

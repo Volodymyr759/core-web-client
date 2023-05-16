@@ -9,13 +9,8 @@ import AdminTeamFilters from "./AdminTeamFilters";
 export default function AdminTeamPage(): JSX.Element {
     const { employeeSearchResult, filters, sortField } = useTypedSelector(state => state.employee);
     const { offices } = useTypedSelector(state => state.employee);
-    const { getEmployees, getEmployeesOfficeNameIdDtos } = useActions();
+    const { getEmployees } = useActions();
     const [employee, setEmployee] = useState<IEmployee | null>(null);
-
-    useEffect(() => {
-        getEmployeesOfficeNameIdDtos();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     useEffect(() => {
         getEmployees(employeeSearchResult.pageSize, employeeSearchResult.currentPageNumber, employeeSearchResult.searchCriteria, 

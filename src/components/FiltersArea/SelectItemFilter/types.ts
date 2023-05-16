@@ -1,5 +1,7 @@
+import { OfficeNameIdDto } from "../../../types/common/officeNameIdDto";
+
 export interface SelectItemFilterProps {
-    items: { id: number | string, name: string }[];
+    items: OfficeNameIdDto[];
     label: string;
     onSelectChanged: (newValue: string) => void;
     value: string;

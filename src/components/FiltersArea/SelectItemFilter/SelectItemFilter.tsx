@@ -3,6 +3,9 @@ import { SelectItemFilterProps } from "./types";
 
 export default function SelectItemsFilter({ items, label, onSelectChanged, value }: SelectItemFilterProps): JSX.Element {
 
+    let officesToSelect = items.slice();
+    officesToSelect.unshift({ id: 0, name: "All Offices" });
+
     return (
         <Grid item sx={{ minWidth: 300 }}>
             <FormControl fullWidth>
@@ -12,7 +15,7 @@ export default function SelectItemsFilter({ items, label, onSelectChanged, value
                     label={label}
                     onChange={(event: SelectChangeEvent) => onSelectChanged(event.target.value)}
                 >
-                    {items.map((item) => <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
+                    {officesToSelect.map((office) => <MenuItem key={office.id} value={office.id}>{office.name}</MenuItem>)}
                 </Select>
             </FormControl>
         </Grid>

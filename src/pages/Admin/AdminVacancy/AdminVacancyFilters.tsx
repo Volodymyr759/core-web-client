@@ -5,11 +5,17 @@ import { AdminVacancyFiltersProps } from "./types";
 import AutocompleteFilter from "../../../components/FiltersArea/AutocompleteFilter/AutocompleteFilter";
 import CreateNewButton from "../../../components/FiltersArea/CreateNewButton/CreateNewButton";
 import SelectItemsFilter from "../../../components/FiltersArea/SelectItemFilter/SelectItemFilter";
+import { useEffect } from "react";
 
 export default function AdminVacancyFilters({ onAddNew }: AdminVacancyFiltersProps): JSX.Element {
     const { filters, offices, titles } = useTypedSelector(state => state.vacancy);
-    const { setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
+    const { getVacanciesOfficeNameIdDtos, setVacancyPage, setVacancyOfficeFilter, setVacancySearchCriteria } = useActions();
 
+    useEffect(() => {
+        getVacanciesOfficeNameIdDtos();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
     const onSelectChanged = (newValue: string) => {
         setVacancyPage(1);
         setVacancyOfficeFilter(Number(newValue));
@@ -24,7 +30,7 @@ export default function AdminVacancyFilters({ onAddNew }: AdminVacancyFiltersPro
     return (
         <Grid container spacing={2} direction='row' justifyContent={'space-between'} alignItems={'center'}>
             <SelectItemsFilter
-                items={offices.map((o) => { return { id: o.id, name: o.name } })}
+                items={offices}
                 label="Office"
                 onSelectChanged={onSelectChanged}
                 value={filters.officeId.toString()}

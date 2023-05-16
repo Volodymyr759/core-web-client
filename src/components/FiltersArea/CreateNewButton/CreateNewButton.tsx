@@ -7,7 +7,7 @@ export default function CreateNewButton({ onAction, children }: CreateNewButtonP
         <Grid item>
             <Button
                 variant="contained"
-                style={{ marginTop: '15px', textTransform: 'none' }}
+                style={{ textTransform: 'none' }}
                 onClick={onAction}>
                 {children}
             </Button>

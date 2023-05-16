@@ -47,9 +47,9 @@ export const employeeReducer = (state: EmployeeState = initialState, action: Emp
                 filters: { ...state.filters, officeId: action.payload }
             };
         case EmployeeActionTypes.SET_EMPLOYEE_OFFICES:
-            let employeeOffices = action.payload;
-            employeeOffices.unshift({ id: 0, name: "All" });
-            return { ...state, offices: employeeOffices };
+            // let employeeOffices = action.payload;
+            // employeeOffices.unshift({ id: 0, name: "All" });
+            return { ...state, offices: action.payload };
         case EmployeeActionTypes.SET_EMPLOYEE_SORTFIELD:
             return { ...state, sortField: action.payload };
         case EmployeeActionTypes.SET_EMPLOYEE_SORT:

@@ -28,17 +28,17 @@ export default function AdminServiceForm({ service, closeForm }: AdminServiceFor
 
     const validationSchema = Yup.object({
         title: Yup.string()
-            .required()
+            .required('Title is a required field')
             .min(2, 'Title must be at least 2 characters.')
             .max(100, 'The field Title may not be greater than 100 characters.'),
         description: Yup.string()
-            .required()
+            .required('Description is a required field')
             .min(6, 'Description must be at least 6 characters.')
             .max(1024, 'The field Description may not be greater than 1024 characters.'),
         imageUrl: Yup.string()
-            .required()
-            .min(2, 'ImageUrl must be at least 2 characters.')
-            .max(1024, 'The field ImageUrl may not be greater than 1024 characters.'),
+            .required('Image Url is a required field')
+            .min(2, 'Image Url must be at least 2 characters.')
+            .max(1024, 'The field Image Url may not be greater than 1024 characters.'),
         isActive: Yup.boolean()
             .required(),
         id: Yup.number()

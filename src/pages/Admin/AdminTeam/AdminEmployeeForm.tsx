@@ -61,6 +61,7 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
         description: employee.description,
         avatarUrl: employee.avatarUrl,
         officeId: employee.officeId,
+        officeDto: employee.officeDto
     }
 
     const { control, handleSubmit, formState: { errors }, register, reset } = useForm({
@@ -167,11 +168,11 @@ export default function AdminEmployeeForm({ employee, closeForm }: AdminEmployee
                             <InputLabel>Office</InputLabel>
                             <Controller
                                 name="officeId"
-                                defaultValue={offices[1].id}
+                                defaultValue={offices[0].id}
                                 control={control}
                                 render={({ field }) => (
                                     <Select label="Office" {...field}>
-                                        {offices.slice(1).map((office) => <MenuItem key={office.id} value={office.id}>{office.name}</MenuItem>)}
+                                        {offices.map((office) => <MenuItem key={office.id} value={office.id}>{office.name}</MenuItem>)}
                                     </Select>
                                 )}
                             />
