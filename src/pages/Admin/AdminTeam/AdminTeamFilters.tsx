@@ -17,7 +17,6 @@ export default function AdminTeamFilters({ onAddNew }: AdminTeamFiltersProps): J
 
     const onSelectChanged = (newValue: string) => {
         setEmployeePage(1);
-        console.log('newValue: ', typeof newValue)
         setEmployeeOfficeFilter(Number(newValue));
     }
 

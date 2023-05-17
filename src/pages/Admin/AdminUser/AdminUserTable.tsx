@@ -5,7 +5,7 @@ import { OrderType } from "../../../types/common/orderType";
 import { Box, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Tooltip, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import TablePagination from "../../../components/TablePagination/TablePagination";
-import AppTableAvatar from "../../../components/AppAvatar/AppTableAvatar";
+import AppAccountAvatar from "../../../components/AppAvatar/AppAccountAvatar";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 
@@ -56,7 +56,7 @@ export default function AdminUserTable(): JSX.Element {
                         {userSearchResult.itemList.map((user) => (
                             <TableRow key={user.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell>
-                                    <AppTableAvatar name={user.userName} email={user.email} avatarUrl={user.avatarUrl} />
+                                    <AppAccountAvatar name={user.userName} email={user.email} avatarUrl={user.avatarUrl} />
                                 </TableCell>
                                 <TableCell align="center">
                                     <Switch checked={user.emailConfirmed} onClick={() => onChangeEmailConfirmed(user.id)} />

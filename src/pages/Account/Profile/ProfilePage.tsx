@@ -7,7 +7,7 @@ export default function ProfilePage(): JSX.Element {
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="Profile"
-                text="Magnam dolores commodi suscipit"
+                text="Check or Update your profile settings."
             />
             <Grid container direction="column" alignItems="center">
                 <ProfileForm />

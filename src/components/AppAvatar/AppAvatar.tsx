@@ -13,6 +13,7 @@ import ProfilePage from '../../pages/Account/Profile/ProfilePage';
 import ChangeEmailPage from '../../pages/Account/ChangeEmail/ChangeEmailPage';
 import FavoriteVacanciesPage from '../../pages/Vacancies/FavoriteVacanciesPage';
 import ChangePasswordPage from '../../pages/Account/ChangePassword/ChangePasswordPage';
+import AppAccountAvatar from './AppAccountAvatar';
 
 export default function AppAvatar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -49,9 +50,9 @@ export default function AppAvatar() {
 
     return (
         <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', columnGap: '10px' }}>
-            <Typography component="span">
+            {/* <Typography component="span">
                 {auth.user.userName}
-            </Typography>
+            </Typography> */}
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpen} sx={{ p: 0 }}>
                     <Avatar alt="Users avatar" src={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
@@ -73,18 +74,22 @@ export default function AppAvatar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleClose}
             >
+                <Box sx={{ margin: "5px 15px" }}>
+                    <AppAccountAvatar name={auth.user.userName} email={"Roles: " + auth.roles.join(", ")} avatarUrl={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
+                </Box>
+                <hr style={{ width: "90%" }} />
                 {settings.map((setting, index) => (
                     <MenuItem key={setting.path} component={Link} to={setting.path} onClick={handleClose}>
                         <Grid container direction="row" justifyContent="space-between" alignItems="center" gap="10px">
-                            <Typography textAlign="center">{setting.title}</Typography>
+                            <Typography sx={{ textAlign: "left", fontSize: "0.95rem" }}>{setting.title}</Typography>
                             {settingsIcons[index]}
                         </Grid>
                     </MenuItem>
                 ))}
-                <hr />
+                <hr style={{ width: "90%" }} />
                 <MenuItem component={Link} to={RouteNames.HOME} onClick={handleLogout}>
                     <Grid container direction="row" justifyContent="space-between" alignItems="center" gap="10px">
-                        <Typography textAlign="center">Logout</Typography>
+                        <Typography sx={{ textAlign: "left", fontSize: "0.95rem" }}>Logout</Typography>
                         <LogoutIcon sx={{ color: "red" }} />
                     </Grid>
                 </MenuItem>

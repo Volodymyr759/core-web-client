@@ -13,7 +13,7 @@ export default function AdminTeamPage(): JSX.Element {
     const [employee, setEmployee] = useState<IEmployee | null>(null);
 
     useEffect(() => {
-        getEmployees(employeeSearchResult.pageSize, employeeSearchResult.currentPageNumber, employeeSearchResult.searchCriteria, 
+        getEmployees(5, employeeSearchResult.currentPageNumber, employeeSearchResult.searchCriteria, 
             filters.officeId, sortField, employeeSearchResult.order);
         
         // eslint-disable-next-line react-hooks/exhaustive-deps

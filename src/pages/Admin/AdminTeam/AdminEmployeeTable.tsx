@@ -10,7 +10,7 @@ import { MessageAppearance } from "../../../components/Messages/types";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
 import TablePagination from "../../../components/TablePagination/TablePagination";
-import AppTableAvatar from "../../../components/AppAvatar/AppTableAvatar";
+import AppAccountAvatar from "../../../components/AppAvatar/AppAccountAvatar";
 import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps): JSX.Element {
@@ -59,16 +59,18 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                         <TableRow>
                             {["FullName", "Position", "Description", "Office", "Actions"].map((field) => {
                                 return (
-                                    <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={employeeSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                    <TableCell key={field}>
+                                        <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ cursor: "pointer" }}>
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={employeeSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -78,7 +80,7 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                         {employeeSearchResult.itemList.map((employee) => (
                             <TableRow key={employee.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell>
-                                    <AppTableAvatar name={employee.fullName} email={employee.email} avatarUrl={employee.avatarUrl} />
+                                    <AppAccountAvatar name={employee.fullName} email={employee.email} avatarUrl={employee.avatarUrl} />
                                 </TableCell>
                                 <TableCell align="left">{employee.position}</TableCell>
                                 <TableCell align="left">

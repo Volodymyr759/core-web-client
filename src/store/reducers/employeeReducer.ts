@@ -7,7 +7,7 @@ const initialState: EmployeeState = {
         currentPageNumber: 1,
         order: OrderType.Ascending,
         pageCount: 0,
-        pageSize: 5,
+        pageSize: 3,
         searchCriteria: "",
         totalItemCount: 0
     },

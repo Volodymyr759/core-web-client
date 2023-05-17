@@ -1,7 +1,7 @@
-import { IAppTableAvatarProps } from './types';
+import { IAppAccountAvatarProps } from './types';
 import { Avatar, Grid, Typography } from '@mui/material';
 
-export default function AppTableAvatar({ name, email, avatarUrl }: IAppTableAvatarProps) {
+export default function AppAccountAvatar({ name, email, avatarUrl }: IAppAccountAvatarProps) {
     return (
         <Grid container direction="row" justifyContent="left" alignItems="center" gap='10px'>
             <Avatar alt="Avatar" src={avatarUrl || "/static/images/avatar/2.jpg"} />

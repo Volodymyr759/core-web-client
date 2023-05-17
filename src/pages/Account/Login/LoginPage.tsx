@@ -9,7 +9,7 @@ export default function LoginPage(): JSX.Element {
         <Container maxWidth="lg" className='layout-container' >
             <PageHeader
                 title="Sign In."
-                text="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem."
+                text="For DEMO proposes you can use email 'admin@example.com' and password 'Example.'"
             />
             <Grid container direction="column" alignItems="center">
                 <LoginForm />

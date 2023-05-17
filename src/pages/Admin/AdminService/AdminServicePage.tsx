@@ -12,7 +12,7 @@ export default function AdminServicePage(): JSX.Element {
     const [service, setService] = useState<null | ICompanyService>(null);
 
     useEffect(() => {
-        getServices(serviceSearchResult.pageSize, serviceSearchResult.currentPageNumber, filters.active, sortField, serviceSearchResult.order);
+        getServices(5, serviceSearchResult.currentPageNumber, filters.active, sortField, serviceSearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [serviceSearchResult.currentPageNumber, filters, serviceSearchResult.order, sortField])
 

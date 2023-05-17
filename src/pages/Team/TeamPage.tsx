@@ -20,7 +20,7 @@ export default function TeamPage(): JSX.Element {
     }, [])
 
     const loadMoreHandler = () => {
-        loadMoreEmployees(3, employeeSearchResult.currentPageNumber + 1, '', filters.officeId, 'FullName', OrderType.Ascending);
+        loadMoreEmployees(employeeSearchResult.pageSize, employeeSearchResult.currentPageNumber + 1, '', filters.officeId, 'FullName', OrderType.Ascending);
         setEmployeePage(employeeSearchResult.currentPageNumber + 1);
     }
 
