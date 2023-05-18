@@ -60,7 +60,7 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                             {["FullName", "Position", "Description", "Office", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field}>
-                                        <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ cursor: "pointer" }}>
+                                        <Box className="table-header">
                                             <Typography variant="overline" gutterBottom>
                                                 {field}
                                             </Typography>
@@ -78,19 +78,19 @@ export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps):
                     </TableHead>
                     <TableBody>
                         {employeeSearchResult.itemList.map((employee) => (
-                            <TableRow key={employee.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableRow key={employee.id} className='table-row' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell>
                                     <AppAccountAvatar name={employee.fullName} email={employee.email} avatarUrl={employee.avatarUrl} />
                                 </TableCell>
-                                <TableCell align="left">{employee.position}</TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">{employee.position}</TableCell>
+                                <TableCell align="left" className="table-cell">
                                     {employee.description.length > 18 ?
                                         employee.description.slice(0, 15).concat('...') : employee.description
                                     }
                                 </TableCell>
-                                <TableCell align="left">{employee.officeDto.name}</TableCell>
+                                <TableCell align="left" className="table-cell">{employee.officeDto.name}</TableCell>
                                 <TableCell align="center">
-                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className="table-actions">
                                         <StyledEditIcon tooltipTitle="Edit Employee" onEdit={() => onEditHandler(employee.id)} />
                                         <Divider orientation="vertical" flexItem />
                                         <StyledDeleteIcon tooltipTitle="Remove Employee" onDelete={() => onDeleteHandler(employee.id)} />

@@ -60,16 +60,17 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
                             {["Name", "Description", "Address", "Country", "Vacancies", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={officeSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                        <Box className="table-header">
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={officeSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -79,23 +80,24 @@ export default function AdminOfficeTable({ onEdit }: AdminOfficeTableProps): JSX
                         {officeSearchResult.itemList.map((office) => (
                             <TableRow
                                 key={office.id}
+                                className='table-row'
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell align="left">{office.name}</TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">{office.name}</TableCell>
+                                <TableCell align="left" className="table-cell">
                                     {office.description.length > 18 ?
                                         office.description.slice(0, 15).concat('...') : office.description
                                     }
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">
                                     {office.address.length > 18 ?
                                         office.address.slice(0, 15).concat('...') : office.address
                                     }
                                 </TableCell>
-                                <TableCell align="center">{office.countryDto?.code}</TableCell>
-                                <TableCell align="center">{office.vacancyDtos?.length}</TableCell>
+                                <TableCell align="center" className="table-cell">{office.countryDto?.code}</TableCell>
+                                <TableCell align="center" className="table-cell">{office.vacancyDtos?.length}</TableCell>
                                 <TableCell align="center">
-                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className="table-actions">
                                         <StyledEditIcon tooltipTitle="Edit Office" onEdit={() => onEditHandler(office.id)} />
                                         <Divider orientation="vertical" flexItem />
                                         <StyledDeleteIcon tooltipTitle="Remove Office" onDelete={() => onDeleteHandler(office.id)} />

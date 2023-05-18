@@ -38,15 +38,17 @@ export default function AdminUserTable(): JSX.Element {
                             {["UserName", "EmailConfirmed", "PhoneNumber", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={userSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                        <Box className="table-header">
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={userSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -54,16 +56,16 @@ export default function AdminUserTable(): JSX.Element {
                     </TableHead>
                     <TableBody>
                         {userSearchResult.itemList.map((user) => (
-                            <TableRow key={user.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableRow key={user.id} className='table-row' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell>
                                     <AppAccountAvatar name={user.userName} email={user.email} avatarUrl={user.avatarUrl} />
                                 </TableCell>
                                 <TableCell align="center">
                                     <Switch checked={user.emailConfirmed} onClick={() => onChangeEmailConfirmed(user.id)} />
                                 </TableCell>
-                                <TableCell align="left">{user.phoneNumber}</TableCell>
+                                <TableCell align="left" className="table-cell">{user.phoneNumber}</TableCell>
                                 <TableCell align="center">
-                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className="table-actions">
                                         <Tooltip title="Remove User" placement="top">
                                             <DeleteIcon sx={{ cursor: 'pointer', margin: '0 5px', fill: 'red' }} onClick={() => alert("Delete is not implemented yet." + user.id)} />
                                         </Tooltip>

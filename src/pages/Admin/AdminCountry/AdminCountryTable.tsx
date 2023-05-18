@@ -53,15 +53,17 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                             {["Name", "Code", "Offices", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={countrySearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                        <Box className="table-header">
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={countrySearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -70,19 +72,20 @@ export default function AdminCountryTable({ onEdit }: AdminCountryTableProps): J
                     <TableBody>
                         {countrySearchResult.itemList.map((country) => (
                             <TableRow
-                                key={country.id}
+                                key={country.id} 
+                                className='table-row'
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell align="left">{country.name}</TableCell>
-                                <TableCell align="left">{country.code}</TableCell>
+                                <TableCell align="left" className="table-cell">{country.name}</TableCell>
+                                <TableCell align="left" className="table-cell">{country.code}</TableCell>
                                 <TableCell align="left">{
                                     country.officeDtos &&
                                     country.officeDtos.map(office => {
-                                        return <p key={office.name}><span>{office.name + ', ' + office.address}</span></p>
+                                        return <p key={office.name}><span className="table-cell">{office.name + ', ' + office.address}</span></p>
                                     })
                                 }</TableCell>
                                 <TableCell align="center">
-                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className="table-actions">
                                         <StyledEditIcon tooltipTitle="Edit Country" onEdit={() => onEditHandler(country.id)} />
                                         <Divider orientation="vertical" flexItem />
                                         <StyledDeleteIcon tooltipTitle="Remove Country" onDelete={() => onDeleteHandler(country.id)} />

@@ -63,15 +63,17 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                             {["Title", "Description", "Image Url", "Is Active?", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={serviceSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                        <Box className="table-header">
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={serviceSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -81,26 +83,27 @@ export default function AdminServiceTable({ onEdit }: AdminServiceTableProps): J
                         {serviceSearchResult.itemList.map((service) => (
                             <TableRow
                                 key={service.id}
+                                className='table-row'
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">
                                     {service.title}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">
                                     {service.description.length > 53 ?
                                         service.description.slice(0, 50).concat('...') : service.description
                                     }
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">
                                     {service.imageUrl.length > 18 ?
                                         service.imageUrl.slice(0, 15).concat('...') : service.imageUrl
                                     }
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" className="table-cell">
                                     <Switch checked={service.isActive} onClick={() => onChangeIsActive(service.id)} />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className="table-actions">
                                         <StyledEditIcon tooltipTitle="Edit Company Service" onEdit={() => onEditHandler(service.id)} />
                                         <Divider orientation="vertical" flexItem />
                                         <StyledDeleteIcon tooltipTitle="Remove Service" onDelete={() => onDeleteHandler(service.id)} />

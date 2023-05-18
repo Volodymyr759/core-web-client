@@ -66,15 +66,17 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                             {["Title", "Previews", "Is Active?", "Office", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={vacancySearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                        <Box className="table-header">
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={vacancySearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -85,9 +87,10 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                             return (
                                 <TableRow
                                     key={vacancy.id}
+                                    className='table-row'
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell className="table-cell">
                                         {
                                             vacancy.candidates?.length > 0 ?
                                                 <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
@@ -103,13 +106,13 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                                 </Typography>
                                         }
                                     </TableCell>
-                                    <TableCell align="center">{vacancy.previews}</TableCell>
+                                    <TableCell align="center" className="table-cell">{vacancy.previews}</TableCell>
                                     <TableCell align="center" >
                                         <Switch checked={vacancy.isActive} onClick={() => onChangeIsActive(vacancy.id)} />
                                     </TableCell>
-                                    <TableCell align="left">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
+                                    <TableCell align="left" className="table-cell">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
                                     <TableCell align="center">
-                                        <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Box className="table-actions">
                                             <StyledEditIcon tooltipTitle="Edit Vacancy" onEdit={() => onEditHandler(vacancy.id)} />
                                             <Divider orientation="vertical" flexItem />
                                             <StyledDeleteIcon tooltipTitle="Remove Vacancy" onDelete={() => onDeleteHandler(vacancy.id)} />

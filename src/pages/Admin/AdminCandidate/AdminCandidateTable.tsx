@@ -68,15 +68,17 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                             {["FullName", "Email", "Phone", "Notes", "IsDismissed", "JoinedAt", "Vacancy", "Actions"].map((field) => {
                                 return (
                                     <TableCell key={field} align="center">
-                                        <Typography variant="overline" gutterBottom>
-                                            {field}
-                                        </Typography>
-                                        {sortableFields.filter(f => f === field).length > 0 &&
-                                            <TableSortLabel
-                                                active={sortField === field}
-                                                direction={candidateSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
-                                                onClick={() => onSortFieldHandler(field)}
-                                            />}
+                                        <Box className="table-header">
+                                            <Typography variant="overline" gutterBottom>
+                                                {field}
+                                            </Typography>
+                                            {sortableFields.filter(f => f === field).length > 0 &&
+                                                <TableSortLabel
+                                                    active={sortField === field}
+                                                    direction={candidateSearchResult.order === OrderType.Ascending ? "asc" : "desc"}
+                                                    onClick={() => onSortFieldHandler(field)}
+                                                />}
+                                        </Box>
                                     </TableCell>
                                 )
                             })}
@@ -84,11 +86,11 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                     </TableHead>
                     <TableBody>
                         {candidateSearchResult.itemList.map((candidate) => (
-                            <TableRow key={candidate.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="left">{candidate.fullName}</TableCell>
-                                <TableCell align="left">{candidate.email}</TableCell>
-                                <TableCell align="left">{candidate.phone}</TableCell>
-                                <TableCell align="left">
+                            <TableRow key={candidate.id} className='table-row' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="left" className="table-cell">{candidate.fullName}</TableCell>
+                                <TableCell align="left" className="table-cell">{candidate.email}</TableCell>
+                                <TableCell align="left" className="table-cell">{candidate.phone}</TableCell>
+                                <TableCell align="left" className="table-cell">
                                     {candidate.notes.length > 53 ?
                                         candidate.notes.slice(0, 50).concat('...') : candidate.notes
                                     }
@@ -100,10 +102,10 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                         onClick={() => onChangeIsDismissed(candidate.id)}
                                     />
                                 </TableCell>
-                                <TableCell align="left">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
-                                <TableCell align="left">{candidate.vacancyDto?.title.length > 18 ? candidate.vacancyDto?.title.slice(0, 15).concat('...') : candidate.vacancyDto?.title}</TableCell>
+                                <TableCell align="left" className="table-cell">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
+                                <TableCell align="left" className="table-cell">{candidate.vacancyDto?.title.length > 18 ? candidate.vacancyDto?.title.slice(0, 15).concat('...') : candidate.vacancyDto?.title}</TableCell>
                                 <TableCell align="center">
-                                    <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className="table-actions">
                                         <StyledEditIcon tooltipTitle="Edit Candidate" onEdit={() => onEditHandler(candidate.id)} />
                                         <Divider orientation="vertical" flexItem />
                                         <StyledDeleteIcon tooltipTitle="Remove Candidate" onDelete={() => onDeleteHandler(candidate.id)} />

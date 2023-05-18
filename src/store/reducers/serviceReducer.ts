@@ -5,7 +5,7 @@ const initialState: CompanyServiceState = {
     serviceSearchResult: {
         itemList: [] as ICompanyService[],
         currentPageNumber: 1,
-        order: OrderType.Descending,
+        order: OrderType.Ascending,
         pageCount: 0,
         pageSize: 3,
         searchCriteria: "",

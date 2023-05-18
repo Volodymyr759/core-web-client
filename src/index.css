@@ -88,3 +88,30 @@ code {
     font-weight: 400 !important;
     line-height: 1.5 !important;
 }
+
+.table-header {
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.table-row {
+    transition: "background-color" 1s !important;
+}
+
+.table-row:hover {
+    background-color: #f1f5f4 !important;
+}
+
+.table-cell {
+    font-size: 0.9rem;
+}
+
+.table-actions {
+    display: flex;
+    direction: row;
+    justify-content: center;
+    align-items: center;
+}

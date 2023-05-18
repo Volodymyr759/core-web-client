@@ -1,10 +1,12 @@
 import { IStatCardProps } from './types';
 import { Motion, spring } from 'react-motion';
-import { Grid, Paper } from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import PeopleIcon from '@mui/icons-material/People';
+import { Link } from 'react-router-dom';
+import "./styles.css";
 
 export default function StatCard({ item }: IStatCardProps): JSX.Element {
 
@@ -17,16 +19,16 @@ export default function StatCard({ item }: IStatCardProps): JSX.Element {
 
     return (
         <Paper elevation={6} className='stat-card' >
-            <Grid container direction="row" justifyContent="space-between" alignItems="center" className='stat-card-top' sx={{ padding: '0 15px 0 5px' }}>
+            <Grid container direction="row" justifyContent="space-between" alignItems="center" className='stat-card-top' >
                 {icons[item.icon]}
                 <Motion defaultStyle={{ x: 0 }} style={{ x: spring(item.maxNumber, { stiffness: 50, damping: 20 }) }}>
                     {(value: { x: number; }) => <span className="page-header">{value.x.toFixed(0)}</span>}
                 </Motion>
             </Grid>
             <p className="stat-card-content">{item.content}</p>
-            <div style={{ marginTop: '20px' }}>
-                <a href={item.redirectLink} className='stat-card-link'>Find out more »</a>
-            </div>
+            <Box style={{ marginTop: '20px' }}>
+                <Link to={item.redirectLink} className='stat-card-link'>Find out more »</Link>
+            </Box>
         </Paper>
     )
 }
