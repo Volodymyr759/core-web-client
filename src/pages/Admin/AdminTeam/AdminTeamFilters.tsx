@@ -1,10 +1,10 @@
+import { useEffect } from "react";
 import { AdminTeamFiltersProps } from "./types";
-import { Grid } from "@mui/material";
-import CreateNewButton from "../../../components/FiltersArea/CreateNewButton/CreateNewButton";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
+import { Grid } from "@mui/material";
+import CreateNewButton from "../../../components/FiltersArea/CreateNewButton/CreateNewButton";
 import SelectItemsFilter from "../../../components/FiltersArea/SelectItemFilter/SelectItemFilter";
-import { useEffect } from "react";
 
 export default function AdminTeamFilters({ onAddNew }: AdminTeamFiltersProps): JSX.Element {
     const { filters, offices } = useTypedSelector(state => state.employee);

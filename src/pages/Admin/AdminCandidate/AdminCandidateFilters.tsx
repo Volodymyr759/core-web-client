@@ -24,7 +24,7 @@ export default function AdminCandidateFilters({ onAddNew }: AdminCandidateFilter
 
     return (
         <Grid container spacing={2} direction='row' justifyContent={'space-between'} alignItems={'center'}>
-            <CheckBoxFilter label="Show only not dismissed" onCheck={activeCandidatesFilterHandler} isChecked={filters.active === CandidateStatus.Active ? true : false} />
+            <CheckBoxFilter label="Only not dismissed" onCheck={activeCandidatesFilterHandler} isChecked={filters.active === CandidateStatus.Active ? true : false} />
             <SearchTextFilter title="Search candidate" onSearch={onChangeSearch} />
             <CreateNewButton onAction={onAddNew}>+ New Candidate</CreateNewButton>
         </Grid>
