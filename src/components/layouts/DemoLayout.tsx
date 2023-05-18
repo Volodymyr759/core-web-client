@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { LayoutProps } from './types';
+import { RouteNames } from '../../routing';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -15,8 +17,8 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { LayoutProps } from './types';
-import { RouteNames } from '../../routing';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import AppAvatar from '../AppAvatar/AppAvatar';
 import LeftMenuItems from './LeftMenuItems';
 
@@ -98,11 +100,7 @@ export default function DemoAppBar({ children, title }: LayoutProps): JSX.Elemen
             <Box sx={{ display: 'flex', minHeight: '100%' }}>
                 <CssBaseline />
                 <AppBar position="absolute" open={open} sx={{ backgroundColor: 'rgb(21, 143, 124)' }}>
-                    <Toolbar
-                        sx={{
-                            pr: '24px', // keep right padding when drawer closed
-                        }}
-                    >
+                    <Toolbar sx={{ pr: '24px' }}>
                         <IconButton
                             edge="start"
                             color="inherit"
@@ -125,7 +123,10 @@ export default function DemoAppBar({ children, title }: LayoutProps): JSX.Elemen
                         >
                             {title}
                         </Typography>
-                        <IconButton color="inherit">
+                        <HelpOutlineIcon onClick={() => alert("Specified Help page design needed.")} />
+                        &nbsp;&nbsp;
+                        <SettingsIcon onClick={() => alert("Specified Settings page design needed.")} />
+                        <IconButton color="inherit" onClick={() => alert("Specified api needed.")}>
                             <Badge badgeContent={4} color="secondary">
                                 <NotificationsIcon />
                             </Badge>
@@ -145,7 +146,7 @@ export default function DemoAppBar({ children, title }: LayoutProps): JSX.Elemen
                     >
                         <Typography variant="h6" component="a" href="https://volodymyr759.github.io/core-web-client" sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: { xs: 'flex' },
                             fontSize: '28px',
                             lineHeight: '1',
                             fontFamily: 'Poppins, sans-serif',
