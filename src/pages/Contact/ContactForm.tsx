@@ -113,12 +113,12 @@ export default function ContactForm(): JSX.Element {
                     />
                 </Grid>
                 <Grid container justifyContent="center" spacing={2} sx={{ padding: '20px 0' }} >
-                    <Grid item sm={6} xs={12} sx={{ textAlign: 'center' }}>
+                    <Grid item xs={6} sx={{ textAlign: 'center' }}>
                         <Button variant="outlined" onClick={() => reset()}>
                             Cancel
                         </Button>
                     </Grid>
-                    <Grid item sm={6} xs={12} sx={{ textAlign: 'center' }}>
+                    <Grid item xs={6} sx={{ textAlign: 'center' }}>
                         <Button variant="outlined" type="submit">
                             {loading ? 'Sending...' : 'Send'}
                         </Button>
