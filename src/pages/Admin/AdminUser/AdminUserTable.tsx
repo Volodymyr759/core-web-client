@@ -5,7 +5,7 @@ import { OrderType } from "../../../types/common/orderType";
 import { Box, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Tooltip, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import TablePagination from "../../../components/TablePagination/TablePagination";
-import AppAccountAvatar from "../../../components/AppAvatar/AppAccountAvatar";
+import AppAccountAvatar from "../../../components/AppBars/AppAvatar/AppAccountAvatar";
 import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 

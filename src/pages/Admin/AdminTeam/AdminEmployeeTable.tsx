@@ -10,7 +10,7 @@ import { MessageAppearance } from "../../../components/Messages/types";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
 import TablePagination from "../../../components/TablePagination/TablePagination";
-import AppAccountAvatar from "../../../components/AppAvatar/AppAccountAvatar";
+import AppAccountAvatar from "../../../components/AppBars/AppAvatar/AppAccountAvatar";
 import { OrderType } from "../../../types/common/orderType";
 
 export default function AdminEmployeeTable({ onEdit }: AdminEmployeeTableProps): JSX.Element {

@@ -17,10 +17,10 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import SettingsIcon from '@mui/icons-material/Settings';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import AppAvatar from '../AppAvatar/AppAvatar';
+import AppAvatar from '../AppBars/AppAvatar/AppAvatar';
 import LeftMenuItems from './LeftMenuItems';
+import SettingsBar from '../AppBars/SettingsBar/SettingsBar';
+import HelpBar from '../AppBars/HelpBar/HelpBar';
 
 function Copyright(props: any) {
     return (
@@ -123,10 +123,10 @@ export default function DemoAppBar({ children, title }: LayoutProps): JSX.Elemen
                         >
                             {title}
                         </Typography>
-                        <HelpOutlineIcon onClick={() => alert("Specified Help page design needed.")} />
+                        <HelpBar />
                         &nbsp;&nbsp;
-                        <SettingsIcon onClick={() => alert("Specified Settings page design needed.")} />
-                        <IconButton color="inherit" onClick={() => alert("Specified api needed.")}>
+                        <SettingsBar />
+                        <IconButton color="inherit" onClick={() => alert("Specified api wanted.")}>
                             <Badge badgeContent={4} color="secondary">
                                 <NotificationsIcon />
                             </Badge>

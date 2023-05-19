@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { IRoute, RouteNames } from '../../../routing';
-import { AppBar, Box, Button, Container, Toolbar, IconButton, Menu, MenuItem, Typography, Tooltip, } from '@mui/material';
+import { Roles } from '../../../types/auth';
+import { AppBar, Box, Button, Container, Toolbar, IconButton, Menu, MenuItem, Typography, Tooltip, Grid, } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import BrightnessAutoIcon from '@mui/icons-material/BrightnessAuto';
@@ -17,25 +18,15 @@ import ContactPage from '../../../pages/Contact/ContactPage';
 import HomePage from '../../../pages/Home/HomePage';
 import ServicesPage from '../../../pages/CompanyServices/ServicesPage';
 import TeamPage from '../../../pages/Team/TeamPage';
-import AppAvatar from '../../AppAvatar/AppAvatar';
-import { Roles } from '../../../types/auth';
+import AppAvatar from '../AppAvatar/AppAvatar';
 
-const mainMenuRoutes: IRoute[] = [
-    { path: RouteNames.HOME, title: "Home", component: <HomePage /> },
-    { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> },
-    { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> },
-    { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> },
-    { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> },
-    { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> }
-]
-
-const mainMenuIcons = [
-    <HomeIcon sx={{ color: "#4b605c" }} />,
-    <BrightnessAutoIcon sx={{ color: "#4b605c" }} />,
-    <BuildIcon sx={{ color: "#4b605c" }} />,
-    <Groups2Icon sx={{ color: "#4b605c" }} />,
-    <Diversity3Icon sx={{ color: "#4b605c" }} />,
-    <ConnectWithoutContactIcon sx={{ color: "#4b605c" }} />
+const mainMenuItems: { route: IRoute, icon: React.ReactNode }[] = [
+    { route: { path: RouteNames.HOME, title: "Home", component: <HomePage /> }, icon: <HomeIcon sx={{ color: "#4b605c" }} /> },
+    { route: { path: RouteNames.ABOUT, title: "About Us", component: <AboutPage /> }, icon: <BrightnessAutoIcon sx={{ color: "#4b605c" }} /> },
+    { route: { path: RouteNames.SERVICES, title: "Services", component: <ServicesPage /> }, icon: <BuildIcon sx={{ color: "#4b605c" }} /> },
+    { route: { path: RouteNames.TEAM, title: "Team", component: <TeamPage /> }, icon: <Groups2Icon sx={{ color: "#4b605c" }} /> },
+    { route: { path: RouteNames.VACANCY, title: "Vacancies", component: <VacanciesPage /> }, icon: <Diversity3Icon sx={{ color: "#4b605c" }} /> },
+    { route: { path: RouteNames.CONTACT, title: "Contact", component: <ContactPage /> }, icon: <ConnectWithoutContactIcon sx={{ color: "#4b605c" }} /> }
 ]
 
 export default function MainAppBar() {
@@ -99,10 +90,12 @@ export default function MainAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {mainMenuRoutes.map((page, index) => (
-                                <MenuItem key={page.path} component={Link} to={page.path} onClick={handleCloseNavMenu}>
-                                    {mainMenuIcons[index]}&nbsp;
-                                    <Typography textAlign="center">{page.title}</Typography>
+                            {mainMenuItems.map((page, index) => (
+                                <MenuItem key={page.route.path} component={Link} to={page.route.path} onClick={handleCloseNavMenu}>
+                                    <Grid container direction="row" justifyContent="space-between" alignItems="center" gap="10px">
+                                        <Typography sx={{ textAlign: "left", fontSize: "0.95rem" }}>{page.route.title}</Typography>
+                                        {page.icon}
+                                    </Grid>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -125,13 +118,13 @@ export default function MainAppBar() {
 
                     {/* Main Menu pages */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {mainMenuRoutes.map((page) => (
+                        {mainMenuItems.map((page) => (
                             <Button
-                                key={page.path}
+                                key={page.route.path}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, display: 'block' }}
                             >
-                                <Link to={page.path} className="main-menu-link">{page.title}</Link>
+                                <Link to={page.route.path} className="main-menu-link">{page.route.title}</Link>
                             </Button>
                         ))}
                     </Box>
