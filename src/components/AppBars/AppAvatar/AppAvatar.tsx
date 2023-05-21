@@ -65,7 +65,7 @@ export default function AppAvatar() {
                 onClose={handleClose}
             >
                 <Box sx={{ margin: "5px 15px" }}>
-                    <AppAccountAvatar name={auth.user.userName} email={"Roles: " + auth.roles.join(", ")} avatarUrl={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
+                    <AppAccountAvatar name={auth.user.userName} email={"Roles: " + auth.roles.join(", ")} avatarUrl={auth.user.avatarUrl || "https://volodymyr57.somee.com/uploads/admin-avatar.jpg"} />
                 </Box>
                 <hr style={{ width: "90%" }} />
                 {settings.map((setting, index) => (
