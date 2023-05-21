@@ -108,7 +108,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                     </TableCell>
                                     <TableCell align="center" className="table-cell">{vacancy.previews}</TableCell>
                                     <TableCell align="center" >
-                                        <Switch checked={vacancy.isActive} onClick={() => onChangeIsActive(vacancy.id)} />
+                                        <Switch name="isActive" checked={vacancy.isActive} onClick={() => onChangeIsActive(vacancy.id)} />
                                     </TableCell>
                                     <TableCell align="left" className="table-cell">{vacancy.officeDto ? vacancy.officeDto.name : '...Please refresh the page...'}</TableCell>
                                     <TableCell align="center">

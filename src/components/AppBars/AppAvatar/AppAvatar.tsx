@@ -45,7 +45,7 @@ export default function AppAvatar() {
         <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Manage profile">
                 <IconButton onClick={handleOpen} sx={{ p: 0 }}>
-                    <Avatar alt="Users avatar" src={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
+                    <Avatar alt="Avatar" src={auth.user.avatarUrl || "/static/images/avatar/2.jpg"} />
                 </IconButton>
             </Tooltip>
             <Menu

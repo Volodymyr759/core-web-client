@@ -10,7 +10,7 @@ export default function SelectItemsFilter({ items, label, onSelectChanged, value
         <Grid item sx={{ minWidth: 316, margin: "5px 0" }}>
             <FormControl fullWidth>
                 <InputLabel>{label}</InputLabel>
-                <Select
+                <Select name="office"
                     value={value}
                     label={label}
                     onChange={(event: SelectChangeEvent) => onSelectChanged(event.target.value)}
