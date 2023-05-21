@@ -38,7 +38,7 @@ The working prototype of Web-UI (react typescript) for typical company site
 - [Forgot Password](https://volodymyr759.github.io/core-web-client/#/forgot-password)
 
 ## Demo Demo authenticated pages:
-Register with youe own credentials or use demo-account login 'admin@example.com' password 'Example.'
+Register with your own credentials or use demo-account login 'admin@example.com' password 'Example.'
 - [Profile](https://volodymyr759.github.io/core-web-client/#/profile)
 - [Favorite Vacancies](https://volodymyr759.github.io/core-web-client/#/favorite-vacancies)
 - [Change Email](https://volodymyr759.github.io/core-web-client/#/change-email)
@@ -53,3 +53,13 @@ git clone https://github.com/Volodymyr759/core-web-client.git
 yarn install
 yarn start
 ```
+
+## Browser Support
+
+At present, we officially aim to support the last two versions of the following browsers:
+
+<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
+
+## Technical Support or Questions
+
+If you have questions or need help integrating the product please [contact us](https://volodymyr759.github.io/core-web-client/#/contact) instead of opening an issue.
