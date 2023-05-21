@@ -18,7 +18,7 @@ export default function StatCard({ item }: IStatCardProps): JSX.Element {
     ]
 
     return (
-        <Paper elevation={6} className='stat-card' >
+        <Paper elevation={6} className='stat-card' sx={{ overflow: 'hidden' }}>
             <Grid container direction="row" justifyContent="space-between" alignItems="center" className='stat-card-top' >
                 {icons[item.icon]}
                 <Motion defaultStyle={{ x: 0 }} style={{ x: spring(item.maxNumber, { stiffness: 50, damping: 20 }) }}>

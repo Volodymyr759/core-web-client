@@ -83,7 +83,7 @@ export default function LeftMenuItems() {
                 <List component="div" disablePadding>
                     <Tooltip title="Employees" placement="right">
                         <Link to={RouteNames.ADMIN_TEAM} className='dashboard-menu-link'>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 3 }}>
                                 <ListItemIcon>
                                     <Groups2Icon />
                                 </ListItemIcon>
@@ -93,7 +93,7 @@ export default function LeftMenuItems() {
                     </Tooltip>
                     <Tooltip title="Candidates" placement="right">
                         <Link to={RouteNames.ADMIN_CANDIDATES} className='dashboard-menu-link'>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 3 }}>
                                 <ListItemIcon>
                                     <PeopleOutlineIcon />
                                 </ListItemIcon>
@@ -103,7 +103,7 @@ export default function LeftMenuItems() {
                     </Tooltip>
                     <Tooltip title="Users" placement="right">
                         <Link to={RouteNames.USERS} className='dashboard-menu-link'>
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 3 }}>
                                 <ListItemIcon>
                                     <SupervisedUserCircleIcon />
                                 </ListItemIcon>

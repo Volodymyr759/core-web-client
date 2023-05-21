@@ -89,7 +89,7 @@ const mdTheme = createTheme();
 
 export default function DemoAppBar({ children, title }: LayoutProps): JSX.Element {
     document.title = title || 'Admin - Demo';
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = () => {
         setOpen(!open);

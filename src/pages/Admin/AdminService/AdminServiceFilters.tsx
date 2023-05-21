@@ -16,7 +16,7 @@ export default function AdminServiceFilters({ onAddNew }: AdminServiceFiltersPro
 
     return (
         <Grid container spacing={2} direction='row' justifyContent={'space-between'} alignItems={'center'}>
-            <CheckBoxFilter label="Show only active" onCheck={activeServicesFilterHandler} isChecked={filters.active === CompanyServiceStatus.Active ? true : false} />
+            <CheckBoxFilter label="Active" onCheck={activeServicesFilterHandler} isChecked={filters.active === CompanyServiceStatus.Active ? true : false} />
             <CreateNewButton onAction={onAddNew}>+ Create New</CreateNewButton>
         </Grid>
     )

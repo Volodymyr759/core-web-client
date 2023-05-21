@@ -62,7 +62,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
     return (
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loading ? "loading-opacity" : ""}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             {["FullName", "Email", "Phone", "Notes", "IsDismissed", "JoinedAt", "Vacancy", "Actions"].map((field) => {

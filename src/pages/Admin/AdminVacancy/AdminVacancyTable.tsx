@@ -60,7 +60,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
     return (
         <>
             <TableContainer component={Paper} sx={{ margin: '20px 0' }} className={loadingVacancies ? "loading-opacity" : ""}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             {["Title", "Previews", "Is Active?", "Office", "Actions"].map((field) => {

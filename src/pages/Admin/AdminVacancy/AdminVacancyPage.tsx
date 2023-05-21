@@ -13,7 +13,7 @@ export default function AdminVacancyPage(): JSX.Element {
 
     useEffect(() => {
         getVacanciesTitles(vacancySearchResult.searchCriteria, filters.officeId);
-        getVacancies(5, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
+        getVacancies(10, vacancySearchResult.currentPageNumber, vacancySearchResult.searchCriteria,
             VacancyStatus.All, filters.officeId, sortField, vacancySearchResult.order);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vacancySearchResult.searchCriteria, filters.officeId, vacancySearchResult.currentPageNumber, sortField, vacancySearchResult.order])

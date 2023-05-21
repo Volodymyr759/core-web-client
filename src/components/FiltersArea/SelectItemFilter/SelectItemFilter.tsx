@@ -7,7 +7,7 @@ export default function SelectItemsFilter({ items, label, onSelectChanged, value
     officesToSelect.unshift({ id: 0, name: "All Offices" });
 
     return (
-        <Grid item sx={{ minWidth: 300, margin: "5px 0" }}>
+        <Grid item sx={{ minWidth: 316, margin: "5px 0" }}>
             <FormControl fullWidth>
                 <InputLabel>{label}</InputLabel>
                 <Select
