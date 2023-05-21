@@ -33,17 +33,17 @@ export default function Footer(): JSX.Element {
                     Shuffle
                 </Typography>
                 <Typography variant="body2" component={'p'}>
-                    A108 Adam Street
+                    St. Kulparkivska, 200a,
                 </Typography>
                 <Typography variant="body2" component={'p'}>
-                    NY 535022, USA
+                    Lviv, 79071 Ukraine
                 </Typography>
                 <br />
                 <Typography variant="body2" component={'p'}>
-                    <strong>Phone:</strong> +1 5589 55488 55
+                    <strong>Phone:</strong> +38 096 675 6680
                 </Typography>
                 <Typography variant="body2" component={'p'}>
-                    <strong>Email:</strong> info@example.com
+                    <strong>Email:</strong> logisticmaster.2000@gmail.com
                 </Typography>
             </Grid>
             <Grid item xs={12} md={4}>

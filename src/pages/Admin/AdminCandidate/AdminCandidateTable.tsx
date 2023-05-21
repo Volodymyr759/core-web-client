@@ -91,8 +91,8 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                 <TableCell align="left" className="table-cell">{candidate.email}</TableCell>
                                 <TableCell align="left" className="table-cell">{candidate.phone}</TableCell>
                                 <TableCell align="left" className="table-cell">
-                                    {candidate.notes.length > 53 ?
-                                        candidate.notes.slice(0, 50).concat('...') : candidate.notes
+                                    {candidate.notes.length > 18 ?
+                                        candidate.notes.slice(0, 15).concat('...') : candidate.notes
                                     }
                                 </TableCell>
                                 <TableCell align="left">
@@ -103,7 +103,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                     />
                                 </TableCell>
                                 <TableCell align="left" className="table-cell">{moment(candidate.joinedAt).format('DD/MM/YYYY')}</TableCell>
-                                <TableCell align="left" className="table-cell">{candidate.vacancyDto?.title.length > 18 ? candidate.vacancyDto?.title.slice(0, 15).concat('...') : candidate.vacancyDto?.title}</TableCell>
+                                <TableCell align="left" className="table-cell">{candidate.vacancyDto?.title.length > 60 ? candidate.vacancyDto?.title.slice(0, 57).concat('...') : candidate.vacancyDto?.title}</TableCell>
                                 <TableCell align="center">
                                     <Box className="table-actions">
                                         <StyledEditIcon tooltipTitle="Edit Candidate" onEdit={() => onEditHandler(candidate.id)} />

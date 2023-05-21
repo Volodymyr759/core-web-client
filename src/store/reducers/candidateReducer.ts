@@ -5,7 +5,7 @@ const initialState: CandidateState = {
     candidateSearchResult: {
         itemList: [],
         currentPageNumber: 1,
-        order: OrderType.Ascending,
+        order: OrderType.Descending,
         pageCount: 0,
         pageSize: 10,
         searchCriteria: "",
@@ -16,7 +16,7 @@ const initialState: CandidateState = {
         vacancyId: null,
         searchInFullName: ""
     },
-    sortField: "FullName",
+    sortField: "JoinedAt",
     loading: true,
     error: null
 }
