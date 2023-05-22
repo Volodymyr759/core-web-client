@@ -8,6 +8,7 @@ export default function CheckBoxFilter({ label, onCheck, isChecked }: CheckBoxFi
             <FormControlLabel
                 control={
                     <Checkbox
+                        id="check-filter"
                         onChange={(event: ChangeEvent<HTMLInputElement>, checked: boolean) => onCheck(checked)}
                         checked={isChecked}
                     />}

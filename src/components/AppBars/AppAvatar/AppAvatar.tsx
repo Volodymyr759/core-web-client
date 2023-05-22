@@ -13,7 +13,6 @@ import ProfilePage from '../../../pages/Account/Profile/ProfilePage';
 import ChangeEmailPage from '../../../pages/Account/ChangeEmail/ChangeEmailPage';
 import FavoriteVacanciesPage from '../../../pages/Vacancies/FavoriteVacanciesPage';
 import ChangePasswordPage from '../../../pages/Account/ChangePassword/ChangePasswordPage';
-import AppAccountAvatar from './AppAccountAvatar';
 
 export default function AppAvatar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -65,7 +64,8 @@ export default function AppAvatar() {
                 onClose={handleClose}
             >
                 <Box sx={{ margin: "5px 15px" }}>
-                    <AppAccountAvatar name={auth.user.userName} email={"Roles: " + auth.roles.join(", ")} avatarUrl={auth.user.avatarUrl || "https://volodymyr57.somee.com/uploads/admin-avatar.jpg"} />
+                    <Typography component={'p'} sx={{ fontSize: '0.75rem;', fontWeight: '600' }}>{auth.user.userName}</Typography>
+                    <Typography component={'p'} sx={{ fontSize: '0.75rem;', fontWeight: 'normal' }}>{"Roles: " + auth.roles.join(", ")}</Typography>
                 </Box>
                 <hr style={{ width: "90%" }} />
                 {settings.map((setting, index) => (

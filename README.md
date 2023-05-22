@@ -16,13 +16,9 @@ The working prototype of Web-UI (react typescript) for typical company site.
 ## Includes:
 
 - Authentication process, based on JWT-tokens (access / refresh);
-
 - Protected routing is based on different user-roles;
-
 - CRUD-functionality with filtering, sorting and pagination;
-
 - Redux;
-
 - Uses Material UI design system.
 
 ## Demo public pages:

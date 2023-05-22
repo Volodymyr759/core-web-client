@@ -97,6 +97,7 @@ export default function AdminCandidateTable({ onEdit }: AdminCandidateTableProps
                                 </TableCell>
                                 <TableCell align="left">
                                     <Switch
+                                        name="isDismissed"
                                         color="error"
                                         checked={candidate.isDismissed}
                                         onClick={() => onChangeIsDismissed(candidate.id)}

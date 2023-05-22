@@ -8,7 +8,7 @@ export default function SearchText({ title, onSearch }: SearchTextFilterProps): 
                 label={title}
                 type="text"
                 margin="normal"
-                fullWidth
+                sx={{ width: 300 }}
                 onChange={(event) => onSearch(event.target.value)}
             />
         </Grid>
