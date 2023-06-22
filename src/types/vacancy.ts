@@ -1,3 +1,4 @@
+import { ICandidateDto } from "./candidate";
 import { OfficeNameIdDto } from "./common/officeNameIdDto";
 import { OrderType } from "./common/orderType";
 import { ISearchResult } from "./common/searchResult";
@@ -9,7 +10,7 @@ export interface IVacancy {
     previews: number;
     isActive: boolean;
     officeId: number;
-    candidates?: { id: number, fullName: string, email: string, isDismissed: boolean }[];
+    candidates?: ICandidateDto[];
     officeDto?: {
         name: string;
         address: string;

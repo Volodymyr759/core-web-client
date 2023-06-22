@@ -14,6 +14,17 @@ export interface ICandidate {
     vacancyDto?: IVacancy;
 }
 
+export interface ICandidateDto {
+    id: number;
+    fullName: string;
+    email: string;
+    phone: string;
+    notes: string;
+    isDismissed: boolean;
+    joinedAt: Date;
+    vacancyId: number;
+}
+
 export enum CandidateStatus {
     Active,
     Dismissed,

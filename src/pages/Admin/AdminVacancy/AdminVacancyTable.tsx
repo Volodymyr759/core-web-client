@@ -4,6 +4,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { AdminVacancyTableProps } from "./types";
 import { IVacancy } from "../../../types/vacancy";
 import { Badge, Box, Divider, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Tooltip, Typography } from "@mui/material";
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import AppDeleteConfirmDialog from "../../../components/AppDeleteConfirmDialog/AppDeleteConfirmDialog";
 import StyledEditIcon from "../../../components/StyledIcons/StyledEditIcon";
 import StyledDeleteIcon from "../../../components/StyledIcons/StyledDeleteIcon";
@@ -12,7 +13,7 @@ import ErrorMessage from "../../../components/Messages/ErrorMessage";
 import { MessageAppearance } from "../../../components/Messages/types";
 import { OrderType } from "../../../types/common/orderType";
 
-export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): JSX.Element {
+export default function AdminVacancyTable({ onEdit, onShowCandidates }: AdminVacancyTableProps): JSX.Element {
     const { vacancySearchResult, errorFilters, errorVacancies, sortField, loadingVacancies } = useTypedSelector(state => state.vacancy);
     const { removeVacancy, setVacancyPage, updateVacancyIsActiveStatus, setVacancySort, setVacancySortfield } = useActions();
     const [confirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
@@ -93,7 +94,7 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                     <TableCell className="table-cell">
                                         {
                                             vacancy.candidates?.length > 0 ?
-                                                <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => alert('Should redirect to list of candidates belong to the vacancy. Is not implemented yet.')}>
+                                                <Typography gutterBottom variant="body2" component="div" sx={{ cursor: 'pointer' }} onClick={() => onShowCandidates(vacancy)}>
                                                     <Tooltip title="Show candidates (not dismissed)" placement="top">
                                                         <Badge badgeContent={vacancy.candidates?.filter((c) => c.isDismissed === false).length} color="primary">
                                                             {vacancy.title.length > 60 ? vacancy.title.substring(0, 60) + ' ...' : vacancy.title}
@@ -116,6 +117,10 @@ export default function AdminVacancyTable({ onEdit }: AdminVacancyTableProps): J
                                             <StyledEditIcon tooltipTitle="Edit Vacancy" onEdit={() => onEditHandler(vacancy.id)} />
                                             <Divider orientation="vertical" flexItem />
                                             <StyledDeleteIcon tooltipTitle="Remove Vacancy" onDelete={() => onDeleteHandler(vacancy.id)} />
+                                            <Divider orientation="vertical" flexItem />
+                                            <Tooltip title="Show Candidates" placement="right">
+                                                <PeopleOutlineIcon sx={{ cursor: 'pointer', margin: '0 5px' }} onClick={() => onShowCandidates(vacancy)} />
+                                            </Tooltip>
                                         </Box>
                                     </TableCell>
                                 </TableRow>
