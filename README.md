@@ -7,11 +7,11 @@
 
 The working prototype of Web-UI (react typescript) for typical company site.
 
-![react-web-client-template.jpg](https://volodymyr57.somee.com/uploads/client-demo.jpg)
+![react-web-client-template.jpg](http://volodymyr57.somee.com/uploads/client-demo.jpg)
 
 ## Uses backend API (Asp.Net Core web app):
 - repository: https://github.com/Volodymyr759/core-web-api;
-- live-server: https://volodymyr57.somee.com/index.html;
+- live-server: http://volodymyr57.somee.com/index.html;
 
 ## Includes:
 
@@ -59,7 +59,7 @@ At present, we officially aim to support the last two versions of the following 
 
 ## Google page speed test
 Live: https://pagespeed.web.dev/analysis/https-volodymyr759-github-io-core-web-client/9h5y7nxcjh?form_factor=desktop
-![page-speed-test.jpg](https://volodymyr57.somee.com/uploads/page-speed-test.jpg)
+![page-speed-test.jpg](http://volodymyr57.somee.com/uploads/page-speed-test.jpg)
 
 ## Technical Support or Questions
 
