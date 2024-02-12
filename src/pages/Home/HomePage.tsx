@@ -10,19 +10,12 @@ export default function HomePage(): JSX.Element {
     return (
         <>
             <HeaderChapter />
-
             <Container maxWidth="lg" className='layout-container' >
-
                 <AboutPage />
-
                 <ServiceChapter />
-
                 <StatisticsChapter />
-
                 <TeamChapter />
-
                 <ContactPage />
-
             </Container>
         </>
     );
